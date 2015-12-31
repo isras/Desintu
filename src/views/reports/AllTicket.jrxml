@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bdc53be2-a9b9-4093-ada5-3e46d24dba4d">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ini" class="java.lang.String"/>
+	<parameter name="fin" class="java.lang.String"/>
+	<parameter name="totalTic" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select numeroTicket,nombre,apellido,fechaticket,totalTicket from ticket,cliente where fechaticket>= $P{ini} and fechaticket<= $P{fin}]]>
+	</queryString>
+	<field name="numeroTicket" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="apellido" class="java.lang.String"/>
+	<field name="fechaticket" class="java.sql.Date"/>
+	<field name="totalTicket" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="753b42cf-73ae-4ea1-94ec-a6a7bc9bc472" x="0" y="30" width="555" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BURGUERKI VENTAS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="91" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="65077823-fddb-48ef-a14f-2bdbcb3571a0" x="47" y="71" width="45" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[N. Ticket]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40d6b10b-7cd0-426e-b117-41dfad4f888a" x="92" y="71" width="208" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="527d921b-dad0-4a18-a158-7c32a5a893eb" x="300" y="71" width="138" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="91bcb063-9475-49a0-a601-305b67270bac" x="438" y="71" width="82" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4898903f-f536-4834-a4bf-c53c46d6ad0e" x="338" y="21" width="44" height="20"/>
+				<textElement/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="85630b7f-b33f-47b2-8c7c-82e2f9aa576f" x="382" y="21" width="138" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement uuid="42c10c38-24b4-459b-89b4-bdba2910038b" x="47" y="0" width="45" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{numeroTicket}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8eb871e8-e730-4b2f-9698-40d39d9af8f6" x="92" y="0" width="208" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nombre}+" "+$F{apellido}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="b5670bf3-f5a2-456d-893c-2e2066954afb" x="300" y="0" width="138" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{fechaticket}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="21e8663c-a210-4277-8f0a-a821f778b62b" x="438" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{totalTicket}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c664b487-70c3-4f5c-ae9a-f794c74e1881" x="47" y="29" width="473" height="20"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Eyetive. Cia. Ltda. Av. Gran Colombia 0308 entre Guaranda y Ancón, Derechos Reservados.]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="bc08a5e1-1473-487c-aef1-259e5fc9d177" x="438" y="0" width="70" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totalTic}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e83933c6-e8da-4ac6-9d1b-7303ee128b62" x="300" y="0" width="138" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

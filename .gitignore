@@ -1,0 +1,11 @@
+*.class
+*.jar
+*.mf
+nbproject/
+build/
+dist/
+build.xml
+*.mwb
+*.mwb.bak
+*.png
+*.jasper

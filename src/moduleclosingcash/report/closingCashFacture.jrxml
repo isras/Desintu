@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cCashPetitionNote" printOrder="Horizontal" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="397b0e4c-0ed9-410a-a027-56a01cebe299">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="dateIni" class="java.lang.String"/>
+	<parameter name="dateFin" class="java.lang.String"/>
+	<parameter name="totFactures" class="java.lang.String"/>
+	<parameter name="enterpriseName" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT * FROM facture]]>
+	</queryString>
+	<field name="Cliente" class="java.lang.String"/>
+	<field name="Fecha" class="java.lang.String"/>
+	<field name="Total" class="java.lang.String"/>
+	<field name="No Factura" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="47" splitType="Stretch">
+			<textField>
+				<reportElement uuid="ddf1d1c0-229a-4ee4-b516-84484f800aaa" x="50" y="27" width="55" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateIni}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d67711ca-32d5-4fb2-9bca-bd3e4448b8a2" x="10" y="27" width="40" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5a914d30-3472-4e26-ae40-eda118393382" x="113" y="27" width="40" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="019a0ec1-8871-4b3a-815e-0999343d232c" x="154" y="27" width="57" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateFin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7a048942-7bea-4375-ad2a-d8b49097f867" x="0" y="0" width="752" height="27"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{enterpriseName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="f10a8b6e-1f78-4e9c-8a08-24ff0035d010" x="454" y="0" width="61" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eebe9231-7975-458f-a92c-5926396796e1" x="671" y="0" width="54" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="172b17a8-e97d-4553-ad09-613f25d6460c" x="10" y="20" width="726" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="3137c111-ecd0-44f5-bb80-fa8bbe5464fd" x="123" y="0" width="164" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7c280975-63c2-4c66-b4df-77afedcbb458" x="10" y="0" width="103" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Numero Factura]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement uuid="f53e6e6e-58ef-45f3-a123-7974cbed25b3" mode="Transparent" x="123" y="2" width="174" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e6b77be1-9cc4-4aed-99c6-c71b7d9cc1d5" mode="Transparent" x="454" y="2" width="188" height="16"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f58e0c4f-6622-4f72-b051-d11adb5ae269" x="672" y="1" width="54" height="16"/>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bf652b77-8bdc-433d-b346-76761c49a1ae" x="10" y="2" width="103" height="16"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{No Factura}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Prevent">
+			<line>
+				<reportElement uuid="674fe1cd-07bf-4306-94e7-05ee4a4c3d27" x="10" y="0" width="726" height="1"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement uuid="b80ad905-403b-40ac-a012-a3fb6c574034" x="689" y="9" width="65" height="15"/>
+				<textElement>
+					<font size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["pág. "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="a86adb47-2c44-4208-84b1-5fb8c86aa073" x="245" y="9" width="187" height="15"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="aaa97f10-6498-40aa-b13b-a7e036a6952f" x="12" y="9" width="189" height="15"/>
+				<textElement>
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ARMOIRE v1.0    EYETIVE CIA. LTDA.]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="94">
+			<staticText>
+				<reportElement uuid="9d866158-0833-4fde-bf93-2343c9326bf0" x="515" y="10" width="152" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL FACTURAS:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="bf1767fb-3549-45f2-b10f-d0c28e2a6777" x="667" y="10" width="73" height="20"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{totFactures}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3a09b89f-2e75-44a9-98b5-928d2abf6343" x="689" y="79" width="65" height="15"/>
+				<textElement>
+					<font size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["pág. "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="fec367c4-12d1-41d3-bace-8366bb186595" x="245" y="79" width="187" height="15"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5a1ca359-f33c-447b-a993-63a3161a7460" x="10" y="79" width="189" height="15"/>
+				<textElement>
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ARMOIRE v1.0    EYETIVE CIA. LTDA.]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="21" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CashClosingReport" language="groovy" pageWidth="226" pageHeight="595" columnWidth="198" leftMargin="14" rightMargin="14" topMargin="63" bottomMargin="113" whenResourceMissingType="Empty" uuid="0202ae2f-86b2-45a0-84b6-7d4da6a997e6">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="cashInitValue" class="java.lang.String"/>
+	<parameter name="cashBillTotal" class="java.lang.String"/>
+	<parameter name="checksTotal" class="java.lang.String"/>
+	<parameter name="creditCardTotal" class="java.lang.String"/>
+	<parameter name="debitCardTotal" class="java.lang.String"/>
+	<parameter name="inflowTotal" class="java.lang.String"/>
+	<parameter name="outflowTotal" class="java.lang.String"/>
+	<parameter name="receivableAccountsTotal" class="java.lang.String"/>
+	<parameter name="cashTotal" class="java.lang.String"/>
+	<parameter name="fromDate" class="java.lang.String"/>
+	<parameter name="upToDate" class="java.lang.String"/>
+	<parameter name="user" class="java.lang.String"/>
+	<field name="Cantidad" class="java.lang.String"/>
+	<field name="Descripcion" class="java.lang.String"/>
+	<field name="Precio" class="java.lang.String"/>
+	<field name="Total" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="240">
+			<staticText>
+				<reportElement uuid="cbcde9ad-f4a0-4963-ae6c-14bde125bf87" x="0" y="0" width="198" height="21"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CIERRE DE CAJA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="097ceece-3e47-4d2c-8691-f0b17ce6a692" x="4" y="21" width="29" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8f406627-1f25-4f11-b22a-7aada168ad45" x="106" y="21" width="24" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b0613911-e553-4ac9-9c6f-f13e6f91bdc6" x="10" y="47" width="95" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Valor Inicial de caja:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="952c41bf-3542-4d4f-bb66-4cd33af8d8c7" x="10" y="58" width="95" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Efectivo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6850ea88-5515-4b6b-8a75-c6f7eee582de" x="10" y="69" width="95" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Cheques:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8a0a5343-29ba-4961-b078-531247d8ce6b" x="10" y="80" width="95" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Tarjeta de Crédito:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40776376-b1f0-46d5-ba09-88eba82d1f23" x="10" y="91" width="95" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Tarjeta de Débito:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="7e2a9ba1-87dc-431c-b024-9d009929e71e" x="105" y="47" width="71" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cashInitValue}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22a9f02d-5f08-49a5-a1d6-ae9bb1333fce" x="105" y="58" width="71" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cashBillTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b176eb82-3ea2-4c55-8089-6b232ca69cbe" x="105" y="69" width="71" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{checksTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fda31350-33d4-413c-91a6-509896167831" x="105" y="80" width="71" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{creditCardTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="21647182-11f3-4546-9b80-7905799e764d" x="105" y="91" width="71" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{debitCardTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="84302d79-9fa8-4b75-ba46-9d869d0925b4" x="130" y="21" width="55" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{upToDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="588f9938-6f5d-42f5-8867-fbb1e2d32433" x="34" y="21" width="64" height="12"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fromDate}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="f7ea907e-7897-48f9-b8a4-6e2586fb4e63" x="11" y="111" width="174" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="2ec340c7-93a6-4187-bfc4-aef60efe6cc0" x="11" y="115" width="95" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Ingresos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f8ad7424-3d97-41f9-9b69-5edd4cb76774" x="11" y="126" width="95" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Egresos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fcdcb8d3-69e2-43d5-ae84-7d8af2ebec90" x="11" y="137" width="95" height="12"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total Cuentas por Cobrar:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="936f77f5-0139-49f5-ae40-3d244a3525d1" x="12" y="162" width="94" height="11"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL CAJA:]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="7fdf37f2-1115-4944-9b47-ed0ec06b0ed6" x="12" y="155" width="174" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="f6b15840-f88b-4105-999c-09dbff6aa3f5" x="106" y="162" width="71" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cashTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="75897d32-eba6-42bb-95e0-6fa3fd878b19" x="106" y="137" width="71" height="12"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{receivableAccountsTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="38c9a1c8-d5e9-43c0-ba0d-9d23bc6c66c2" x="106" y="126" width="71" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{outflowTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="61ee756e-3e7f-449c-9b93-3f91047fa4c7" x="106" y="115" width="71" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{inflowTotal}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="f71d0a42-d3f8-4564-9a99-528256d2ab55" x="53" y="215" width="100" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="eb1321b5-5e22-477d-a900-9571492e759e" x="53" y="218" width="53" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Generado por:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f66380b3-866c-47cb-84a7-c11abebfc3d3" x="106" y="218" width="47" height="11"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{user}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="29" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30"/>
+	</columnHeader>
+	<detail>
+		<band height="25"/>
+	</detail>
+	<columnFooter>
+		<band height="31"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e4f9a1e0-aa13-412d-bd25-f7ce0d413a1b" x="6" y="14" width="178" height="10"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[EYETIVE Cia. Ltda. - 2579413 - info@eyetive.com]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

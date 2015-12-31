@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ComercialFernandezInvoice" pageWidth="425" pageHeight="595" columnWidth="369" leftMargin="28" rightMargin="28" topMargin="34" bottomMargin="28" whenResourceMissingType="Empty" uuid="0202ae2f-86b2-45a0-84b6-7d4da6a997e6">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="240"/>
+	<parameter name="nombreCliente" class="java.lang.String"/>
+	<parameter name="rucCliente" class="java.lang.String"/>
+	<parameter name="dirCliente" class="java.lang.String"/>
+	<parameter name="telfCliente" class="java.lang.String"/>
+	<parameter name="total" class="java.lang.String"/>
+	<parameter name="efectivo" class="java.lang.String"/>
+	<parameter name="cambio" class="java.lang.String"/>
+	<parameter name="subtotal" class="java.lang.String"/>
+	<parameter name="iva" class="java.lang.String"/>
+	<parameter name="discount" class="java.lang.String"/>
+	<parameter name="subtotalIva" class="java.lang.String"/>
+	<parameter name="subtotalIvaZero" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="Cantidad" class="java.lang.String"/>
+	<field name="Descripcion" class="java.lang.String"/>
+	<field name="Precio" class="java.lang.String"/>
+	<field name="Total" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="136" splitType="Stretch">
+			<textField>
+				<reportElement uuid="dcb1b9dd-6bc4-4a5f-bdd2-06915e01bbc5" x="42" y="70" width="178" height="12"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombreCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="580260d8-534c-4658-9ae6-bec841076249" x="41" y="92" width="128" height="12"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{rucCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6ae01fde-4911-4950-8ab9-52f3db69fdb8" x="43" y="112" width="140" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dirCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e719e3e8-2b01-4c92-b198-332105a42c14" x="190" y="92" width="77" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{telfCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b3edb039-174b-4231-bb80-39dd208e21f8" x="290" y="70" width="77" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="14" splitType="Stretch">
+			<textField>
+				<reportElement uuid="a6b4aa8f-6117-419b-9bc2-a2cb0bcd7d54" x="17" y="3" width="20" height="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4feb60c6-d530-464d-831a-b3785bc44d1d" x="54" y="3" width="204" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4f1ad808-3244-4f5f-847b-5b0576dc29a7" x="269" y="3" width="27" height="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="297496fb-8ad0-4440-aa9e-7dec31275429" x="324" y="3" width="29" height="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="108" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e4f9a1e0-aa13-412d-bd25-f7ce0d413a1b" x="92" y="97" width="178" height="10"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="7"/>
+				</textElement>
+				<text><![CDATA[EYETIVE Cia. Ltda. - 2579413 - info@eyetive.com]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="9b973981-a60a-4da9-9485-45204f9aa490" x="324" y="86" width="29" height="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9c552571-204f-498a-ace7-7f76d0942e4f" x="325" y="54" width="29" height="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{subtotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="02f1ca98-cc1b-407f-a6fc-5fe84bacd578" x="324" y="69" width="29" height="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{iva}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e10d21ce-5a98-47c6-a6b7-f85638e4394c" x="37" y="22" width="52" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[EFECTIVO: $]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="29d13c51-595f-433f-8b59-53d6e5e45808" x="46" y="35" width="43" height="11"/>
+				<textElement>
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<text><![CDATA[CAMBIO: $]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="aa42f2de-d1d4-4c69-ac19-2e546236ff65" x="91" y="22" width="29" height="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{efectivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2f72b0b6-1b10-4185-9fa4-ae3dd58dbbe5" x="91" y="35" width="29" height="11"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cambio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d5c7a497-e388-4d6b-b3d1-9074f910aadb" x="314" y="22" width="50" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{subtotalIvaZero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="123aaa5c-288e-498f-be89-211f0ca55694" x="314" y="7" width="50" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{subtotalIva}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="e03f9724-f566-443a-bb4e-30e416163921" x="314" y="38" width="50" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{discount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -13,6 +14,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -41,10 +44,16 @@ public class Salary implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "sa_value")
     private Double saValue;
+    
+    @JoinColumn(name = "sa_employee_id", referencedColumnName = "employee_id")
+    @ManyToOne(optional = false)
+    private Employee employee;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "salary")
-    private List<SalaryAdvance> salaryItemList;
+    private List<SalaryAdvance> salaryAdvanceList;
 
     public Salary() {
+        this.salaryAdvanceList = new ArrayList<>();
     }
 
     public Salary(Long salaryId) {
@@ -75,12 +84,12 @@ public class Salary implements Serializable {
         this.saValue = saValue;
     }
 
-    public List<SalaryAdvance> getSalaryItemList() {
-        return salaryItemList;
+    public List<SalaryAdvance> getSalaryAdvanceList() {
+        return salaryAdvanceList;
     }
 
-    public void setSalaryItemList(List<SalaryAdvance> salaryItemList) {
-        this.salaryItemList = salaryItemList;
+    public void setSalaryAdvanceList(List<SalaryAdvance> salaryAdvanceList) {
+        this.salaryAdvanceList = salaryAdvanceList;
     }
 
     @Override
@@ -106,6 +115,14 @@ public class Salary implements Serializable {
     @Override
     public String toString() {
         return "model.Salary[ salaryId=" + salaryId + " ]";
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
     
 }

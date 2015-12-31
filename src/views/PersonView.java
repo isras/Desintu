@@ -55,7 +55,6 @@ public class PersonView extends javax.swing.JDialog {
             personAddress.setEnabled(false);
             personEmail.setEnabled(false);
             personTypeCb.setEnabled(false);
-            personJobTxt.setEnabled(false);
 
             this.personChargeView();//Cargamos el objeto persona en la vista
 
@@ -91,8 +90,7 @@ public class PersonView extends javax.swing.JDialog {
         personFirstNameTxtf = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         personTypeCb = new javax.swing.JComboBox<>();
-        jLabel8 = new javax.swing.JLabel();
-        personJobTxt = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -197,27 +195,21 @@ public class PersonView extends javax.swing.JDialog {
         jLabel6.setForeground(new java.awt.Color(244, 151, 25));
         jLabel6.setText("TIPO:");
 
-        personTypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Cliente", "Empleado" }));
+        personTypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Cliente", "Publicista", "Proveedor" }));
         personTypeCb.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 personTypeCbPropertyChange(evt);
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(244, 151, 25));
-        jLabel8.setText("PUESTO:");
-
-        personJobTxt.setEnabled(false);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
@@ -225,23 +217,26 @@ public class PersonView extends javax.swing.JDialog {
                             .addComponent(jLabel7)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8))
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(personIdentificationFtxtf, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(personAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(personPhoneFtxtf, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(personEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(personLastNameTxtf, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(personFirstNameTxtf, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                            .addComponent(personTypeCb, 0, 223, Short.MAX_VALUE)
-                            .addComponent(personJobTxt)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(personIdentificationFtxtf, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                            .addComponent(personAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                            .addComponent(personPhoneFtxtf, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                            .addComponent(personEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                            .addComponent(personLastNameTxtf, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                            .addComponent(personFirstNameTxtf, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                            .addComponent(personTypeCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(personSaveBt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(personCancelBt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(personCancelBt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)))
                 .addGap(26, 26, 26))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,15 +269,12 @@ public class PersonView extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(personTypeCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(personJobTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(personCancelBt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(personSaveBt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(personCancelBt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(personSaveBt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
@@ -298,7 +290,7 @@ public class PersonView extends javax.swing.JDialog {
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -310,7 +302,7 @@ public class PersonView extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+            .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -325,10 +317,6 @@ public class PersonView extends javax.swing.JDialog {
     private void personChargeView() {
         if (this.psr.getPerson().getPrType() != null) {
             personTypeCb.setSelectedItem(this.psr.getPerson().getPrType());
-            //Comprobamos si el tipo de persona es empleado para cargar los datos
-            if (this.psr.getPerson().getPrType().equals("Empleado")) {
-                personJobTxt.setText(this.psr.getPerson().getPrJob());
-            }
 
         }
         personFirstNameTxtf.setText(this.psr.getPerson().getPrFirstName());
@@ -348,7 +336,6 @@ public class PersonView extends javax.swing.JDialog {
         this.psr.getPerson().setPrPhone(this.personPhoneFtxtf.getText());
         this.psr.getPerson().setPrAddress(this.personAddress.getText());
         this.psr.getPerson().setPrEmail(this.personEmail.getText());
-        this.psr.getPerson().setPrJob(this.personJobTxt.getText());
     }
 
     //Método para limpiar los campos de la vista cuando se completa una operación
@@ -434,11 +421,6 @@ public class PersonView extends javax.swing.JDialog {
 
     private void personTypeCbPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_personTypeCbPropertyChange
         // TODO add your handling code here:
-        if (this.personTypeCb.getSelectedItem().equals("Empleado")) {
-            this.personJobTxt.setEnabled(true);
-        } else {
-            this.personJobTxt.setEnabled(false);
-        }
     }//GEN-LAST:event_personTypeCbPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -450,14 +432,13 @@ public class PersonView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField personAddress;
     private javax.swing.JButton personCancelBt;
     private javax.swing.JTextField personEmail;
     private javax.swing.JTextField personFirstNameTxtf;
     private javax.swing.JFormattedTextField personIdentificationFtxtf;
-    private javax.swing.JTextField personJobTxt;
     private javax.swing.JTextField personLastNameTxtf;
     private javax.swing.JFormattedTextField personPhoneFtxtf;
     private javax.swing.JButton personSaveBt;

@@ -6,14 +6,18 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -43,11 +47,14 @@ public class Employee implements Serializable {
     @Column(name = "emp_departure_date")
     @Temporal(TemporalType.DATE)
     private Date employeeDepartureDate;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+    private List<Salary> salaryList;
     @JoinColumn(name = "emp_person_id", referencedColumnName = "person_id")
     @OneToOne
     private Person person;
 
     public Employee() {
+        this.salaryList = new ArrayList<>();
     }
 
     public Employee(Long employeeId) {
@@ -130,5 +137,13 @@ public class Employee implements Serializable {
      */
     public void setEmployeeDepartureDate(Date employeeDepartureDate) {
         this.employeeDepartureDate = employeeDepartureDate;
+    }
+
+    public List<Salary> getSalaryList() {
+        return salaryList;
+    }
+
+    public void setSalaryList(List<Salary> salaryList) {
+        this.salaryList = salaryList;
     }
 }

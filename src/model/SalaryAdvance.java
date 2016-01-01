@@ -7,9 +7,10 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,14 +25,14 @@ import javax.persistence.TemporalType;
  * @author eyetive
  */
 @Entity
-@Table(name = "salary_item")
+@Table(name = "salary_advance")
 @NamedQueries({
-    @NamedQuery(name = "SalaryItem.findAll", query = "SELECT s FROM SalaryItem s")})
+    @NamedQuery(name = "SalaryItem.findAll", query = "SELECT s FROM SalaryAdvance s")})
 public class SalaryAdvance implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "salary_advance_id")
     private Long salaryAdvanceId;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation

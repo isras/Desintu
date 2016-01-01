@@ -9,10 +9,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -35,15 +36,15 @@ public class Salary implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "salary_id")
     private Long salaryId;
     @Column(name = "sa_date")
     @Temporal(TemporalType.DATE)
-    private Date saDate;
+    private Date salaryDate;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "sa_value")
-    private Double saValue;
+    private Double salaryValue;
     
     @JoinColumn(name = "sa_employee_id", referencedColumnName = "employee_id")
     @ManyToOne(optional = false)
@@ -68,20 +69,20 @@ public class Salary implements Serializable {
         this.salaryId = salaryId;
     }
 
-    public Date getSaDate() {
-        return saDate;
+    public Date getSalaryDate() {
+        return salaryDate;
     }
 
-    public void setSaDate(Date saDate) {
-        this.saDate = saDate;
+    public void setSalaryDate(Date salaryDate) {
+        this.salaryDate = salaryDate;
     }
 
-    public Double getSaValue() {
-        return saValue;
+    public Double getSalaryValue() {
+        return salaryValue;
     }
 
-    public void setSaValue(Double saValue) {
-        this.saValue = saValue;
+    public void setSalaryValue(Double salaryValue) {
+        this.salaryValue = salaryValue;
     }
 
     public List<SalaryAdvance> getSalaryAdvanceList() {

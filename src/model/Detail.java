@@ -27,10 +27,6 @@ import javax.persistence.Table;
     @NamedQuery(name = "Detail.findAll", query = "SELECT d FROM Detail d")})
 public class Detail implements Serializable {
 
-    @JoinColumn(name = "work_order_work_order_id", referencedColumnName = "work_order_id")
-    @ManyToOne
-    private WorkOrder workOrderWorkOrderId;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,6 +55,9 @@ public class Detail implements Serializable {
     @JoinColumn(name = "sellnote_sell_note_id", referencedColumnName = "sell_note_id")
     @ManyToOne
     private Sellnote sellnote;
+    @JoinColumn(name = "work_order_work_order_id", referencedColumnName = "work_order_id")
+    @ManyToOne
+    private WorkOrder workOrder;
 
     public Detail() {
     }
@@ -172,12 +171,12 @@ public class Detail implements Serializable {
         return "model.Detail[ detailId=" + detailId + " ]";
     }
 
-    public WorkOrder getWorkOrderWorkOrderId() {
-        return workOrderWorkOrderId;
+    public WorkOrder getWorkOrder() {
+        return workOrder;
     }
 
-    public void setWorkOrderWorkOrderId(WorkOrder workOrderWorkOrderId) {
-        this.workOrderWorkOrderId = workOrderWorkOrderId;
+    public void setWorkOrder(WorkOrder workOrder) {
+        this.workOrder = workOrder;
     }
 
 }

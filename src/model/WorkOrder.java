@@ -65,7 +65,7 @@ public class WorkOrder implements Serializable {
     private Double woBalance;
     @Column(name = "wo_advance")
     private Double woAdvance;
-    @OneToMany(mappedBy = "workOrderWorkOrderId", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "workOrder", cascade = CascadeType.PERSIST)
     private List<Detail> detailList;
     @JoinColumn(name = "person_person_id", referencedColumnName = "person_id")
     @ManyToOne(optional = false)

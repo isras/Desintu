@@ -599,7 +599,7 @@ public class WorkOrderView extends javax.swing.JDialog {
 
         if (this.ds.getDetail().getDetTotal() != null) {
             workOrderTotalTxt.setText(String.valueOf(this.ds.getDetail().getDetTotal()));
-            this.ds.getDetail().setWorkOrderWorkOrderId(this.wos.getWorkOrder());
+            this.ds.getDetail().setWorkOrder(this.wos.getWorkOrder());
             this.ds.addDetailList(this.ds.getDetail());
             this.updateWorkOrderDetailTable();
         }

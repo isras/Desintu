@@ -10,39 +10,43 @@ import controller.service.PersonService;
 import controller.service.SalaryService;
 import javax.swing.JOptionPane;
 import views.tableModel.EmployeeTableModel;
+import views.tableModel.SalaryTableModel;
 
 /**
  *
  * @author eyetive
  */
 public class EmployeeView extends javax.swing.JDialog {
-
+    
     private final EmployeeService employeeService;
     private final SalaryService salaryService;
     private final PersonService personService;
     private final EmployeeTableModel employeeTableModel;
-
+    private final SalaryTableModel salaryTableModel;
+    
     public EmployeeView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.employeeService = new EmployeeService();
         this.salaryService = new SalaryService();
         this.personService = new PersonService();
         this.employeeTableModel = new EmployeeTableModel();
+        this.salaryTableModel = new SalaryTableModel();
         initComponents();
         employeeSaveBt.setVisible(false);
-        
-        this.employeeTabView.setSelectedIndex(2);
+        employeeCancelBt.setVisible(false);
+        employeeSalaryAdvanceBt.setVisible(false);
         this.getEmployeeList();
         
     }
     
-    private void getEmployeeList(){
-        this.employeeTableModel.setList(this.employeeService.list());
+    private void getEmployeeList() {
+        this.employeeService.setEmployeeList(this.employeeService.list());
+        this.employeeTableModel.setList(this.employeeService.getEmployeeList());
         this.employeeTable.setModel(this.employeeTableModel);
         this.employeeTable.updateUI();
         
     }
-
+    
     private void chargeEmployeeData() {
         this.employeeService.getEmployee().setPerson(this.personService.getPerson());
         this.employeeService.getEmployee().getPerson().setPrType("Empleado");
@@ -54,15 +58,14 @@ public class EmployeeView extends javax.swing.JDialog {
         this.employeeService.getEmployee().getPerson().setPrEmail(this.employeeEmailTxt.getText());
         this.employeeService.getEmployee().setEmployeeJob(this.employeeJobTxt.getText());
         this.employeeService.getEmployee().setEmployeeHireDate(this.employeeHireDateDC.getDate());
-
+        
         if (this.employeeDepartureDateDc.getDate() != null) {
             this.employeeService.getEmployee().setEmployeeDepartureDate(this.employeeDepartureDateDc.getDate());
         }
 
-        this.chargeSalaryData();
-
+        //this.chargeSalaryData();
     }
-
+    
     private void chargeSalaryData() {
         this.salaryService.getSalary().setSalaryValue(Double.parseDouble(this.salaryValueTxt.getText()));
         this.salaryService.getSalary().setSalaryDate(this.salaryDateDc.getDate());
@@ -80,9 +83,7 @@ public class EmployeeView extends javax.swing.JDialog {
 
         employeeSalaryTableScroll = new javax.swing.JScrollPane();
         employeeSalaryTable = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        employeeTabView = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        employeePanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         employeeFirstNameTxt = new javax.swing.JTextField();
@@ -102,20 +103,7 @@ public class EmployeeView extends javax.swing.JDialog {
         employeeDepartureDateDc = new com.toedter.calendar.JDateChooser();
         jLabel11 = new javax.swing.JLabel();
         employeeIdentificationTxt = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel17 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        employeeTable = new javax.swing.JTable();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPanel7 = new javax.swing.JPanel();
+        addSalaryPanel = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         salaryEmployeeNameTxt = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
@@ -124,14 +112,35 @@ public class EmployeeView extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         salaryDateDc = new com.toedter.calendar.JDateChooser();
         testPanel = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        salaryEmployeeTxt = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        salaryEmployeeAddressTxt = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        salaryEmployeePhoneTxt = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        salaryEmployeeIdentificationTxt = new javax.swing.JTextField();
+        salaryEmployeeTablePanel = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        employeeTabView = new javax.swing.JTabbedPane();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        employeeTable = new javax.swing.JTable();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
-        jButton2 = new javax.swing.JButton();
+        employeeNewBt = new javax.swing.JButton();
         employeeSaveBt = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        employeeEditBt = new javax.swing.JButton();
         employeeCancelBt = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        addEmployeeSalaryBt = new javax.swing.JButton();
+        employeeSalaryBt = new javax.swing.JButton();
+        employeeWorkBt = new javax.swing.JButton();
+        employeeSalaryAddBt = new javax.swing.JButton();
+        employeeSalaryAdvanceBt = new javax.swing.JButton();
 
         employeeSalaryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,20 +153,14 @@ public class EmployeeView extends javax.swing.JDialog {
 
             }
         ));
-        employeeSalaryTableScroll.setViewportView(employeeSalaryTable);
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-
-        employeeTabView.setBackground(new java.awt.Color(255, 255, 255));
-        employeeTabView.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                employeeTabViewStateChanged(evt);
+        employeeSalaryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                employeeSalaryTableMouseClicked(evt);
             }
         });
+        employeeSalaryTableScroll.setViewportView(employeeSalaryTable);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        employeePanel.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos Generales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 1, 12), new java.awt.Color(0, 153, 255))); // NOI18N
@@ -289,134 +292,24 @@ public class EmployeeView extends javax.swing.JDialog {
                 .addGap(23, 23, 23))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout employeePanelLayout = new javax.swing.GroupLayout(employeePanel);
+        employeePanel.setLayout(employeePanelLayout);
+        employeePanelLayout.setHorizontalGroup(
+            employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(employeePanelLayout.createSequentialGroup()
                 .addContainerGap(7, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        employeePanelLayout.setVerticalGroup(
+            employeePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(employeePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(110, 110, 110))
         );
 
-        employeeTabView.addTab("Nuevo Empleado", jPanel1);
-
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-
-        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Empleado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 0, 12), new java.awt.Color(0, 153, 255))); // NOI18N
-
-        jLabel15.setText("Nombres:");
-
-        jLabel16.setText("Apellidos:");
-
-        jLabel17.setText("Dirección:");
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField5))
-                .addContainerGap())
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 35, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(238, 238, 238))
-        );
-
-        employeeTabView.addTab("Salarios", jPanel5);
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-
-        employeeTable.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        employeeTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(employeeTable);
-
-        jLabel12.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jLabel12.setText("Buscar Empleado:");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))
-        );
-
-        employeeTabView.addTab("Empleados", jPanel6);
-
-        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        addSalaryPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel18.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel18.setText("Empleado:");
@@ -470,21 +363,21 @@ public class EmployeeView extends javax.swing.JDialog {
         testPanel.setLayout(testPanelLayout);
         testPanelLayout.setHorizontalGroup(
             testPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 543, Short.MAX_VALUE)
+            .addGap(0, 574, Short.MAX_VALUE)
         );
         testPanelLayout.setVerticalGroup(
             testPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 259, Short.MAX_VALUE)
+            .addGap(0, 342, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout addSalaryPanelLayout = new javax.swing.GroupLayout(addSalaryPanel);
+        addSalaryPanel.setLayout(addSalaryPanelLayout);
+        addSalaryPanelLayout.setHorizontalGroup(
+            addSalaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addSalaryPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(addSalaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(addSalaryPanelLayout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(salaryEmployeeNameTxt))
@@ -492,11 +385,11 @@ public class EmployeeView extends javax.swing.JDialog {
                 .addGap(31, 31, 31))
             .addComponent(testPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        addSalaryPanelLayout.setVerticalGroup(
+            addSalaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addSalaryPanelLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(addSalaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(salaryEmployeeNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -505,17 +398,186 @@ public class EmployeeView extends javax.swing.JDialog {
                 .addComponent(testPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        employeeTabView.addTab("Agregar Salario", jPanel7);
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Empleado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 1, 12), new java.awt.Color(0, 153, 255))); // NOI18N
+        jPanel8.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        jLabel15.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel15.setText("Nombre:");
+
+        salaryEmployeeTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        jLabel17.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel17.setText("Dirección:");
+
+        salaryEmployeeAddressTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel9.setText("Teléfono:");
+
+        jLabel10.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel10.setText("Cargo:");
+
+        salaryEmployeePhoneTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        jTextField4.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel16.setText("Identificación:");
+
+        salaryEmployeeIdentificationTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(salaryEmployeeAddressTxt)
+                    .addComponent(salaryEmployeeTxt)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(salaryEmployeePhoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(salaryEmployeeIdentificationTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
+                    .addComponent(jTextField4))
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(salaryEmployeeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salaryEmployeeAddressTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(salaryEmployeePhoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16)
+                    .addComponent(salaryEmployeeIdentificationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout salaryEmployeeTablePanelLayout = new javax.swing.GroupLayout(salaryEmployeeTablePanel);
+        salaryEmployeeTablePanel.setLayout(salaryEmployeeTablePanelLayout);
+        salaryEmployeeTablePanelLayout.setHorizontalGroup(
+            salaryEmployeeTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        salaryEmployeeTablePanelLayout.setVerticalGroup(
+            salaryEmployeeTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 232, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(salaryEmployeeTablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(salaryEmployeeTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("EMPLEADOS");
+        setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        setResizable(false);
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        employeeTabView.setBackground(new java.awt.Color(255, 255, 255));
+        employeeTabView.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                employeeTabViewStateChanged(evt);
+            }
+        });
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+
+        employeeTable.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        employeeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(employeeTable);
+
+        jLabel12.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel12.setText("Buscar Empleado:");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+            .addComponent(jScrollPane1)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))
+        );
+
+        employeeTabView.addTab("Empleados", jPanel6);
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
         jToolBar1.setRollover(true);
 
-        jButton2.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jButton2.setText("NUEVO");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        employeeNewBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        employeeNewBt.setText("NUEVO");
+        employeeNewBt.setFocusable(false);
+        employeeNewBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        employeeNewBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        employeeNewBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeeNewBtActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(employeeNewBt);
 
         employeeSaveBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         employeeSaveBt.setText("GUARDAR");
@@ -526,42 +588,59 @@ public class EmployeeView extends javax.swing.JDialog {
         });
         jToolBar1.add(employeeSaveBt);
 
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jButton1.setText("EDITAR");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
+        employeeEditBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        employeeEditBt.setText("EDITAR");
+        employeeEditBt.setFocusable(false);
+        employeeEditBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        employeeEditBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        employeeEditBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeeEditBtActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(employeeEditBt);
 
         employeeCancelBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         employeeCancelBt.setText("CANCELAR");
-        jToolBar1.add(employeeCancelBt);
-
-        jButton3.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jButton3.setText("SALARIO");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
-
-        jButton4.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jButton4.setText("TRABAJOS");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
-
-        addEmployeeSalaryBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        addEmployeeSalaryBt.setText("AGREGAR SALARIO");
-        addEmployeeSalaryBt.setFocusable(false);
-        addEmployeeSalaryBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        addEmployeeSalaryBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        addEmployeeSalaryBt.addActionListener(new java.awt.event.ActionListener() {
+        employeeCancelBt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addEmployeeSalaryBtActionPerformed(evt);
+                employeeCancelBtActionPerformed(evt);
             }
         });
-        jToolBar1.add(addEmployeeSalaryBt);
+        jToolBar1.add(employeeCancelBt);
+
+        employeeSalaryBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        employeeSalaryBt.setText("SALARIO");
+        employeeSalaryBt.setFocusable(false);
+        employeeSalaryBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        employeeSalaryBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(employeeSalaryBt);
+
+        employeeWorkBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        employeeWorkBt.setText("TRABAJOS");
+        employeeWorkBt.setFocusable(false);
+        employeeWorkBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        employeeWorkBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(employeeWorkBt);
+
+        employeeSalaryAddBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        employeeSalaryAddBt.setText("AGREGAR SALARIO");
+        employeeSalaryAddBt.setFocusable(false);
+        employeeSalaryAddBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        employeeSalaryAddBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        employeeSalaryAddBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeeSalaryAddBtActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(employeeSalaryAddBt);
+
+        employeeSalaryAdvanceBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        employeeSalaryAdvanceBt.setText("ADEL");
+        employeeSalaryAdvanceBt.setFocusable(false);
+        employeeSalaryAdvanceBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        employeeSalaryAdvanceBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(employeeSalaryAdvanceBt);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -596,98 +675,247 @@ public class EmployeeView extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void employeeSaveBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeSaveBtActionPerformed
         // TODO add your handling code here:
-        this.chargeEmployeeData();
-        if (this.employeeService.saveEmployee() == true) {
-            this.salaryService.saveSalary();
-            JOptionPane.showMessageDialog(this, "Empleado guardado correctamente");
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al guardar el empleado");
+
+        if (this.employeeTabView.getTitleAt(employeeTabView.getSelectedIndex()).equals("Agregar Salario")) {
+            this.chargeSalaryData();
+            if (this.salaryService.saveSalary()) {
+                JOptionPane.showMessageDialog(this, "Salario guardado correctamente");
+                this.salaryService.addSalaryToList(this.salaryService.getSalary());
+                //Actualizamos la vista de la tabla
+                employeeSalaryTable.updateUI();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al guardar el salario");
+            }
+        } else if (this.employeeTabView.getTitleAt(employeeTabView.getSelectedIndex()).equals("Nuevo Empleado")) {
+            this.chargeEmployeeData();
+            if (this.employeeService.saveEmployee()) {
+                JOptionPane.showMessageDialog(this, "Empleado creado correctamente");
+                this.employeeTabView.remove(this.employeeTabView.getSelectedIndex());
+                this.employeeNewBt.setEnabled(true);
+                this.commonsButtonsControl();
+                this.employeeService.addEmployeeToList(this.employeeService.getEmployee());
+                employeeTable.updateUI();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al crear un empleado");
+            }
+        }else if(this.employeeTabView.getTitleAt(employeeTabView.getSelectedIndex()).equals("Editar Empleado")){
+            this.chargeEmployeeData();
+            if(this.employeeService.updateEmployee()){
+                JOptionPane.showMessageDialog(this, "Empleado modificado correctamente");
+                this.employeeTabView.remove(this.employeeTabView.getSelectedIndex());
+                this.employeeEditBt.setEnabled(true);
+                this.commonsButtonsControl();
+                employeeTable.updateUI();
+            }
         }
+
+//        this.chargeEmployeeData();
+//        if (this.employeeService.saveEmployee() == true) {
+//            this.salaryService.saveSalary();
+//            JOptionPane.showMessageDialog(this, "Empleado guardado correctamente");
+//        } else {
+//           
+//        }
     }//GEN-LAST:event_employeeSaveBtActionPerformed
 
     private void employeeTabViewStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_employeeTabViewStateChanged
         // TODO add your handling code here:
-        if (employeeTabView.getSelectedIndex() == 3) {
-            //JOptionPane.showMessageDialog(this, "Esto es una prueba");
-            //testPanel.add(this.employeeSalaryTableScroll);
-            
-            //testPanel.updateUI();
-        }
     }//GEN-LAST:event_employeeTabViewStateChanged
 
     private void salaryValueTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryValueTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_salaryValueTxtActionPerformed
 
-    private void addEmployeeSalaryBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEmployeeSalaryBtActionPerformed
+    private void employeeSalaryAddBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeSalaryAddBtActionPerformed
         // TODO add your handling code here:
         StringBuilder sb = new StringBuilder();
         
-        if(employeeTable.getSelectedRow() != -1){
-        this.employeeTabView.setSelectedIndex(3);
-        this.employeeService.setInstance(employeeTableModel.getList().get(employeeTable.getSelectedRow()));
-        this.salaryEmployeeNameTxt.setText(sb.append(this.employeeService.getEmployee().toString()).append(" - ").append(this.employeeService.getEmployee().getEmployeeJob()).toString());
-        this.addEmployeeSalaryTable();   
-        }else{
+        if (employeeTable.getSelectedRow() != -1) {
+            this.employeeTabView.add(addSalaryPanel);
+            this.employeeTabView.setSelectedIndex(employeeTabView.getComponentCount() - 1);
+            this.employeeTabView.setTitleAt(employeeTabView.getSelectedIndex(), "Agregar Salario");
+            this.addSalaryButtonControl();
+            this.addEmployeeSalaryTable();
+            this.employeeService.setInstance(employeeTableModel.getList().get(employeeTable.getSelectedRow()));
+            this.salaryEmployeeNameTxt.setText(sb.append(this.employeeService.getEmployee().toString()).append(" - ").append(this.employeeService.getEmployee().getEmployeeJob()).toString());
+            
+            this.salaryService.setSalaryList(this.salaryService.getSalaryByEmployee(this.employeeService.getEmployee()));
+            
+            this.updateSalaryTable();
+            
+        } else {
             JOptionPane.showMessageDialog(this, "No ha seleccionado ningun empleado");
         }
-    }//GEN-LAST:event_addEmployeeSalaryBtActionPerformed
+    }//GEN-LAST:event_employeeSalaryAddBtActionPerformed
+    
+    private void updateSalaryTable() {
+        this.salaryTableModel.setList(this.salaryService.getSalaryList());
+        employeeSalaryTable.setModel(salaryTableModel);
+        employeeSalaryTable.updateUI();
+    }
+    
+    private void addSalaryButtonControl() {
+        employeeNewBt.setVisible(false);
+        employeeSalaryAddBt.setEnabled(false);
+        employeeEditBt.setVisible(false);
+        employeeSaveBt.setVisible(true);
+        employeeCancelBt.setVisible(true);
+        employeeSalaryBt.setVisible(false);
+        employeeWorkBt.setVisible(false);
+    }
 
-    private void addEmployeeSalaryTable(){
+    private void employeeCancelBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeCancelBtActionPerformed
+        // TODO add your handling code here:
+        if (employeeTabView.getTitleAt(employeeTabView.getSelectedIndex()).equals("Agregar Salario")) {
+            employeeTabView.remove(employeeTabView.getSelectedIndex());
+            employeeSalaryAddBt.setEnabled(true);
+            this.commonsButtonsControl();
+        } else if (employeeTabView.getTitleAt(employeeTabView.getSelectedIndex()).equals("Nuevo Empleado")) {
+            employeeTabView.remove(employeeTabView.getSelectedIndex());
+            employeeNewBt.setEnabled(true);
+            this.commonsButtonsControl();
+        }else if(employeeTabView.getTitleAt(employeeTabView.getSelectedIndex()).equals("Editar Empleado")){
+            employeeTabView.remove(employeeTabView.getSelectedIndex());
+            employeeEditBt.setEnabled(true);
+            this.commonsButtonsControl();
+        }
+    }//GEN-LAST:event_employeeCancelBtActionPerformed
+    
+    private void commonsButtonsControl() {
+        employeeCancelBt.setVisible(false);
+        employeeSaveBt.setVisible(false);
+        employeeNewBt.setVisible(true);
+        employeeEditBt.setVisible(true);
+        employeeWorkBt.setVisible(true);
+        employeeSalaryBt.setVisible(true);
+        employeeSalaryAddBt.setVisible(true);
+        employeeSalaryAdvanceBt.setVisible(false);
+    }
+
+    private void employeeSalaryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeSalaryTableMouseClicked
+        // TODO add your handling code here:
+//        if(evt.getClickCount() == 1){
+//            System.out.println("" + this.salaryTableModel.getList().get(employeeSalaryTable.getSelectedRow()).getSalaryValue());
+//        }
+
+    }//GEN-LAST:event_employeeSalaryTableMouseClicked
+
+    private void employeeNewBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeNewBtActionPerformed
+        // TODO add your handling code here:
+        employeeTabView.add(employeePanel);
+        employeeTabView.setSelectedIndex(employeeTabView.getComponentCount() - 1);
+        employeeTabView.setTitleAt(employeeTabView.getSelectedIndex(), "Nuevo Empleado");
+        
+        employeeSalaryAddBt.setVisible(false);
+        employeeWorkBt.setVisible(false);
+        employeeSalaryBt.setVisible(false);
+        employeeEditBt.setVisible(false);
+        employeeSaveBt.setVisible(true);
+        employeeCancelBt.setVisible(true);
+        employeeNewBt.setEnabled(false);
+        
+
+    }//GEN-LAST:event_employeeNewBtActionPerformed
+
+    private void employeeEditBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeEditBtActionPerformed
+        // TODO add your handling code here:
+        if (employeeTable.getSelectedRow() != -1) {
+            employeeTabView.add(employeePanel);
+            employeeTabView.setSelectedIndex(employeeTabView.getComponentCount() - 1);
+            employeeTabView.setTitleAt(employeeTabView.getSelectedIndex(), "Editar Empleado");
+            //Fijamos una nueva instancia de un empleado
+            this.employeeService.setInstance(this.employeeTableModel.getList().get(this.employeeTable.getSelectedRow()));
+            
+            this.chargeEmployeeView();
+            
+            employeeSalaryAddBt.setVisible(false);
+            employeeWorkBt.setVisible(false);
+            employeeSalaryBt.setVisible(false);
+            employeeEditBt.setVisible(true);
+            employeeSaveBt.setVisible(true);
+            employeeCancelBt.setVisible(true);
+            employeeEditBt.setEnabled(false);
+            employeeNewBt.setVisible(false);
+            employeeSalaryAdvanceBt.setVisible(false);
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "No ha seleccionado ningún empleado");
+        }
+        
+    }//GEN-LAST:event_employeeEditBtActionPerformed
+    
+    private void chargeEmployeeView() {
+        this.employeeFirstNameTxt.setText(this.employeeService.getEmployee().getPerson().getPrFirstName());
+        this.employeeLastNameTxt.setText(this.employeeService.getEmployee().getPerson().getPrLastName());
+        this.employeeAddressTxt.setText(this.employeeService.getEmployee().getPerson().getPrAddress());
+        this.employeePhoneTxt.setText(this.employeeService.getEmployee().getPerson().getPrPhone());
+        this.employeeEmailTxt.setText(this.employeeService.getEmployee().getPerson().getPrEmail());
+        this.employeeIdentificationTxt.setText(this.employeeService.getEmployee().getPerson().getPrIdentification());
+        this.employeeJobTxt.setText(this.employeeService.getEmployee().getEmployeeJob());
+        this.employeeHireDateDC.setDate(this.employeeService.getEmployee().getEmployeeHireDate());
+        if (this.employeeService.getEmployee().getEmployeeHireDate() != null) {
+            this.employeeDepartureDateDc.setDate(this.employeeService.getEmployee().getEmployeeDepartureDate());
+        }
+    }
+    
+    private void addEmployeeSalaryTable() {
         employeeSalaryTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
+                new Object[][]{
+                    {},
+                    {},
+                    {},
+                    {}
+                },
+                new String[]{}
         ));
         employeeSalaryTableScroll.setViewportView(employeeSalaryTable);
-
+        
         javax.swing.GroupLayout testPanelLayout = new javax.swing.GroupLayout(testPanel);
         testPanel.setLayout(testPanelLayout);
         testPanelLayout.setHorizontalGroup(
-            testPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(employeeSalaryTableScroll)
+                testPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(employeeSalaryTableScroll)
         );
         testPanelLayout.setVerticalGroup(
-            testPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(testPanelLayout.createSequentialGroup()
-                .addComponent(employeeSalaryTableScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                testPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(testPanelLayout.createSequentialGroup()
+                        .addComponent(employeeSalaryTableScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
         );
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addEmployeeSalaryBt;
+    private javax.swing.JPanel addSalaryPanel;
     private javax.swing.JTextField employeeAddressTxt;
     private javax.swing.JButton employeeCancelBt;
     private com.toedter.calendar.JDateChooser employeeDepartureDateDc;
+    private javax.swing.JButton employeeEditBt;
     private javax.swing.JTextField employeeEmailTxt;
     private javax.swing.JTextField employeeFirstNameTxt;
     private com.toedter.calendar.JDateChooser employeeHireDateDC;
     private javax.swing.JTextField employeeIdentificationTxt;
     private javax.swing.JTextField employeeJobTxt;
     private javax.swing.JTextField employeeLastNameTxt;
+    private javax.swing.JButton employeeNewBt;
+    private javax.swing.JPanel employeePanel;
     private javax.swing.JTextField employeePhoneTxt;
+    private javax.swing.JButton employeeSalaryAddBt;
+    private javax.swing.JButton employeeSalaryAdvanceBt;
+    private javax.swing.JButton employeeSalaryBt;
     private javax.swing.JTable employeeSalaryTable;
     private javax.swing.JScrollPane employeeSalaryTableScroll;
     private javax.swing.JButton employeeSaveBt;
     private javax.swing.JTabbedPane employeeTabView;
     private javax.swing.JTable employeeTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton employeeWorkBt;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -703,22 +931,24 @@ public class EmployeeView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JToolBar jToolBar1;
     private com.toedter.calendar.JDateChooser salaryDateDc;
+    private javax.swing.JTextField salaryEmployeeAddressTxt;
+    private javax.swing.JTextField salaryEmployeeIdentificationTxt;
     private javax.swing.JTextField salaryEmployeeNameTxt;
+    private javax.swing.JTextField salaryEmployeePhoneTxt;
+    private javax.swing.JPanel salaryEmployeeTablePanel;
+    private javax.swing.JTextField salaryEmployeeTxt;
     private javax.swing.JTextField salaryValueTxt;
     private javax.swing.JPanel testPanel;
     // End of variables declaration//GEN-END:variables

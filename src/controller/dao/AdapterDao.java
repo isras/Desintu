@@ -95,6 +95,21 @@ public class AdapterDao<T> implements InterfaceDao<T>{
         entityManager.remove(obj);
     }
     
+    @Override
+    public void detach(T obj){
+        entityManager.detach(obj);
+    }
+    
+    @Override
+    public void refresh(T obj){
+        entityManager.refresh(obj);
+    }
+    
+    @Override
+    public void flush(){
+        entityManager.flush();
+    }
+    
     /**
      * 
      * @return EntityManager retorna un manejador de entidad 

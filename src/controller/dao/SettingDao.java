@@ -18,7 +18,7 @@ public class SettingDao extends AdapterDao  {
         try {
             this.getEntityManager().getTransaction().begin();
             this.guarda(this.setting);
-            this.getEntityManager().getTransaction().commit();//commmit enviado a la datos  
+            this.getEntityManager().getTransaction().commit();//commmit enviado a la datos 
             flag = true;
         } catch (Exception e) {
             System.out.println("Error en: " + e);

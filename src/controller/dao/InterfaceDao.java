@@ -13,4 +13,7 @@ public interface InterfaceDao<T> {
     void guarda(T obj);
     void modificar(T obj);//metodos sin cuerpos
     void eliminar(T obj);
+    void detach(T obj);
+    void flush();
+    void refresh(T obj);
 }

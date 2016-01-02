@@ -18,6 +18,7 @@ import model.Salary;
 public class SalaryDao extends AdapterDao {
     
     private Salary salary;
+    private List<Salary> salaryList;
 
     public SalaryDao() {
         super(Salary.class, new Conexion().getEm());
@@ -28,7 +29,7 @@ public class SalaryDao extends AdapterDao {
         try {
             this.getEntityManager().getTransaction().begin();
             this.guarda(this.salary);
-            this.getEntityManager().getTransaction().commit();//commmit enviado a la datos  
+            this.getEntityManager().getTransaction().commit();//commmit enviado a la datos
             flag = true;
         } catch (Exception e) {
             System.out.println("Error en: " + e);
@@ -40,8 +41,10 @@ public class SalaryDao extends AdapterDao {
         boolean flag = false;
         try {
             this.getEntityManager().getTransaction().begin();
-            this.modificar(this.salary);
-            this.getEntityManager().getTransaction().commit();//commmit enviado a la datos  
+            this.guarda(this.salary);
+            this.getEntityManager().getTransaction().commit();//commmit enviado a la datos
+            this.detach(salary);
+            this.modificar(salary);
             flag = true;
         } catch (Exception e) {
             System.out.println("Error en: " + e);
@@ -70,27 +73,52 @@ public class SalaryDao extends AdapterDao {
         this.salary = null;
     }
 
-    public List<Salary> list() {
-        List<Salary> salaryList = new ArrayList<>();
+    public List<Salary> listAll() {
+        List<Salary> list = new ArrayList<>();
         try {
             String query = "select c from Salary c";
             Query q = this.getEntityManager().createQuery(query);
-            salaryList = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
+            list = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
         } catch (Exception e) {
             System.out.println(e);
+        }
+        return list;
+    }
+
+    public List<Salary> getSalaryByEmployee(Employee emp) {
+        List<Salary> list = new ArrayList<>();
+        try {
+            String query = "select c from Salary c where c.employee.employeeId = " + emp.getEmployeeId();
+            Query q = this.getEntityManager().createQuery(query);
+            list = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    /**
+     * @return the listAll
+     */
+    public List<Salary> getSalaryList() {
+        if(this.salaryList == null){
+            this.salaryList = new ArrayList<>();
         }
         return salaryList;
     }
 
-    public List<Salary> getSalaryByEmployee(Employee employee) {
-        List<Salary> salaryList = new ArrayList<>();
-        try {
-            String query = "select c from Salary c where c.salary.salary_id = '" + employee.getEmployeeId();
-            Query q = this.getEntityManager().createQuery(query);
-            salaryList = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
-        } catch (Exception e) {
-            System.out.println(e);
+    /**
+     * @param salaryList the listAll to set
+     */
+    public void setSalaryList(List<Salary> salaryList) {
+        this.salaryList = salaryList;
+    }
+    
+    public void addSalaryToList(Salary salary){
+        if(this.salaryList == null){
+            this.salaryList = new ArrayList<>();
         }
-        return salaryList;
+        this.salaryList.add(salary);
+        this.salary = new Salary();
     }
 }

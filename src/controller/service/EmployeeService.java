@@ -42,7 +42,7 @@ public class EmployeeService {
     }
 
     public List<Employee> list() {
-        return this.employeeDao.list();
+        return this.employeeDao.listAll();
     }
     
     public List<Employee> getEmployeesByCriteria(String criteria){
@@ -51,6 +51,18 @@ public class EmployeeService {
     
     public boolean employeeExists(String identification){
         return this.employeeDao.employeeExists(identification);
+    }
+    
+    public List<Employee> getEmployeeList(){
+        return this.employeeDao.getEmployeeList();
+    }
+    
+    public void setEmployeeList(List<Employee> employeeList){
+        this.employeeDao.setEmployeeList(employeeList);
+    }
+    
+    public void addEmployeeToList(Employee employee){
+        this.employeeDao.addEmployeeToList(employee);
     }
     
 }

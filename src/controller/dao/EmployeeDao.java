@@ -18,6 +18,7 @@ public class EmployeeDao extends AdapterDao {
     
 
     private Employee employee;
+    private List<Employee> employeeList;
 
     public EmployeeDao() {
         super(Employee.class, new Conexion().getEm());
@@ -70,29 +71,29 @@ public class EmployeeDao extends AdapterDao {
         this.employee = null;
     }
 
-    public List<Employee> list() {
-        List<Employee> employeeList = new ArrayList<>();
+    public List<Employee> listAll() {
+        List<Employee> list = new ArrayList<>();
         try {
             String query = "select c from Employee c";
             Query q = this.getEntityManager().createQuery(query);
-            employeeList = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
+            list = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
         } catch (Exception e) {
             System.out.println(e);
         }
-        return employeeList;
+        return list;
     }
 
     public List<Employee> getEmployeesByCriteria(String criteria) {
-        List<Employee> employeeList = new ArrayList<>();
+        List<Employee> list = new ArrayList<>();
         try {
             String query = "select c from Employee c where c.person.prFirstName like '" + criteria + "%' or c.person.prLastName like '" + criteria + "%' or c.person.prIdentification like '" + criteria + "%'";
             Query q = this.getEntityManager().createQuery(query);
-            employeeList = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
+            list = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
         } catch (Exception e) {
             System.out.println(e);
         }
-        System.out.println(employeeList);
-        return employeeList;
+        System.out.println(list);
+        return list;
     }
 
     public boolean employeeExists(String identification) {
@@ -106,6 +107,31 @@ public class EmployeeDao extends AdapterDao {
             System.out.println("Error en: " + e);
         }
         return flag;
+    }
+
+    /**
+     * @return the listAll
+     */
+    public List<Employee> getEmployeeList() {
+        if(this.employeeList == null){
+            this.employeeList = new ArrayList<>();
+        }
+        return employeeList;
+    }
+    
+    public void addEmployeeToList(Employee employee){
+        if(employeeList == null){
+            this.employeeList = new ArrayList<>();
+        }
+        this.employeeList.add(employee);
+        this.employee = new Employee();
+    }
+
+    /**
+     * @param employeeList the listAll to set
+     */
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
 
 

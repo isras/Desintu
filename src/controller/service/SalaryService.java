@@ -42,12 +42,24 @@ public class SalaryService {
         return this.salaryDao.getSalary();
     }
     
-    public List<Salary> list(){
-        return this.salaryDao.list();
+    public List<Salary> listAll(){
+        return this.salaryDao.listAll();
     }
     
     public List<Salary> getSalaryByEmployee(Employee employee){
         return this.salaryDao.getSalaryByEmployee(employee);
+    }
+    
+    public List<Salary> getSalaryList(){
+        return this.salaryDao.getSalaryList();
+    }
+    
+    public void setSalaryList(List<Salary> salaryList){
+        this.salaryDao.setSalaryList(salaryList);
+    }
+    
+    public void addSalaryToList(Salary salary){
+        this.salaryDao.addSalaryToList(salary);
     }
     
 }

@@ -48,7 +48,7 @@ public class Employee implements Serializable {
     @Column(name = "emp_departure_date")
     @Temporal(TemporalType.DATE)
     private Date employeeDepartureDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "employee")
     private List<Salary> salaryList;
     @JoinColumn(name = "emp_person_id", referencedColumnName = "person_id")
     @OneToOne(cascade = CascadeType.PERSIST)

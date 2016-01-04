@@ -7,9 +7,12 @@ package views;
 
 import controller.service.EmployeeService;
 import controller.service.PersonService;
+import controller.service.SalaryPaymentService;
 import controller.service.SalaryService;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import views.tableModel.EmployeeTableModel;
+import views.tableModel.SalaryPaymentTableModel;
 import views.tableModel.SalaryTableModel;
 
 /**
@@ -17,13 +20,15 @@ import views.tableModel.SalaryTableModel;
  * @author eyetive
  */
 public class EmployeeView extends javax.swing.JDialog {
-    
+
     private final EmployeeService employeeService;
     private final SalaryService salaryService;
     private final PersonService personService;
     private final EmployeeTableModel employeeTableModel;
     private final SalaryTableModel salaryTableModel;
-    
+    private final SalaryPaymentService salaryPaymentService;
+    private final SalaryPaymentTableModel salaryPaymentTableModel;
+
     public EmployeeView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.employeeService = new EmployeeService();
@@ -31,22 +36,24 @@ public class EmployeeView extends javax.swing.JDialog {
         this.personService = new PersonService();
         this.employeeTableModel = new EmployeeTableModel();
         this.salaryTableModel = new SalaryTableModel();
+        this.salaryPaymentService = new SalaryPaymentService();
+        this.salaryPaymentTableModel = new SalaryPaymentTableModel();
         initComponents();
         employeeSaveBt.setVisible(false);
         employeeCancelBt.setVisible(false);
-        employeeSalaryAdvanceBt.setVisible(false);
+        employeeSalaryPaymentBt.setVisible(false);
         this.getEmployeeList();
-        
+
     }
-    
+
     private void getEmployeeList() {
         this.employeeService.setEmployeeList(this.employeeService.list());
         this.employeeTableModel.setList(this.employeeService.getEmployeeList());
         this.employeeTable.setModel(this.employeeTableModel);
         this.employeeTable.updateUI();
-        
+
     }
-    
+
     private void chargeEmployeeData() {
         this.employeeService.getEmployee().setPerson(this.personService.getPerson());
         this.employeeService.getEmployee().getPerson().setPrType("Empleado");
@@ -58,17 +65,19 @@ public class EmployeeView extends javax.swing.JDialog {
         this.employeeService.getEmployee().getPerson().setPrEmail(this.employeeEmailTxt.getText());
         this.employeeService.getEmployee().setEmployeeJob(this.employeeJobTxt.getText());
         this.employeeService.getEmployee().setEmployeeHireDate(this.employeeHireDateDC.getDate());
-        
+
         if (this.employeeDepartureDateDc.getDate() != null) {
             this.employeeService.getEmployee().setEmployeeDepartureDate(this.employeeDepartureDateDc.getDate());
         }
 
         //this.chargeSalaryData();
     }
-    
+
     private void chargeSalaryData() {
-        this.salaryService.getSalary().setSalaryValue(Double.parseDouble(this.salaryValueTxt.getText()));
+        this.salaryService.getSalary().setSalaryValue(Double.valueOf(this.salaryValueTxt.getText()));
         this.salaryService.getSalary().setSalaryDate(this.salaryDateDc.getDate());
+        this.salaryService.getSalary().setSalaryState(0);
+        this.salaryService.getSalary().setSalaryBalance(Double.valueOf(this.salaryValueTxt.getText()));
         this.salaryService.getSalary().setEmployee(this.employeeService.getEmployee());
     }
 
@@ -112,7 +121,7 @@ public class EmployeeView extends javax.swing.JDialog {
         jLabel14 = new javax.swing.JLabel();
         salaryDateDc = new com.toedter.calendar.JDateChooser();
         testPanel = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
+        salaryPanel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         salaryEmployeeTxt = new javax.swing.JTextField();
@@ -121,10 +130,30 @@ public class EmployeeView extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         salaryEmployeePhoneTxt = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        salaryEmployeeJobTxt = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         salaryEmployeeIdentificationTxt = new javax.swing.JTextField();
         salaryEmployeeTablePanel = new javax.swing.JPanel();
+        salaryPaymentOptionsBtg = new javax.swing.ButtonGroup();
+        salaryPaymentPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        salaryPaymentCompleteRb = new javax.swing.JRadioButton();
+        salaryPaymentAdvanceRb = new javax.swing.JRadioButton();
+        salaryPaymentAdvanceValueTxt = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        salaryPaymentDate = new com.toedter.calendar.JDateChooser();
+        jLabel20 = new javax.swing.JLabel();
+        salaryPaymentEmployeeTxt = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        salaryPaymentValueTxt = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        salaryPaymentDescriptionTxt = new javax.swing.JTextField();
+        salaryPaymentTablePanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        salaryPaymentTable = new javax.swing.JTable();
+        jLabel24 = new javax.swing.JLabel();
+        salaryPaymentBalanceTxt = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         employeeTabView = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
@@ -140,7 +169,7 @@ public class EmployeeView extends javax.swing.JDialog {
         employeeSalaryBt = new javax.swing.JButton();
         employeeWorkBt = new javax.swing.JButton();
         employeeSalaryAddBt = new javax.swing.JButton();
-        employeeSalaryAdvanceBt = new javax.swing.JButton();
+        employeeSalaryPaymentBt = new javax.swing.JButton();
 
         employeeSalaryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -398,7 +427,7 @@ public class EmployeeView extends javax.swing.JDialog {
                 .addComponent(testPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        salaryPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Empleado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 1, 12), new java.awt.Color(0, 153, 255))); // NOI18N
@@ -407,11 +436,13 @@ public class EmployeeView extends javax.swing.JDialog {
         jLabel15.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel15.setText("Nombre:");
 
+        salaryEmployeeTxt.setEditable(false);
         salaryEmployeeTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         jLabel17.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel17.setText("Dirección:");
 
+        salaryEmployeeAddressTxt.setEditable(false);
         salaryEmployeeAddressTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
@@ -420,13 +451,16 @@ public class EmployeeView extends javax.swing.JDialog {
         jLabel10.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel10.setText("Cargo:");
 
+        salaryEmployeePhoneTxt.setEditable(false);
         salaryEmployeePhoneTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        salaryEmployeeJobTxt.setEditable(false);
+        salaryEmployeeJobTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         jLabel16.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel16.setText("Identificación:");
 
+        salaryEmployeeIdentificationTxt.setEditable(false);
         salaryEmployeeIdentificationTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -450,7 +484,7 @@ public class EmployeeView extends javax.swing.JDialog {
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(salaryEmployeeIdentificationTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
-                    .addComponent(jTextField4))
+                    .addComponent(salaryEmployeeJobTxt))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -472,7 +506,7 @@ public class EmployeeView extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(salaryEmployeeJobTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -484,26 +518,182 @@ public class EmployeeView extends javax.swing.JDialog {
         );
         salaryEmployeeTablePanelLayout.setVerticalGroup(
             salaryEmployeeTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 232, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout salaryPanelLayout = new javax.swing.GroupLayout(salaryPanel);
+        salaryPanel.setLayout(salaryPanelLayout);
+        salaryPanelLayout.setHorizontalGroup(
+            salaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(salaryPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(salaryEmployeeTablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        salaryPanelLayout.setVerticalGroup(
+            salaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, salaryPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(salaryEmployeeTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        salaryPaymentPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        salaryPaymentOptionsBtg.add(salaryPaymentCompleteRb);
+        salaryPaymentCompleteRb.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        salaryPaymentCompleteRb.setText("Salario completo");
+        salaryPaymentCompleteRb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salaryPaymentCompleteRbActionPerformed(evt);
+            }
+        });
+
+        salaryPaymentOptionsBtg.add(salaryPaymentAdvanceRb);
+        salaryPaymentAdvanceRb.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        salaryPaymentAdvanceRb.setText("Adelanto");
+        salaryPaymentAdvanceRb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salaryPaymentAdvanceRbActionPerformed(evt);
+            }
+        });
+
+        salaryPaymentAdvanceValueTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        salaryPaymentAdvanceValueTxt.setEnabled(false);
+
+        jLabel19.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jLabel19.setText("Valor:");
+
+        jLabel23.setText("Fecha:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(salaryPaymentCompleteRb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(salaryPaymentAdvanceRb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19)
+                .addGap(5, 5, 5)
+                .addComponent(salaryPaymentAdvanceValueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(salaryPaymentDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(salaryPaymentDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(salaryPaymentCompleteRb)
+                        .addComponent(salaryPaymentAdvanceRb)
+                        .addComponent(salaryPaymentAdvanceValueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel19)
+                        .addComponent(jLabel23)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel20.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel20.setText("Empleado:");
+
+        salaryPaymentEmployeeTxt.setEditable(false);
+
+        jLabel21.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel21.setText("Salario:");
+
+        salaryPaymentValueTxt.setEditable(false);
+
+        jLabel22.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel22.setText("Descripción:");
+
+        salaryPaymentTable.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        salaryPaymentTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(salaryPaymentTable);
+
+        javax.swing.GroupLayout salaryPaymentTablePanelLayout = new javax.swing.GroupLayout(salaryPaymentTablePanel);
+        salaryPaymentTablePanel.setLayout(salaryPaymentTablePanelLayout);
+        salaryPaymentTablePanelLayout.setHorizontalGroup(
+            salaryPaymentTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2)
+        );
+        salaryPaymentTablePanelLayout.setVerticalGroup(
+            salaryPaymentTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(salaryPaymentTablePanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jLabel24.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel24.setText("Saldo:");
+
+        salaryPaymentBalanceTxt.setEditable(false);
+        salaryPaymentBalanceTxt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        javax.swing.GroupLayout salaryPaymentPanelLayout = new javax.swing.GroupLayout(salaryPaymentPanel);
+        salaryPaymentPanel.setLayout(salaryPaymentPanelLayout);
+        salaryPaymentPanelLayout.setHorizontalGroup(
+            salaryPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(salaryPaymentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(salaryPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(salaryPaymentPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(salaryPaymentEmployeeTxt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(salaryPaymentValueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(salaryPaymentPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(salaryPaymentBalanceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(salaryPaymentDescriptionTxt))
+                .addContainerGap())
+            .addComponent(salaryPaymentTablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        salaryPaymentPanelLayout.setVerticalGroup(
+            salaryPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(salaryPaymentPanelLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addGroup(salaryPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel20)
+                    .addComponent(salaryPaymentEmployeeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21)
+                    .addComponent(salaryPaymentValueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(salaryPaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel24)
+                    .addComponent(salaryPaymentBalanceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(salaryPaymentDescriptionTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(salaryPaymentTablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -544,12 +734,14 @@ public class EmployeeView extends javax.swing.JDialog {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap(17, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -614,6 +806,11 @@ public class EmployeeView extends javax.swing.JDialog {
         employeeSalaryBt.setFocusable(false);
         employeeSalaryBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         employeeSalaryBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        employeeSalaryBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeeSalaryBtActionPerformed(evt);
+            }
+        });
         jToolBar1.add(employeeSalaryBt);
 
         employeeWorkBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -635,12 +832,17 @@ public class EmployeeView extends javax.swing.JDialog {
         });
         jToolBar1.add(employeeSalaryAddBt);
 
-        employeeSalaryAdvanceBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        employeeSalaryAdvanceBt.setText("ADEL");
-        employeeSalaryAdvanceBt.setFocusable(false);
-        employeeSalaryAdvanceBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        employeeSalaryAdvanceBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(employeeSalaryAdvanceBt);
+        employeeSalaryPaymentBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        employeeSalaryPaymentBt.setText("PAGO");
+        employeeSalaryPaymentBt.setFocusable(false);
+        employeeSalaryPaymentBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        employeeSalaryPaymentBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        employeeSalaryPaymentBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeeSalaryPaymentBtActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(employeeSalaryPaymentBt);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -680,48 +882,88 @@ public class EmployeeView extends javax.swing.JDialog {
 
     private void employeeSaveBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeSaveBtActionPerformed
         // TODO add your handling code here:
+        switch (this.employeeTabView.getTitleAt(employeeTabView.getSelectedIndex())) {
+            case "Agregar Salario":
+                this.chargeSalaryData();
+                if (this.salaryService.saveSalary()) {
+                    JOptionPane.showMessageDialog(this, "Salario guardado correctamente");
+                    //this.employeeTabView.remove(this.employeeTabView.getSelectedIndex());
+                    //this.employeeSalaryBt.setEnabled(true);
+                    //this.commonsButtonsControl();
+                    this.salaryService.addSalaryToList(this.salaryService.getSalary());
+                    //Actualizamos la vista de la tabla
+                    employeeSalaryTable.updateUI();
+                    this.clearAddSalaryButtons();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al guardar el salario");
+                }
+                break;
+            case "Nuevo Empleado":
+                this.chargeEmployeeData();
+                if (this.employeeService.saveEmployee()) {
+                    JOptionPane.showMessageDialog(this, "Empleado creado correctamente");
+                    this.employeeTabView.remove(this.employeeTabView.getSelectedIndex());
+                    this.employeeNewBt.setEnabled(true);
+                    this.commonsButtonsControl();
+                    this.employeeService.addEmployeeToList(this.employeeService.getEmployee());
+                    employeeTable.updateUI();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error al crear un empleado");
+                }
+                break;
+            case "Editar Empleado":
+                this.chargeEmployeeData();
+                if (this.employeeService.updateEmployee()) {
+                    JOptionPane.showMessageDialog(this, "Empleado modificado correctamente");
+                    this.employeeTabView.remove(this.employeeTabView.getSelectedIndex());
+                    this.employeeEditBt.setEnabled(true);
+                    this.commonsButtonsControl();
+                    employeeTable.updateUI();
+                }
+                break;
+            case "Pago":
+                this.chargeSalaryPaymentData();
+                if (this.salaryPaymentService.saveSalaryPayment()) {
+                    JOptionPane.showMessageDialog(this, "Pago agregado correctamente");
 
-        if (this.employeeTabView.getTitleAt(employeeTabView.getSelectedIndex()).equals("Agregar Salario")) {
-            this.chargeSalaryData();
-            if (this.salaryService.saveSalary()) {
-                JOptionPane.showMessageDialog(this, "Salario guardado correctamente");
-                this.salaryService.addSalaryToList(this.salaryService.getSalary());
-                //Actualizamos la vista de la tabla
-                employeeSalaryTable.updateUI();
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al guardar el salario");
-            }
-        } else if (this.employeeTabView.getTitleAt(employeeTabView.getSelectedIndex()).equals("Nuevo Empleado")) {
-            this.chargeEmployeeData();
-            if (this.employeeService.saveEmployee()) {
-                JOptionPane.showMessageDialog(this, "Empleado creado correctamente");
-                this.employeeTabView.remove(this.employeeTabView.getSelectedIndex());
-                this.employeeNewBt.setEnabled(true);
-                this.commonsButtonsControl();
-                this.employeeService.addEmployeeToList(this.employeeService.getEmployee());
-                employeeTable.updateUI();
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al crear un empleado");
-            }
-        }else if(this.employeeTabView.getTitleAt(employeeTabView.getSelectedIndex()).equals("Editar Empleado")){
-            this.chargeEmployeeData();
-            if(this.employeeService.updateEmployee()){
-                JOptionPane.showMessageDialog(this, "Empleado modificado correctamente");
-                this.employeeTabView.remove(this.employeeTabView.getSelectedIndex());
-                this.employeeEditBt.setEnabled(true);
-                this.commonsButtonsControl();
-                employeeTable.updateUI();
-            }
+                    this.salaryPaymentService.addSalaryPaymentToList(this.salaryPaymentService.getSalaryPayment());
+                    this.salaryPaymentTable.updateUI();
+                    //Actualizamos el saldo del sueldo cuando hay un pago
+                    this.updateSalaryBalance();
+                    this.clearSalaryPaymentButtons();
+                }
+                break;
+            default:
+                break;
         }
-
-//        this.chargeEmployeeData();
-//        if (this.employeeService.saveEmployee() == true) {
-//            this.salaryService.saveSalary();
-//            JOptionPane.showMessageDialog(this, "Empleado guardado correctamente");
-//        } else {
-//           
-//        }
     }//GEN-LAST:event_employeeSaveBtActionPerformed
+
+    private void updateSalaryBalance() {
+
+        if (this.salaryPaymentCompleteRb.isSelected()) {
+            this.salaryPaymentService.getSalaryPayment().setSalaryPaymentValue(Double.valueOf(salaryPaymentValueTxt.getText()));
+        } else {
+            this.salaryPaymentService.getSalaryPayment().setSalaryPaymentValue(Double.valueOf(salaryPaymentAdvanceValueTxt.getText()));
+        }
+        this.salaryService.getSalary().setSalaryBalance(this.salaryService.getSalary().getSalaryBalance() - this.salaryPaymentService.getSalaryPayment().getSalaryPaymentValue());
+        if (this.salaryService.getSalary().getSalaryBalance() == 0) {
+            this.salaryService.getSalary().setSalaryState(1);
+        }
+        this.salaryPaymentBalanceTxt.setText(String.valueOf(this.salaryService.getSalary().getSalaryBalance()));
+
+        this.salaryService.updateSalary();
+    }
+
+    private void clearAddSalaryButtons() {
+        salaryValueTxt.setText("");
+        salaryDateDc.setDate(null);
+    }
+
+    private void clearSalaryPaymentButtons() {
+        salaryPaymentAdvanceValueTxt.setText("");
+        salaryPaymentDate.setDate(null);
+        salaryPaymentDescriptionTxt.setText("");
+    }
 
     private void employeeTabViewStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_employeeTabViewStateChanged
         // TODO add your handling code here:
@@ -734,31 +976,37 @@ public class EmployeeView extends javax.swing.JDialog {
     private void employeeSalaryAddBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeSalaryAddBtActionPerformed
         // TODO add your handling code here:
         StringBuilder sb = new StringBuilder();
-        
+
         if (employeeTable.getSelectedRow() != -1) {
             this.employeeTabView.add(addSalaryPanel);
             this.employeeTabView.setSelectedIndex(employeeTabView.getComponentCount() - 1);
             this.employeeTabView.setTitleAt(employeeTabView.getSelectedIndex(), "Agregar Salario");
             this.addSalaryButtonControl();
-            this.addEmployeeSalaryTable();
+            this.addEmployeeSalaryTable(testPanel);
             this.employeeService.setInstance(employeeTableModel.getList().get(employeeTable.getSelectedRow()));
             this.salaryEmployeeNameTxt.setText(sb.append(this.employeeService.getEmployee().toString()).append(" - ").append(this.employeeService.getEmployee().getEmployeeJob()).toString());
-            
+
             this.salaryService.setSalaryList(this.salaryService.getSalaryByEmployee(this.employeeService.getEmployee()));
-            
+
             this.updateSalaryTable();
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "No ha seleccionado ningun empleado");
         }
     }//GEN-LAST:event_employeeSalaryAddBtActionPerformed
-    
+
     private void updateSalaryTable() {
         this.salaryTableModel.setList(this.salaryService.getSalaryList());
         employeeSalaryTable.setModel(salaryTableModel);
         employeeSalaryTable.updateUI();
     }
-    
+
+    private void updateSalaryPaymentTable() {
+        this.salaryPaymentTableModel.setList(this.salaryPaymentService.getSalaryPaymentList());
+        this.salaryPaymentTable.setModel(salaryPaymentTableModel);
+        this.salaryPaymentTable.updateUI();
+    }
+
     private void addSalaryButtonControl() {
         employeeNewBt.setVisible(false);
         employeeSalaryAddBt.setEnabled(false);
@@ -771,21 +1019,38 @@ public class EmployeeView extends javax.swing.JDialog {
 
     private void employeeCancelBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeCancelBtActionPerformed
         // TODO add your handling code here:
-        if (employeeTabView.getTitleAt(employeeTabView.getSelectedIndex()).equals("Agregar Salario")) {
-            employeeTabView.remove(employeeTabView.getSelectedIndex());
-            employeeSalaryAddBt.setEnabled(true);
-            this.commonsButtonsControl();
-        } else if (employeeTabView.getTitleAt(employeeTabView.getSelectedIndex()).equals("Nuevo Empleado")) {
-            employeeTabView.remove(employeeTabView.getSelectedIndex());
-            employeeNewBt.setEnabled(true);
-            this.commonsButtonsControl();
-        }else if(employeeTabView.getTitleAt(employeeTabView.getSelectedIndex()).equals("Editar Empleado")){
-            employeeTabView.remove(employeeTabView.getSelectedIndex());
-            employeeEditBt.setEnabled(true);
-            this.commonsButtonsControl();
+        switch (employeeTabView.getTitleAt(employeeTabView.getSelectedIndex())) {
+            case "Agregar Salario":
+                employeeTabView.remove(employeeTabView.getSelectedIndex());
+                employeeSalaryAddBt.setEnabled(true);
+                this.commonsButtonsControl();
+                break;
+            case "Nuevo Empleado":
+                employeeTabView.remove(employeeTabView.getSelectedIndex());
+                employeeNewBt.setEnabled(true);
+                this.commonsButtonsControl();
+                break;
+            case "Editar Empleado":
+                employeeTabView.remove(employeeTabView.getSelectedIndex());
+                employeeEditBt.setEnabled(true);
+                this.commonsButtonsControl();
+                break;
+            case "Salarios":
+                employeeTabView.remove(employeeTabView.getSelectedIndex());
+                employeeSalaryBt.setEnabled(true);
+                this.commonsButtonsControl();
+                break;
+            case "Pago":
+                employeeTabView.remove(employeeTabView.getSelectedIndex());
+                employeeSalaryPaymentBt.setEnabled(true);
+                employeeSaveBt.setVisible(false);
+                employeeSalaryBt.setVisible(true);
+                employeeSalaryBt.setEnabled(false);
+            default:
+                break;
         }
     }//GEN-LAST:event_employeeCancelBtActionPerformed
-    
+
     private void commonsButtonsControl() {
         employeeCancelBt.setVisible(false);
         employeeSaveBt.setVisible(false);
@@ -794,7 +1059,7 @@ public class EmployeeView extends javax.swing.JDialog {
         employeeWorkBt.setVisible(true);
         employeeSalaryBt.setVisible(true);
         employeeSalaryAddBt.setVisible(true);
-        employeeSalaryAdvanceBt.setVisible(false);
+        employeeSalaryPaymentBt.setVisible(false);
     }
 
     private void employeeSalaryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_employeeSalaryTableMouseClicked
@@ -810,7 +1075,7 @@ public class EmployeeView extends javax.swing.JDialog {
         employeeTabView.add(employeePanel);
         employeeTabView.setSelectedIndex(employeeTabView.getComponentCount() - 1);
         employeeTabView.setTitleAt(employeeTabView.getSelectedIndex(), "Nuevo Empleado");
-        
+
         employeeSalaryAddBt.setVisible(false);
         employeeWorkBt.setVisible(false);
         employeeSalaryBt.setVisible(false);
@@ -818,7 +1083,7 @@ public class EmployeeView extends javax.swing.JDialog {
         employeeSaveBt.setVisible(true);
         employeeCancelBt.setVisible(true);
         employeeNewBt.setEnabled(false);
-        
+
 
     }//GEN-LAST:event_employeeNewBtActionPerformed
 
@@ -830,9 +1095,9 @@ public class EmployeeView extends javax.swing.JDialog {
             employeeTabView.setTitleAt(employeeTabView.getSelectedIndex(), "Editar Empleado");
             //Fijamos una nueva instancia de un empleado
             this.employeeService.setInstance(this.employeeTableModel.getList().get(this.employeeTable.getSelectedRow()));
-            
+
             this.chargeEmployeeView();
-            
+
             employeeSalaryAddBt.setVisible(false);
             employeeWorkBt.setVisible(false);
             employeeSalaryBt.setVisible(false);
@@ -841,14 +1106,104 @@ public class EmployeeView extends javax.swing.JDialog {
             employeeCancelBt.setVisible(true);
             employeeEditBt.setEnabled(false);
             employeeNewBt.setVisible(false);
-            employeeSalaryAdvanceBt.setVisible(false);
-            
+            employeeSalaryPaymentBt.setVisible(false);
+
         } else {
             JOptionPane.showMessageDialog(this, "No ha seleccionado ningún empleado");
         }
-        
+
     }//GEN-LAST:event_employeeEditBtActionPerformed
-    
+
+    private void employeeSalaryBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeSalaryBtActionPerformed
+        // TODO add your handling code here:
+        if (employeeTable.getSelectedRow() != -1) {
+            this.employeeTabView.add(salaryPanel);
+            this.employeeTabView.setSelectedIndex(employeeTabView.getComponentCount() - 1);
+            this.employeeTabView.setTitleAt(employeeTabView.getSelectedIndex(), "Salarios");
+            this.addEmployeeSalaryTable(salaryEmployeeTablePanel);
+
+            this.employeeService.setInstance(this.employeeTableModel.getList().get(employeeTable.getSelectedRow()));
+
+            this.salaryEmployeeTxt.setText(employeeService.getEmployee().toString());
+            this.salaryEmployeeAddressTxt.setText(employeeService.getEmployee().getPerson().getPrAddress());
+            this.salaryEmployeePhoneTxt.setText(employeeService.getEmployee().getPerson().getPrPhone());
+            this.salaryEmployeeIdentificationTxt.setText(employeeService.getEmployee().getPerson().getPrIdentification());
+            this.salaryEmployeeJobTxt.setText(employeeService.getEmployee().getEmployeeJob());
+
+            this.salaryService.setSalaryList(this.salaryService.getSalaryByEmployee(this.employeeService.getEmployee()));
+            this.updateSalaryTable();
+
+            this.employeeSalaryPaymentBt.setVisible(true);
+            this.employeeSalaryAddBt.setVisible(false);
+            this.employeeNewBt.setVisible(false);
+            this.employeeSaveBt.setVisible(false);
+            this.employeeEditBt.setVisible(false);
+            this.employeeCancelBt.setVisible(true);
+            this.employeeWorkBt.setVisible(false);
+            this.employeeSalaryBt.setEnabled(false);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "No ha seleccionado ningún empleado");
+        }
+    }//GEN-LAST:event_employeeSalaryBtActionPerformed
+
+    private void employeeSalaryPaymentBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeSalaryPaymentBtActionPerformed
+        // TODO add your handling code here:
+        if (employeeSalaryTable.getSelectedRow() != -1) {
+            this.employeeTabView.add(salaryPaymentPanel);
+            this.employeeTabView.setSelectedIndex(employeeTabView.getComponentCount() - 1);
+            this.employeeTabView.setTitleAt(employeeTabView.getSelectedIndex(), "Pago");
+
+            this.salaryService.setInstance(this.salaryService.getSalaryList().get(this.employeeSalaryTable.getSelectedRow()));
+
+            this.salaryPaymentEmployeeTxt.setText(this.salaryService.getSalary().getEmployee().toString());
+            this.salaryPaymentValueTxt.setText(String.valueOf(this.salaryService.getSalary().getSalaryValue()));
+            if(this.salaryService.getSalary().getSalaryBalance() != null){
+                this.salaryPaymentBalanceTxt.setText(String.valueOf(this.salaryService.getSalary().getSalaryBalance()));
+            }else{
+                this.salaryService.getSalary().setSalaryBalance(this.salaryService.getSalary().getSalaryValue());
+                this.salaryPaymentBalanceTxt.setText(String.valueOf(this.salaryService.getSalary().getSalaryBalance()));
+            }
+            
+            this.salaryPaymentService.setSalaryPaymentList(this.salaryPaymentService.getSalaryPaymentListBySalary(this.salaryService.getSalary()));
+            this.updateSalaryPaymentTable();
+
+            this.employeeSalaryBt.setVisible(false);
+            this.employeeSaveBt.setVisible(true);
+            this.employeeSalaryPaymentBt.setEnabled(false);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "No ha seleccionado un salario");
+        }
+
+    }//GEN-LAST:event_employeeSalaryPaymentBtActionPerformed
+
+    private void salaryPaymentCompleteRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryPaymentCompleteRbActionPerformed
+        // TODO add your handling code here:
+        if (this.salaryPaymentCompleteRb.isSelected()) {
+            this.salaryPaymentAdvanceValueTxt.setEnabled(false);
+        }
+
+    }//GEN-LAST:event_salaryPaymentCompleteRbActionPerformed
+
+    private void salaryPaymentAdvanceRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryPaymentAdvanceRbActionPerformed
+        // TODO add your handling code here:
+        if (this.salaryPaymentAdvanceRb.isSelected()) {
+            this.salaryPaymentAdvanceValueTxt.setEnabled(true);
+        }
+    }//GEN-LAST:event_salaryPaymentAdvanceRbActionPerformed
+
+    private void chargeSalaryPaymentData() {
+        if (salaryPaymentCompleteRb.isSelected()) {
+            this.salaryPaymentService.getSalaryPayment().setSalaryPaymentValue(this.salaryService.getSalary().getSalaryValue());
+        } else {
+            this.salaryPaymentService.getSalaryPayment().setSalaryPaymentValue(Double.valueOf(this.salaryPaymentAdvanceValueTxt.getText()));
+        }
+        this.salaryPaymentService.getSalaryPayment().setSalaryPaymentDate(salaryPaymentDate.getDate());
+        this.salaryPaymentService.getSalaryPayment().setSalaryPaymentDescription(salaryPaymentDescriptionTxt.getText());
+        this.salaryPaymentService.getSalaryPayment().setSalary(this.salaryService.getSalary());
+    }
+
     private void chargeEmployeeView() {
         this.employeeFirstNameTxt.setText(this.employeeService.getEmployee().getPerson().getPrFirstName());
         this.employeeLastNameTxt.setText(this.employeeService.getEmployee().getPerson().getPrLastName());
@@ -862,8 +1217,8 @@ public class EmployeeView extends javax.swing.JDialog {
             this.employeeDepartureDateDc.setDate(this.employeeService.getEmployee().getEmployeeDepartureDate());
         }
     }
-    
-    private void addEmployeeSalaryTable() {
+
+    private void addEmployeeSalaryTable(JPanel panel) {
         employeeSalaryTable.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
                     {},
@@ -874,9 +1229,9 @@ public class EmployeeView extends javax.swing.JDialog {
                 new String[]{}
         ));
         employeeSalaryTableScroll.setViewportView(employeeSalaryTable);
-        
-        javax.swing.GroupLayout testPanelLayout = new javax.swing.GroupLayout(testPanel);
-        testPanel.setLayout(testPanelLayout);
+
+        javax.swing.GroupLayout testPanelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(testPanelLayout);
         testPanelLayout.setHorizontalGroup(
                 testPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(employeeSalaryTableScroll)
@@ -906,8 +1261,8 @@ public class EmployeeView extends javax.swing.JDialog {
     private javax.swing.JPanel employeePanel;
     private javax.swing.JTextField employeePhoneTxt;
     private javax.swing.JButton employeeSalaryAddBt;
-    private javax.swing.JButton employeeSalaryAdvanceBt;
     private javax.swing.JButton employeeSalaryBt;
+    private javax.swing.JButton employeeSalaryPaymentBt;
     private javax.swing.JTable employeeSalaryTable;
     private javax.swing.JScrollPane employeeSalaryTableScroll;
     private javax.swing.JButton employeeSaveBt;
@@ -924,7 +1279,13 @@ public class EmployeeView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -932,23 +1293,37 @@ public class EmployeeView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JToolBar jToolBar1;
     private com.toedter.calendar.JDateChooser salaryDateDc;
     private javax.swing.JTextField salaryEmployeeAddressTxt;
     private javax.swing.JTextField salaryEmployeeIdentificationTxt;
+    private javax.swing.JTextField salaryEmployeeJobTxt;
     private javax.swing.JTextField salaryEmployeeNameTxt;
     private javax.swing.JTextField salaryEmployeePhoneTxt;
     private javax.swing.JPanel salaryEmployeeTablePanel;
     private javax.swing.JTextField salaryEmployeeTxt;
+    private javax.swing.JPanel salaryPanel;
+    private javax.swing.JRadioButton salaryPaymentAdvanceRb;
+    private javax.swing.JTextField salaryPaymentAdvanceValueTxt;
+    private javax.swing.JTextField salaryPaymentBalanceTxt;
+    private javax.swing.JRadioButton salaryPaymentCompleteRb;
+    private com.toedter.calendar.JDateChooser salaryPaymentDate;
+    private javax.swing.JTextField salaryPaymentDescriptionTxt;
+    private javax.swing.JTextField salaryPaymentEmployeeTxt;
+    private javax.swing.ButtonGroup salaryPaymentOptionsBtg;
+    private javax.swing.JPanel salaryPaymentPanel;
+    private javax.swing.JTable salaryPaymentTable;
+    private javax.swing.JPanel salaryPaymentTablePanel;
+    private javax.swing.JTextField salaryPaymentValueTxt;
     private javax.swing.JTextField salaryValueTxt;
     private javax.swing.JPanel testPanel;
     // End of variables declaration//GEN-END:variables

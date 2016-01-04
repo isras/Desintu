@@ -20,7 +20,7 @@
     <class>model.WorkOrder</class>
     <class>model.Employee</class>
     <class>model.Salary</class>
-    <class>model.SalaryAdvance</class>
+    <class>model.SalaryPayment</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/desintu?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

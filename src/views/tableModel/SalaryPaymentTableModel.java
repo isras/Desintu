@@ -8,15 +8,15 @@ package views.tableModel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import model.Salary;
+import model.SalaryPayment;
 
 /**
  *
  * @author eyetive
  */
-public class SalaryTableModel extends AbstractTableModel {
+public class SalaryPaymentTableModel extends AbstractTableModel {
 
-    private List<Salary> list = new ArrayList<>();
+    private List<SalaryPayment> list = new ArrayList<>();
 
     @Override
     public int getRowCount() {
@@ -25,32 +25,22 @@ public class SalaryTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 4;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Salary salary = this.list.get(rowIndex);
+        SalaryPayment salaryPayment = this.list.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
                 return rowIndex + 1;
             case 1:
-                return salary.getSalaryValue();
+                return salaryPayment.getSalaryPaymentValue();
             case 2:
-                if(salary.getSalaryBalance() != null){
-                    return salary.getSalaryBalance();
-                }else{
-                    return "0.00";
-                }
+                return salaryPayment.getSalaryPaymentDate();
             case 3:
-                return salary.getSalaryDate();
-            case 4:
-                if(salary.getSalaryState() == 0){
-                    return "Pendiente";
-                }else{
-                    return "Pagado";
-                }
+                return salaryPayment.getSalaryPaymentDescription();
             default:
                 return null;
         }
@@ -65,11 +55,9 @@ public class SalaryTableModel extends AbstractTableModel {
             case 1:
                 return "Valor";
             case 2:
-                return "Saldo";
-            case 3:
                 return "Fecha";
-            case 4:
-                return "Estado";
+            case 3:
+                return "Descripción";
             default:
                 return null;
         }
@@ -78,14 +66,14 @@ public class SalaryTableModel extends AbstractTableModel {
     /**
      * @return the list
      */
-    public List<Salary> getList() {
+    public List<SalaryPayment> getList() {
         return list;
     }
 
     /**
      * @param list the list to set
      */
-    public void setList(List<Salary> list) {
+    public void setList(List<SalaryPayment> list) {
         this.list = list;
     }
 

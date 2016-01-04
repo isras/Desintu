@@ -45,16 +45,20 @@ public class Salary implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "sa_value")
     private Double salaryValue;
+    @Column(name = "sa_state")
+    private int salaryState;
+    @Column (name = "sa_balance")
+    private Double salaryBalance;
     
     @JoinColumn(name = "sa_employee_id", referencedColumnName = "employee_id")
     @ManyToOne(optional = false)
     private Employee employee;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "salary")
-    private List<SalaryAdvance> salaryAdvanceList;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "salary")
+    private List<SalaryPayment> salaryPaymentList;
 
     public Salary() {
-        this.salaryAdvanceList = new ArrayList<>();
+        this.salaryPaymentList = new ArrayList<>();
     }
 
     public Salary(Long salaryId) {
@@ -85,12 +89,12 @@ public class Salary implements Serializable {
         this.salaryValue = salaryValue;
     }
 
-    public List<SalaryAdvance> getSalaryAdvanceList() {
-        return salaryAdvanceList;
+    public List<SalaryPayment> getSalaryPaymentList() {
+        return salaryPaymentList;
     }
 
-    public void setSalaryAdvanceList(List<SalaryAdvance> salaryAdvanceList) {
-        this.salaryAdvanceList = salaryAdvanceList;
+    public void setSalaryPaymentList(List<SalaryPayment> salaryPaymentList) {
+        this.salaryPaymentList = salaryPaymentList;
     }
 
     @Override
@@ -124,6 +128,34 @@ public class Salary implements Serializable {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    /**
+     * @return the salaryState
+     */
+    public int getSalaryState() {
+        return salaryState;
+    }
+
+    /**
+     * @param salaryState the salaryState to set
+     */
+    public void setSalaryState(int salaryState) {
+        this.salaryState = salaryState;
+    }
+
+    /**
+     * @return the salaryBalance
+     */
+    public Double getSalaryBalance() {
+        return salaryBalance;
+    }
+
+    /**
+     * @param salaryBalance the salaryBalance to set
+     */
+    public void setSalaryBalance(Double salaryBalance) {
+        this.salaryBalance = salaryBalance;
     }
     
 }

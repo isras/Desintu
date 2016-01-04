@@ -45,7 +45,7 @@ public class Report {
     public Report() {
         try {
             Class.forName("com.mysql.jdbc.Driver"); //se carga el driver
-            String url = "jdbc:mysql://localhost/armoire";
+            String url = "jdbc:mysql://localhost/desintu";
             conn = DriverManager.getConnection(url, "root", "Eyetive@2015");
         } catch (ClassNotFoundException | SQLException ex) {
             System.out.println("errrrrrrrrrrrrrrrrrror: " + ex);
@@ -100,8 +100,8 @@ public class Report {
     public void printInvoice(InvoiceService invs, DetailTableModel dtm) {
         JRViewer viewer = null;
         try {
-            String report = System.getProperty("user.dir") + "/reports/InvoiceReport.jasper";
-            //String report = System.getProperty("user.dir") + "/reports/InvoiceEyetiveReport.jasper";
+            //String report = System.getProperty("user.dir") + "/reports/InvoiceReport.jasper";
+            String report = System.getProperty("user.dir") + "/reports/Invoice360Report.jasper";
             //String report = System.getProperty("user.dir") + "/reports/ComercialFernandezInvoice.jasper";
             System.out.println(report);
 

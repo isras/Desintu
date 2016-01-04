@@ -68,6 +68,20 @@ public class WorkOrder implements Serializable {
     private Double workOrderBalance;
     @Column(name = "wo_advance")
     private Double workOrderAdvance;
+    
+    //Esta parte es temporal
+    @Column (name = "wo_type")
+    private String workOrderType;
+    @Column (name = "wo_invoice_state")
+    private String workOrderInvoiceState;
+    @Column (name = "wo_subtotal")
+    private Double workOrderSubtotal;
+    @Column (name = "wo_iva")
+    private Double workOrderIva;
+    @Column (name = "wo_invoice_total")
+    private Double workOrderInvoiceTotal;
+    
+    
     @OneToMany(mappedBy = "workOrder", cascade = CascadeType.PERSIST)
     private List<Detail> detailList;
     @JoinColumn(name = "person_person_id", referencedColumnName = "person_id")
@@ -218,6 +232,76 @@ public class WorkOrder implements Serializable {
      */
     public void setWorkOrderPriority(Integer workOrderPriority) {
         this.workOrderPriority = workOrderPriority;
+    }
+
+    /**
+     * @return the workOrderType
+     */
+    public String getWorkOrderType() {
+        return workOrderType;
+    }
+
+    /**
+     * @param workOrderType the workOrderType to set
+     */
+    public void setWorkOrderType(String workOrderType) {
+        this.workOrderType = workOrderType;
+    }
+
+    /**
+     * @return the workOrderInvoiceState
+     */
+    public String getWorkOrderInvoiceState() {
+        return workOrderInvoiceState;
+    }
+
+    /**
+     * @param workOrderInvoiceState the workOrderInvoiceState to set
+     */
+    public void setWorkOrderInvoiceState(String workOrderInvoiceState) {
+        this.workOrderInvoiceState = workOrderInvoiceState;
+    }
+
+    /**
+     * @return the workOrderSubtotal
+     */
+    public Double getWorkOrderSubtotal() {
+        return workOrderSubtotal;
+    }
+
+    /**
+     * @param workOrderSubtotal the workOrderSubtotal to set
+     */
+    public void setWorkOrderSubtotal(Double workOrderSubtotal) {
+        this.workOrderSubtotal = workOrderSubtotal;
+    }
+
+    /**
+     * @return the workOrderIva
+     */
+    public Double getWorkOrderIva() {
+        return workOrderIva;
+    }
+
+    /**
+     * @param workOrderIva the workOrderIva to set
+     */
+    public void setWorkOrderIva(Double workOrderIva) {
+        this.workOrderIva = workOrderIva;
+    }
+
+    /**
+     * @return the workOrderInvoiceTotal
+     */
+    public Double getWorkOrderInvoiceTotal() {
+        return workOrderInvoiceTotal;
+    }
+
+    /**
+     * @param workOrderInvoiceTotal the workOrderInvoiceTotal to set
+     */
+    public void setWorkOrderInvoiceTotal(Double workOrderInvoiceTotal) {
+        this.workOrderInvoiceTotal = workOrderInvoiceTotal;
     }
     
 }

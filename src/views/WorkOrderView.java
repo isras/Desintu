@@ -5,7 +5,10 @@
  */
 package views;
 
+import controller.resources.GeneralParameter;
+import controller.resources.Operaciones;
 import controller.service.DetailService;
+import controller.service.EmployeeService;
 import controller.service.PersonService;
 import controller.service.WorkOrderService;
 import java.awt.event.KeyAdapter;
@@ -15,6 +18,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import views.tableModel.DetailTableModel;
+import views.tableModel.EmployeeComboBoxModel;
 import views.tableModel.PersonComboBoxModel;
 
 /**
@@ -27,7 +31,9 @@ public class WorkOrderView extends javax.swing.JDialog {
     private final PersonService pns;
     private final WorkOrderService wos;
     private final DetailTableModel dtm;
+    private final EmployeeService employeeService;
     private JTextField searchNameText;
+    private final Double auxTot;
 
     public WorkOrderView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -35,9 +41,12 @@ public class WorkOrderView extends javax.swing.JDialog {
         this.pns = new PersonService();
         this.wos = new WorkOrderService();
         this.dtm = new DetailTableModel();
+        this.employeeService = new EmployeeService();
+        
         initComponents();
-
+        this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         this.chargePersonCombo();
+        this.chargeEmployeeCombo();
     }
 
     public WorkOrderView(java.awt.Frame parent, boolean modal, WorkOrderService wos) {
@@ -46,10 +55,13 @@ public class WorkOrderView extends javax.swing.JDialog {
         this.pns = new PersonService();
         //this.wos = new WorkOrderService();
         this.dtm = new DetailTableModel();
+        this.employeeService = new EmployeeService();
         initComponents();
+        this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         this.wos = wos;
-        this.chargeWorkOrder();
         this.chargePersonCombo();
+        this.chargeEmployeeCombo();
+        this.chargeWorkOrderView();
     }
 
     /**
@@ -78,7 +90,6 @@ public class WorkOrderView extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         workOrderDetailTable = new javax.swing.JTable();
         workOrderAddBt = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -104,7 +115,7 @@ public class WorkOrderView extends javax.swing.JDialog {
         workOrderPersonAddressTxt = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        searchEmployeeComboText = new javax.swing.JComboBox();
+        employeeComboBox = new javax.swing.JComboBox();
         workOrderCancelBt = new javax.swing.JButton();
         workOrderSaveBt = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
@@ -165,6 +176,7 @@ public class WorkOrderView extends javax.swing.JDialog {
         jLabel1.setText("VALOR:");
 
         workOrderTotalTxt.setEditable(false);
+        workOrderTotalTxt.setText("0.00");
         workOrderTotalTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 workOrderTotalTxtActionPerformed(evt);
@@ -173,6 +185,23 @@ public class WorkOrderView extends javax.swing.JDialog {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("ANTICIPO:");
+
+        workOrderAdvanceTxt.setText("0.00");
+        workOrderAdvanceTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                workOrderAdvanceTxtActionPerformed(evt);
+            }
+        });
+        workOrderAdvanceTxt.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                workOrderAdvanceTxtPropertyChange(evt);
+            }
+        });
+        workOrderAdvanceTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                workOrderAdvanceTxtKeyReleased(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("SALDO:");
@@ -239,8 +268,6 @@ public class WorkOrderView extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("ELIMINAR");
-
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 153, 255));
         jLabel4.setText("DETALLE");
@@ -253,12 +280,10 @@ public class WorkOrderView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 806, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(workOrderAddBt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18))))
@@ -268,10 +293,8 @@ public class WorkOrderView extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(workOrderAddBt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)))
+                    .addComponent(workOrderAddBt)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -450,9 +473,17 @@ public class WorkOrderView extends javax.swing.JDialog {
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel14.setText("Será realizada por:");
 
-        searchEmployeeComboText.setEditable(true);
-        searchEmployeeComboText.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        searchEmployeeComboText.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciones un empleado...", "Julio Galán ", "Israel Sotomayor" }));
+        employeeComboBox.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        employeeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciones un empleado...", "Julio Galán ", "Israel Sotomayor" }));
+        employeeComboBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                employeeComboBoxPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -462,7 +493,7 @@ public class WorkOrderView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchEmployeeComboText, 0, 340, Short.MAX_VALUE)
+                .addComponent(employeeComboBox, 0, 340, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -471,12 +502,17 @@ public class WorkOrderView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(searchEmployeeComboText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(employeeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         workOrderCancelBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         workOrderCancelBt.setText("CANCELAR");
+        workOrderCancelBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                workOrderCancelBtActionPerformed(evt);
+            }
+        });
 
         workOrderSaveBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         workOrderSaveBt.setText("GUARDAR");
@@ -554,7 +590,7 @@ public class WorkOrderView extends javax.swing.JDialog {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -595,10 +631,10 @@ public class WorkOrderView extends javax.swing.JDialog {
 
     private void workOrderAddBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workOrderAddBtActionPerformed
         // TODO add your handling code here:
-        new WorkOrderItemView(null, true, this).setVisible(true);
+        new WorkOrderItemView(null, true, this, this.pns.getPerson().getPrType()).setVisible(true);
 
         if (this.ds.getDetail().getDetTotal() != null) {
-            workOrderTotalTxt.setText(String.valueOf(this.ds.getDetail().getDetTotal()));
+            workOrderTotalTxt.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(this.ds.getDetail().getDetTotal() * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
             this.ds.getDetail().setWorkOrder(this.wos.getWorkOrder());
             this.ds.addDetailList(this.ds.getDetail());
             this.updateWorkOrderDetailTable();
@@ -616,6 +652,11 @@ public class WorkOrderView extends javax.swing.JDialog {
     public void getWorkItemDetail(DetailService detailService) {
         this.ds.setIntance(detailService.getDetail());
     }
+    
+    private void chargeEmployeeCombo(){
+    employeeComboBox.setModel(new EmployeeComboBoxModel(this.employeeService.list()));
+    employeeComboBox.setSelectedIndex(0);
+}
 
     private void chargePersonCombo() {
 
@@ -644,7 +685,7 @@ public class WorkOrderView extends javax.swing.JDialog {
 
                 int position = searchNameText.getCaretPosition();
                 String s = searchNameText.getText();
-                searchNameComboText.setModel(new PersonComboBoxModel(pns.getPersonsByCriteria(searchNameText.getText())));
+                searchNameComboText.setModel(new PersonComboBoxModel(pns.getPersonsByCriteriaType(searchNameText.getText())));
                 searchNameText.setText(s);
 
                 searchNameText.setCaretPosition(position);
@@ -662,30 +703,39 @@ public class WorkOrderView extends javax.swing.JDialog {
     }
 
     private void chargeWorkOrderData() {
-        this.wos.getWorkOrder().setWoDescription("Prueba");
+        this.wos.getWorkOrder().setWorkOrderDescription("Prueba");
         if (this.workOrderStateCb.getSelectedItem().equals("PENDIENTE")) {
-            this.wos.getWorkOrder().setWoState(1);
+            this.wos.getWorkOrder().setWorkOrderState(1);
         } else if (this.workOrderStateCb.getSelectedItem().equals("PAUSADO")) {
-            this.wos.getWorkOrder().setWoState(2);
+            this.wos.getWorkOrder().setWorkOrderState(2);
         } else if (this.workOrderStateCb.getSelectedItem().equals("TERMINADO")) {
-            this.wos.getWorkOrder().setWoState(3);
+            this.wos.getWorkOrder().setWorkOrderState(3);
         }
-        this.wos.getWorkOrder().setWoNumber(workOrderNumberTxt.getText());
-        this.wos.getWorkOrder().setWoIssueDate(workOrderIssueDc.getDate());
-        this.wos.getWorkOrder().setWoDeliveryDate(workOrderDeliveryDc.getDate());
-        this.wos.getWorkOrder().setWoTotal(Double.valueOf(workOrderTotalTxt.getText()));
-        this.wos.getWorkOrder().setWoAdvance(Double.valueOf(workOrderAdvanceTxt.getText()));
-        this.wos.getWorkOrder().setWoBalance(Double.valueOf(workOrderBalanceTxt.getText()));
+        this.wos.getWorkOrder().setWorkOrderNumber(workOrderNumberTxt.getText());
+        this.wos.getWorkOrder().setWorkOrderIssueDate(workOrderIssueDc.getDate());
+        this.wos.getWorkOrder().setWorkOrderDeliveryDate(workOrderDeliveryDc.getDate());
+        this.wos.getWorkOrder().setWorkOrderTotal(Double.valueOf(workOrderTotalTxt.getText()));
+        this.wos.getWorkOrder().setWorkOrderAdvance(Double.valueOf(workOrderAdvanceTxt.getText()));
+        this.wos.getWorkOrder().setWorkOrderBalance(Double.valueOf(workOrderBalanceTxt.getText()));
+        
+        if(this.workOrderLowPriorityJrb.isSelected()){
+            this.wos.getWorkOrder().setWorkOrderPriority(0);
+        }else if(this.workOrderNormalPriorityJrb.isSelected()){
+            this.wos.getWorkOrder().setWorkOrderPriority(1);
+        }else if(this.workOrderHightPriorityJrb.isSelected()){
+            this.wos.getWorkOrder().setWorkOrderPriority(2);
+        }
 
         this.wos.getWorkOrder().setDetailList(this.ds.getDetailList());
 
         this.wos.getWorkOrder().setPerson(this.pns.getPerson());
+        this.wos.getWorkOrder().setEmployee(this.employeeService.getEmployee());
 
     }
 
-    private void chargeWorkOrder() {
-        if (null != this.wos.getWorkOrder().getWoState()) {
-            switch (this.wos.getWorkOrder().getWoState()) {
+    private void chargeWorkOrderView() {
+        if (null != this.wos.getWorkOrder().getWorkOrderState()) {
+            switch (this.wos.getWorkOrder().getWorkOrderState()) {
                 case 1:
                     this.workOrderStateCb.setSelectedItem("PENDIENTE");
                     break;
@@ -700,11 +750,30 @@ public class WorkOrderView extends javax.swing.JDialog {
             }
         }
 
-        this.workOrderNumberTxt.setText(this.wos.getWorkOrder().getWoNumber());
-        this.workOrderIssueDc.setDate(this.wos.getWorkOrder().getWoIssueDate());
-        this.workOrderDeliveryDc.setDate(this.wos.getWorkOrder().getWoDeliveryDate());
+        this.workOrderNumberTxt.setText(this.wos.getWorkOrder().getWorkOrderNumber());
+        this.workOrderIssueDc.setDate(this.wos.getWorkOrder().getWorkOrderIssueDate());
+        this.workOrderDeliveryDc.setDate(this.wos.getWorkOrder().getWorkOrderDeliveryDate());
         this.pns.setInstance(this.wos.getWorkOrder().getPerson());
         this.chargePersonView();
+        
+        this.employeeComboBox.setSelectedItem(this.wos.getWorkOrder().getEmployee());
+        
+        if(null != this.wos.getWorkOrder().getWorkOrderPriority())switch (this.wos.getWorkOrder().getWorkOrderPriority()) {
+            case 0:
+                this.workOrderLowPriorityJrb.setSelected(true);
+                break;
+            case 1:
+                this.workOrderNormalPriorityJrb.setSelected(true);
+                break;
+            case 2:
+                this.workOrderHightPriorityJrb.setSelected(true);
+                break;
+            default:
+                break;
+        }
+        this.workOrderTotalTxt.setText(String.valueOf(this.wos.getWorkOrder().getWorkOrderTotal()));
+        this.workOrderBalanceTxt.setText(String.valueOf(this.wos.getWorkOrder().getWorkOrderBalance()));
+        this.workOrderAdvanceTxt.setText(String.valueOf(this.wos.getWorkOrder().getWorkOrderAdvance()));
 
         this.ds.setDetailList(this.wos.getWorkOrder().getDetailList());
         this.updateWorkOrderDetailTable();
@@ -749,6 +818,38 @@ public class WorkOrderView extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_workOrderStateCbActionPerformed
 
+    private void workOrderCancelBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workOrderCancelBtActionPerformed
+        // TODO add your handling code here:
+        this.closeWindow();
+    }//GEN-LAST:event_workOrderCancelBtActionPerformed
+
+    private void employeeComboBoxPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_employeeComboBoxPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        EmployeeComboBoxModel employeeComboBoxModel = (EmployeeComboBoxModel) employeeComboBox.getModel();
+        this.employeeService.setInstance(employeeComboBoxModel.getSelectedItem());
+        
+    }//GEN-LAST:event_employeeComboBoxPopupMenuWillBecomeInvisible
+
+    private void workOrderAdvanceTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workOrderAdvanceTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_workOrderAdvanceTxtActionPerformed
+
+    private void workOrderAdvanceTxtPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_workOrderAdvanceTxtPropertyChange
+        // TODO add your handling code here:
+        //balanceTotalCalculate();
+    }//GEN-LAST:event_workOrderAdvanceTxtPropertyChange
+
+    private void workOrderAdvanceTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_workOrderAdvanceTxtKeyReleased
+        // TODO add your handling code here:
+        balanceTotalCalculate();
+    }//GEN-LAST:event_workOrderAdvanceTxtKeyReleased
+
+    private void balanceTotalCalculate(){
+        Double temp;
+        temp = Double.valueOf(this.workOrderTotalTxt.getText()) - Double.valueOf(this.workOrderAdvanceTxt.getText());
+        this.workOrderBalanceTxt.setText(String.valueOf(temp));
+    }
+    
     //Método encargado de cerrar todos los procesos de un JDialog
     private void closeWindow() {
         this.processWindowEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -757,7 +858,7 @@ public class WorkOrderView extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox employeeComboBox;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabel1;
@@ -785,7 +886,6 @@ public class WorkOrderView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox pruebaJC;
-    private javax.swing.JComboBox searchEmployeeComboText;
     private javax.swing.JComboBox searchNameComboText;
     private javax.swing.JButton workOrderAddBt;
     private javax.swing.JTextField workOrderAdvanceTxt;

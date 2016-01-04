@@ -50,12 +50,15 @@ public class Employee implements Serializable {
     private Date employeeDepartureDate;
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "employee")
     private List<Salary> salaryList;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "employee")
+    private List<WorkOrder> workOrderList;
     @JoinColumn(name = "emp_person_id", referencedColumnName = "person_id")
     @OneToOne(cascade = CascadeType.PERSIST)
     private Person person;
 
     public Employee() {
         this.salaryList = new ArrayList<>();
+        this.workOrderList = new ArrayList<>();
     }
 
     public Employee(Long employeeId) {
@@ -146,5 +149,13 @@ public class Employee implements Serializable {
 
     public void setSalaryList(List<Salary> salaryList) {
         this.salaryList = salaryList;
+    }
+
+    public List<WorkOrder> getWorkOrderList() {
+        return workOrderList;
+    }
+
+    public void setWorkOrderList(List<WorkOrder> workOrderList) {
+        this.workOrderList = workOrderList;
     }
 }

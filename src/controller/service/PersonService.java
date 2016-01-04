@@ -39,6 +39,9 @@ public class PersonService {
     public List<Person> getPersonsByCriteria(String criteria){
         return this.pd.getPersonsByCriteria(criteria);
     }
+    public List<Person> getPersonsByCriteriaType(String criteria){
+        return this.pd.getPersonsByCriteriaType(criteria);
+    }
     
     public boolean personExists(String identification){
         return this.pd.personExists(identification);

@@ -57,6 +57,12 @@ public class Setting implements Serializable {
     private Integer MEDIUM_SERVICE_VALUE;
     @Column(name = "pr_complex_service_value")
     private Integer COMPLEX_SERVICE_VALUE;
+    @Column (name = "pr_publicist_print_discount_value")
+    private Integer PUBLICIST_PRINT_DISCOUNT_VALUE;
+    @Column (name = "pr_publicist_finished_discount_value")
+    private Integer PUBLICIST_FINISHED_DISCOUNT_VALUE;
+    @Column (name = "pr_publicist_service_discount_value")
+    private Integer PUBLICIST_SERVICE_DISCOUNT_VALUE;
 
     public Setting() {
     }
@@ -228,6 +234,48 @@ public class Setting implements Serializable {
      */
     public void setCOMPLEX_SERVICE_VALUE(Integer COMPLEX_SERVICE_VALUE) {
         this.COMPLEX_SERVICE_VALUE = COMPLEX_SERVICE_VALUE;
+    }
+
+    /**
+     * @return the PUBLICIST_PRINT_DISCOUNT_VALUE
+     */
+    public Integer getPUBLICIST_PRINT_DISCOUNT_VALUE() {
+        return PUBLICIST_PRINT_DISCOUNT_VALUE;
+    }
+
+    /**
+     * @param PUBLICIST_PRINT_DISCOUNT_VALUE the PUBLICIST_PRINT_DISCOUNT_VALUE to set
+     */
+    public void setPUBLICIST_PRINT_DISCOUNT_VALUE(Integer PUBLICIST_PRINT_DISCOUNT_VALUE) {
+        this.PUBLICIST_PRINT_DISCOUNT_VALUE = PUBLICIST_PRINT_DISCOUNT_VALUE;
+    }
+
+    /**
+     * @return the PUBLICIST_FINISHED_DISCOUNT_VALUE
+     */
+    public Integer getPUBLICIST_FINISHED_DISCOUNT_VALUE() {
+        return PUBLICIST_FINISHED_DISCOUNT_VALUE;
+    }
+
+    /**
+     * @param PUBLICIST_FINISHED_DISCOUNT_VALUE the PUBLICIST_FINISHED_DISCOUNT_VALUE to set
+     */
+    public void setPUBLICIST_FINISHED_DISCOUNT_VALUE(Integer PUBLICIST_FINISHED_DISCOUNT_VALUE) {
+        this.PUBLICIST_FINISHED_DISCOUNT_VALUE = PUBLICIST_FINISHED_DISCOUNT_VALUE;
+    }
+
+    /**
+     * @return the PUBLICIST_SERVICE_DISCOUNT_VALUE
+     */
+    public Integer getPUBLICIST_SERVICE_DISCOUNT_VALUE() {
+        return PUBLICIST_SERVICE_DISCOUNT_VALUE;
+    }
+
+    /**
+     * @param PUBLICIST_SERVICE_DISCOUNT_VALUE the PUBLICIST_SERVICE_DISCOUNT_VALUE to set
+     */
+    public void setPUBLICIST_SERVICE_DISCOUNT_VALUE(Integer PUBLICIST_SERVICE_DISCOUNT_VALUE) {
+        this.PUBLICIST_SERVICE_DISCOUNT_VALUE = PUBLICIST_SERVICE_DISCOUNT_VALUE;
     }
     
 }

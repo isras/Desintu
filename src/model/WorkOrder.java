@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -31,14 +32,14 @@ import javax.persistence.TemporalType;
 //@NamedQueries({
 //    @NamedQuery(name = "WorkOrder.findAll", query = "SELECT w FROM WorkOrder w"),
 //    @NamedQuery(name = "WorkOrder.findByWorkOrderId", query = "SELECT w FROM WorkOrder w WHERE w.workOrderId = :workOrderId"),
-//    @NamedQuery(name = "WorkOrder.findByWoState", query = "SELECT w FROM WorkOrder w WHERE w.woState = :woState"),
-//    @NamedQuery(name = "WorkOrder.findByWoDescription", query = "SELECT w FROM WorkOrder w WHERE w.woDescription = :woDescription"),
-//    @NamedQuery(name = "WorkOrder.findByWoNumber", query = "SELECT w FROM WorkOrder w WHERE w.woNumber = :woNumber"),
-//    @NamedQuery(name = "WorkOrder.findByWoIssueDate", query = "SELECT w FROM WorkOrder w WHERE w.woIssueDate = :woIssueDate"),
-//    @NamedQuery(name = "WorkOrder.findByWoDeliveryDate", query = "SELECT w FROM WorkOrder w WHERE w.woDeliveryDate = :woDeliveryDate"),
-//    @NamedQuery(name = "WorkOrder.findByWoTotal", query = "SELECT w FROM WorkOrder w WHERE w.woTotal = :woTotal"),
-//    @NamedQuery(name = "WorkOrder.findByWoBalance", query = "SELECT w FROM WorkOrder w WHERE w.woBalance = :woBalance"),
-//    @NamedQuery(name = "WorkOrder.findByWoAdvance", query = "SELECT w FROM WorkOrder w WHERE w.woAdvance = :woAdvance")})
+//    @NamedQuery(name = "WorkOrder.findByWoState", query = "SELECT w FROM WorkOrder w WHERE w.workOrderState = :workOrderState"),
+//    @NamedQuery(name = "WorkOrder.findByWoDescription", query = "SELECT w FROM WorkOrder w WHERE w.workOrderDescription = :workOrderDescription"),
+//    @NamedQuery(name = "WorkOrder.findByWoNumber", query = "SELECT w FROM WorkOrder w WHERE w.workOrderNumber = :workOrderNumber"),
+//    @NamedQuery(name = "WorkOrder.findByWoIssueDate", query = "SELECT w FROM WorkOrder w WHERE w.workOrderIssueDate = :workOrderIssueDate"),
+//    @NamedQuery(name = "WorkOrder.findByWoDeliveryDate", query = "SELECT w FROM WorkOrder w WHERE w.workOrderDeliveryDate = :workOrderDeliveryDate"),
+//    @NamedQuery(name = "WorkOrder.findByWoTotal", query = "SELECT w FROM WorkOrder w WHERE w.workOrderTotal = :workOrderTotal"),
+//    @NamedQuery(name = "WorkOrder.findByWoBalance", query = "SELECT w FROM WorkOrder w WHERE w.workOrderBalance = :workOrderBalance"),
+//    @NamedQuery(name = "WorkOrder.findByWoAdvance", query = "SELECT w FROM WorkOrder w WHERE w.workOrderAdvance = :workOrderAdvance")})
 public class WorkOrder implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -47,31 +48,37 @@ public class WorkOrder implements Serializable {
     @Column(name = "work_order_id")
     private Long workOrderId;
     @Column(name = "wo_state")
-    private Integer woState;
+    private Integer workOrderState;
+    @Column(name = "wo_priority")
+    private Integer workOrderPriority;
     @Column(name = "wo_description")
-    private String woDescription;
+    private String workOrderDescription;
     @Column(name = "wo_number")
-    private String woNumber;
+    private String workOrderNumber;
     @Column(name = "wo_issue_date")
     @Temporal(TemporalType.DATE)
-    private Date woIssueDate;
+    private Date workOrderIssueDate;
     @Column(name = "wo_delivery_date")
     @Temporal(TemporalType.DATE)
-    private Date woDeliveryDate;
+    private Date workOrderDeliveryDate;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "wo_total")
-    private Double woTotal;
+    private Double workOrderTotal;
     @Column(name = "wo_balance")
-    private Double woBalance;
+    private Double workOrderBalance;
     @Column(name = "wo_advance")
-    private Double woAdvance;
+    private Double workOrderAdvance;
     @OneToMany(mappedBy = "workOrder", cascade = CascadeType.PERSIST)
     private List<Detail> detailList;
     @JoinColumn(name = "person_person_id", referencedColumnName = "person_id")
     @ManyToOne(optional = false)
     private Person person;
+    @JoinColumn(name = "wo_employee_id", referencedColumnName = "employee_id")
+    @ManyToOne(optional = false)
+    private Employee employee;
 
     public WorkOrder() {
+        this.detailList = new ArrayList<>();
     }
 
     public WorkOrder(Long workOrderId) {
@@ -86,68 +93,68 @@ public class WorkOrder implements Serializable {
         this.workOrderId = workOrderId;
     }
 
-    public Integer getWoState() {
-        return woState;
+    public Integer getWorkOrderState() {
+        return workOrderState;
     }
 
-    public void setWoState(Integer woState) {
-        this.woState = woState;
+    public void setWorkOrderState(Integer workOrderState) {
+        this.workOrderState = workOrderState;
     }
 
-    public String getWoDescription() {
-        return woDescription;
+    public String getWorkOrderDescription() {
+        return workOrderDescription;
     }
 
-    public void setWoDescription(String woDescription) {
-        this.woDescription = woDescription;
+    public void setWorkOrderDescription(String workOrderDescription) {
+        this.workOrderDescription = workOrderDescription;
     }
 
-    public String getWoNumber() {
-        return woNumber;
+    public String getWorkOrderNumber() {
+        return workOrderNumber;
     }
 
-    public void setWoNumber(String woNumber) {
-        this.woNumber = woNumber;
+    public void setWorkOrderNumber(String workOrderNumber) {
+        this.workOrderNumber = workOrderNumber;
     }
 
-    public Date getWoIssueDate() {
-        return woIssueDate;
+    public Date getWorkOrderIssueDate() {
+        return workOrderIssueDate;
     }
 
-    public void setWoIssueDate(Date woIssueDate) {
-        this.woIssueDate = woIssueDate;
+    public void setWorkOrderIssueDate(Date workOrderIssueDate) {
+        this.workOrderIssueDate = workOrderIssueDate;
     }
 
-    public Date getWoDeliveryDate() {
-        return woDeliveryDate;
+    public Date getWorkOrderDeliveryDate() {
+        return workOrderDeliveryDate;
     }
 
-    public void setWoDeliveryDate(Date woDeliveryDate) {
-        this.woDeliveryDate = woDeliveryDate;
+    public void setWorkOrderDeliveryDate(Date workOrderDeliveryDate) {
+        this.workOrderDeliveryDate = workOrderDeliveryDate;
     }
 
-    public Double getWoTotal() {
-        return woTotal;
+    public Double getWorkOrderTotal() {
+        return workOrderTotal;
     }
 
-    public void setWoTotal(Double woTotal) {
-        this.woTotal = woTotal;
+    public void setWorkOrderTotal(Double workOrderTotal) {
+        this.workOrderTotal = workOrderTotal;
     }
 
-    public Double getWoBalance() {
-        return woBalance;
+    public Double getWorkOrderBalance() {
+        return workOrderBalance;
     }
 
-    public void setWoBalance(Double woBalance) {
-        this.woBalance = woBalance;
+    public void setWorkOrderBalance(Double workOrderBalance) {
+        this.workOrderBalance = workOrderBalance;
     }
 
-    public Double getWoAdvance() {
-        return woAdvance;
+    public Double getWorkOrderAdvance() {
+        return workOrderAdvance;
     }
 
-    public void setWoAdvance(Double woAdvance) {
-        this.woAdvance = woAdvance;
+    public void setWorkOrderAdvance(Double workOrderAdvance) {
+        this.workOrderAdvance = workOrderAdvance;
     }
     
     public List<Detail> getDetailList() {
@@ -189,6 +196,28 @@ public class WorkOrder implements Serializable {
     @Override
     public String toString() {
         return "model.WorkOrder[ workOrderId=" + workOrderId + " ]";
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    /**
+     * @return the workOrderPriority
+     */
+    public Integer getWorkOrderPriority() {
+        return workOrderPriority;
+    }
+
+    /**
+     * @param workOrderPriority the workOrderPriority to set
+     */
+    public void setWorkOrderPriority(Integer workOrderPriority) {
+        this.workOrderPriority = workOrderPriority;
     }
     
 }

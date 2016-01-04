@@ -53,19 +53,19 @@ public class WorkDiaryTableModel extends AbstractTableModel {
             case 0:
                 return String.valueOf(rowIndex + 1);
             case 1:
-                return wOrder.getWoDescription(); //Operaciones.formFechaToLarge(aEntry.getAeCreatedDate());
+                return wOrder.getWorkOrderDescription(); //Operaciones.formFechaToLarge(aEntry.getAeCreatedDate());
             case 2:
-                return Operaciones.formFechaToLarge(wOrder.getWoIssueDate());
+                return Operaciones.formFechaToLarge(wOrder.getWorkOrderIssueDate());
             case 3:
-                return Operaciones.formFechaToLarge(wOrder.getWoDeliveryDate());
+                return Operaciones.formFechaToLarge(wOrder.getWorkOrderDeliveryDate());
 //                if (aEntry.getAeType() == 0) {//Cuando es un ingreso
 //                    return Operaciones.parteDecimal(Math.rint(aEntry.getAeValue() * accuracyVal) / accuracyVal, GeneralParameter.ACCURACY_VALUE);
 //                } else {
 //                    return "0.00";
 //                }
             case 4:
-                if (null != wOrder.getWoState()) {
-                    switch (wOrder.getWoState()) {
+                if (null != wOrder.getWorkOrderState()) {
+                    switch (wOrder.getWorkOrderState()) {
                         case 1:
                             return "PENDIENTE";
                         case 2:

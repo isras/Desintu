@@ -84,6 +84,20 @@ public class PersonDao extends AdapterDao {
         System.out.println(personList);
         return personList;
     }
+    
+    public List<Person> getPersonsByCriteriaType(String criteria) {
+        List<Person> personList = new ArrayList<>();
+        try {
+            String query = "select c from Person c where (c.prType = 'Cliente' or c.prType = 'Publicista') and (c.prFirstName like '%" + criteria + "%' or c.prLastName like '%" + criteria + "%' or c.prIdentification like '%" + criteria + "%')"
+                    ;
+            Query q = this.getEntityManager().createQuery(query);
+            personList = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.out.println(personList);
+        return personList;
+    }
 
     public boolean personExists(String identification) {
         boolean flag = false;

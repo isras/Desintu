@@ -22,6 +22,9 @@ public class GeneralParameter {
     public static int SIMPLE_SERVICE_VALUE;
     public static int MEDIUM_SERVICE_VALUE;
     public static int COMPLEX_SERVICE_VALUE;
+    public static int PUBLICIST_PRINT_DISCOUNT_VALUE;
+    public static int  PUBLICIST_FINISHED_DISCOUNT_VALUE;
+    public static int PUBLICIST_SERVICE_DISCOUNT_VALUE;
 
     public static void chargeSetting() {
         SettingService ss = new SettingService();
@@ -41,6 +44,9 @@ public class GeneralParameter {
             SIMPLE_SERVICE_VALUE = ss.getSetting().getSIMPLE_SERVICE_VALUE();
             MEDIUM_SERVICE_VALUE = ss.getSetting().getMEDIUM_SERVICE_VALUE();
             COMPLEX_SERVICE_VALUE = ss.getSetting().getCOMPLEX_SERVICE_VALUE();
+            PUBLICIST_PRINT_DISCOUNT_VALUE = ss.getSetting().getPUBLICIST_PRINT_DISCOUNT_VALUE();
+            PUBLICIST_FINISHED_DISCOUNT_VALUE = ss.getSetting().getPUBLICIST_FINISHED_DISCOUNT_VALUE();
+            PUBLICIST_SERVICE_DISCOUNT_VALUE = ss.getSetting().getPUBLICIST_SERVICE_DISCOUNT_VALUE();
             
         } else {       
             JOptionPane.showMessageDialog(null, "Deberá configurar los parámetros del software\npara su correcto funcionamiento","SIN CONFIGURACIÓN",JOptionPane.INFORMATION_MESSAGE);

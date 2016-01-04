@@ -41,8 +41,10 @@ public class EmployeeDao extends AdapterDao {
         boolean flag = false;
         try {
             this.getEntityManager().getTransaction().begin();
+            this.guarda(this.employee);
+            this.getEntityManager().getTransaction().commit();//commmit enviado a la datos
+            this.detach(this.employee);
             this.modificar(this.employee);
-            this.getEntityManager().getTransaction().commit();//commmit enviado a la datos  
             flag = true;
         } catch (Exception e) {
             System.out.println("Error en: " + e);
@@ -95,7 +97,7 @@ public class EmployeeDao extends AdapterDao {
         System.out.println(list);
         return list;
     }
-
+    
     public boolean employeeExists(String identification) {
         boolean flag = false;
         try {

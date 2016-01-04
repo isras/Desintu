@@ -30,6 +30,7 @@ public class WorkOrderItemView extends javax.swing.JDialog {
     private final DetailService ds;
     private final ProductService ps;
     private final double auxTot;
+    private String personType;
 
     public WorkOrderItemView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -40,12 +41,13 @@ public class WorkOrderItemView extends javax.swing.JDialog {
         this.chargeCombos();
     }
 
-    public WorkOrderItemView(java.awt.Frame parent, boolean modal, WorkOrderView wo) {
+    public WorkOrderItemView(java.awt.Frame parent, boolean modal, WorkOrderView wo, String personType) {
         super(parent, modal);
         this.ps = new ProductService();
         this.ds = new DetailService();
         initComponents();
         this.wo = wo;
+        this.personType = personType;
         this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         this.chargeCombos();
     }
@@ -608,6 +610,9 @@ public class WorkOrderItemView extends javax.swing.JDialog {
             //JOptionPane.showMessageDialog(this, "Usted no ha seleccionado ningún producto");
             ProductComboBoxModel pcbmmi = (ProductComboBoxModel) this.workOrderItemPrintJC.getModel();
             materialValue = pcbmmi.getSelectedItem().getPdSalePrice();
+            if(personType.equals("Publicista")){
+                materialValue -= (pcbmmi.getSelectedItem().getPdSalePrice() * GeneralParameter.PUBLICIST_PRINT_DISCOUNT_VALUE)/100 ;
+            }
             miName = pcbmmi.getSelectedItem().getPdName();
             if (descriptionText.isEmpty()) {
                 descriptionText = sb.append(miName).append(" ").append(workOrderItemXDimenTxt.getText()).append("x").append(workOrderItemYDimenTxt.getText()).append(" m2").toString();
@@ -626,6 +631,9 @@ public class WorkOrderItemView extends javax.swing.JDialog {
         } else {
             ProductComboBoxModel pcbmt = (ProductComboBoxModel) this.workOrderItemFinishedJC.getModel();
             finishedValue = pcbmt.getSelectedItem().getPdSalePrice();
+            if(personType.equals("Publicista")){
+                finishedValue -= (pcbmt.getSelectedItem().getPdSalePrice() * GeneralParameter.PUBLICIST_FINISHED_DISCOUNT_VALUE)/100 ;
+            }
             tName = pcbmt.getSelectedItem().getPdName();
             if (descriptionText.isEmpty()) {
                 descriptionText = sb.append(tName).append(" ").append(workOrderItemXDimenTxt.getText()).append("x").append(workOrderItemYDimenTxt.getText()).append(" m2").toString();
@@ -640,6 +648,10 @@ public class WorkOrderItemView extends javax.swing.JDialog {
         } else {
             ProductComboBoxModel pcbms = (ProductComboBoxModel) this.workOrderItemServiceJC.getModel();
             serviceValue = pcbms.getSelectedItem().getPdSalePrice();
+            if(personType.equals("Publicista")){
+                serviceValue -= (pcbms.getSelectedItem().getPdSalePrice()*GeneralParameter.PUBLICIST_SERVICE_DISCOUNT_VALUE)/100;
+            }
+            
             sName = pcbms.getSelectedItem().getPdName();
             if (descriptionText.isEmpty()) {
                 descriptionText = sb.append(sName).toString();

@@ -54,6 +54,16 @@ public class EmployeeView extends javax.swing.JDialog {
 
     }
 
+    private void chargePersonData() {
+        this.personService.getPerson().setPrType("Empleado");
+        this.personService.getPerson().setPrFirstName(this.employeeFirstNameTxt.getText());
+        this.personService.getPerson().setPrLastName(this.employeeLastNameTxt.getText());
+        this.personService.getPerson().setPrAddress(this.employeeAddressTxt.getText());
+        this.personService.getPerson().setPrIdentification(this.employeeIdentificationTxt.getText());
+        this.personService.getPerson().setPrPhone(this.employeePhoneTxt.getText());
+        this.personService.getPerson().setPrEmail(this.employeeEmailTxt.getText());
+    }
+
     private void chargeEmployeeData() {
         this.employeeService.getEmployee().setPerson(this.personService.getPerson());
         this.employeeService.getEmployee().getPerson().setPrType("Empleado");
@@ -899,17 +909,17 @@ public class EmployeeView extends javax.swing.JDialog {
                 }
                 break;
             case "Nuevo Empleado":
-                this.chargeEmployeeData();
-                if (this.employeeService.saveEmployee()) {
-                    JOptionPane.showMessageDialog(this, "Empleado creado correctamente");
-                    this.employeeTabView.remove(this.employeeTabView.getSelectedIndex());
-                    this.employeeNewBt.setEnabled(true);
-                    this.commonsButtonsControl();
-                    this.employeeService.addEmployeeToList(this.employeeService.getEmployee());
-                    employeeTable.updateUI();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Error al crear un empleado");
-                }
+                    this.chargeEmployeeData();
+                    if (this.employeeService.saveEmployee()) {
+                        JOptionPane.showMessageDialog(this, "Empleado creado correctamente");
+                        this.employeeTabView.remove(this.employeeTabView.getSelectedIndex());
+                        this.employeeNewBt.setEnabled(true);
+                        this.commonsButtonsControl();
+                        this.employeeService.addEmployeeToList(this.employeeService.getEmployee());
+                        employeeTable.updateUI();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Error al crear un empleado");
+                    }
                 break;
             case "Editar Empleado":
                 this.chargeEmployeeData();
@@ -1158,13 +1168,13 @@ public class EmployeeView extends javax.swing.JDialog {
 
             this.salaryPaymentEmployeeTxt.setText(this.salaryService.getSalary().getEmployee().toString());
             this.salaryPaymentValueTxt.setText(String.valueOf(this.salaryService.getSalary().getSalaryValue()));
-            if(this.salaryService.getSalary().getSalaryBalance() != null){
+            if (this.salaryService.getSalary().getSalaryBalance() != null) {
                 this.salaryPaymentBalanceTxt.setText(String.valueOf(this.salaryService.getSalary().getSalaryBalance()));
-            }else{
+            } else {
                 this.salaryService.getSalary().setSalaryBalance(this.salaryService.getSalary().getSalaryValue());
                 this.salaryPaymentBalanceTxt.setText(String.valueOf(this.salaryService.getSalary().getSalaryBalance()));
             }
-            
+
             this.salaryPaymentService.setSalaryPaymentList(this.salaryPaymentService.getSalaryPaymentListBySalary(this.salaryService.getSalary()));
             this.updateSalaryPaymentTable();
 

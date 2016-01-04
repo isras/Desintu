@@ -97,6 +97,14 @@ public class SettingPanel extends javax.swing.JPanel {
         normalServiceValueSp = new javax.swing.JSpinner();
         complexServiceValueSp = new javax.swing.JSpinner();
         simpleServiceValueSp = new javax.swing.JSpinner();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        printDiscountSp = new javax.swing.JSpinner();
+        jLabel17 = new javax.swing.JLabel();
+        finishedDiscountSp = new javax.swing.JSpinner();
+        jLabel18 = new javax.swing.JLabel();
+        serviceDiscountSp = new javax.swing.JSpinner();
         adminPrefJB = new javax.swing.JButton();
         preferencesContenPanel = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -393,7 +401,7 @@ public class SettingPanel extends javax.swing.JPanel {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(settingAuthorizationNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -520,30 +528,104 @@ public class SettingPanel extends javax.swing.JPanel {
                     .addComponent(settingVynilPrintPriceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Impresión", jPanel7);
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Publicista", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 1, 12), new java.awt.Color(0, 153, 255))); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel16.setText("Material Impreso:");
+
+        printDiscountSp.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        jLabel17.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel17.setText("Terminados:");
+
+        finishedDiscountSp.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        jLabel18.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel18.setText("Servicios:");
+
+        serviceDiscountSp.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(printDiscountSp, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(finishedDiscountSp, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(serviceDiscountSp, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(printDiscountSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17)
+                    .addComponent(finishedDiscountSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18)
+                    .addComponent(serviceDiscountSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
+        );
+
+        jTabbedPane1.addTab("Descuentos", jPanel9);
 
         javax.swing.GroupLayout optionsPanelLayout = new javax.swing.GroupLayout(optionsPanel);
         optionsPanel.setLayout(optionsPanelLayout);
         optionsPanelLayout.setHorizontalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(settingSaveBt)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(120, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionsPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(settingSaveBt)
+                .addGap(248, 248, 248))
         );
         optionsPanelLayout.setVerticalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jTabbedPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionsPanelLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(settingSaveBt)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addGap(157, 157, 157))
         );
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -652,6 +734,9 @@ public class SettingPanel extends javax.swing.JPanel {
         this.ss.getSetting().setSIMPLE_SERVICE_VALUE(Integer.parseInt(String.valueOf(simpleServiceValueSp.getValue())));
         this.ss.getSetting().setMEDIUM_SERVICE_VALUE(Integer.parseInt(String.valueOf(normalServiceValueSp.getValue())));
         this.ss.getSetting().setCOMPLEX_SERVICE_VALUE(Integer.parseInt(String.valueOf(complexServiceValueSp.getValue())));
+        this.ss.getSetting().setPUBLICIST_PRINT_DISCOUNT_VALUE(Integer.parseInt(String.valueOf(printDiscountSp.getValue())));
+        this.ss.getSetting().setPUBLICIST_FINISHED_DISCOUNT_VALUE(Integer.parseInt(String.valueOf(finishedDiscountSp.getValue())));
+        this.ss.getSetting().setPUBLICIST_SERVICE_DISCOUNT_VALUE(Integer.parseInt(String.valueOf(serviceDiscountSp.getValue())));
     }
     
     private void chargeViewSetting(){
@@ -669,6 +754,9 @@ public class SettingPanel extends javax.swing.JPanel {
         simpleServiceValueSp.setValue(this.ss.getSetting().getSIMPLE_SERVICE_VALUE());
         normalServiceValueSp.setValue(this.ss.getSetting().getMEDIUM_SERVICE_VALUE());
         complexServiceValueSp.setValue(this.ss.getSetting().getCOMPLEX_SERVICE_VALUE());
+        printDiscountSp.setValue(this.ss.getSetting().getPUBLICIST_PRINT_DISCOUNT_VALUE());
+        finishedDiscountSp.setValue(this.ss.getSetting().getPUBLICIST_FINISHED_DISCOUNT_VALUE());
+        serviceDiscountSp.setValue(this.ss.getSetting().getPUBLICIST_SERVICE_DISCOUNT_VALUE());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -678,6 +766,7 @@ public class SettingPanel extends javax.swing.JPanel {
     private javax.swing.JSpinner complexServiceValueSp;
     private javax.swing.ButtonGroup enterpriseOptionButtonGroup;
     private javax.swing.JCheckBox enterpriseOptionCB;
+    private javax.swing.JSpinner finishedDiscountSp;
     private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
@@ -699,6 +788,9 @@ public class SettingPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -708,6 +800,7 @@ public class SettingPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -715,12 +808,15 @@ public class SettingPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JSpinner normalServiceValueSp;
     private javax.swing.JPanel optionsPanel;
     private javax.swing.JCheckBox pointOfSaleOption;
     private javax.swing.JPanel preferencesContenPanel;
+    private javax.swing.JSpinner printDiscountSp;
     private javax.swing.JCheckBox restaurantOptionCB;
+    private javax.swing.JSpinner serviceDiscountSp;
     private javax.swing.JSpinner settingAccuracyValueSp;
     private javax.swing.JTextField settingAuthorizationNumberTxt;
     private javax.swing.JTextField settingCanvasPrintPriceTxt;

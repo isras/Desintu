@@ -10,8 +10,8 @@ public class EmployeeComboBoxModel extends AbstractListModel implements ComboBox
     boolean loEncontro;
     private List<Employee> employeeList = null;//cadena q recibira los datos a mostrar.
     Employee employee = null;
-    
-    public EmployeeComboBoxModel(List<Employee> list){
+
+    public EmployeeComboBoxModel(List<Employee> list) {
         this.employeeList = list;
     }
 
@@ -27,15 +27,24 @@ public class EmployeeComboBoxModel extends AbstractListModel implements ComboBox
 
     @Override
     public void setSelectedItem(Object item) {
-        try{
+
+        if ((employee != null && !employee.equals(item))
+                || employee == null && item != null) {
             employee = (Employee) item;
             fireContentsChanged(this, -1, -1);
-        }catch(Exception ex){            
-        }        
-    }     
+        }
+
+    }
+    public int getIndexOf(Object anObject) {
+        return employeeList.indexOf(anObject);
+    }
+    
+    public void setSelectedIndex(){
+        
+    }
 
     @Override
     public Employee getSelectedItem() { //metodo implementado por la interface  JComboBoxModel
         return employee;
-    } 
+    }
 }

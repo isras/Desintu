@@ -3,7 +3,6 @@ package views;
 import java.util.Date;
 import controller.resources.Report;
 import controller.service.InvoiceService;
-import net.sf.jasperreports.view.JRViewer;
 import views.tableModel.DetailTableModel;
 import views.tableModel.InvoiceTableModel;
 
@@ -13,7 +12,6 @@ public class SearchInvoiceView extends javax.swing.JDialog {
     private final DetailTableModel dtm;
     private final InvoiceService invs;
     private Report r;
-    private JRViewer viewer;
     
     public SearchInvoiceView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -154,48 +152,6 @@ public class SearchInvoiceView extends javax.swing.JDialog {
             r.printInvoice(invs, this.dtm);
         }
     }//GEN-LAST:event_searchFactureTableMouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SearchInvoiceView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SearchInvoiceView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SearchInvoiceView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SearchInvoiceView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                SearchInvoiceView dialog = new SearchInvoiceView(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser jDateChooser1;

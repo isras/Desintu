@@ -15,7 +15,10 @@ import controller.service.ProductService;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import views.tableModel.DetailTableModel;
@@ -1103,7 +1106,9 @@ public class InvoiceView extends javax.swing.JDialog {
                         this.saveAccountingEntry();//Guardamos el asiento contable de la venta
                         JOptionPane.showMessageDialog(this, "FACTURA GUARDADA CORRECTAMENTE");
                         report = new Report();
-                        report.printInvoice(this.invs, this.dtm);
+                       
+                            report.printInvoice(this.invs, this.dtm);
+                        
                         this.closeWindow();
                         if (this.pts.getPetition() != null) {
                             if (!this.pts.removePetition()) {

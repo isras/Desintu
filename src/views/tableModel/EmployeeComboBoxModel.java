@@ -4,6 +4,7 @@ import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.ComboBoxModel;
 import model.Employee;
+import model.Person;
 
 public class EmployeeComboBoxModel extends AbstractListModel implements ComboBoxModel {
 
@@ -12,6 +13,12 @@ public class EmployeeComboBoxModel extends AbstractListModel implements ComboBox
     Employee employee = null;
 
     public EmployeeComboBoxModel(List<Employee> list) {
+        Person person = new Person();
+        person.setPrFirstName("Seleccione un empleado...");
+        person.setPrLastName("");
+        Employee emp = new Employee();
+        emp.setPerson(person);
+        list.add(0,emp);
         this.employeeList = list;
     }
 

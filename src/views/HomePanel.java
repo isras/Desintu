@@ -7,7 +7,6 @@ package views;
 
 import controller.service.WorkOrderService;
 import java.awt.Graphics;
-import java.util.List;
 import javax.swing.ImageIcon;
 import views.tableModel.WorkDiaryTableModel;
 
@@ -33,8 +32,8 @@ public class HomePanel extends javax.swing.JPanel {
     }
 
     private void updateWorkOrderDiaryTable() {
-        if (!this.wos.getWorkOrderList().isEmpty()) {
-            this.wdtm.setList(this.wos.getWorkOrderList());
+        if (!this.wos.getWorkOrderListByState().isEmpty()) {
+            this.wdtm.setList(this.wos.getWorkOrderListByState());
             this.workDiaryTable.setModel(wdtm);
             this.workDiaryTable.updateUI();
         }
@@ -96,6 +95,8 @@ public class HomePanel extends javax.swing.JPanel {
         if (evt.getClickCount() == 2) {
             this.wos.setInstance(this.wdtm.getList().get(this.workDiaryTable.getSelectedRow()));
             new WorkOrderView(null, true, wos).setVisible(true);
+            //Actualizamos la tabla quitando los trabajos terminados y volviendo a cargar los pendientes
+            this.updateWorkOrderDiaryTable();
         }
     }//GEN-LAST:event_workDiaryTableMouseClicked
 

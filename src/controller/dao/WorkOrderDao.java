@@ -84,4 +84,17 @@ public class WorkOrderDao extends AdapterDao {
         }
         return workOrderList;
     }
+    
+    public List<WorkOrder> getWorkOrderListByState(){
+        List<WorkOrder> workOrderList = new ArrayList<>();
+       int state = 1;
+        try {
+            String query = "select c from WorkOrder c where c.workOrderState = '" + state + "'";
+            Query q = this.getEntityManager().createQuery(query);
+            workOrderList = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return workOrderList;
+    }
 }

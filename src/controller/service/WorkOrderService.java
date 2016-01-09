@@ -45,4 +45,8 @@ public class WorkOrderService {
         return this.wdao.getWorkOrderList();
     }
     
+    public List<WorkOrder> getWorkOrderListByState(){
+        return this.wdao.getWorkOrderListByState();
+    }
+    
 }

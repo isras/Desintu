@@ -55,9 +55,9 @@ public class WorkDiaryTableModel extends AbstractTableModel {
             case 1:
                 return wOrder.getWorkOrderDescription(); //Operaciones.formFechaToLarge(aEntry.getAeCreatedDate());
             case 2:
-                return Operaciones.formFechaToLarge(wOrder.getWorkOrderIssueDate());
+                return Operaciones.formatDate(wOrder.getWorkOrderIssueDate());
             case 3:
-                return Operaciones.formFechaToLarge(wOrder.getWorkOrderDeliveryDate());
+                return Operaciones.formatDate(wOrder.getWorkOrderDeliveryDate());
 //                if (aEntry.getAeType() == 0) {//Cuando es un ingreso
 //                    return Operaciones.parteDecimal(Math.rint(aEntry.getAeValue() * accuracyVal) / accuracyVal, GeneralParameter.ACCURACY_VALUE);
 //                } else {

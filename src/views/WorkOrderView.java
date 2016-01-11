@@ -108,9 +108,6 @@ public class WorkOrderView extends javax.swing.JDialog {
         workOrderQuotationRb = new javax.swing.JRadioButton();
         workOrderRb = new javax.swing.JRadioButton();
         workOrderInvoiceRb = new javax.swing.JRadioButton();
-        jLabel17 = new javax.swing.JLabel();
-        workOrderPayFormCb = new javax.swing.JComboBox<>();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         workOrderNumberTxt = new javax.swing.JTextField();
@@ -142,6 +139,10 @@ public class WorkOrderView extends javax.swing.JDialog {
         workOrderHightPriorityJrb = new javax.swing.JRadioButton();
         workOrderNormalPriorityJrb = new javax.swing.JRadioButton();
         workOrderLowPriorityJrb = new javax.swing.JRadioButton();
+        jLabel17 = new javax.swing.JLabel();
+        workOrderPayFormCb = new javax.swing.JComboBox<>();
+        ivaOptionCb = new javax.swing.JCheckBox();
+        jLabel15 = new javax.swing.JLabel();
 
         pruebaJC.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -332,6 +333,7 @@ public class WorkOrderView extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(51, 153, 255));
         jLabel4.setText("DETALLE");
 
+        workOrderQuotationRb.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(workOrderQuotationRb);
         workOrderQuotationRb.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         workOrderQuotationRb.setText("Proforma");
@@ -341,6 +343,7 @@ public class WorkOrderView extends javax.swing.JDialog {
             }
         });
 
+        workOrderRb.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(workOrderRb);
         workOrderRb.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         workOrderRb.setSelected(true);
@@ -351,6 +354,7 @@ public class WorkOrderView extends javax.swing.JDialog {
             }
         });
 
+        workOrderInvoiceRb.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup2.add(workOrderInvoiceRb);
         workOrderInvoiceRb.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         workOrderInvoiceRb.setText("Factura");
@@ -359,15 +363,6 @@ public class WorkOrderView extends javax.swing.JDialog {
                 workOrderInvoiceRbActionPerformed(evt);
             }
         });
-
-        jLabel17.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jLabel17.setText("Estado:");
-
-        workOrderPayFormCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "PAGADA", "PENDIENTE", "ANULADA" }));
-        workOrderPayFormCb.setEnabled(false);
-
-        jCheckBox1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jCheckBox1.setText("Iva");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -385,14 +380,8 @@ public class WorkOrderView extends javax.swing.JDialog {
                         .addComponent(workOrderQuotationRb)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(workOrderRb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(41, 41, 41)
                         .addComponent(workOrderInvoiceRb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(workOrderPayFormCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addGap(15, 15, 15))))
@@ -406,10 +395,7 @@ public class WorkOrderView extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(workOrderQuotationRb)
                     .addComponent(workOrderRb)
-                    .addComponent(workOrderInvoiceRb)
-                    .addComponent(jLabel17)
-                    .addComponent(workOrderPayFormCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
+                    .addComponent(workOrderInvoiceRb))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -463,7 +449,7 @@ public class WorkOrderView extends javax.swing.JDialog {
                     .addComponent(jLabel16))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(workOrderStateCb, 0, 1, Short.MAX_VALUE)
+                    .addComponent(workOrderStateCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(workOrderDeliveryDc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(workOrderNumberTxt)
                     .addComponent(workOrderIssueDc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -496,12 +482,12 @@ public class WorkOrderView extends javax.swing.JDialog {
 
         searchNameComboText.setEditable(true);
         searchNameComboText.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 searchNameComboTextPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         searchNameComboText.addActionListener(new java.awt.event.ActionListener() {
@@ -543,7 +529,7 @@ public class WorkOrderView extends javax.swing.JDialog {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(workOrderPersonNameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                            .addComponent(workOrderPersonNameTxt)
                             .addComponent(workOrderPersonIdentificationTxt))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -554,7 +540,7 @@ public class WorkOrderView extends javax.swing.JDialog {
                             .addComponent(workOrderPersonLastNameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                             .addComponent(workOrderPersonPhoneTxt)))
                     .addComponent(workOrderPersonAddressTxt)
-                    .addComponent(searchNameComboText, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(searchNameComboText, 0, 450, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -592,12 +578,12 @@ public class WorkOrderView extends javax.swing.JDialog {
         employeeComboBox.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         employeeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciones un empleado...", "Julio Galán ", "Israel Sotomayor" }));
         employeeComboBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 employeeComboBoxPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
 
@@ -609,8 +595,8 @@ public class WorkOrderView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(employeeComboBox, 0, 340, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(employeeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -643,28 +629,31 @@ public class WorkOrderView extends javax.swing.JDialog {
 
         workOrderHightPriorityJrb.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(workOrderHightPriorityJrb);
+        workOrderHightPriorityJrb.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         workOrderHightPriorityJrb.setText("Alta");
 
         workOrderNormalPriorityJrb.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(workOrderNormalPriorityJrb);
+        workOrderNormalPriorityJrb.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         workOrderNormalPriorityJrb.setText("Media");
 
         workOrderLowPriorityJrb.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(workOrderLowPriorityJrb);
+        workOrderLowPriorityJrb.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         workOrderLowPriorityJrb.setText("Baja");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(workOrderHightPriorityJrb)
                 .addGap(18, 18, 18)
                 .addComponent(workOrderNormalPriorityJrb)
                 .addGap(18, 18, 18)
                 .addComponent(workOrderLowPriorityJrb)
-                .addGap(50, 50, 50))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -677,6 +666,24 @@ public class WorkOrderView extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel17.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel17.setText("Pago:");
+
+        workOrderPayFormCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "PAGADA", "PENDIENTE", "ANULADA" }));
+        workOrderPayFormCb.setEnabled(false);
+
+        ivaOptionCb.setBackground(new java.awt.Color(255, 255, 255));
+        ivaOptionCb.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        ivaOptionCb.setText("Iva");
+        ivaOptionCb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ivaOptionCbActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel15.setText("Impuesto:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -685,22 +692,32 @@ public class WorkOrderView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(workOrderPayFormCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ivaOptionCb))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(workOrderSaveBt)
                         .addGap(12, 12, 12)
                         .addComponent(workOrderCancelBt))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -712,10 +729,21 @@ public class WorkOrderView extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17)
+                            .addComponent(workOrderPayFormCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(ivaOptionCb))
+                        .addGap(15, 15, 15)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(workOrderSaveBt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -798,8 +826,10 @@ public class WorkOrderView extends javax.swing.JDialog {
             subtotal += this.ds.getDetailList().get(i).getDetTotal();
         }
 
-        if (workOrderRb.isSelected()) {
+        if (workOrderRb.isSelected() && !ivaOptionCb.isSelected()) {
+
             workOrderValueTxt.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(subtotal * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
+
         } else {
             workOrderSubtotalTxt.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(subtotal * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
             iva = subtotal * 0.12;
@@ -951,7 +981,8 @@ public class WorkOrderView extends javax.swing.JDialog {
         this.pns.setInstance(this.wos.getWorkOrder().getPerson());
         this.chargePersonView();
 
-        this.employeeComboBox.setSelectedItem(this.wos.getWorkOrder().getEmployee());
+        this.employeeService.setInstance(this.wos.getWorkOrder().getEmployee());
+        this.employeeComboBox.setSelectedItem(this.employeeService.getEmployee());
 
         if (null != this.wos.getWorkOrder().getWorkOrderPriority()) {
             switch (this.wos.getWorkOrder().getWorkOrderPriority()) {
@@ -1018,9 +1049,9 @@ public class WorkOrderView extends javax.swing.JDialog {
                             } else {
                                 JOptionPane.showMessageDialog(this, "No se guardo la orden de trabajo");
                             }
-                        }else if(this.wos.getWorkOrder().getWorkOrderId() != null){
+                        } else if (this.wos.getWorkOrder().getWorkOrderId() != null) {
                             this.chargeWorkOrderData();
-                            if(this.wos.updateWorkOrder()){
+                            if (this.wos.updateWorkOrder()) {
                                 JOptionPane.showMessageDialog(this, "Orden de trabajo modificada correctamente");
                                 //En esta parte iria si desea convertir la orden de trabajo en factura o no
                             }
@@ -1094,9 +1125,20 @@ public class WorkOrderView extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (workOrderRb.isSelected()) {
             workOrderPayFormCb.setEnabled(false);
-            workOrderPayFormCb.setSelectedItem(null);
+            workOrderPayFormCb.setSelectedItem("Seleccione...");
         }
     }//GEN-LAST:event_workOrderRbActionPerformed
+
+    private void ivaOptionCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ivaOptionCbActionPerformed
+        // TODO add your handling code here:
+        if (ivaOptionCb.isSelected()) {
+            totalIvaCalculate();
+        }else{
+            workOrderSubtotalTxt.setText("0.00");
+            workOrderIvaBt.setText("0.00");
+            workOrderTotalTxt.setText("0.00");
+        }
+    }//GEN-LAST:event_ivaOptionCbActionPerformed
 
     private void balanceTotalCalculate() {
         Double temp;
@@ -1114,7 +1156,7 @@ public class WorkOrderView extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox employeeComboBox;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox ivaOptionCb;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JLabel jLabel1;
@@ -1123,6 +1165,7 @@ public class WorkOrderView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;

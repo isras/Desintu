@@ -97,4 +97,28 @@ public class WorkOrderDao extends AdapterDao {
         }
         return workOrderList;
     }
+    
+    public List<WorkOrder> getWorkOrderListByCustomerCriteria(String criteria){
+        List<WorkOrder> workOrderList = new ArrayList<>();
+        try{
+            String query = "select c from WorkOrder c where c.person.prFirstName like '" + criteria + "%' or c.person.prLastName like '" + criteria + "%' or c.person.prIdentification like '" + criteria + "%'";
+            Query q = this.getEntityManager().createQuery(query);
+            workOrderList = q.getResultList();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return workOrderList;
+    }
+    
+    public List<WorkOrder> getWorkOrderListByEmployeeCriteria(String criteria){
+        List<WorkOrder> workOrderList = new ArrayList<>();
+        try{
+            String query = "select c from WorkOrder c where c.employee.person.prFirstName like '" + criteria + "%' or c.employee.person.prLastName like '" + criteria + "%' or c.employee.person.prIdentification like '" + criteria + "%'";
+            Query q = this.getEntityManager().createQuery(query);
+            workOrderList = q.getResultList();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return workOrderList;
+    }
 }

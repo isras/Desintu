@@ -223,6 +223,7 @@ public class WorkOrderItemView extends javax.swing.JDialog {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo de Trabajo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11), new java.awt.Color(0, 153, 255))); // NOI18N
 
+        woiPrintCheckBox.setBackground(new java.awt.Color(255, 255, 255));
         woiPrintCheckBox.setText("Impresión");
         woiPrintCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,6 +236,7 @@ public class WorkOrderItemView extends javax.swing.JDialog {
             }
         });
 
+        woiServiceCheckBox.setBackground(new java.awt.Color(255, 255, 255));
         woiServiceCheckBox.setText("Servicio");
         woiServiceCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,6 +249,7 @@ public class WorkOrderItemView extends javax.swing.JDialog {
             }
         });
 
+        woiFinishedCheckBox.setBackground(new java.awt.Color(255, 255, 255));
         woiFinishedCheckBox.setText("Terminado");
         woiFinishedCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,6 +318,7 @@ public class WorkOrderItemView extends javax.swing.JDialog {
         workOrderItemComplexComplexityRB.setText("Compleja");
         workOrderItemComplexComplexityRB.setEnabled(false);
 
+        noneComplexityRB.setBackground(new java.awt.Color(255, 255, 255));
         complexityBG.add(noneComplexityRB);
         noneComplexityRB.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         noneComplexityRB.setText("Ninguna");

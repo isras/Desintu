@@ -49,4 +49,12 @@ public class WorkOrderService {
         return this.wdao.getWorkOrderListByState();
     }
     
+    public List<WorkOrder> getWorkOrderListByCustomerCriteria(String criteria){
+        return this.wdao.getWorkOrderListByCustomerCriteria(criteria);
+    }
+    
+     public List<WorkOrder> getWorkOrderListByEmployeeCriteria(String criteria){
+        return this.wdao.getWorkOrderListByEmployeeCriteria(criteria);
+    }
+    
 }

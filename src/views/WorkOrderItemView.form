@@ -295,6 +295,9 @@
           <SubComponents>
             <Component class="javax.swing.JCheckBox" name="woiPrintCheckBox">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Impresi&#xf3;n"/>
               </Properties>
               <Events>
@@ -304,6 +307,9 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="woiServiceCheckBox">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Servicio"/>
               </Properties>
               <Events>
@@ -313,6 +319,9 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="woiFinishedCheckBox">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Terminado"/>
               </Properties>
               <Events>
@@ -492,6 +501,9 @@
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="noneComplexityRB">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="complexityBG"/>
                     </Property>

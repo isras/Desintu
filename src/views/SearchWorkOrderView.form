@@ -36,6 +36,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Generar Factura"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="invoiceGenerateMenuItemActionPerformed"/>
+          </Events>
         </MenuItem>
       </SubComponents>
     </Container>
@@ -137,7 +140,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="searchWorkOrderTxt" min="-2" pref="397" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="searchWorkOrderBt" pref="74" max="32767" attributes="0"/>
+                              <Component id="searchWorkOrderBt" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
                       </Group>

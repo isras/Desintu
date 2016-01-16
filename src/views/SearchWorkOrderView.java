@@ -5,9 +5,13 @@
  */
 package views;
 
+import controller.service.InvoiceService;
 import controller.service.WorkOrderService;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.sql.Time;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import views.tableModel.WorkDiaryTableModel;
 
@@ -19,11 +23,13 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
 
     private final WorkOrderService workOrderService;
     private final WorkDiaryTableModel workDiaryTableModel;
+    private final InvoiceService invoiceService;
 
     public SearchWorkOrderView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.workOrderService = new WorkOrderService();
         this.workDiaryTableModel = new WorkDiaryTableModel();
+        this.invoiceService = new InvoiceService();
         initComponents();
     }
 
@@ -72,6 +78,11 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
 
         invoiceGenerateMenuItem.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         invoiceGenerateMenuItem.setText("Generar Factura");
+        invoiceGenerateMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invoiceGenerateMenuItemActionPerformed(evt);
+            }
+        });
         searchWorkOrderTablePopupOptions.add(invoiceGenerateMenuItem);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -198,7 +209,7 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchWorkOrderTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchWorkOrderBt, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))
+                        .addComponent(searchWorkOrderBt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -315,11 +326,52 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
             tableOptionsPopup(evt);
     }//GEN-LAST:event_searchWorkOrderTableMousePressed
 
+    private void chargeInvoiceData(){
+        this.invoiceService.getInvoice().setInIssueDate(new Date());
+        this.invoiceService.getInvoice().setInIssueTime(new Date());
+        this.invoiceService.getInvoice().setInIva(this.workOrderService.getWorkOrder().getWorkOrderIva());
+        this.invoiceService.getInvoice().setInNumber("12345");
+        this.invoiceService.getInvoice().setInState("Realizada");
+        this.invoiceService.getInvoice().setInSubtotalIva(this.workOrderService.getWorkOrder().getWorkOrderSubtotal());
+        this.invoiceService.getInvoice().setInTotal(this.workOrderService.getWorkOrder().getWorkOrderTotal());
+        this.invoiceService.getInvoice().setPerson(this.workOrderService.getWorkOrder().getPerson());
+        
+        
+        this.workOrderDetailToInvoiceDetail();
+        this.invoiceService.getInvoice().setDetailList(this.workOrderService.getWorkOrder().getDetailList());
+        
+    }
+    
+    //Actualizamos el tipo de detalle de oreden de trabajo a factura
+    private void workOrderDetailToInvoiceDetail(){
+        
+        for (int i = 0; i < this.workOrderService.getWorkOrder().getDetailList().size(); i++) {
+            this.workOrderService.getWorkOrder().getDetailList().get(i).setDetType("InvoiceDetail");
+            this.workOrderService.getWorkOrder().getDetailList().get(i).setWorkOrder(null);
+            this.workOrderService.getWorkOrder().getDetailList().get(i).setDetailId(null);
+        }
+    }
+    
+    private void invoiceGenerate(){
+        
+    }
+    
     private void showWorkOrderViewMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWorkOrderViewMenuItemActionPerformed
         // TODO add your handling code here:
         this.workOrderService.setInstance(this.workDiaryTableModel.getList().get(searchWorkOrderTable.getSelectedRow()));
         new WorkOrderView(null, true, workOrderService).setVisible(true);
     }//GEN-LAST:event_showWorkOrderViewMenuItemActionPerformed
+
+    private void invoiceGenerateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceGenerateMenuItemActionPerformed
+        // TODO add your handling code here:
+        
+        chargeInvoiceData();
+        if(this.invoiceService.getInvoice().getInvoiceId() == null){
+            this.invoiceService.saveInvoice();
+            JOptionPane.showMessageDialog(null, "La factura ha sido generada correctamente");
+        }
+        
+    }//GEN-LAST:event_invoiceGenerateMenuItemActionPerformed
 
      private void tableOptionsPopup(java.awt.event.MouseEvent evt){
         if(evt.getButton() == MouseEvent.BUTTON3){

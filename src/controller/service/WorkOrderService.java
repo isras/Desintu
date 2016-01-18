@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.service;
 
 import controller.dao.WorkOrderDao;
 import java.util.List;
 import model.WorkOrder;
 
-/**
- *
- * @author Eyetive
- */
 public class WorkOrderService {
     
     private final WorkOrderDao wdao;

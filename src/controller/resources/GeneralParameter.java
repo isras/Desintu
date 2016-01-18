@@ -16,9 +16,9 @@ public class GeneralParameter {
     public static String FIRST_INVOICE_NUMBER;
     public static String SECOND_INVOICE_NUMBER;
     public static String THIRD_INVOICE_NUMBRE;
+    public static int QUOTATION_NUMBER;
+    public static int WORK_ORDER_NUMBER;
     public static boolean SHOW_PRINT_PREVIEW;
-    public static double CANVAS_PRINT_VALUE;
-    public static double VYNIL_PRINT_VALUE;
     public static int SIMPLE_SERVICE_VALUE;
     public static int MEDIUM_SERVICE_VALUE;
     public static int COMPLEX_SERVICE_VALUE;
@@ -38,9 +38,9 @@ public class GeneralParameter {
             FIRST_INVOICE_NUMBER = ss.getSetting().getFIRST_INVOICE_NUMBER();
             SECOND_INVOICE_NUMBER = ss.getSetting().getSECOND_INVOICE_NUMBER();
             THIRD_INVOICE_NUMBRE = ss.getSetting().getTHIRD_INVOICE_NUMBER();
+            QUOTATION_NUMBER = ss.getSetting().getQUOTATION_NUMBER();
+            WORK_ORDER_NUMBER = ss.getSetting().getWORK_ORDER_NUMBER();
             SHOW_PRINT_PREVIEW = ss.getSetting().getSHOW_PRINT_PREVIEW();
-            CANVAS_PRINT_VALUE = ss.getSetting().getCANVAS_PRINT_VALUE();
-            VYNIL_PRINT_VALUE = ss.getSetting().getVYNIL_PRINT_VALUE();
             SIMPLE_SERVICE_VALUE = ss.getSetting().getSIMPLE_SERVICE_VALUE();
             MEDIUM_SERVICE_VALUE = ss.getSetting().getMEDIUM_SERVICE_VALUE();
             COMPLEX_SERVICE_VALUE = ss.getSetting().getCOMPLEX_SERVICE_VALUE();

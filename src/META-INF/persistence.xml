@@ -21,6 +21,7 @@
     <class>model.Employee</class>
     <class>model.Salary</class>
     <class>model.SalaryPayment</class>
+    <class>model.Quotation</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/desintu?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -1,19 +1,20 @@
 package views;
 
-
 import model.Person;
 import java.awt.Color;
 import controller.resources.NumberToLetter;
 import controller.resources.Operaciones;
 import controller.service.InvoiceService;
+import controller.service.WorkOrderService;
 
 public class CambioV extends javax.swing.JDialog {
 
     private double totalVenta;
     private Person cliente;
-    private InvoiceService invs;
+    private final InvoiceService invs;
     private Operaciones uccfactura;
-
+    private final WorkOrderService workOrderService;
+    private int changeState;
 
     public CambioV(java.awt.Frame parent, boolean modal, double val, InvoiceService invs) {
         super(parent, modal);
@@ -22,7 +23,23 @@ public class CambioV extends javax.swing.JDialog {
 //        factures = facture;
         this.invs = invs;
         uccfactura = new Operaciones();
+        workOrderService = new WorkOrderService();
         initComponents();
+        changeState = 1;
+        totalSell.setText(uccfactura.parteDecimal(val, 2) + "");
+        setLocationRelativeTo(this);
+    }
+
+    public CambioV(java.awt.Frame parent, boolean modal, double val, WorkOrderService workOrderService) {
+        super(parent, modal);
+        totalVenta = val;
+//        cliente = client;
+//        factures = facture;
+        this.invs = new InvoiceService();
+        this.workOrderService = workOrderService;
+        uccfactura = new Operaciones();
+        initComponents();
+        changeState = 2;
         totalSell.setText(uccfactura.parteDecimal(val, 2) + "");
         setLocationRelativeTo(this);
     }
@@ -200,10 +217,19 @@ public class CambioV extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void action() {
+
         if (acceptButton.isEnabled()) {
-            this.invs.getInvoice().setInChange(Double.parseDouble(vueltCliente.getText()));
-            this.invs.getInvoice().setInCash(Double.valueOf(clientCant.getText()));           
-            dispose();
+
+            if (changeState == 1) {
+                this.invs.getInvoice().setInChange(Double.parseDouble(vueltCliente.getText()));
+                this.invs.getInvoice().setInCash(Double.valueOf(clientCant.getText()));
+                dispose();
+            } else {
+                this.workOrderService.getWorkOrder().setWorkOrderChange(Double.parseDouble(vueltCliente.getText()));
+                this.workOrderService.getWorkOrder().setWorkOrderCash(Double.valueOf(clientCant.getText()));
+                dispose();
+            }
+
         }
     }
     private void acceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acceptButtonActionPerformed
@@ -264,5 +290,4 @@ public class CambioV extends javax.swing.JDialog {
     private javax.swing.JTextField vueltCliente;
     // End of variables declaration//GEN-END:variables
 
- 
 }

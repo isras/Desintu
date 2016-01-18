@@ -3,48 +3,18 @@ package controller.resources;
 import controller.Sessions;
 import controller.service.CashClosingService;
 import controller.service.InvoiceService;
+import controller.service.QuotationService;
 import controller.service.WorkOrderService;
-import model.Person;
-import java.awt.Dimension;
-import java.awt.HeadlessException;
-import java.awt.Toolkit;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import model.Sellnote;
-import net.sf.jasperreports.engine.JREmptyDataSource;
+import model.Quotation;
 import views.tableModel.InventoryTableModel;
-import views.tableModel.AccountingEntryTableModel;
-import views.tableModel.CCDeliveryNoteTableModel;
-import views.tableModel.CCFactureTableModel;
-import views.tableModel.CCPetitionNoteTableModel;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperPrintManager;
-import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JRViewer;
-import net.sf.jasperreports.view.JasperViewer;
 import views.tableModel.DetailTableModel;
 
-/**
- *
- * @author Isra
- */
 public class Report {
 
     private Connection conn;
@@ -98,6 +68,24 @@ public class Report {
         JRTableModelDataSource dataSource = new JRTableModelDataSource(dtm);
         AbstractJasperReports.createReport(conn, path, parameters, dataSource);
         AbstractJasperReports.showViewer("ORDEN DE TRABAJO - PREVIEW");
+    }
+    
+    public void printQuotation(QuotationService quotationService, DetailTableModel dtm) {
+
+        String path = System.getProperty("user.dir") + "/reports/Invoice360Report.jasper";
+
+        Map parameters = new HashMap();
+        parameters.put("nombreCliente",quotationService.getQuotation().getPerson().toString());
+        parameters.put("rucCliente", quotationService.getQuotation().getPerson().getPrIdentification());
+        parameters.put("dirCliente", quotationService.getQuotation().getPerson().getPrAddress());
+        parameters.put("telfCliente", quotationService.getQuotation().getPerson().getPrPhone());
+        parameters.put("subtotal", String.valueOf(quotationService.getQuotation().getQuotationSubtotal()));
+        parameters.put("subtotalIva", String.valueOf(quotationService.getQuotation().getQuotationIva()));
+        parameters.put("total", String.valueOf(quotationService.getQuotation().getQuotationTotal()));
+
+        JRTableModelDataSource dataSource = new JRTableModelDataSource(dtm);
+        AbstractJasperReports.createReport(conn, path, parameters, dataSource);
+        AbstractJasperReports.showViewer("PROFORMA - PREVIEW");
     }
 
     public void printClosingCash(CashClosingService ccs) {

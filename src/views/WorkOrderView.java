@@ -11,6 +11,8 @@ import controller.resources.Report;
 import controller.service.DetailService;
 import controller.service.EmployeeService;
 import controller.service.PersonService;
+import controller.service.QuotationService;
+import controller.service.SettingService;
 import controller.service.WorkOrderService;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -33,6 +35,8 @@ public class WorkOrderView extends javax.swing.JDialog {
     private final WorkOrderService wos;
     private final DetailTableModel dtm;
     private final EmployeeService employeeService;
+    private final QuotationService quotationService;
+    private final SettingService settingService;
     private JTextField searchNameText;
     private final Double auxTot;
 
@@ -43,11 +47,15 @@ public class WorkOrderView extends javax.swing.JDialog {
         this.wos = new WorkOrderService();
         this.dtm = new DetailTableModel();
         this.employeeService = new EmployeeService();
-
+        this.quotationService = new QuotationService();
+        this.settingService = new SettingService();
         initComponents();
         this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         this.chargePersonCombo();
         this.chargeEmployeeCombo();
+        GeneralParameter.chargeSetting();
+        this.documentControlNumber();
+
 //        workOrderSubtotalTxt.setVisible(false);
 //        workOrderSubtotalLabel.setVisible(false);
 //        workOrderIvaBt.setVisible(false);
@@ -63,12 +71,16 @@ public class WorkOrderView extends javax.swing.JDialog {
         //this.wos = new WorkOrderService();
         this.dtm = new DetailTableModel();
         this.employeeService = new EmployeeService();
+        this.quotationService = new QuotationService();
+        this.settingService = new SettingService();
         initComponents();
         this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         this.wos = wos;
         this.chargePersonCombo();
         this.chargeEmployeeCombo();
         this.chargeWorkOrderView();
+        GeneralParameter.chargeSetting();
+        this.documentControlNumber();
     }
 
     /**
@@ -240,6 +252,11 @@ public class WorkOrderView extends javax.swing.JDialog {
         workOrderIvaLabel.setText("IVA:");
 
         workOrderTotalTxt.setText("0.00");
+        workOrderTotalTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                workOrderTotalTxtActionPerformed(evt);
+            }
+        });
 
         workOrderTotalLabel.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         workOrderTotalLabel.setText("TOTAL:");
@@ -376,13 +393,13 @@ public class WorkOrderView extends javax.swing.JDialog {
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(workOrderAddBt)
-                        .addGap(70, 70, 70)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(workOrderQuotationRb)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(workOrderRb)
-                        .addGap(41, 41, 41)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(workOrderInvoiceRb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addGap(15, 15, 15))))
         );
@@ -402,7 +419,7 @@ public class WorkOrderView extends javax.swing.JDialog {
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ORDEN DE TRABAJO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11), new java.awt.Color(0, 153, 255))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DOCUMENTO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 1, 11), new java.awt.Color(0, 153, 255))); // NOI18N
         jPanel4.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -429,7 +446,7 @@ public class WorkOrderView extends javax.swing.JDialog {
         jLabel16.setText("Estado:");
 
         workOrderStateCb.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        workOrderStateCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendiente", "Pausado", "Terminado" }));
+        workOrderStateCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PENDIENTE", "PAUSADO", "TERMINADO" }));
         workOrderStateCb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 workOrderStateCbActionPerformed(evt);
@@ -482,12 +499,12 @@ public class WorkOrderView extends javax.swing.JDialog {
 
         searchNameComboText.setEditable(true);
         searchNameComboText.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 searchNameComboTextPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         searchNameComboText.addActionListener(new java.awt.event.ActionListener() {
@@ -578,12 +595,12 @@ public class WorkOrderView extends javax.swing.JDialog {
         employeeComboBox.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         employeeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciones un empleado...", "Julio Galán ", "Israel Sotomayor" }));
         employeeComboBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 employeeComboBoxPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
 
@@ -670,7 +687,7 @@ public class WorkOrderView extends javax.swing.JDialog {
         jLabel17.setText("Pago:");
 
         workOrderPayFormCb.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        workOrderPayFormCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pagada", "Pendiente", "Anulada" }));
+        workOrderPayFormCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PAGADA", "PENDIENTE", "ANULADA" }));
         workOrderPayFormCb.setEnabled(false);
 
         ivaOptionCb.setBackground(new java.awt.Color(255, 255, 255));
@@ -772,6 +789,16 @@ public class WorkOrderView extends javax.swing.JDialog {
     private void setworkOrderAndAddDetail() {
         this.ds.getDetail().setWorkOrder(this.wos.getWorkOrder());
         this.ds.addDetailList(this.ds.getDetail());
+    }
+
+    private void documentControlNumber() {
+        if (workOrderRb.isSelected()) {
+            workOrderNumberTxt.setText(String.valueOf(GeneralParameter.WORK_ORDER_NUMBER));
+        } else if (workOrderQuotationRb.isSelected()) {
+            workOrderNumberTxt.setText(String.valueOf(GeneralParameter.QUOTATION_NUMBER));
+        } else if (workOrderInvoiceRb.isSelected()) {
+            workOrderNumberTxt.setText(GeneralParameter.THIRD_INVOICE_NUMBRE);
+        }
     }
 
     private void workOrderAddBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workOrderAddBtActionPerformed
@@ -1039,23 +1066,42 @@ public class WorkOrderView extends javax.swing.JDialog {
             if (this.pns.getPerson().getPersonId() != null) {
                 if (!this.ds.getDetailList().isEmpty()) {
                     if (this.employeeService.getEmployee().getEmployeeId() != null) {
-                        if (this.wos.getWorkOrder().getWorkOrderId() == null) {
-                            this.chargeWorkOrderData();
-                            if (this.wos.saveWorkOrder()) {
-                                JOptionPane.showMessageDialog(this, "La orden de trabajo ha sido guardada correctamente");
-                                Report print = new Report();
-                                print.printWorkOrder(wos, dtm);
-                                this.dispose();
-                            } else {
-                                JOptionPane.showMessageDialog(this, "No se guardo la orden de trabajo");
-                            }
-                        } else if (this.wos.getWorkOrder().getWorkOrderId() != null) {
-                            this.chargeWorkOrderData();
-                            if (this.wos.updateWorkOrder()) {
-                                JOptionPane.showMessageDialog(this, "Orden de trabajo modificada correctamente");
-                                //En esta parte iria si desea convertir la orden de trabajo en factura o no
-                            }
+                        if (ivaOptionCb.isSelected()) {
+                            new CambioV(null, true, Double.parseDouble(workOrderTotalTxt.getText()), this.wos).setVisible(true);
+                        } else {
+                            new CambioV(null, true, Double.parseDouble(workOrderValueTxt.getText()), this.wos).setVisible(true);
                         }
+
+                        if (this.wos.getWorkOrder().getWorkOrderChange() != null) {
+                            System.out.println("EL VUELTO ES: " + this.wos.getWorkOrder().getWorkOrderChange());
+
+                            if (this.wos.getWorkOrder().getWorkOrderId() == null) {
+                                this.chargeWorkOrderData();
+                                if (this.wos.saveWorkOrder()) {
+                                    JOptionPane.showMessageDialog(this, "La orden de trabajo ha sido guardada correctamente");
+                                    this.settingService.setInstance(this.settingService.getUniqueSetting());
+                                    this.settingService.getSetting().setWORK_ORDER_NUMBER(Integer.valueOf(workOrderNumberTxt.getText()) + 1);
+                                    if(this.settingService.updateSetting()){
+                                        System.out.println("Se ha guardado correctamete la configuracion");
+                                    }
+                                    Report print = new Report();
+                                    print.printWorkOrder(wos, dtm);
+                                    this.dispose();
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "No se guardo la orden de trabajo");
+                                }
+                            } else if (this.wos.getWorkOrder().getWorkOrderId() != null) {
+                                this.chargeWorkOrderData();
+                                if (this.wos.updateWorkOrder()) {
+                                    JOptionPane.showMessageDialog(this, "Orden de trabajo modificada correctamente");
+                                    //En esta parte iria si desea convertir la orden de trabajo en factura o no
+                                }
+                            }
+
+                        } else {
+                            System.out.println("LA VENTANA SE HA CERRADO");
+                        }
+
                     } else {
                         JOptionPane.showMessageDialog(this, "No se ha seleccionado ningún empleado");
                     }
@@ -1067,13 +1113,46 @@ public class WorkOrderView extends javax.swing.JDialog {
             }
 
         } else if (workOrderQuotationRb.isSelected()) {
-            JOptionPane.showMessageDialog(this, "Ha guardado el presupuesto correctamente");
+            if (this.pns.getPerson().getPersonId() != null) {
+                if (!this.ds.getDetailList().isEmpty()) {
+                    if (this.quotationService.getQuotation().getQuotationId() == null) {
+                        this.chargeQuotationData();
+                        if (this.quotationService.saveQuotation()) {
+                            JOptionPane.showMessageDialog(this, "La proforma ha sido guardada correctamente");
+                            Report print = new Report();
+                            print.printQuotation(quotationService, dtm);
+                            this.dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "No se guardo la proforma");
+                        }
+                    } else if (this.quotationService.getQuotation().getQuotationId() != null) {
+                        this.chargeQuotationData();
+                        if (this.quotationService.updateQuotation()) {
+                            JOptionPane.showMessageDialog(this, "Proforma modificada correctamente");
+                            //En esta parte iria si desea convertir la orden de trabajo en factura o no
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "La orden de trabajo no tiene items");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No ha seleccionado ningún cliente");
+            }
         } else if (workOrderInvoiceRb.isSelected()) {
             JOptionPane.showMessageDialog(this, "Ha guardado la factura correctamente");
         }
 
 
     }//GEN-LAST:event_workOrderSaveBtActionPerformed
+
+    private void chargeQuotationData() {
+        this.quotationService.getQuotation().setQuotationNumber("12345");
+        this.quotationService.getQuotation().setQuotationSubtotal(Double.valueOf(workOrderSubtotalTxt.getText()));
+        this.quotationService.getQuotation().setQuotationIva(Double.valueOf(workOrderIvaBt.getText()));
+        this.quotationService.getQuotation().setQuotationTotal(Double.valueOf(workOrderTotalTxt.getText()));
+        this.quotationService.getQuotation().setQuotationDate(workOrderIssueDc.getDate());
+        this.quotationService.getQuotation().setPerson(this.pns.getPerson());
+    }
 
     private void workOrderStateCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workOrderStateCbActionPerformed
         // TODO add your handling code here:
@@ -1108,8 +1187,9 @@ public class WorkOrderView extends javax.swing.JDialog {
     private void workOrderQuotationRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workOrderQuotationRbActionPerformed
         // TODO add your handling code here:
         if (workOrderQuotationRb.isSelected()) {
-            workOrderPayFormCb.setEnabled(false);
-            workOrderPayFormCb.setSelectedItem(null);
+            workOrderPayFormCb.setEnabled(true);
+            ivaOptionCb.setSelected(true);
+            workOrderNumberTxt.setText(String.valueOf(GeneralParameter.QUOTATION_NUMBER));
         }
     }//GEN-LAST:event_workOrderQuotationRbActionPerformed
 
@@ -1118,6 +1198,8 @@ public class WorkOrderView extends javax.swing.JDialog {
         if (workOrderInvoiceRb.isSelected()) {
             workOrderPayFormCb.setEnabled(true);
             workOrderPayFormCb.setSelectedIndex(0);
+            workOrderNumberTxt.setText(GeneralParameter.THIRD_INVOICE_NUMBRE);
+
         }
     }//GEN-LAST:event_workOrderInvoiceRbActionPerformed
 
@@ -1126,6 +1208,7 @@ public class WorkOrderView extends javax.swing.JDialog {
         if (workOrderRb.isSelected()) {
             workOrderPayFormCb.setEnabled(false);
             workOrderPayFormCb.setSelectedItem("Seleccione...");
+            workOrderNumberTxt.setText(String.valueOf(GeneralParameter.WORK_ORDER_NUMBER));
         }
     }//GEN-LAST:event_workOrderRbActionPerformed
 
@@ -1133,12 +1216,16 @@ public class WorkOrderView extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (ivaOptionCb.isSelected()) {
             totalIvaCalculate();
-        }else{
+        } else {
             workOrderSubtotalTxt.setText("0.00");
             workOrderIvaBt.setText("0.00");
             workOrderTotalTxt.setText("0.00");
         }
     }//GEN-LAST:event_ivaOptionCbActionPerformed
+
+    private void workOrderTotalTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workOrderTotalTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_workOrderTotalTxtActionPerformed
 
     private void balanceTotalCalculate() {
         Double temp;

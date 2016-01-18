@@ -58,7 +58,10 @@ public class Detail implements Serializable {
     @JoinColumn(name = "work_order_work_order_id", referencedColumnName = "work_order_id")
     @ManyToOne
     private WorkOrder workOrder;
-
+    @JoinColumn(name = "det_quotation_id", referencedColumnName = "work_order_id")
+    @ManyToOne
+    private Quotation quotation;
+    
     public Detail() {
     }
 
@@ -177,6 +180,20 @@ public class Detail implements Serializable {
 
     public void setWorkOrder(WorkOrder workOrder) {
         this.workOrder = workOrder;
+    }
+
+    /**
+     * @return the quotation
+     */
+    public Quotation getQuotation() {
+        return quotation;
+    }
+
+    /**
+     * @param quotation the quotation to set
+     */
+    public void setQuotation(Quotation quotation) {
+        this.quotation = quotation;
     }
 
 }

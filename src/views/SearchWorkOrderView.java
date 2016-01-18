@@ -5,14 +5,15 @@
  */
 package views;
 
+import controller.resources.Report;
 import controller.service.InvoiceService;
 import controller.service.WorkOrderService;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.sql.Time;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import views.tableModel.DetailTableModel;
 import views.tableModel.WorkDiaryTableModel;
 
 /**
@@ -24,12 +25,14 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
     private final WorkOrderService workOrderService;
     private final WorkDiaryTableModel workDiaryTableModel;
     private final InvoiceService invoiceService;
+    private final DetailTableModel detailTableModel;
 
     public SearchWorkOrderView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.workOrderService = new WorkOrderService();
         this.workDiaryTableModel = new WorkDiaryTableModel();
         this.invoiceService = new InvoiceService();
+        this.detailTableModel = new DetailTableModel();
         initComponents();
     }
 
@@ -152,7 +155,12 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
         searchWorkOrderButtonGroup.add(allWorkOrderRb);
         allWorkOrderRb.setFont(new java.awt.Font("Roboto", 1, 11)); // NOI18N
         allWorkOrderRb.setSelected(true);
-        allWorkOrderRb.setText("Todos");
+        allWorkOrderRb.setText("Nro. Orden");
+        allWorkOrderRb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                allWorkOrderRbActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -352,10 +360,6 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
         }
     }
     
-    private void invoiceGenerate(){
-        
-    }
-    
     private void showWorkOrderViewMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWorkOrderViewMenuItemActionPerformed
         // TODO add your handling code here:
         this.workOrderService.setInstance(this.workDiaryTableModel.getList().get(searchWorkOrderTable.getSelectedRow()));
@@ -364,14 +368,26 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
 
     private void invoiceGenerateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceGenerateMenuItemActionPerformed
         // TODO add your handling code here:
-        
+        //Generar una factura a partir de una orden de trabajo
         chargeInvoiceData();
         if(this.invoiceService.getInvoice().getInvoiceId() == null){
-            this.invoiceService.saveInvoice();
-            JOptionPane.showMessageDialog(null, "La factura ha sido generada correctamente");
+            if(this.invoiceService.saveInvoice()){
+             JOptionPane.showMessageDialog(null, "La factura ha sido generada correctamente");
+                Report report = new Report();
+                this.detailTableModel.setList(this.invoiceService.getInvoice().getDetailList());
+                report.printInvoice(invoiceService, this.detailTableModel);
+            }
         }
         
     }//GEN-LAST:event_invoiceGenerateMenuItemActionPerformed
+
+    private void allWorkOrderRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allWorkOrderRbActionPerformed
+        // TODO add your handling code here:
+        if(allWorkOrderRb.isSelected()){
+            searchWorkOrderBt.setEnabled(true);
+            searchWorkOrderTxt.setEnabled(true);
+        }
+    }//GEN-LAST:event_allWorkOrderRbActionPerformed
 
      private void tableOptionsPopup(java.awt.event.MouseEvent evt){
         if(evt.getButton() == MouseEvent.BUTTON3){

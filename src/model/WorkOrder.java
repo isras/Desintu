@@ -81,6 +81,11 @@ public class WorkOrder implements Serializable {
     @Column (name = "wo_invoice_total")
     private Double workOrderInvoiceTotal;
     
+    @Column (name = "wo_cash")
+    private Double workOrderCash;
+    @Column (name = "wo_change")
+    private Double workOrderChange;
+    
     
     @OneToMany(mappedBy = "workOrder", cascade = CascadeType.PERSIST)
     private List<Detail> detailList;
@@ -302,6 +307,34 @@ public class WorkOrder implements Serializable {
      */
     public void setWorkOrderInvoiceTotal(Double workOrderInvoiceTotal) {
         this.workOrderInvoiceTotal = workOrderInvoiceTotal;
+    }
+
+    /**
+     * @return the workOrderCash
+     */
+    public Double getWorkOrderCash() {
+        return workOrderCash;
+    }
+
+    /**
+     * @param workOrderCash the workOrderCash to set
+     */
+    public void setWorkOrderCash(Double workOrderCash) {
+        this.workOrderCash = workOrderCash;
+    }
+
+    /**
+     * @return the workOrderChange
+     */
+    public Double getWorkOrderChange() {
+        return workOrderChange;
+    }
+
+    /**
+     * @param workOrderChange the workOrderChange to set
+     */
+    public void setWorkOrderChange(Double workOrderChange) {
+        this.workOrderChange = workOrderChange;
     }
     
 }

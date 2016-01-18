@@ -365,6 +365,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="0.00"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="workOrderTotalTxtActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="workOrderTotalLabel">
               <Properties>
@@ -400,13 +403,13 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="workOrderAddBt" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="workOrderQuotationRb" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="workOrderRb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="workOrderInvoiceRb" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           </Group>
@@ -554,8 +557,8 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="ORDEN DE TRABAJO">
-                  <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
+                <TitledBorder title="DOCUMENTO">
+                  <Font PropertyName="font" name="Roboto" size="11" style="1"/>
                   <Color PropertyName="color" blue="ff" green="99" red="0" type="rgb"/>
                 </TitledBorder>
               </Border>
@@ -687,9 +690,9 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="3">
-                    <StringItem index="0" value="Pendiente"/>
-                    <StringItem index="1" value="Pausado"/>
-                    <StringItem index="2" value="Terminado"/>
+                    <StringItem index="0" value="PENDIENTE"/>
+                    <StringItem index="1" value="PAUSADO"/>
+                    <StringItem index="2" value="TERMINADO"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -1051,9 +1054,9 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
-                <StringItem index="0" value="Pagada"/>
-                <StringItem index="1" value="Pendiente"/>
-                <StringItem index="2" value="Anulada"/>
+                <StringItem index="0" value="PAGADA"/>
+                <StringItem index="1" value="PENDIENTE"/>
+                <StringItem index="2" value="ANULADA"/>
               </StringArray>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>

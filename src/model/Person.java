@@ -59,12 +59,15 @@ public class Person implements Serializable {
     private List<Invoice> invoiceList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<WorkOrder> workOrderList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    private List<Quotation> quotationList;
 
     public Person() {
         sellnoteList = new ArrayList<>();
         petitionList = new ArrayList<>();
         invoiceList = new ArrayList<>();
         workOrderList = new ArrayList<>();
+        quotationList = new ArrayList<>();
     }
 
     public Person(Long personId) {
@@ -197,4 +200,12 @@ public class Person implements Serializable {
     public void setWorkOrderList(List<WorkOrder> workOrderList) {
         this.workOrderList = workOrderList;
     }    
+
+    public List<Quotation> getQuotationList() {
+        return quotationList;
+    }
+
+    public void setQuotationList(List<Quotation> quotationList) {
+        this.quotationList = quotationList;
+    }
 }

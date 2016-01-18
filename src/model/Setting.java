@@ -34,23 +34,23 @@ public class Setting implements Serializable {
     private Long settingId;
     @Column(name = "pr_first_invoice_number")
     private String FIRST_INVOICE_NUMBER;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "pr_iva_value")
-    private Double IVA_VALUE;
     @Column(name = "pr_second_invoice_number")
     private String SECOND_INVOICE_NUMBER;
     @Column(name = "pr_third_invoice_number")
     private String THIRD_INVOICE_NUMBER;
+    @Column (name = "pr_quotation_number")
+    private Integer QUOTATION_NUMBER;
+    @Column (name = "pr_work_order_number")
+    private Integer WORK_ORDER_NUMBER;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "pr_iva_value")
+    private Double IVA_VALUE;
     @Column(name = "pr_accuracy_value")
     private Integer ACCURACY_VALUE;
     @Column(name = "pr_authorization_number")
     private String AUTHORIZATION_NUMBER;
     @Column(name = "pr_show_print_preview")
     private Boolean SHOW_PRINT_PREVIEW;
-    @Column(name = "pr_canvas_print_value")
-    private Double CANVAS_PRINT_VALUE;
-    @Column(name = "pr_vynil_print_value")
-    private Double VYNIL_PRINT_VALUE;
     @Column(name = "pr_simple_service_value")
     private Integer SIMPLE_SERVICE_VALUE;
     @Column(name = "pr_medium_service_value")
@@ -167,34 +167,6 @@ public class Setting implements Serializable {
     }
 
     /**
-     * @return the CANVAS_PRINT_VALUE
-     */
-    public Double getCANVAS_PRINT_VALUE() {
-        return CANVAS_PRINT_VALUE;
-    }
-
-    /**
-     * @param CANVAS_PRINT_VALUE the CANVAS_PRINT_VALUE to set
-     */
-    public void setCANVAS_PRINT_VALUE(Double CANVAS_PRINT_VALUE) {
-        this.CANVAS_PRINT_VALUE = CANVAS_PRINT_VALUE;
-    }
-
-    /**
-     * @return the VYNIL_PRINT_VALUE
-     */
-    public Double getVYNIL_PRINT_VALUE() {
-        return VYNIL_PRINT_VALUE;
-    }
-
-    /**
-     * @param VYNIL_PRINT_VALUE the VYNIL_PRINT_VALUE to set
-     */
-    public void setVYNIL_PRINT_VALUE(Double VYNIL_PRINT_VALUE) {
-        this.VYNIL_PRINT_VALUE = VYNIL_PRINT_VALUE;
-    }
-
-    /**
      * @return the SIMPLE_SERVICE_VALUE
      */
     public Integer getSIMPLE_SERVICE_VALUE() {
@@ -277,5 +249,32 @@ public class Setting implements Serializable {
     public void setPUBLICIST_SERVICE_DISCOUNT_VALUE(Integer PUBLICIST_SERVICE_DISCOUNT_VALUE) {
         this.PUBLICIST_SERVICE_DISCOUNT_VALUE = PUBLICIST_SERVICE_DISCOUNT_VALUE;
     }
-    
+
+    /**
+     * @return the QUOTATION_NUMBER
+     */
+    public Integer getQUOTATION_NUMBER() {
+        return QUOTATION_NUMBER;
+    }
+
+    /**
+     * @param QUOTATION_NUMBER the QUOTATION_NUMBER to set
+     */
+    public void setQUOTATION_NUMBER(Integer QUOTATION_NUMBER) {
+        this.QUOTATION_NUMBER = QUOTATION_NUMBER;
+    }
+
+    /**
+     * @return the WORK_ORDER_NUMBER
+     */
+    public Integer getWORK_ORDER_NUMBER() {
+        return WORK_ORDER_NUMBER;
+    }
+
+    /**
+     * @param WORK_ORDER_NUMBER the WORK_ORDER_NUMBER to set
+     */
+    public void setWORK_ORDER_NUMBER(Integer WORK_ORDER_NUMBER) {
+        this.WORK_ORDER_NUMBER = WORK_ORDER_NUMBER;
+    }   
 }

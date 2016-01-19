@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2016-01-19T03:48:26 -->
+<!-- 2016-01-19T11:26:39 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="QuotationReport" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="e9bb1a27-f975-4aa4-98f9-75524c5daafa">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -21,6 +21,9 @@
 	<parameter name="quotation_date" class="java.util.Date"/>
 	<parameter name="IMAGE_PATH" class="java.lang.String"/>
 	<parameter name="QUOTATION_NUMBER" class="java.lang.String"/>
+	<parameter name="SUBTOTAL" class="java.lang.String"/>
+	<parameter name="IVA" class="java.lang.String"/>
+	<parameter name="TOTAL" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -129,7 +132,7 @@
 				<reportElement x="158" y="70" width="417" height="25" forecolor="rgba(255, 255, 255, 0.0)" backcolor="#D8DD3A" uuid="0300c087-2631-4eb3-b2b5-8e17941cb9e6"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="310" y="70" width="100" height="25" forecolor="#FFFFFF" uuid="0ce3e951-9f00-4955-924c-ba3a9b9dddfa"/>
+				<reportElement x="310" y="73" width="100" height="20" forecolor="#FFFFFF" uuid="0ce3e951-9f00-4955-924c-ba3a9b9dddfa"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true" isItalic="true"/>
 				</textElement>
@@ -192,7 +195,44 @@
 		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="100" splitType="Stretch"/>
+		<band height="108" splitType="Stretch">
+			<staticText>
+				<reportElement x="420" y="10" width="60" height="15" uuid="21a6ba27-88c2-4f0a-b8c1-076494ee3c31"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUBTOTAL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="484" y="10" width="68" height="15" uuid="3efd1e11-c688-4401-8486-5657103624ee"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{SUBTOTAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="458" y="25" width="22" height="15" uuid="e0d9b8d0-1651-4295-ac3e-d15a58aafec1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IVA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="484" y="25" width="68" height="15" uuid="db64f43e-6b0a-48e4-afee-47ae3bd431dc"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{IVA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="440" y="40" width="40" height="20" uuid="72225336-f93e-4369-a7c5-cb8e4b699a9a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="484" y="40" width="68" height="20" uuid="cc7fcf5a-cbfd-4ca8-8e35-b8af92b84ca5"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band splitType="Stretch"/>

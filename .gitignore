@@ -9,3 +9,6 @@ build.xml
 *.mwb.bak
 *.png
 *.jasper
+._.DS_Store
+.DS_Store
+*.jpg

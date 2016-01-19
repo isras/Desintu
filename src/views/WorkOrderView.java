@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
 import controller.resources.GeneralParameter;
@@ -24,10 +19,6 @@ import views.tableModel.DetailTableModel;
 import views.tableModel.EmployeeComboBoxModel;
 import views.tableModel.PersonComboBoxModel;
 
-/**
- *
- * @author Usuario
- */
 public class WorkOrderView extends javax.swing.JDialog {
 
     private final DetailService ds;
@@ -79,8 +70,8 @@ public class WorkOrderView extends javax.swing.JDialog {
         this.chargePersonCombo();
         this.chargeEmployeeCombo();
         this.chargeWorkOrderView();
-        GeneralParameter.chargeSetting();
-        this.documentControlNumber();
+        //GeneralParameter.chargeSetting();
+        //this.documentControlNumber();
     }
 
     /**
@@ -1167,7 +1158,6 @@ public class WorkOrderView extends javax.swing.JDialog {
         // TODO add your handling code here:
         EmployeeComboBoxModel employeeComboBoxModel = (EmployeeComboBoxModel) employeeComboBox.getModel();
         this.employeeService.setInstance(employeeComboBoxModel.getSelectedItem());
-
     }//GEN-LAST:event_employeeComboBoxPopupMenuWillBecomeInvisible
 
     private void workOrderAdvanceTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workOrderAdvanceTxtActionPerformed

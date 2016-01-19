@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import model.Quotation;
 import views.tableModel.InventoryTableModel;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import views.tableModel.DetailTableModel;
@@ -72,16 +71,20 @@ public class Report {
     
     public void printQuotation(QuotationService quotationService, DetailTableModel dtm) {
 
-        String path = System.getProperty("user.dir") + "/reports/Invoice360Report.jasper";
+        String path = System.getProperty("user.dir") + "/reports/QuotationReport.jasper";
+        String imagePath = System.getProperty("user.dir");
 
         Map parameters = new HashMap();
-        parameters.put("nombreCliente",quotationService.getQuotation().getPerson().toString());
-        parameters.put("rucCliente", quotationService.getQuotation().getPerson().getPrIdentification());
-        parameters.put("dirCliente", quotationService.getQuotation().getPerson().getPrAddress());
-        parameters.put("telfCliente", quotationService.getQuotation().getPerson().getPrPhone());
-        parameters.put("subtotal", String.valueOf(quotationService.getQuotation().getQuotationSubtotal()));
-        parameters.put("subtotalIva", String.valueOf(quotationService.getQuotation().getQuotationIva()));
-        parameters.put("total", String.valueOf(quotationService.getQuotation().getQuotationTotal()));
+        parameters.put("customer_name",quotationService.getQuotation().getPerson().toString());
+        parameters.put("customer_identification", quotationService.getQuotation().getPerson().getPrIdentification());
+        parameters.put("customer_address", quotationService.getQuotation().getPerson().getPrAddress());
+        //parameters.put("telfCliente", quotationService.getQuotation().getPerson().getPrPhone());
+        parameters.put("quotation_date",quotationService.getQuotation().getQuotationDate());
+        parameters.put("IMAGE_PATH",imagePath);
+        parameters.put("QUOTATION_NUMBER",quotationService.getQuotation().getQuotationNumber());
+        //parameters.put("subtotal", String.valueOf(quotationService.getQuotation().getQuotationSubtotal()));
+        //parameters.put("subtotalIva", String.valueOf(quotationService.getQuotation().getQuotationIva()));
+        //parameters.put("total", String.valueOf(quotationService.getQuotation().getQuotationTotal()));
 
         JRTableModelDataSource dataSource = new JRTableModelDataSource(dtm);
         AbstractJasperReports.createReport(conn, path, parameters, dataSource);

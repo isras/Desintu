@@ -68,23 +68,23 @@ public class Report {
         AbstractJasperReports.createReport(conn, path, parameters, dataSource);
         AbstractJasperReports.showViewer("ORDEN DE TRABAJO - PREVIEW");
     }
-    
+
     public void printQuotation(QuotationService quotationService, DetailTableModel dtm) {
 
         String path = System.getProperty("user.dir") + "/reports/QuotationReport.jasper";
         String imagePath = System.getProperty("user.dir");
 
         Map parameters = new HashMap();
-        parameters.put("customer_name",quotationService.getQuotation().getPerson().toString());
+        parameters.put("customer_name", quotationService.getQuotation().getPerson().toString());
         parameters.put("customer_identification", quotationService.getQuotation().getPerson().getPrIdentification());
         parameters.put("customer_address", quotationService.getQuotation().getPerson().getPrAddress());
         //parameters.put("telfCliente", quotationService.getQuotation().getPerson().getPrPhone());
-        parameters.put("quotation_date",quotationService.getQuotation().getQuotationDate());
-        parameters.put("IMAGE_PATH",imagePath);
-        parameters.put("QUOTATION_NUMBER",quotationService.getQuotation().getQuotationNumber());
-        //parameters.put("subtotal", String.valueOf(quotationService.getQuotation().getQuotationSubtotal()));
-        //parameters.put("subtotalIva", String.valueOf(quotationService.getQuotation().getQuotationIva()));
-        //parameters.put("total", String.valueOf(quotationService.getQuotation().getQuotationTotal()));
+        parameters.put("quotation_date", quotationService.getQuotation().getQuotationDate());
+        parameters.put("IMAGE_PATH", imagePath);
+        parameters.put("QUOTATION_NUMBER", quotationService.getQuotation().getQuotationNumber());
+        parameters.put("SUBTOTAL", String.valueOf(quotationService.getQuotation().getQuotationSubtotal()));
+        parameters.put("IVA", String.valueOf(quotationService.getQuotation().getQuotationIva()));
+        parameters.put("TOTAL", String.valueOf(quotationService.getQuotation().getQuotationTotal()));
 
         JRTableModelDataSource dataSource = new JRTableModelDataSource(dtm);
         AbstractJasperReports.createReport(conn, path, parameters, dataSource);
@@ -93,37 +93,37 @@ public class Report {
 
     public void printClosingCash(CashClosingService ccs) {
 
-            String path = System.getProperty("user.dir") + "/reports/CashClosingReport.jasper";
+        String path = System.getProperty("user.dir") + "/reports/CashClosingReport.jasper";
 
-            Map parameters = new HashMap();
-            parameters.put("fromDate", Operaciones.formatDate(ccs.getCashClosing().getCcDateFrom()));
-            parameters.put("upToDate", Operaciones.formatDate(ccs.getCashClosing().getCcDateTo()));
-            parameters.put("cashInitValue", String.valueOf(ccs.getCashClosing().getCcInitialCashValue()));
-            parameters.put("cashBillTotal", String.valueOf(ccs.getCashClosing().getCcTotalCash()));
-            parameters.put("checksTotal", String.valueOf(ccs.getCashClosing().getCcTotalCheks()));
-            parameters.put("creditCardTotal", String.valueOf(ccs.getCashClosing().getCcTotalCreditCard()));
-            parameters.put("debitCardTotal", String.valueOf(ccs.getCashClosing().getCcTotalDebitCard()));
-            parameters.put("inflowTotal", String.valueOf(ccs.getCashClosing().getCcTotalInflow()));
-            parameters.put("outflowTotal", String.valueOf(ccs.getCashClosing().getCcTotalOutflow()));
-            parameters.put("receivableAccountsTotal", String.valueOf(ccs.getCashClosing().getCcTotalReceivableAccounts()));
-            parameters.put("cashTotal", String.valueOf(ccs.getCashClosing().getCcTotal()));
-            parameters.put("user", Sessions.getUser().getUsrName());
+        Map parameters = new HashMap();
+        parameters.put("fromDate", Operaciones.formatDate(ccs.getCashClosing().getCcDateFrom()));
+        parameters.put("upToDate", Operaciones.formatDate(ccs.getCashClosing().getCcDateTo()));
+        parameters.put("cashInitValue", String.valueOf(ccs.getCashClosing().getCcInitialCashValue()));
+        parameters.put("cashBillTotal", String.valueOf(ccs.getCashClosing().getCcTotalCash()));
+        parameters.put("checksTotal", String.valueOf(ccs.getCashClosing().getCcTotalCheks()));
+        parameters.put("creditCardTotal", String.valueOf(ccs.getCashClosing().getCcTotalCreditCard()));
+        parameters.put("debitCardTotal", String.valueOf(ccs.getCashClosing().getCcTotalDebitCard()));
+        parameters.put("inflowTotal", String.valueOf(ccs.getCashClosing().getCcTotalInflow()));
+        parameters.put("outflowTotal", String.valueOf(ccs.getCashClosing().getCcTotalOutflow()));
+        parameters.put("receivableAccountsTotal", String.valueOf(ccs.getCashClosing().getCcTotalReceivableAccounts()));
+        parameters.put("cashTotal", String.valueOf(ccs.getCashClosing().getCcTotal()));
+        parameters.put("user", Sessions.getUser().getUsrName());
 
-            JRTableModelDataSource dataSource = new JRTableModelDataSource(null);
-            AbstractJasperReports.createReport(conn, path, parameters, dataSource);
-            AbstractJasperReports.showViewer("CIERRE DE CAJA - PREVIEW");
-        }
+        JRTableModelDataSource dataSource = new JRTableModelDataSource(null);
+        AbstractJasperReports.createReport(conn, path, parameters, dataSource);
+        AbstractJasperReports.showViewer("CIERRE DE CAJA - PREVIEW");
+    }
 
     public void printInventory(InventoryTableModel itm) {
-        
+
         String path = System.getProperty("user.dir") + "/reports/CashClosingReport.jasper";
-        
+
         Map parameters = new HashMap();
 
-            parameters.put("enterpriseName", "REPORTE DE INVENTARIO");
-            
-            JRTableModelDataSource dataSource = new JRTableModelDataSource(itm);
-            AbstractJasperReports.createReport(conn, path, parameters, dataSource);
-            AbstractJasperReports.showViewer("INVENTARIO - PREVIEW");
+        parameters.put("enterpriseName", "REPORTE DE INVENTARIO");
+
+        JRTableModelDataSource dataSource = new JRTableModelDataSource(itm);
+        AbstractJasperReports.createReport(conn, path, parameters, dataSource);
+        AbstractJasperReports.showViewer("INVENTARIO - PREVIEW");
     }
 }

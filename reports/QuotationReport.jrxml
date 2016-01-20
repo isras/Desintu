@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2016-01-19T11:26:39 -->
+<!-- 2016-01-19T12:04:57 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="QuotationReport" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="e9bb1a27-f975-4aa4-98f9-75524c5daafa">
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -55,14 +55,17 @@
 				<text><![CDATA[PROFORMA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="440" y="0" width="40" height="30" forecolor="#D5DA3A" uuid="078215c9-4479-4940-b87d-048c26201bc9"/>
+				<reportElement x="420" y="0" width="40" height="23" forecolor="#D5DA3A" uuid="078215c9-4479-4940-b87d-048c26201bc9"/>
 				<textElement>
-					<font size="20" isBold="true"/>
+					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nro.]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="484" y="8" width="66" height="15" forecolor="#D5DA3A" uuid="c7baf818-53e3-4ead-80a6-7e52eed954c8"/>
+				<reportElement x="460" y="0" width="92" height="23" forecolor="#D5DA3A" uuid="c7baf818-53e3-4ead-80a6-7e52eed954c8"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{QUOTATION_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -73,21 +76,21 @@
 	<columnHeader>
 		<band height="122" splitType="Stretch">
 			<staticText>
-				<reportElement x="180" y="7" width="70" height="10" uuid="8dedd465-f5ec-4745-a55a-00194fd9c980"/>
+				<reportElement x="180" y="4" width="70" height="14" uuid="8dedd465-f5ec-4745-a55a-00194fd9c980"/>
 				<textElement textAlignment="Right">
 					<font fontName="Helvetica Neue" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CLIENTE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="163" y="29" width="85" height="13" uuid="4e601dad-4207-4686-89be-9217d3df1994"/>
+				<reportElement x="163" y="24" width="85" height="13" uuid="4e601dad-4207-4686-89be-9217d3df1994"/>
 				<textElement textAlignment="Right">
 					<font fontName="Helvetica Neue" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DIRECCIÓN:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="163" y="51" width="85" height="14" uuid="a5dc375b-ab52-4f0f-91e6-573c75120dcd"/>
+				<reportElement x="165" y="50" width="85" height="14" uuid="a5dc375b-ab52-4f0f-91e6-573c75120dcd"/>
 				<textElement textAlignment="Right">
 					<font fontName="Helvetica Neue" size="10" isBold="true"/>
 				</textElement>
@@ -96,26 +99,26 @@
 			<textField>
 				<reportElement x="260" y="3" width="292" height="15" uuid="d0a81efb-529a-4890-9085-b6876e1cf1d2"/>
 				<textElement>
-					<font fontName="Helvetica Light" size="13"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{customer_name}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="258" y="24" width="292" height="16" uuid="77fc6f98-813d-4282-be80-cbf2ef4ea7a5"/>
 				<textElement>
-					<font fontName="Helvetica Light" size="13"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{customer_address}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="258" y="48" width="125" height="15" uuid="20702125-425a-4555-867c-5e5a33a0dc42"/>
 				<textElement>
-					<font fontName="Helvetica Light" size="13"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{customer_identification}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="386" y="51" width="42" height="12" uuid="028ba34e-c228-49dd-b214-3d538b04d289"/>
+				<reportElement x="385" y="48" width="42" height="16" uuid="028ba34e-c228-49dd-b214-3d538b04d289"/>
 				<textElement>
 					<font fontName="Helvetica Neue" size="10" isBold="true"/>
 				</textElement>
@@ -124,7 +127,7 @@
 			<textField>
 				<reportElement x="430" y="47" width="120" height="16" uuid="0968aee2-9243-4424-873d-b5e98bc51c10"/>
 				<textElement>
-					<font fontName="Helvetica Light" size="13"/>
+					<font fontName="SansSerif" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{quotation_date}]]></textFieldExpression>
 			</textField>
@@ -160,7 +163,7 @@
 				<text><![CDATA[V. UNIT.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="504" y="100" width="46" height="21" uuid="636bce0f-388a-43bf-b0b2-a1a4fd2dedcc"/>
+				<reportElement x="504" y="100" width="48" height="21" uuid="636bce0f-388a-43bf-b0b2-a1a4fd2dedcc"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>

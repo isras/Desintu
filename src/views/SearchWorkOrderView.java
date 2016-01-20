@@ -5,6 +5,8 @@
  */
 package views;
 
+import controller.resources.GeneralParameter;
+import controller.resources.Operaciones;
 import controller.resources.Report;
 import controller.service.InvoiceService;
 import controller.service.WorkOrderService;
@@ -26,6 +28,7 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
     private final WorkDiaryTableModel workDiaryTableModel;
     private final InvoiceService invoiceService;
     private final DetailTableModel detailTableModel;
+    private final Double auxTot;
 
     public SearchWorkOrderView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -33,6 +36,7 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
         this.workDiaryTableModel = new WorkDiaryTableModel();
         this.invoiceService = new InvoiceService();
         this.detailTableModel = new DetailTableModel();
+        this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         initComponents();
     }
 
@@ -327,39 +331,52 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
 
     private void searchWorkOrderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchWorkOrderTableMouseClicked
         // TODO add your handling code here:
+        if(evt.getClickCount() == 1){
+            //Cuando el usuario selecciona una fila de la tabla fijamos la instancia de la orden de trabajo
+            
+        }
     }//GEN-LAST:event_searchWorkOrderTableMouseClicked
 
     private void searchWorkOrderTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchWorkOrderTableMousePressed
         // TODO add your handling code here:          
-            tableOptionsPopup(evt);
+        tableOptionsPopup(evt);
     }//GEN-LAST:event_searchWorkOrderTableMousePressed
 
-    private void chargeInvoiceData(){
+    private void chargeInvoiceData() {
+        
+        if(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal() == 0.00 || this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal() == null){
+            this.invoiceIvaCalculate();
+        }else{
+            this.invoiceService.getInvoice().setInSubtotal(this.workOrderService.getWorkOrder().getWorkOrderTotal());
+            this.invoiceService.getInvoice().setInSubtotalIvazero(0.00);
+            this.invoiceService.getInvoice().setInSubtotalIva(this.workOrderService.getWorkOrder().getWorkOrderSubtotal());
+            this.invoiceService.getInvoice().setInIva(this.workOrderService.getWorkOrder().getWorkOrderIva());
+            this.invoiceService.getInvoice().setInTotal(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal());
+            this.invoiceService.getInvoice().setInCash(this.workOrderService.getWorkOrder().getWorkOrderCash());
+            this.invoiceService.getInvoice().setInChange(this.workOrderService.getWorkOrder().getWorkOrderChange());
+        }
+        
         this.invoiceService.getInvoice().setInIssueDate(new Date());
         this.invoiceService.getInvoice().setInIssueTime(new Date());
-        this.invoiceService.getInvoice().setInIva(this.workOrderService.getWorkOrder().getWorkOrderIva());
-        this.invoiceService.getInvoice().setInNumber("12345");
+        this.invoiceService.getInvoice().setInNumber("" + (Integer.valueOf(GeneralParameter.THIRD_INVOICE_NUMBRE) + 1));
         this.invoiceService.getInvoice().setInState("Realizada");
-        this.invoiceService.getInvoice().setInSubtotalIva(this.workOrderService.getWorkOrder().getWorkOrderSubtotal());
-        this.invoiceService.getInvoice().setInTotal(this.workOrderService.getWorkOrder().getWorkOrderTotal());
         this.invoiceService.getInvoice().setPerson(this.workOrderService.getWorkOrder().getPerson());
-        
-        
+
         this.workOrderDetailToInvoiceDetail();
         this.invoiceService.getInvoice().setDetailList(this.workOrderService.getWorkOrder().getDetailList());
-        
+
     }
-    
+
     //Actualizamos el tipo de detalle de oreden de trabajo a factura
-    private void workOrderDetailToInvoiceDetail(){
-        
+    private void workOrderDetailToInvoiceDetail() {
+
         for (int i = 0; i < this.workOrderService.getWorkOrder().getDetailList().size(); i++) {
             this.workOrderService.getWorkOrder().getDetailList().get(i).setDetType("InvoiceDetail");
             this.workOrderService.getWorkOrder().getDetailList().get(i).setWorkOrder(null);
             this.workOrderService.getWorkOrder().getDetailList().get(i).setDetailId(null);
         }
     }
-    
+
     private void showWorkOrderViewMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWorkOrderViewMenuItemActionPerformed
         // TODO add your handling code here:
         this.workOrderService.setInstance(this.workDiaryTableModel.getList().get(searchWorkOrderTable.getSelectedRow()));
@@ -370,33 +387,56 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
         // TODO add your handling code here:
         //Generar una factura a partir de una orden de trabajo
         chargeInvoiceData();
-        if(this.invoiceService.getInvoice().getInvoiceId() == null){
-            if(this.invoiceService.saveInvoice()){
-             JOptionPane.showMessageDialog(null, "La factura ha sido generada correctamente");
+        //if (this.invoiceService.getInvoice().getInvoiceId() == null) {
+            if (this.invoiceService.saveInvoice()) {
+                JOptionPane.showMessageDialog(null, "La factura ha sido generada correctamente");
                 Report report = new Report();
                 this.detailTableModel.setList(this.invoiceService.getInvoice().getDetailList());
                 report.printInvoice(invoiceService, this.detailTableModel);
-            }
+                //Inicializamos a 0 la orden de trabajo par apoder elegir otra
+                this.workOrderService.newInstace();
+           // }
         }
-        
+
     }//GEN-LAST:event_invoiceGenerateMenuItemActionPerformed
 
     private void allWorkOrderRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allWorkOrderRbActionPerformed
         // TODO add your handling code here:
-        if(allWorkOrderRb.isSelected()){
+        if (allWorkOrderRb.isSelected()) {
             searchWorkOrderBt.setEnabled(true);
             searchWorkOrderTxt.setEnabled(true);
         }
     }//GEN-LAST:event_allWorkOrderRbActionPerformed
 
-     private void tableOptionsPopup(java.awt.event.MouseEvent evt){
-        if(evt.getButton() == MouseEvent.BUTTON3){
+    private void invoiceIvaCalculate() {
+        Double subtotal;
+        Double iva;
+        Double total;
+        
+        subtotal = this.workOrderService.getWorkOrder().getWorkOrderTotal();
+        this.invoiceService.getInvoice().setInSubtotal(subtotal);
+        this.invoiceService.getInvoice().setInSubtotalIva(subtotal);
+        this.invoiceService.getInvoice().setInSubtotalIvazero(0.00);
+        
+
+        iva = this.workOrderService.getWorkOrder().getWorkOrderTotal() * 0.12;
+        this.invoiceService.getInvoice().setInIva(Double.valueOf(Operaciones.parteDecimal(Math.rint(iva * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
+
+        total = this.workOrderService.getWorkOrder().getWorkOrderTotal() + iva;
+        this.invoiceService.getInvoice().setInTotal(Double.valueOf(Operaciones.parteDecimal(Math.rint(total * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
+
+    }
+
+    private void tableOptionsPopup(java.awt.event.MouseEvent evt) {
+        if (evt.getButton() == MouseEvent.BUTTON3) {
             Point p = evt.getPoint();
             int rowNumber = searchWorkOrderTable.rowAtPoint(p);
             ListSelectionModel modelo = searchWorkOrderTable.getSelectionModel();
             modelo.setSelectionInterval(rowNumber, rowNumber);
 
             System.out.println("fila presionada " + searchWorkOrderTable.getSelectedRow());
+            //Cargamos una nueva instancia del una orden de trabajo
+            this.workOrderService.setInstance(this.workDiaryTableModel.getList().get(this.searchWorkOrderTable.getSelectedRow()));
 
             //removeTable.setEnabled(true);
             //addTable.setEnabled(false);
@@ -405,7 +445,7 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
             searchWorkOrderTablePopupOptions.setVisible(true);
         }
     }
-    
+
     private void chargeWorkOrderTable() {
         if (allWorkOrderRb.isSelected()) {
             this.workDiaryTableModel.setList(this.workOrderService.getWorkOrderList());

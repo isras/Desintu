@@ -130,7 +130,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="workOrderPayFormCb" pref="0" max="32767" attributes="0"/>
+                                  <Component id="ReceiptPayFormCb" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
@@ -139,12 +139,12 @@
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="workOrderSaveBt" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Component id="workOrderCancelBt" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jPanel2" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="receiptSaveBt" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="receiptCancelButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jPanel4" max="32767" attributes="0"/>
@@ -153,7 +153,7 @@
                       </Group>
                       <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -179,7 +179,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="workOrderPayFormCb" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ReceiptPayFormCb" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -191,8 +191,8 @@
                   </Group>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jPanel2" max="32767" attributes="0"/>
-                      <Component id="workOrderSaveBt" alignment="0" max="32767" attributes="0"/>
-                      <Component id="workOrderCancelBt" alignment="0" max="32767" attributes="0"/>
+                      <Component id="receiptSaveBt" alignment="0" max="32767" attributes="0"/>
+                      <Component id="receiptCancelButton" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -216,71 +216,93 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="receiptAdvanceTextField" min="-2" pref="73" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="receiptDiscount" min="-2" pref="73" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="18" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="receiptValueTextField" min="-2" pref="73" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="receiptBalanceTextField" min="-2" pref="73" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="workOrderAdvanceTxt" min="-2" pref="85" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="workOrderSubtotalLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptSubtotalTextField" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                              <Component id="workOrderSubtotalLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                               <Component id="workOrderIvaLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                              <Component id="workOrderTotalLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="workOrderValueTxt" min="-2" pref="85" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="workOrderBalanceTxt" min="-2" pref="85" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="workOrderSubtotalTxt" min="-2" pref="85" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="workOrderIvaBt" min="-2" pref="85" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="workOrderTotalTxt" min="-2" pref="85" max="-2" attributes="0"/>
-                              <EmptySpace pref="20" max="32767" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="receiptIvaTextField" min="-2" pref="73" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="workOrderTotalLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptTotalTextField" min="-2" pref="73" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="workOrderSubtotalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="workOrderIvaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="workOrderTotalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="workOrderBalanceTxt" alignment="1" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="workOrderAdvanceTxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="workOrderValueTxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="workOrderSubtotalTxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="workOrderIvaBt" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="workOrderTotalTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="workOrderSubtotalLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="workOrderIvaLabel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="workOrderTotalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="receiptSubtotalTextField" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="receiptAdvanceTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="receiptValueTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="receiptTotalTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="receiptDiscount" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="receiptBalanceTextField" alignment="3" max="32767" attributes="0"/>
+                                      <Component id="receiptIvaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -294,13 +316,16 @@
                 <Property name="text" type="java.lang.String" value="VALOR:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="workOrderValueTxt">
+            <Component class="javax.swing.JTextField" name="receiptValueTextField">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Roboto" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="0.00"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="workOrderValueTxtActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="receiptValueTextFieldActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
@@ -311,14 +336,17 @@
                 <Property name="text" type="java.lang.String" value="ANTICIPO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="workOrderAdvanceTxt">
+            <Component class="javax.swing.JTextField" name="receiptAdvanceTextField">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Roboto" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="0.00"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="workOrderAdvanceTxtActionPerformed"/>
-                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="workOrderAdvanceTxtPropertyChange"/>
-                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="workOrderAdvanceTxtKeyReleased"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="receiptAdvanceTextFieldActionPerformed"/>
+                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="receiptAdvanceTextFieldPropertyChange"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="receiptAdvanceTextFieldKeyReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
@@ -329,8 +357,11 @@
                 <Property name="text" type="java.lang.String" value="SALDO:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="workOrderBalanceTxt">
+            <Component class="javax.swing.JTextField" name="receiptBalanceTextField">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Roboto" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="0.00"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -343,15 +374,24 @@
                 <Property name="text" type="java.lang.String" value="SUBTOTAL:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="workOrderSubtotalTxt">
+            <Component class="javax.swing.JTextField" name="receiptSubtotalTextField">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Roboto" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="0.00"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="workOrderIvaBt">
+            <Component class="javax.swing.JTextField" name="receiptIvaTextField">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Roboto" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="0.00"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="receiptIvaTextFieldActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="workOrderIvaLabel">
               <Properties>
@@ -361,12 +401,15 @@
                 <Property name="text" type="java.lang.String" value="IVA:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="workOrderTotalTxt">
+            <Component class="javax.swing.JTextField" name="receiptTotalTextField">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Roboto" size="12" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="0.00"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="workOrderTotalTxtActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="receiptTotalTextFieldActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="workOrderTotalLabel">
@@ -376,6 +419,25 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="TOTAL:"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel18">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Roboto" size="12" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="DESCUENTO:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSpinner" name="receiptDiscount">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Roboto" size="12" style="0"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="receiptDiscountStateChanged"/>
+                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="receiptDiscountPropertyChange"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -402,13 +464,13 @@
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="workOrderAddBt" min="-2" max="-2" attributes="0"/>
+                              <Component id="receiptAddBt" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="workOrderQuotationRb" min="-2" max="-2" attributes="0"/>
+                              <Component id="receiptQuotationRb" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="workOrderRb" min="-2" max="-2" attributes="0"/>
+                              <Component id="receiptWorkOrderRb" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="workOrderInvoiceRb" min="-2" max="-2" attributes="0"/>
+                              <Component id="receiptInvoiceRb" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -422,11 +484,11 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="workOrderAddBt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptAddBt" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="workOrderQuotationRb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="workOrderRb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="workOrderInvoiceRb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptQuotationRb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptWorkOrderRb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptInvoiceRb" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="165" max="-2" attributes="0"/>
@@ -443,7 +505,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="workOrderDetailTable">
+                <Component class="javax.swing.JTable" name="receiptDetailTable">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Roboto" size="12" style="0"/>
@@ -477,12 +539,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="workOrderAddBt">
+            <Component class="javax.swing.JButton" name="receiptAddBt">
               <Properties>
                 <Property name="text" type="java.lang.String" value="A&#xd1;ADIR"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="workOrderAddBtActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="receiptAddBtActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
@@ -496,7 +558,7 @@
                 <Property name="text" type="java.lang.String" value="DETALLE"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="workOrderQuotationRb">
+            <Component class="javax.swing.JRadioButton" name="receiptQuotationRb">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -510,10 +572,10 @@
                 <Property name="text" type="java.lang.String" value="Proforma"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="workOrderQuotationRbActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="receiptQuotationRbActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="workOrderRb">
+            <Component class="javax.swing.JRadioButton" name="receiptWorkOrderRb">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -524,14 +586,13 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Roboto" size="12" style="0"/>
                 </Property>
-                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Orden de Trabajo"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="workOrderRbActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="receiptWorkOrderRbActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="workOrderInvoiceRb">
+            <Component class="javax.swing.JRadioButton" name="receiptInvoiceRb">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -545,7 +606,7 @@
                 <Property name="text" type="java.lang.String" value="Factura"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="workOrderInvoiceRbActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="receiptInvoiceRbActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -557,7 +618,7 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="DOCUMENTO">
+                <TitledBorder title="COMPROBANTE">
                   <Font PropertyName="font" name="Roboto" size="11" style="1"/>
                   <Color PropertyName="color" blue="ff" green="99" red="0" type="rgb"/>
                 </TitledBorder>
@@ -581,10 +642,10 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="workOrderStateCb" max="32767" attributes="0"/>
-                          <Component id="workOrderDeliveryDc" max="32767" attributes="0"/>
-                          <Component id="workOrderNumberTxt" max="32767" attributes="0"/>
-                          <Component id="workOrderIssueDc" max="32767" attributes="0"/>
+                          <Component id="receiptStateComboBox" max="32767" attributes="0"/>
+                          <Component id="receiptDeliveryDateChooser" max="32767" attributes="0"/>
+                          <Component id="receiptNumberTextField" max="32767" attributes="0"/>
+                          <Component id="receiptIssueDateChooser" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -596,21 +657,21 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="workOrderStateCb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptStateComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="workOrderNumberTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptNumberTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="workOrderIssueDc" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptIssueDateChooser" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="workOrderDeliveryDc" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptDeliveryDateChooser" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
@@ -627,7 +688,7 @@
                 <Property name="text" type="java.lang.String" value="N&#xfa;mero:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="workOrderNumberTxt">
+            <Component class="javax.swing.JTextField" name="receiptNumberTextField">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Roboto" size="12" style="1"/>
@@ -647,7 +708,7 @@
                 <Property name="text" type="java.lang.String" value="Fecha de recepci&#xf3;n:"/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="workOrderIssueDc">
+            <Component class="com.toedter.calendar.JDateChooser" name="receiptIssueDateChooser">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -665,7 +726,7 @@
                 <Property name="text" type="java.lang.String" value="Fecha de entrega:"/>
               </Properties>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="workOrderDeliveryDc">
+            <Component class="com.toedter.calendar.JDateChooser" name="receiptDeliveryDateChooser">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -683,7 +744,7 @@
                 <Property name="text" type="java.lang.String" value="Estado:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="workOrderStateCb">
+            <Component class="javax.swing.JComboBox" name="receiptStateComboBox">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Roboto" size="12" style="0"/>
@@ -697,7 +758,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="workOrderStateCbActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="receiptStateComboBoxActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -735,8 +796,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="workOrderPersonNameTxt" max="32767" attributes="0"/>
-                                  <Component id="workOrderPersonIdentificationTxt" max="32767" attributes="0"/>
+                                  <Component id="receiptPersonNameTextField" max="32767" attributes="0"/>
+                                  <Component id="receiptPersonIdentificationTextField" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -745,12 +806,12 @@
                               </Group>
                               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="workOrderPersonLastNameTxt" pref="156" max="32767" attributes="0"/>
-                                  <Component id="workOrderPersonPhoneTxt" max="32767" attributes="0"/>
+                                  <Component id="receiptPersonLastNameTextField" pref="156" max="32767" attributes="0"/>
+                                  <Component id="receiptPersonPhoneTextField" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="workOrderPersonAddressTxt" max="32767" attributes="0"/>
-                          <Component id="searchNameComboText" alignment="0" pref="450" max="32767" attributes="0"/>
+                          <Component id="receiptPersonAddressTextField" max="32767" attributes="0"/>
+                          <Component id="searchCustomerTextField" alignment="0" pref="450" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -761,26 +822,26 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="searchNameComboText" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="searchCustomerTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="workOrderPersonNameTxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="workOrderPersonLastNameTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptPersonNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptPersonLastNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="workOrderPersonIdentificationTxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="workOrderPersonPhoneTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptPersonIdentificationTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptPersonPhoneTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="workOrderPersonAddressTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptPersonAddressTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -789,7 +850,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JComboBox" name="searchNameComboText">
+            <Component class="javax.swing.JComboBox" name="searchCustomerTextField">
               <Properties>
                 <Property name="editable" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -797,8 +858,8 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="popupMenuWillBecomeInvisible" listener="javax.swing.event.PopupMenuListener" parameters="javax.swing.event.PopupMenuEvent" handler="searchNameComboTextPopupMenuWillBecomeInvisible"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchNameComboTextActionPerformed"/>
+                <EventHandler event="popupMenuWillBecomeInvisible" listener="javax.swing.event.PopupMenuListener" parameters="javax.swing.event.PopupMenuEvent" handler="searchCustomerTextFieldPopupMenuWillBecomeInvisible"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchCustomerTextFieldActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
@@ -817,7 +878,7 @@
                 <Property name="text" type="java.lang.String" value="Nombre:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="workOrderPersonNameTxt">
+            <Component class="javax.swing.JTextField" name="receiptPersonNameTextField">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
@@ -827,7 +888,7 @@
                 <Property name="text" type="java.lang.String" value="Apellido:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="workOrderPersonLastNameTxt">
+            <Component class="javax.swing.JTextField" name="receiptPersonLastNameTextField">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
@@ -837,7 +898,7 @@
                 <Property name="text" type="java.lang.String" value="Identificaci&#xf3;n:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="workOrderPersonIdentificationTxt">
+            <Component class="javax.swing.JTextField" name="receiptPersonIdentificationTextField">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
@@ -847,7 +908,7 @@
                 <Property name="text" type="java.lang.String" value="Tel&#xe9;fono:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="workOrderPersonPhoneTxt">
+            <Component class="javax.swing.JTextField" name="receiptPersonPhoneTextField">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
@@ -857,7 +918,7 @@
                 <Property name="text" type="java.lang.String" value="Direcci&#xf3;n:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="workOrderPersonAddressTxt">
+            <Component class="javax.swing.JTextField" name="receiptPersonAddressTextField">
             </Component>
           </SubComponents>
         </Container>
@@ -929,7 +990,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="workOrderCancelBt">
+        <Component class="javax.swing.JButton" name="receiptCancelButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="12" style="0"/>
@@ -937,10 +998,10 @@
             <Property name="text" type="java.lang.String" value="CANCELAR"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="workOrderCancelBtActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="receiptCancelButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="workOrderSaveBt">
+        <Component class="javax.swing.JButton" name="receiptSaveBt">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="12" style="0"/>
@@ -948,7 +1009,7 @@
             <Property name="text" type="java.lang.String" value="GUARDAR"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="workOrderSaveBtActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="receiptSaveBtActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel7">
@@ -971,11 +1032,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="workOrderHightPriorityJrb" min="-2" max="-2" attributes="0"/>
+                      <Component id="receiptHightPriorityJRb" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="workOrderNormalPriorityJrb" min="-2" max="-2" attributes="0"/>
+                      <Component id="receiptNormalPriorityJRb" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="workOrderLowPriorityJrb" min="-2" max="-2" attributes="0"/>
+                      <Component id="receiptLowPriorityJRb" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -985,9 +1046,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="workOrderHightPriorityJrb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="workOrderNormalPriorityJrb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="workOrderLowPriorityJrb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptHightPriorityJRb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptNormalPriorityJRb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="receiptLowPriorityJRb" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -995,7 +1056,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JRadioButton" name="workOrderHightPriorityJrb">
+            <Component class="javax.swing.JRadioButton" name="receiptHightPriorityJRb">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1009,7 +1070,7 @@
                 <Property name="text" type="java.lang.String" value="Alta"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="workOrderNormalPriorityJrb">
+            <Component class="javax.swing.JRadioButton" name="receiptNormalPriorityJRb">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1023,7 +1084,7 @@
                 <Property name="text" type="java.lang.String" value="Media"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="workOrderLowPriorityJrb">
+            <Component class="javax.swing.JRadioButton" name="receiptLowPriorityJRb">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -1047,7 +1108,7 @@
             <Property name="text" type="java.lang.String" value="Pago:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="workOrderPayFormCb">
+        <Component class="javax.swing.JComboBox" name="ReceiptPayFormCb">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="11" style="0"/>
@@ -1059,7 +1120,11 @@
                 <StringItem index="2" value="ANULADA"/>
               </StringArray>
             </Property>
+            <Property name="selectedIndex" type="int" value="1"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReceiptPayFormCbActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

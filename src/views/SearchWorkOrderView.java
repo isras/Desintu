@@ -380,7 +380,7 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
     private void showWorkOrderViewMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWorkOrderViewMenuItemActionPerformed
         // TODO add your handling code here:
         this.workOrderService.setInstance(this.workDiaryTableModel.getList().get(searchWorkOrderTable.getSelectedRow()));
-        new WorkOrderView(null, true, workOrderService).setVisible(true);
+        new ReceiptView(null, true, workOrderService).setVisible(true);
     }//GEN-LAST:event_showWorkOrderViewMenuItemActionPerformed
 
     private void invoiceGenerateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceGenerateMenuItemActionPerformed

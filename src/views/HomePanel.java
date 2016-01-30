@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
 import controller.service.WorkOrderService;
@@ -10,10 +5,6 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import views.tableModel.WorkDiaryTableModel;
 
-/**
- *
- * @author Isra
- */
 public class HomePanel extends javax.swing.JPanel {
 
     private ImageIcon ic;
@@ -94,7 +85,7 @@ public class HomePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             this.wos.setInstance(this.wdtm.getList().get(this.workDiaryTable.getSelectedRow()));
-            new WorkOrderView(null, true, wos).setVisible(true);
+            new ReceiptView(null, true, wos).setVisible(true);
             //Actualizamos la tabla quitando los trabajos terminados y volviendo a cargar los pendientes
             this.updateWorkOrderDiaryTable();
         }

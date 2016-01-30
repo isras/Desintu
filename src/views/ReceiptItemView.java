@@ -16,7 +16,7 @@ import views.tableModel.ProductComboBoxModel;
  *
  * @author Usuario
  */
-public class WorkOrderItemView extends javax.swing.JDialog {
+public class ReceiptItemView extends javax.swing.JDialog {
 
     private double materialValue;
     private double finishedValue;
@@ -26,13 +26,13 @@ public class WorkOrderItemView extends javax.swing.JDialog {
     private String tName;
     private String sName;
     private String descriptionText;
-    private WorkOrderView wo;
+    private ReceiptView wo;
     private final DetailService ds;
     private final ProductService ps;
     private final double auxTot;
     private String personType;
 
-    public WorkOrderItemView(java.awt.Frame parent, boolean modal) {
+    public ReceiptItemView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.ps = new ProductService();
         this.ds = new DetailService();
@@ -41,7 +41,7 @@ public class WorkOrderItemView extends javax.swing.JDialog {
         this.chargeCombos();
     }
 
-    public WorkOrderItemView(java.awt.Frame parent, boolean modal, WorkOrderView wo, String personType) {
+    public ReceiptItemView(java.awt.Frame parent, boolean modal, ReceiptView wo, String personType) {
         super(parent, modal);
         this.ps = new ProductService();
         this.ds = new DetailService();

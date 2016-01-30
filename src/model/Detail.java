@@ -58,7 +58,7 @@ public class Detail implements Serializable {
     @JoinColumn(name = "work_order_work_order_id", referencedColumnName = "work_order_id")
     @ManyToOne
     private WorkOrder workOrder;
-    @JoinColumn(name = "det_quotation_id", referencedColumnName = "work_order_id")
+    @JoinColumn(name = "det_quotation_id", referencedColumnName = "quotation_id")
     @ManyToOne
     private Quotation quotation;
     

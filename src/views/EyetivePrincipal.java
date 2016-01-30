@@ -851,7 +851,7 @@ public class EyetivePrincipal extends javax.swing.JFrame {
         //JOptionPane.showMessageDialog(this, "FUNCIÓN VÁLIDA PARA RESTAURANTES");
         //--------------- Descomentar para restaurantes 
         //new Explode(contentPanel, new PetitionPanel()).play();
-        new WorkOrderView(this, true).setVisible(true);
+        new ReceiptView(this, true).setVisible(true);
         homeButton.setSelected(false);
         petitionPJB.setSelected(true);
         clientsPrincipalButton.setSelected(false);

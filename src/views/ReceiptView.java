@@ -31,6 +31,8 @@ public class ReceiptView extends javax.swing.JDialog {
     private final SettingService settingService;
     private JTextField searchNameText;
     private final Double auxTot;
+    private Double receiptValue;
+    private Double receiptIvaValue;
 
     public ReceiptView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -1334,7 +1336,7 @@ public class ReceiptView extends javax.swing.JDialog {
         // TODO add your handling code here:
         Double receiptValueTemp = Double.valueOf(receiptValueTextField.getText());
         Double receiptDiscountTemp = Double.valueOf(this.receiptDiscount.getValue().toString());
-        Double receiptTotal = receiptValueTemp + ((receiptValueTemp * receiptDiscountTemp) / 100);
+        Double receiptTotal = receiptValueTemp - ((receiptValueTemp * receiptDiscountTemp) / 100);
 
         receiptValueTextField.setText(receiptTotal.toString());
     }//GEN-LAST:event_receiptDiscountStateChanged

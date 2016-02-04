@@ -889,6 +889,9 @@ public class ReceiptView extends javax.swing.JDialog {
         if (receiptWorkOrderRb.isSelected() && !ivaOptionCb.isSelected()) {
 
             receiptValueTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(subtotal * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
+            
+            //Fijamos el valor del documento sin iva
+            this.receiptValue = subtotal;
 
         } else {
             receiptSubtotalTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(subtotal * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
@@ -896,6 +899,9 @@ public class ReceiptView extends javax.swing.JDialog {
             receiptIvaTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(iva * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
             total = subtotal + iva;
             receiptTotalTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(total * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
+            
+            //Fijamos el valor del documento con iva
+            this.receiptIvaValue = total;
         }
 
     }
@@ -1334,7 +1340,7 @@ public class ReceiptView extends javax.swing.JDialog {
 
     private void receiptDiscountStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_receiptDiscountStateChanged
         // TODO add your handling code here:
-        Double receiptValueTemp = Double.valueOf(receiptValueTextField.getText());
+        Double receiptValueTemp = this.receiptValue;
         Double receiptDiscountTemp = Double.valueOf(this.receiptDiscount.getValue().toString());
         Double receiptTotal = receiptValueTemp - ((receiptValueTemp * receiptDiscountTemp) / 100);
 
@@ -1345,6 +1351,8 @@ public class ReceiptView extends javax.swing.JDialog {
         Double temp;
         temp = Double.valueOf(this.receiptValueTextField.getText()) - Double.valueOf(this.receiptAdvanceTextField.getText());
         this.receiptBalanceTextField.setText(String.valueOf(temp));
+        
+        
     }
 
     //Método encargado de cerrar todos los procesos de un JDialog

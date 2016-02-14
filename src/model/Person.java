@@ -30,7 +30,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")})
 public class Person implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -61,6 +61,8 @@ public class Person implements Serializable {
     private List<WorkOrder> workOrderList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
     private List<Quotation> quotationList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "person")
+    private List<ReceivableAccount> receivableAccountList;
 
     public Person() {
         sellnoteList = new ArrayList<>();
@@ -207,5 +209,13 @@ public class Person implements Serializable {
 
     public void setQuotationList(List<Quotation> quotationList) {
         this.quotationList = quotationList;
+    }
+
+    public List<ReceivableAccount> getReceivableAccountList() {
+        return receivableAccountList;
+    }
+
+    public void setReceivableAccountList(List<ReceivableAccount> receivableAccountList) {
+        this.receivableAccountList = receivableAccountList;
     }
 }

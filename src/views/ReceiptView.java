@@ -3,10 +3,12 @@ package views;
 import controller.resources.GeneralParameter;
 import controller.resources.Operaciones;
 import controller.resources.Report;
+import controller.service.AccountRecordService;
 import controller.service.DetailService;
 import controller.service.EmployeeService;
 import controller.service.PersonService;
 import controller.service.QuotationService;
+import controller.service.ReceivableAccountService;
 import controller.service.SettingService;
 import controller.service.WorkOrderService;
 import java.awt.event.KeyAdapter;
@@ -29,6 +31,8 @@ public class ReceiptView extends javax.swing.JDialog {
     private final EmployeeService employeeService;
     private final QuotationService quotationService;
     private final SettingService settingService;
+    private final ReceivableAccountService receivableAccountService;
+    private final AccountRecordService accountRecordService;
     private JTextField searchNameText;
     private final Double auxTot;
     private Double receiptValue;
@@ -43,6 +47,8 @@ public class ReceiptView extends javax.swing.JDialog {
         this.employeeService = new EmployeeService();
         this.quotationService = new QuotationService();
         this.settingService = new SettingService();
+        this.accountRecordService = new AccountRecordService();
+        this.receivableAccountService = new ReceivableAccountService();
         initComponents();
         this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         this.chargePersonCombo();
@@ -60,6 +66,8 @@ public class ReceiptView extends javax.swing.JDialog {
         this.employeeService = new EmployeeService();
         this.quotationService = new QuotationService();
         this.settingService = new SettingService();
+        this.receivableAccountService = new ReceivableAccountService();
+        this.accountRecordService = new AccountRecordService();
         initComponents();
         this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         this.workOrderService = wos;
@@ -889,7 +897,7 @@ public class ReceiptView extends javax.swing.JDialog {
         if (receiptWorkOrderRb.isSelected() && !ivaOptionCb.isSelected()) {
 
             receiptValueTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(subtotal * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
-            
+
             //Fijamos el valor del documento sin iva
             this.receiptValue = subtotal;
 
@@ -899,7 +907,7 @@ public class ReceiptView extends javax.swing.JDialog {
             receiptIvaTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(iva * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
             total = subtotal + iva;
             receiptTotalTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(total * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
-            
+
             //Fijamos el valor del documento con iva
             this.receiptIvaValue = total;
         }
@@ -1127,6 +1135,26 @@ public class ReceiptView extends javax.swing.JDialog {
         }
     }
 
+    //Cargamos los datos necesarios para generar una nueva cuenta por cobrar
+    private void chargeReceivableAccountData() {
+        this.receivableAccountService.getReceivableAccount().setReceivableAccountDate(new Date());
+        this.receivableAccountService.getReceivableAccount().setReceivableAccountUpdateDate(new Date());
+        if (ivaOptionCb.isSelected()) {
+            this.receivableAccountService.getReceivableAccount().setReceivableAccountTotal(Double.valueOf(receiptTotalTextField.getText()));
+        } else {
+            this.receivableAccountService.getReceivableAccount().setReceivableAccountTotal(Double.valueOf(receiptBalanceTextField.getText()));
+        }
+        this.receivableAccountService.getReceivableAccount().setPerson(this.personService.getPerson());
+    }
+
+    private void chargeAccountRecordData(Integer accountRecordType, String accountRecordDescription, Double accountRecordValue) {
+        this.accountRecordService.getAccountRecord().setAccountRecordType(accountRecordType);
+        this.accountRecordService.getAccountRecord().setAccountRecordDate(new Date());
+        this.accountRecordService.getAccountRecord().setAccountRecordDescription(accountRecordDescription);
+        this.accountRecordService.getAccountRecord().setAccountRecordValue(accountRecordValue);
+        this.accountRecordService.getAccountRecord().setReceivableAccount(this.receivableAccountService.getReceivableAccount());
+    }
+
     private void receiptSaveBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receiptSaveBtActionPerformed
         // TODO add your handling code here:
 
@@ -1153,6 +1181,20 @@ public class ReceiptView extends javax.swing.JDialog {
                         } else {
                             //Guardamos la orden de trabajo cuando no se paga el valor completo de la misma
                             this.saveWorkOrder();
+                            //Si no existe la cuenta por cobrar la creamos
+                            if (this.receivableAccountService.getReceivableAccountByPerson(this.personService.getPerson()).getReceivableAccountId() != null) {
+                                System.out.println("Ya existe esta cuenta entonces hay que actualizar");
+                            } else {
+
+                                this.chargeReceivableAccountData();
+                                if (this.receivableAccountService.saveReceivableAccount()) {
+                                    System.out.println("Cuenta por cobrar guardada correctamente");
+                                    this.chargeAccountRecordData(0, "Abono a la cuenta el valor de: " + receiptAdvanceTextField.getText(), Double.parseDouble(receiptAdvanceTextField.getText()));
+                                    if (this.accountRecordService.saveAccountRecord()) {
+                                        System.out.println("Registro de cuenta guardada correctamente");
+                                    }
+                                }
+                            }
                         }
 
                     } else {
@@ -1313,11 +1355,16 @@ public class ReceiptView extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (ivaOptionCb.isSelected()) {
             totalIvaCalculate();
+            balanceTotalCalculate();
+            discountCalculate();
         } else {
             receiptSubtotalTextField.setText("0.00");
             receiptIvaTextField.setText("0.00");
             receiptTotalTextField.setText("0.00");
+            balanceTotalCalculate();
+            discountCalculate();
         }
+
     }//GEN-LAST:event_ivaOptionCbActionPerformed
 
     private void receiptTotalTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receiptTotalTextFieldActionPerformed
@@ -1334,25 +1381,45 @@ public class ReceiptView extends javax.swing.JDialog {
 
     private void receiptDiscountPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_receiptDiscountPropertyChange
         // TODO add your handling code here:
-        
+
 
     }//GEN-LAST:event_receiptDiscountPropertyChange
 
     private void receiptDiscountStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_receiptDiscountStateChanged
         // TODO add your handling code here:
-        Double receiptValueTemp = this.receiptValue;
-        Double receiptDiscountTemp = Double.valueOf(this.receiptDiscount.getValue().toString());
-        Double receiptTotal = receiptValueTemp - ((receiptValueTemp * receiptDiscountTemp) / 100);
 
-        receiptValueTextField.setText(receiptTotal.toString());
+        discountCalculate();
+        balanceTotalCalculate();
     }//GEN-LAST:event_receiptDiscountStateChanged
+
+    private void discountCalculate() {
+        if(ivaOptionCb.isSelected()){
+            Double receiptValueTemp = this.receiptIvaValue;
+            Double receiptDiscountTemp = Double.valueOf(this.receiptDiscount.getValue().toString());
+            Double receiptTotal = receiptValueTemp - ((receiptValueTemp * receiptDiscountTemp) / 100);
+            receiptSubtotalTextField.setText(receiptTotal.toString());
+            
+        }else{
+            Double receiptValueTemp = this.receiptValue;
+            Double receiptDiscountTemp = Double.valueOf(this.receiptDiscount.getValue().toString());
+            Double receiptTotal = receiptValueTemp - ((receiptValueTemp * receiptDiscountTemp) / 100);
+            receiptValueTextField.setText(receiptTotal.toString());
+        }
+        //Fijamos en una variable temporal el valor del documento
+
+        //receiptValueTextField.setText(receiptTotal.toString());
+    }
 
     private void balanceTotalCalculate() {
         Double temp;
-        temp = Double.valueOf(this.receiptValueTextField.getText()) - Double.valueOf(this.receiptAdvanceTextField.getText());
-        this.receiptBalanceTextField.setText(String.valueOf(temp));
-        
-        
+        if (ivaOptionCb.isSelected()) {
+            temp = Double.valueOf(this.receiptTotalTextField.getText()) - Double.valueOf(this.receiptAdvanceTextField.getText());
+            this.receiptBalanceTextField.setText(String.valueOf(temp));
+        } else {
+            temp = Double.valueOf(this.receiptValueTextField.getText()) - Double.valueOf(this.receiptAdvanceTextField.getText());
+            this.receiptBalanceTextField.setText(String.valueOf(temp));
+        }
+
     }
 
     //Método encargado de cerrar todos los procesos de un JDialog
@@ -1427,5 +1494,4 @@ public class ReceiptView extends javax.swing.JDialog {
     private javax.swing.JLabel workOrderSubtotalLabel;
     private javax.swing.JLabel workOrderTotalLabel;
     // End of variables declaration//GEN-END:variables
-
 }

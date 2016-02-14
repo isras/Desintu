@@ -53,29 +53,31 @@ public class WorkDiaryTableModel extends AbstractTableModel {
             case 0:
                 return String.valueOf(rowIndex + 1);
             case 1:
-                return wOrder.getWorkOrderDescription(); //Operaciones.formFechaToLarge(aEntry.getAeCreatedDate());
+                return wOrder.getPerson().toString();
             case 2:
-                return Operaciones.formatDate(wOrder.getWorkOrderIssueDate());
+                return wOrder.getWorkOrderDescription(); //Operaciones.formFechaToLarge(aEntry.getAeCreatedDate());
             case 3:
+                return Operaciones.formatDate(wOrder.getWorkOrderIssueDate());
+            case 4:
                 return Operaciones.formatDate(wOrder.getWorkOrderDeliveryDate());
 //                if (aEntry.getAeType() == 0) {//Cuando es un ingreso
 //                    return Operaciones.parteDecimal(Math.rint(aEntry.getAeValue() * accuracyVal) / accuracyVal, GeneralParameter.ACCURACY_VALUE);
 //                } else {
 //                    return "0.00";
 //                }
-            case 4:
-                if (null != wOrder.getWorkOrderState()) {
-                    switch (wOrder.getWorkOrderState()) {
-                        case 1:
-                            return "PENDIENTE";
-                        case 2:
-                            return "PAUSADO";
-                        case 3:
-                            return "TERMINADO";
-                        default:
-                            break;
-                    }
-                }
+//            case 4:
+//                if (null != wOrder.getWorkOrderState()) {
+//                    switch (wOrder.getWorkOrderState()) {
+//                        case 1:
+//                            return "PENDIENTE";
+//                        case 2:
+//                            return "PAUSADO";
+//                        case 3:
+//                            return "TERMINADO";
+//                        default:
+//                            break;
+//                    }
+//                }
 //                if (aEntry.getAeType() == 1) {//Cuando es un egreso
 //                    return Operaciones.parteDecimal(Math.rint(aEntry.getAeValue() * accuracyVal) / accuracyVal, GeneralParameter.ACCURACY_VALUE);
 //                } else {
@@ -94,13 +96,15 @@ public class WorkDiaryTableModel extends AbstractTableModel {
             case 0:
                 return "N°.";
             case 1:
-                return "DESCRIPCIÓN";
+                return "CLIENTE";
             case 2:
-                return "FECHA DE INICIO";
+                return "DESCRIPCIÓN";
             case 3:
-                return "FECHA DE FINALIZACIÓN";
+                return "FECHA DE INICIO";
             case 4:
-                return "ESTADO";
+                return "FECHA DE FINALIZACIÓN";
+//            case 4:
+//                return "ESTADO";
             default:
                 return null;
         }

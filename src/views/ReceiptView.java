@@ -95,8 +95,6 @@ public class ReceiptView extends javax.swing.JDialog {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        receiptValueTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         receiptAdvanceTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -201,18 +199,6 @@ public class ReceiptView extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jLabel1.setText("VALOR:");
-
-        receiptValueTextField.setEditable(false);
-        receiptValueTextField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        receiptValueTextField.setText("0.00");
-        receiptValueTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                receiptValueTextFieldActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel2.setText("ANTICIPO:");
 
@@ -288,8 +274,8 @@ public class ReceiptView extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -299,33 +285,25 @@ public class ReceiptView extends javax.swing.JDialog {
                         .addComponent(receiptAdvanceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(receiptDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(receiptValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(receiptBalanceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(workOrderSubtotalLabel)
                     .addComponent(receiptSubtotalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addGap(3, 3, 3)
                         .addComponent(workOrderIvaLabel))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(receiptIvaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10)
+                    .addComponent(receiptIvaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(workOrderTotalLabel)
                     .addComponent(receiptTotalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(receiptBalanceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,28 +311,23 @@ public class ReceiptView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(workOrderSubtotalLabel)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(workOrderIvaLabel)
+                        .addComponent(jLabel3)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
                             .addComponent(workOrderTotalLabel)
-                            .addComponent(jLabel18))
+                            .addComponent(jLabel18)
+                            .addComponent(workOrderSubtotalLabel)
+                            .addComponent(workOrderIvaLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(receiptSubtotalTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(receiptAdvanceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(receiptValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(receiptTotalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(receiptDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(receiptBalanceTextField)
-                                .addComponent(receiptIvaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(receiptAdvanceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(receiptTotalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(receiptDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(receiptBalanceTextField)
+                            .addComponent(receiptIvaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(receiptSubtotalTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18))))
         );
 
@@ -499,10 +472,10 @@ public class ReceiptView extends javax.swing.JDialog {
                     .addComponent(jLabel5)
                     .addComponent(jLabel7)
                     .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(receiptStateComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(receiptDeliveryDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(receiptStateComboBox, 0, 1, Short.MAX_VALUE)
+                    .addComponent(receiptDeliveryDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                     .addComponent(receiptNumberTextField)
                     .addComponent(receiptIssueDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -534,12 +507,12 @@ public class ReceiptView extends javax.swing.JDialog {
 
         searchCustomerTextField.setEditable(true);
         searchCustomerTextField.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 searchCustomerTextFieldPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         searchCustomerTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -630,12 +603,12 @@ public class ReceiptView extends javax.swing.JDialog {
         employeeComboBox.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         employeeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciones un empleado...", "Julio Galán ", "Israel Sotomayor" }));
         employeeComboBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 employeeComboBoxPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
 
@@ -748,32 +721,35 @@ public class ReceiptView extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ReceiptPayFormCb, 0, 1, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ivaOptionCb))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(receiptSaveBt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(receiptCancelButton))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(ivaOptionCb)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ReceiptPayFormCb, 0, 94, Short.MAX_VALUE)
+                                .addGap(336, 336, 336))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(receiptSaveBt, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(receiptCancelButton))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -786,25 +762,23 @@ public class ReceiptView extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel17)
                             .addComponent(ReceiptPayFormCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel15)
-                            .addComponent(ivaOptionCb))
-                        .addGap(15, 15, 15)))
+                            .addComponent(ivaOptionCb)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(receiptSaveBt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(receiptCancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(receiptCancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(receiptSaveBt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -812,14 +786,13 @@ public class ReceiptView extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -848,7 +821,6 @@ public class ReceiptView extends javax.swing.JDialog {
             new ReceiptItemView(null, true, this, this.personService.getPerson().getPrType()).setVisible(true);
 
             if (this.detailService.getDetail().getDetTotal() != null) {
-
                 if (this.receiptWorkOrderRb.isSelected()) {
                     receiptSubtotalTextField.setEnabled(false);
                     receiptIvaTextField.setEnabled(false);
@@ -856,16 +828,18 @@ public class ReceiptView extends javax.swing.JDialog {
 
                     this.setworkOrderAndAddDetail();
                     this.updateWorkOrderDetailTable();
-                    this.totalIvaCalculate();
+                    this.totalCalculate();
                 } else if (this.receiptQuotationRb.isSelected()) {
                     receiptSubtotalTextField.setEnabled(true);
                     receiptIvaTextField.setEnabled(true);
                     receiptTotalTextField.setEnabled(true);
                     receiptAdvanceTextField.setEnabled(false);
 
+                    ivaOptionCb.setSelected(true);
+
                     this.setworkOrderAndAddDetail();
                     this.updateWorkOrderDetailTable();
-                    this.totalIvaCalculate();
+                    this.totalCalculate();
 
                 } else if (this.receiptInvoiceRb.isSelected()) {
                     receiptSubtotalTextField.setEnabled(true);
@@ -873,10 +847,11 @@ public class ReceiptView extends javax.swing.JDialog {
                     receiptTotalTextField.setEnabled(true);
                     receiptAdvanceTextField.setEnabled(false);
 
+                    ivaOptionCb.setSelected(true);
+
                     this.setworkOrderAndAddDetail();
                     this.updateWorkOrderDetailTable();
-                    this.totalIvaCalculate();
-
+                    this.totalCalculate();
                 }
             }
         } else {
@@ -884,36 +859,52 @@ public class ReceiptView extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_receiptAddBtActionPerformed
 
-    //Para calcular el iva del comprobante
-    private void totalIvaCalculate() {
-        Double subtotal = 0.0;
-        Double iva;
-        Double total;
-
+    //-----------------------Esta sección es para calcular el iva, el descuento y el anticipo------------------------------------
+    private void totalCalculate() {
+        Double subtotal = 0.00;
         for (int i = 0; i < this.detailService.getDetailList().size(); i++) {
             subtotal += this.detailService.getDetailList().get(i).getDetTotal();
         }
+        receiptSubtotalTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(subtotal * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
+        this.ivaCalculate();
+        //Fijamos una variable temporal con el subtotal para poder usarla en los descentos
+        this.receiptValue = subtotal;
+    }
 
-        if (receiptWorkOrderRb.isSelected() && !ivaOptionCb.isSelected()) {
-
-            receiptValueTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(subtotal * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
-
-            //Fijamos el valor del documento sin iva
-            this.receiptValue = subtotal;
-
+    //Para calcular el iva del comprobante
+    private void ivaCalculate() {
+        Double iva;
+        if (ivaOptionCb.isSelected()) {
+            iva = Double.valueOf(receiptSubtotalTextField.getText()) * 0.12;
         } else {
-            receiptSubtotalTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(subtotal * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
-            iva = subtotal * 0.12;
-            receiptIvaTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(iva * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
-            total = subtotal + iva;
-            receiptTotalTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(total * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
+            iva = 0.00;
+        }
+        Double total = Double.valueOf(receiptSubtotalTextField.getText()) + iva;
+        receiptIvaTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(iva * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
+        receiptTotalTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(total * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
+    }
 
-            //Fijamos el valor del documento con iva
-            this.receiptIvaValue = total;
+    private void discountCalculate() {
+        Double receiptValueTemp = this.receiptValue;
+        Double receiptDiscountTemp = Double.valueOf(this.receiptDiscount.getValue().toString());
+        Double receiptTotal = receiptValueTemp - ((receiptValueTemp * receiptDiscountTemp) / 100);
+        receiptSubtotalTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(receiptTotal * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
+
+    }
+
+    private void balanceTotalCalculate() {
+        Double temp;
+        if (ivaOptionCb.isSelected()) {
+            temp = Double.valueOf(this.receiptTotalTextField.getText()) - Double.valueOf(this.receiptAdvanceTextField.getText());
+            this.receiptBalanceTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(temp * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
+        } else {
+            temp = Double.valueOf(this.receiptSubtotalTextField.getText()) - Double.valueOf(this.receiptAdvanceTextField.getText());
+            this.receiptBalanceTextField.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(temp * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
         }
 
     }
 
+    //---------------------------------------------------------------------------------------------------------------
     //Cargamos o actualizamos los datos de la lista detalle en la tabla
     private void updateWorkOrderDetailTable() {
         this.detailTableModel.setList(this.detailService.getDetailList());
@@ -991,19 +982,13 @@ public class ReceiptView extends javax.swing.JDialog {
         this.workOrderService.getWorkOrder().setWorkOrderNumber(receiptNumberTextField.getText());
         this.workOrderService.getWorkOrder().setWorkOrderIssueDate(receiptIssueDateChooser.getDate());
         this.workOrderService.getWorkOrder().setWorkOrderDeliveryDate(receiptDeliveryDateChooser.getDate());
-        this.workOrderService.getWorkOrder().setWorkOrderTotal(Double.valueOf(receiptValueTextField.getText()));
+        //--------------------------------this.workOrderService.getWorkOrder().setWorkOrderTotal(Double.valueOf(receiptValueTextField.getText()));
         this.workOrderService.getWorkOrder().setWorkOrderAdvance(Double.valueOf(receiptAdvanceTextField.getText()));
         this.workOrderService.getWorkOrder().setWorkOrderBalance(Double.valueOf(receiptBalanceTextField.getText()));
 
-        if (ivaOptionCb.isSelected()) {
-            this.workOrderService.getWorkOrder().setWorkOrderSubtotal(Double.valueOf(this.receiptSubtotalTextField.getText()));
-            this.workOrderService.getWorkOrder().setWorkOrderIva(Double.parseDouble(this.receiptIvaTextField.getText()));
-            this.workOrderService.getWorkOrder().setWorkOrderInvoiceTotal(Double.valueOf(this.receiptTotalTextField.getText()));
-        } else {
-            this.workOrderService.getWorkOrder().setWorkOrderSubtotal(Double.valueOf("0.00"));
-            this.workOrderService.getWorkOrder().setWorkOrderIva(Double.valueOf("0.00"));
-            this.workOrderService.getWorkOrder().setWorkOrderInvoiceTotal(Double.valueOf("0.00"));
-        }
+        this.workOrderService.getWorkOrder().setWorkOrderSubtotal(Double.valueOf(this.receiptSubtotalTextField.getText()));
+        this.workOrderService.getWorkOrder().setWorkOrderIva(Double.parseDouble(this.receiptIvaTextField.getText()));
+        this.workOrderService.getWorkOrder().setWorkOrderInvoiceTotal(Double.valueOf(this.receiptTotalTextField.getText()));
 
         if (this.receiptLowPriorityJRb.isSelected()) {
             this.workOrderService.getWorkOrder().setWorkOrderPriority(0);
@@ -1079,7 +1064,9 @@ public class ReceiptView extends javax.swing.JDialog {
                     break;
             }
         }
-        this.receiptValueTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderTotal()));
+        this.receiptSubtotalTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderSubtotal()));
+        this.receiptIvaTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderIva()));
+        this.receiptTotalTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal()));
         this.receiptBalanceTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderBalance()));
         this.receiptAdvanceTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderAdvance()));
 
@@ -1092,10 +1079,6 @@ public class ReceiptView extends javax.swing.JDialog {
         // TODO add your handling code here:
         receiptPersonAddressTextField.setText(pruebaJC.getSelectedItem().toString());
     }//GEN-LAST:event_addActionPerformed
-
-    private void receiptValueTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receiptValueTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_receiptValueTextFieldActionPerformed
 
     private void searchCustomerTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchCustomerTextFieldActionPerformed
         // TODO add your handling code here:
@@ -1139,11 +1122,8 @@ public class ReceiptView extends javax.swing.JDialog {
     private void chargeReceivableAccountData() {
         this.receivableAccountService.getReceivableAccount().setReceivableAccountDate(new Date());
         this.receivableAccountService.getReceivableAccount().setReceivableAccountUpdateDate(new Date());
-        if (ivaOptionCb.isSelected()) {
-            this.receivableAccountService.getReceivableAccount().setReceivableAccountTotal(Double.valueOf(receiptTotalTextField.getText()));
-        } else {
-            this.receivableAccountService.getReceivableAccount().setReceivableAccountTotal(Double.valueOf(receiptBalanceTextField.getText()));
-        }
+
+        this.receivableAccountService.getReceivableAccount().setReceivableAccountTotal(Double.valueOf(receiptBalanceTextField.getText()));
         this.receivableAccountService.getReceivableAccount().setPerson(this.personService.getPerson());
     }
 
@@ -1155,6 +1135,39 @@ public class ReceiptView extends javax.swing.JDialog {
         this.accountRecordService.getAccountRecord().setReceivableAccount(this.receivableAccountService.getReceivableAccount());
     }
 
+    private void receivableAccountBlock() {
+        this.receivableAccountService.setInstance(this.receivableAccountService.getReceivableAccountByPerson(this.personService.getPerson()));
+        if (this.receivableAccountService.getReceivableAccount().getReceivableAccountId() != null) {
+            System.out.println("Ya existe esta cuenta entonces hay que actualizar");
+            Double accountReceivableNewValue = this.receivableAccountService.getReceivableAccount().getReceivableAccountTotal() + Double.valueOf(receiptBalanceTextField.getText());
+            
+            System.out.println("El saldo anterior es: " + this.receivableAccountService.getReceivableAccount().getReceivableAccountTotal());
+            System.out.println("El nuevo saldo es: " + accountReceivableNewValue);
+            //Actualizamos el saldo anterior con el nuevo saldo
+            this.chargeReceivableAccountData();
+            this.receivableAccountService.getReceivableAccount().setReceivableAccountTotal(accountReceivableNewValue);
+            
+            if (this.receivableAccountService.updateReceivableAccount()) {
+                System.out.println("SE ha actualizado la cuenta");
+                this.chargeAccountRecordData(0, "Abono a la cuenta el valor de: " + receiptAdvanceTextField.getText(), Double.parseDouble(receiptAdvanceTextField.getText()));
+                if(this.accountRecordService.saveAccountRecord()){
+                     System.out.println("Se ha agregado un nuevo registro a la cuenta");
+                }
+            }
+
+        } else {
+
+            this.chargeReceivableAccountData();
+            if (this.receivableAccountService.saveReceivableAccount()) {
+                System.out.println("Cuenta por cobrar guardada correctamente");
+                this.chargeAccountRecordData(0, "Abono a la cuenta el valor de: " + receiptAdvanceTextField.getText(), Double.parseDouble(receiptAdvanceTextField.getText()));
+                if (this.accountRecordService.saveAccountRecord()) {
+                    System.out.println("Registro de cuenta guardada correctamente");
+                }
+            }
+        }
+    }
+
     private void receiptSaveBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receiptSaveBtActionPerformed
         // TODO add your handling code here:
 
@@ -1163,7 +1176,7 @@ public class ReceiptView extends javax.swing.JDialog {
                 if (!this.detailService.getDetailList().isEmpty()) {
                     if (this.employeeService.getEmployee().getEmployeeId() != null) {
                         Double receiptAdvanceTemp = Double.valueOf(receiptAdvanceTextField.getText());
-                        Double receiptValueTemp = Double.valueOf(receiptValueTextField.getText());
+                        Double receiptValueTemp = Double.valueOf(receiptSubtotalTextField.getText());
                         //Comparamos si el valor del anticipo es igual al valor del comprobante, si lo es abrimos la ventana para dar vuelto
                         if (Objects.equals(receiptAdvanceTemp, receiptValueTemp)) {
                             if (ivaOptionCb.isSelected()) {
@@ -1171,7 +1184,7 @@ public class ReceiptView extends javax.swing.JDialog {
                                 new CambioV(null, true, Double.parseDouble(receiptTotalTextField.getText()), this.workOrderService).setVisible(true);
                             } else {
                                 //Cargamos el valor total sin iva en la ventana de cambio
-                                new CambioV(null, true, Double.parseDouble(receiptValueTextField.getText()), this.workOrderService).setVisible(true);
+                                new CambioV(null, true, Double.parseDouble(receiptSubtotalTextField.getText()), this.workOrderService).setVisible(true);
                             }
                             //Para guardar la orden de trabajo cuando se paga el valor completo de la misma
                             if (this.workOrderService.getWorkOrder().getWorkOrderChange() != null) {
@@ -1182,19 +1195,8 @@ public class ReceiptView extends javax.swing.JDialog {
                             //Guardamos la orden de trabajo cuando no se paga el valor completo de la misma
                             this.saveWorkOrder();
                             //Si no existe la cuenta por cobrar la creamos
-                            if (this.receivableAccountService.getReceivableAccountByPerson(this.personService.getPerson()).getReceivableAccountId() != null) {
-                                System.out.println("Ya existe esta cuenta entonces hay que actualizar");
-                            } else {
+                            this.receivableAccountBlock();
 
-                                this.chargeReceivableAccountData();
-                                if (this.receivableAccountService.saveReceivableAccount()) {
-                                    System.out.println("Cuenta por cobrar guardada correctamente");
-                                    this.chargeAccountRecordData(0, "Abono a la cuenta el valor de: " + receiptAdvanceTextField.getText(), Double.parseDouble(receiptAdvanceTextField.getText()));
-                                    if (this.accountRecordService.saveAccountRecord()) {
-                                        System.out.println("Registro de cuenta guardada correctamente");
-                                    }
-                                }
-                            }
                         }
 
                     } else {
@@ -1296,7 +1298,7 @@ public class ReceiptView extends javax.swing.JDialog {
     private void receiptAdvanceTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_receiptAdvanceTextFieldKeyReleased
         // TODO add your handling code here:
         Double advanceTemp = Double.valueOf(receiptAdvanceTextField.getText());
-        Double valueTemp = Double.valueOf(receiptValueTextField.getText());
+        Double valueTemp = Double.valueOf(receiptSubtotalTextField.getText());
         if (advanceTemp <= valueTemp) {
             ReceiptPayFormCb.setSelectedItem("PENDIENTE");
         }
@@ -1354,13 +1356,12 @@ public class ReceiptView extends javax.swing.JDialog {
     private void ivaOptionCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ivaOptionCbActionPerformed
         // TODO add your handling code here:
         if (ivaOptionCb.isSelected()) {
-            totalIvaCalculate();
-            balanceTotalCalculate();
+            //totalIvaCalculate();
             discountCalculate();
+            ivaCalculate();
+            balanceTotalCalculate();
         } else {
-            receiptSubtotalTextField.setText("0.00");
             receiptIvaTextField.setText("0.00");
-            receiptTotalTextField.setText("0.00");
             balanceTotalCalculate();
             discountCalculate();
         }
@@ -1381,46 +1382,14 @@ public class ReceiptView extends javax.swing.JDialog {
 
     private void receiptDiscountPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_receiptDiscountPropertyChange
         // TODO add your handling code here:
-
-
     }//GEN-LAST:event_receiptDiscountPropertyChange
 
     private void receiptDiscountStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_receiptDiscountStateChanged
         // TODO add your handling code here:
-
         discountCalculate();
+        ivaCalculate();
         balanceTotalCalculate();
     }//GEN-LAST:event_receiptDiscountStateChanged
-
-    private void discountCalculate() {
-        if(ivaOptionCb.isSelected()){
-            Double receiptValueTemp = this.receiptIvaValue;
-            Double receiptDiscountTemp = Double.valueOf(this.receiptDiscount.getValue().toString());
-            Double receiptTotal = receiptValueTemp - ((receiptValueTemp * receiptDiscountTemp) / 100);
-            receiptSubtotalTextField.setText(receiptTotal.toString());
-            
-        }else{
-            Double receiptValueTemp = this.receiptValue;
-            Double receiptDiscountTemp = Double.valueOf(this.receiptDiscount.getValue().toString());
-            Double receiptTotal = receiptValueTemp - ((receiptValueTemp * receiptDiscountTemp) / 100);
-            receiptValueTextField.setText(receiptTotal.toString());
-        }
-        //Fijamos en una variable temporal el valor del documento
-
-        //receiptValueTextField.setText(receiptTotal.toString());
-    }
-
-    private void balanceTotalCalculate() {
-        Double temp;
-        if (ivaOptionCb.isSelected()) {
-            temp = Double.valueOf(this.receiptTotalTextField.getText()) - Double.valueOf(this.receiptAdvanceTextField.getText());
-            this.receiptBalanceTextField.setText(String.valueOf(temp));
-        } else {
-            temp = Double.valueOf(this.receiptValueTextField.getText()) - Double.valueOf(this.receiptAdvanceTextField.getText());
-            this.receiptBalanceTextField.setText(String.valueOf(temp));
-        }
-
-    }
 
     //Método encargado de cerrar todos los procesos de un JDialog
     private void closeWindow() {
@@ -1436,7 +1405,6 @@ public class ReceiptView extends javax.swing.JDialog {
     private javax.swing.JCheckBox ivaOptionCb;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1487,7 +1455,6 @@ public class ReceiptView extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> receiptStateComboBox;
     private javax.swing.JTextField receiptSubtotalTextField;
     private javax.swing.JTextField receiptTotalTextField;
-    private javax.swing.JTextField receiptValueTextField;
     private javax.swing.JRadioButton receiptWorkOrderRb;
     private javax.swing.JComboBox searchCustomerTextField;
     private javax.swing.JLabel workOrderIvaLabel;

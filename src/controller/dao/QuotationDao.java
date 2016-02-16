@@ -96,4 +96,16 @@ public class QuotationDao extends AdapterDao {
         }
         return quotationList;
     }
+    
+    public List<Quotation> getQuotationListByCustomer(String criteria){
+        List<Quotation> quotationList = new ArrayList<>();
+        try{
+            String query = "select c from Quotation c where c.person.prFirstName like '" + criteria + "%' or c.person.prLastName like '" + criteria + "%' or c.person.prIdentification like '" + criteria + "%'";
+            Query q = this.getEntityManager().createQuery(query);
+            quotationList = q.getResultList();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return quotationList;
+    }
 }

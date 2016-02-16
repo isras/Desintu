@@ -9,6 +9,7 @@ import controller.resources.GeneralParameter;
 import controller.resources.Operaciones;
 import controller.resources.Report;
 import controller.service.InvoiceService;
+import controller.service.QuotationService;
 import controller.service.WorkOrderService;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -16,6 +17,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import views.tableModel.DetailTableModel;
+import views.tableModel.QuotationTableModel;
 import views.tableModel.WorkDiaryTableModel;
 
 /**
@@ -27,7 +29,9 @@ public class SearchQuotationView extends javax.swing.JDialog {
     private final WorkOrderService workOrderService;
     private final WorkDiaryTableModel workDiaryTableModel;
     private final InvoiceService invoiceService;
+    private final QuotationService quotationService;
     private final DetailTableModel detailTableModel;
+    private final QuotationTableModel quotationTableModel;
     private final Double auxTot;
 
     public SearchQuotationView(java.awt.Frame parent, boolean modal) {
@@ -36,6 +40,8 @@ public class SearchQuotationView extends javax.swing.JDialog {
         this.workDiaryTableModel = new WorkDiaryTableModel();
         this.invoiceService = new InvoiceService();
         this.detailTableModel = new DetailTableModel();
+        this.quotationService = new QuotationService();
+        this.quotationTableModel = new QuotationTableModel();
         this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         initComponents();
     }
@@ -49,39 +55,39 @@ public class SearchQuotationView extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        searchWorkOrderButtonGroup = new javax.swing.ButtonGroup();
-        searchWorkOrderTablePopupOptions = new javax.swing.JPopupMenu();
-        showWorkOrderViewMenuItem = new javax.swing.JMenuItem();
-        proformGenerateMenuItem = new javax.swing.JMenuItem();
+        searchQuotationButtonGroup = new javax.swing.ButtonGroup();
+        searchQuotationTablePopupOptions = new javax.swing.JPopupMenu();
+        showQuotationViewMenuItem = new javax.swing.JMenuItem();
+        workOrderGenerateMenuItem = new javax.swing.JMenuItem();
         invoiceGenerateMenuItem = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        searchWorkOrderTxt = new javax.swing.JTextField();
+        searchQuotationTxt = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        workOrderStateCb = new javax.swing.JComboBox<>();
-        workOrderStateRb = new javax.swing.JRadioButton();
-        workOrderPaymentStateRb = new javax.swing.JRadioButton();
-        workOrderPaymentStateCb = new javax.swing.JComboBox<>();
         customerFilterRb = new javax.swing.JRadioButton();
-        employeeFilterRb = new javax.swing.JRadioButton();
-        allWorkOrderRb = new javax.swing.JRadioButton();
-        searchWorkOrderBt = new javax.swing.JButton();
+        QuotationNumberRb = new javax.swing.JRadioButton();
+        searchQuotationBt = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        searchWorkOrderTable = new javax.swing.JTable();
+        searchQuotationTable = new javax.swing.JTable();
 
-        showWorkOrderViewMenuItem.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        showWorkOrderViewMenuItem.setText("Visualizar Orden de Trabajo");
-        showWorkOrderViewMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        showQuotationViewMenuItem.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        showQuotationViewMenuItem.setText("Visualizar Proforma");
+        showQuotationViewMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showWorkOrderViewMenuItemActionPerformed(evt);
+                showQuotationViewMenuItemActionPerformed(evt);
             }
         });
-        searchWorkOrderTablePopupOptions.add(showWorkOrderViewMenuItem);
+        searchQuotationTablePopupOptions.add(showQuotationViewMenuItem);
 
-        proformGenerateMenuItem.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        proformGenerateMenuItem.setText("Generar Proforma");
-        searchWorkOrderTablePopupOptions.add(proformGenerateMenuItem);
+        workOrderGenerateMenuItem.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        workOrderGenerateMenuItem.setText("Generar Orden de Trabajo");
+        workOrderGenerateMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                workOrderGenerateMenuItemActionPerformed(evt);
+            }
+        });
+        searchQuotationTablePopupOptions.add(workOrderGenerateMenuItem);
 
         invoiceGenerateMenuItem.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         invoiceGenerateMenuItem.setText("Generar Factura");
@@ -90,7 +96,7 @@ public class SearchQuotationView extends javax.swing.JDialog {
                 invoiceGenerateMenuItemActionPerformed(evt);
             }
         });
-        searchWorkOrderTablePopupOptions.add(invoiceGenerateMenuItem);
+        searchQuotationTablePopupOptions.add(invoiceGenerateMenuItem);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -98,45 +104,29 @@ public class SearchQuotationView extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Orden de Trabajo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 1, 12), new java.awt.Color(0, 153, 255))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar Proforma", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 1, 12), new java.awt.Color(0, 153, 255))); // NOI18N
         jPanel2.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 11)); // NOI18N
         jLabel1.setText("Criterio:");
 
-        searchWorkOrderTxt.setEnabled(false);
-        searchWorkOrderTxt.addActionListener(new java.awt.event.ActionListener() {
+        searchQuotationTxt.setEnabled(false);
+        searchQuotationTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchWorkOrderTxtActionPerformed(evt);
+                searchQuotationTxtActionPerformed(evt);
             }
         });
-        searchWorkOrderTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+        searchQuotationTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                searchWorkOrderTxtKeyReleased(evt);
+                searchQuotationTxtKeyReleased(evt);
             }
         });
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 1, 11), new java.awt.Color(0, 153, 255))); // NOI18N
 
-        workOrderStateCb.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        workOrderStateCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PENDIENTE", "PAUSADO", "REALIZADO" }));
-
-        workOrderStateRb.setBackground(new java.awt.Color(255, 255, 255));
-        searchWorkOrderButtonGroup.add(workOrderStateRb);
-        workOrderStateRb.setFont(new java.awt.Font("Roboto", 1, 11)); // NOI18N
-        workOrderStateRb.setText("Estado");
-
-        workOrderPaymentStateRb.setBackground(new java.awt.Color(255, 255, 255));
-        searchWorkOrderButtonGroup.add(workOrderPaymentStateRb);
-        workOrderPaymentStateRb.setFont(new java.awt.Font("Roboto", 1, 11)); // NOI18N
-        workOrderPaymentStateRb.setText("Pago");
-
-        workOrderPaymentStateCb.setFont(new java.awt.Font("Roboto", 0, 11)); // NOI18N
-        workOrderPaymentStateCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PENDIENTE", "PAGADO" }));
-
         customerFilterRb.setBackground(new java.awt.Color(255, 255, 255));
-        searchWorkOrderButtonGroup.add(customerFilterRb);
+        searchQuotationButtonGroup.add(customerFilterRb);
         customerFilterRb.setFont(new java.awt.Font("Roboto", 1, 11)); // NOI18N
         customerFilterRb.setText("Cliente");
         customerFilterRb.addActionListener(new java.awt.event.ActionListener() {
@@ -145,24 +135,14 @@ public class SearchQuotationView extends javax.swing.JDialog {
             }
         });
 
-        employeeFilterRb.setBackground(new java.awt.Color(255, 255, 255));
-        searchWorkOrderButtonGroup.add(employeeFilterRb);
-        employeeFilterRb.setFont(new java.awt.Font("Roboto", 1, 11)); // NOI18N
-        employeeFilterRb.setText("Empleado");
-        employeeFilterRb.addActionListener(new java.awt.event.ActionListener() {
+        QuotationNumberRb.setBackground(new java.awt.Color(255, 255, 255));
+        searchQuotationButtonGroup.add(QuotationNumberRb);
+        QuotationNumberRb.setFont(new java.awt.Font("Roboto", 1, 11)); // NOI18N
+        QuotationNumberRb.setSelected(true);
+        QuotationNumberRb.setText("Nro. Proforma");
+        QuotationNumberRb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                employeeFilterRbActionPerformed(evt);
-            }
-        });
-
-        allWorkOrderRb.setBackground(new java.awt.Color(255, 255, 255));
-        searchWorkOrderButtonGroup.add(allWorkOrderRb);
-        allWorkOrderRb.setFont(new java.awt.Font("Roboto", 1, 11)); // NOI18N
-        allWorkOrderRb.setSelected(true);
-        allWorkOrderRb.setText("Nro. Orden");
-        allWorkOrderRb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                allWorkOrderRbActionPerformed(evt);
+                QuotationNumberRbActionPerformed(evt);
             }
         });
 
@@ -172,40 +152,28 @@ public class SearchQuotationView extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(allWorkOrderRb)
+                .addComponent(QuotationNumberRb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(customerFilterRb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(employeeFilterRb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(workOrderStateRb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(workOrderStateCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(workOrderPaymentStateRb)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(workOrderPaymentStateCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(workOrderStateCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(workOrderStateRb)
-                    .addComponent(workOrderPaymentStateRb)
-                    .addComponent(workOrderPaymentStateCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customerFilterRb)
-                    .addComponent(employeeFilterRb)
-                    .addComponent(allWorkOrderRb))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(QuotationNumberRb))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(customerFilterRb)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        searchWorkOrderBt.setText("Buscar");
-        searchWorkOrderBt.addActionListener(new java.awt.event.ActionListener() {
+        searchQuotationBt.setText("Buscar");
+        searchQuotationBt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchWorkOrderBtActionPerformed(evt);
+                searchQuotationBtActionPerformed(evt);
             }
         });
 
@@ -219,9 +187,9 @@ public class SearchQuotationView extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchWorkOrderTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchQuotationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchWorkOrderBt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(searchQuotationBt, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -232,12 +200,12 @@ public class SearchQuotationView extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(searchWorkOrderTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchWorkOrderBt))
+                    .addComponent(searchQuotationTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchQuotationBt))
                 .addGap(73, 73, 73))
         );
 
-        searchWorkOrderTable.setModel(new javax.swing.table.DefaultTableModel(
+        searchQuotationTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -248,15 +216,15 @@ public class SearchQuotationView extends javax.swing.JDialog {
 
             }
         ));
-        searchWorkOrderTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        searchQuotationTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                searchWorkOrderTableMousePressed(evt);
+                searchQuotationTableMousePressed(evt);
             }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                searchWorkOrderTableMouseClicked(evt);
+                searchQuotationTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(searchWorkOrderTable);
+        jScrollPane1.setViewportView(searchQuotationTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -294,94 +262,131 @@ public class SearchQuotationView extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void searchWorkOrderTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchWorkOrderTxtActionPerformed
+    private void searchQuotationTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchQuotationTxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_searchWorkOrderTxtActionPerformed
+    }//GEN-LAST:event_searchQuotationTxtActionPerformed
 
-    private void searchWorkOrderBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchWorkOrderBtActionPerformed
+    private void searchQuotationBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchQuotationBtActionPerformed
         // TODO add your handling code here:
 
-        if (allWorkOrderRb.isSelected()) {
-            chargeWorkOrderTable();
+        if (QuotationNumberRb.isSelected()) {
+            chargeQuotationTable();
         }
 
-    }//GEN-LAST:event_searchWorkOrderBtActionPerformed
+    }//GEN-LAST:event_searchQuotationBtActionPerformed
 
     private void customerFilterRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerFilterRbActionPerformed
         // TODO add your handling code here:
         if (customerFilterRb.isSelected()) {
-            searchWorkOrderTxt.setEnabled(true);
-            searchWorkOrderBt.setEnabled(false);
+            searchQuotationTxt.setEnabled(true);
+            searchQuotationBt.setEnabled(false);
         }
     }//GEN-LAST:event_customerFilterRbActionPerformed
 
-    private void searchWorkOrderTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchWorkOrderTxtKeyReleased
+    private void searchQuotationTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchQuotationTxtKeyReleased
         // TODO add your handling code here:
-        chargeWorkOrderTable();
+        chargeQuotationTable();
 
-    }//GEN-LAST:event_searchWorkOrderTxtKeyReleased
+    }//GEN-LAST:event_searchQuotationTxtKeyReleased
 
-    private void employeeFilterRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeFilterRbActionPerformed
-        // TODO add your handling code here:
-        if (employeeFilterRb.isSelected()) {
-            searchWorkOrderTxt.setEnabled(true);
-            searchWorkOrderBt.setEnabled(false);
-        }
-    }//GEN-LAST:event_employeeFilterRbActionPerformed
-
-    private void searchWorkOrderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchWorkOrderTableMouseClicked
+    private void searchQuotationTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchQuotationTableMouseClicked
         // TODO add your handling code here:
         if(evt.getClickCount() == 1){
             //Cuando el usuario selecciona una fila de la tabla fijamos la instancia de la orden de trabajo
             
         }
-    }//GEN-LAST:event_searchWorkOrderTableMouseClicked
+    }//GEN-LAST:event_searchQuotationTableMouseClicked
 
-    private void searchWorkOrderTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchWorkOrderTableMousePressed
+    private void searchQuotationTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchQuotationTableMousePressed
         // TODO add your handling code here:          
         tableOptionsPopup(evt);
-    }//GEN-LAST:event_searchWorkOrderTableMousePressed
+    }//GEN-LAST:event_searchQuotationTableMousePressed
 
+    private void chargeWorkOrderData(){
+        
+        this.workOrderService.getWorkOrder().setWorkOrderState(1);
+        this.workOrderService.getWorkOrder().setWorkOrderType("WorkOrder");
+        this.workOrderService.getWorkOrder().setWorkOrderPriority(0);
+        this.workOrderService.getWorkOrder().setWorkOrderDescription("Trabajo de impresión");
+        this.workOrderService.getWorkOrder().setWorkOrderNumber(String.valueOf(GeneralParameter.WORK_ORDER_NUMBER + 1));
+        this.workOrderService.getWorkOrder().setWorkOrderDeliveryDate(new Date());
+        this.workOrderService.getWorkOrder().setWorkOrderTotal(0.00);
+        this.workOrderService.getWorkOrder().setWorkOrderBalance(0.00);
+        this.workOrderService.getWorkOrder().setWorkOrderAdvance(0.00);
+        this.workOrderService.getWorkOrder().setWorkOrderSubtotal(this.quotationService.getQuotation().getQuotationSubtotal());
+        this.workOrderService.getWorkOrder().setWorkOrderIva(this.quotationService.getQuotation().getQuotationIva());
+        this.workOrderService.getWorkOrder().setWorkOrderTotal(this.quotationService.getQuotation().getQuotationTotal());
+        this.workOrderService.getWorkOrder().setWorkOrderChange(0.00);
+        this.workOrderService.getWorkOrder().setWorkOrderCash(0.00);
+        
+        //this.workOrderService.getWorkOrder().setDetailList(this.quotationService.getQuotation().getDetailList());
+        this.quotationDetailToWorkOrderDetail();
+        
+        this.workOrderService.getWorkOrder().setPerson(this.quotationService.getQuotation().getPerson());
+     
+    }
+    
+    private void chargeWorkOrderView(){
+        
+    }
+    
     private void chargeInvoiceData() {
         
-        if(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal() == 0.00 || this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal() == null){
+        if(this.quotationService.getQuotation().getQuotationTotal() == 0.00 || this.quotationService.getQuotation().getQuotationTotal() == null){
             this.invoiceIvaCalculate();
         }else{
-            this.invoiceService.getInvoice().setInSubtotal(this.workOrderService.getWorkOrder().getWorkOrderTotal());
+            this.invoiceService.getInvoice().setInSubtotal(this.quotationService.getQuotation().getQuotationSubtotal());
             this.invoiceService.getInvoice().setInSubtotalIvazero(0.00);
-            this.invoiceService.getInvoice().setInSubtotalIva(this.workOrderService.getWorkOrder().getWorkOrderSubtotal());
-            this.invoiceService.getInvoice().setInIva(this.workOrderService.getWorkOrder().getWorkOrderIva());
-            this.invoiceService.getInvoice().setInTotal(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal());
-            this.invoiceService.getInvoice().setInCash(this.workOrderService.getWorkOrder().getWorkOrderCash());
-            this.invoiceService.getInvoice().setInChange(this.workOrderService.getWorkOrder().getWorkOrderChange());
+            this.invoiceService.getInvoice().setInSubtotalIva(this.quotationService.getQuotation().getQuotationSubtotal());
+            this.invoiceService.getInvoice().setInIva(this.quotationService.getQuotation().getQuotationIva());
+            this.invoiceService.getInvoice().setInTotal(this.quotationService.getQuotation().getQuotationTotal());
+            this.invoiceService.getInvoice().setInCash(0.00);
+            this.invoiceService.getInvoice().setInChange(0.00);
         }
         
         this.invoiceService.getInvoice().setInIssueDate(new Date());
         this.invoiceService.getInvoice().setInIssueTime(new Date());
         this.invoiceService.getInvoice().setInNumber("" + (Integer.valueOf(GeneralParameter.THIRD_INVOICE_NUMBRE) + 1));
         this.invoiceService.getInvoice().setInState("Realizada");
-        this.invoiceService.getInvoice().setPerson(this.workOrderService.getWorkOrder().getPerson());
+        this.invoiceService.getInvoice().setPerson(this.quotationService.getQuotation().getPerson());
 
-        this.workOrderDetailToInvoiceDetail();
-        this.invoiceService.getInvoice().setDetailList(this.workOrderService.getWorkOrder().getDetailList());
+        this.quotationDetailToInvoiceDetail();
+        //this.invoiceService.getInvoice().setDetailList(this.workOrderService.getWorkOrder().getDetailList());
 
     }
 
     //Actualizamos el tipo de detalle de oreden de trabajo a factura
-    private void workOrderDetailToInvoiceDetail() {
+    private void quotationDetailToInvoiceDetail() {
 
+        this.invoiceService.getInvoice().setDetailList(this.quotationService.getQuotation().getDetailList());
+        
+        for (int i = 0; i < this.invoiceService.getInvoice().getDetailList().size(); i++) {
+            this.invoiceService.getInvoice().getDetailList().get(i).setDetType("InvoiceDetail");
+            this.invoiceService.getInvoice().getDetailList().get(i).setWorkOrder(null);
+            this.invoiceService.getInvoice().getDetailList().get(i).setDetailId(null);
+            this.invoiceService.getInvoice().getDetailList().get(i).setInvoice(this.invoiceService.getInvoice());
+        }
+    }
+    
+    private void quotationDetailToWorkOrderDetail(){
+        this.workOrderService.getWorkOrder().setDetailList(this.quotationService.getQuotation().getDetailList());
+        
         for (int i = 0; i < this.workOrderService.getWorkOrder().getDetailList().size(); i++) {
-            this.workOrderService.getWorkOrder().getDetailList().get(i).setDetType("InvoiceDetail");
-            this.workOrderService.getWorkOrder().getDetailList().get(i).setWorkOrder(null);
+            this.workOrderService.getWorkOrder().getDetailList().get(i).setDetType("WorkOrderDetail");
+            this.workOrderService.getWorkOrder().getDetailList().get(i).setQuotation(null);
             this.workOrderService.getWorkOrder().getDetailList().get(i).setDetailId(null);
+            this.workOrderService.getWorkOrder().getDetailList().get(i).setWorkOrder(this.workOrderService.getWorkOrder());
         }
     }
 
-    private void showWorkOrderViewMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWorkOrderViewMenuItemActionPerformed
+    private void showQuotationViewMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showQuotationViewMenuItemActionPerformed
         // TODO add your handling code here:
-        this.workOrderService.setInstance(this.workDiaryTableModel.getList().get(searchWorkOrderTable.getSelectedRow()));
-        new ReceiptView(null, true, workOrderService).setVisible(true);
-    }//GEN-LAST:event_showWorkOrderViewMenuItemActionPerformed
+        //this.workOrderService.setInstance(this.workDiaryTableModel.getList().get(searchQuotationTable.getSelectedRow()));
+        //new ReceiptView(null, true, workOrderService).setVisible(true);
+        this.detailTableModel.setList(this.quotationService.getQuotation().getDetailList());
+        Report report = new Report();
+        report.printQuotation(quotationService, this.detailTableModel);
+    }//GEN-LAST:event_showQuotationViewMenuItemActionPerformed
 
     private void invoiceGenerateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceGenerateMenuItemActionPerformed
         // TODO add your handling code here:
@@ -400,13 +405,21 @@ public class SearchQuotationView extends javax.swing.JDialog {
 
     }//GEN-LAST:event_invoiceGenerateMenuItemActionPerformed
 
-    private void allWorkOrderRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allWorkOrderRbActionPerformed
+    private void QuotationNumberRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuotationNumberRbActionPerformed
         // TODO add your handling code here:
-        if (allWorkOrderRb.isSelected()) {
-            searchWorkOrderBt.setEnabled(true);
-            searchWorkOrderTxt.setEnabled(true);
+        if (QuotationNumberRb.isSelected()) {
+            searchQuotationBt.setEnabled(true);
+            searchQuotationTxt.setEnabled(true);
         }
-    }//GEN-LAST:event_allWorkOrderRbActionPerformed
+    }//GEN-LAST:event_QuotationNumberRbActionPerformed
+
+    private void workOrderGenerateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workOrderGenerateMenuItemActionPerformed
+        // TODO add your handling code here:
+        
+        chargeWorkOrderData();
+        new ReceiptView(null, true, this.workOrderService).setVisible(true);
+        
+    }//GEN-LAST:event_workOrderGenerateMenuItemActionPerformed
 
     private void invoiceIvaCalculate() {
         Double subtotal;
@@ -430,55 +443,50 @@ public class SearchQuotationView extends javax.swing.JDialog {
     private void tableOptionsPopup(java.awt.event.MouseEvent evt) {
         if (evt.getButton() == MouseEvent.BUTTON3) {
             Point p = evt.getPoint();
-            int rowNumber = searchWorkOrderTable.rowAtPoint(p);
-            ListSelectionModel modelo = searchWorkOrderTable.getSelectionModel();
+            int rowNumber = searchQuotationTable.rowAtPoint(p);
+            ListSelectionModel modelo = searchQuotationTable.getSelectionModel();
             modelo.setSelectionInterval(rowNumber, rowNumber);
 
-            System.out.println("fila presionada " + searchWorkOrderTable.getSelectedRow());
+            System.out.println("fila presionada " + searchQuotationTable.getSelectedRow());
             //Cargamos una nueva instancia del una orden de trabajo
-            this.workOrderService.setInstance(this.workDiaryTableModel.getList().get(this.searchWorkOrderTable.getSelectedRow()));
+            this.quotationService.setInstance(this.quotationTableModel.getList().get(this.searchQuotationTable.getSelectedRow()));
 
             //removeTable.setEnabled(true);
             //addTable.setEnabled(false);
             //changeTableToAnother.setEnabled(true);
-            searchWorkOrderTablePopupOptions.show(evt.getComponent(), evt.getX(), evt.getY());
-            searchWorkOrderTablePopupOptions.setVisible(true);
+            searchQuotationTablePopupOptions.show(evt.getComponent(), evt.getX(), evt.getY());
+            searchQuotationTablePopupOptions.setVisible(true);
         }
     }
 
-    private void chargeWorkOrderTable() {
-        if (allWorkOrderRb.isSelected()) {
-            this.workDiaryTableModel.setList(this.workOrderService.getWorkOrderList());
+    private void chargeQuotationTable() {
+        if (QuotationNumberRb.isSelected()) {
+            this.quotationTableModel.setList(this.quotationService.getQuotationListByNumber(searchQuotationTxt.getText()));
         } else if (this.customerFilterRb.isSelected()) {
-            this.workDiaryTableModel.setList(this.workOrderService.getWorkOrderListByCustomerCriteria(searchWorkOrderTxt.getText()));
-        } else if (this.employeeFilterRb.isSelected()) {
-            this.workDiaryTableModel.setList(this.workOrderService.getWorkOrderListByEmployeeCriteria(searchWorkOrderTxt.getText()));
-        }
+            this.quotationTableModel.setList(this.quotationService.getQuotationListByCustomerCriteria(searchQuotationTxt.getText()));
+        } //else if (this.dateFilterRb.isSelected()) {
+            //this.workDiaryTableModel.setList(this.workOrderService.getWorkOrderListByEmployeeCriteria(searchQuotationTxt.getText()));
+        //}
 
-        this.searchWorkOrderTable.setModel(workDiaryTableModel);
-        this.searchWorkOrderTable.updateUI();
+        this.searchQuotationTable.setModel(quotationTableModel);
+        this.searchQuotationTable.updateUI();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JRadioButton allWorkOrderRb;
+    private javax.swing.JRadioButton QuotationNumberRb;
     private javax.swing.JRadioButton customerFilterRb;
-    private javax.swing.JRadioButton employeeFilterRb;
     private javax.swing.JMenuItem invoiceGenerateMenuItem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenuItem proformGenerateMenuItem;
-    private javax.swing.JButton searchWorkOrderBt;
-    private javax.swing.ButtonGroup searchWorkOrderButtonGroup;
-    private javax.swing.JTable searchWorkOrderTable;
-    private javax.swing.JPopupMenu searchWorkOrderTablePopupOptions;
-    private javax.swing.JTextField searchWorkOrderTxt;
-    private javax.swing.JMenuItem showWorkOrderViewMenuItem;
-    private javax.swing.JComboBox<String> workOrderPaymentStateCb;
-    private javax.swing.JRadioButton workOrderPaymentStateRb;
-    private javax.swing.JComboBox<String> workOrderStateCb;
-    private javax.swing.JRadioButton workOrderStateRb;
+    private javax.swing.JButton searchQuotationBt;
+    private javax.swing.ButtonGroup searchQuotationButtonGroup;
+    private javax.swing.JTable searchQuotationTable;
+    private javax.swing.JPopupMenu searchQuotationTablePopupOptions;
+    private javax.swing.JTextField searchQuotationTxt;
+    private javax.swing.JMenuItem showQuotationViewMenuItem;
+    private javax.swing.JMenuItem workOrderGenerateMenuItem;
     // End of variables declaration//GEN-END:variables
 }

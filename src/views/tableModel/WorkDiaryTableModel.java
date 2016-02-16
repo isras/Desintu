@@ -51,7 +51,7 @@ public class WorkDiaryTableModel extends AbstractTableModel {
         WorkOrder wOrder = this.list.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return String.valueOf(rowIndex + 1);
+                return wOrder.getWorkOrderNumber();
             case 1:
                 return wOrder.getPerson().toString();
             case 2:

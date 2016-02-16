@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package views.tableModel;
 
 import controller.resources.GeneralParameter;
@@ -5,30 +10,34 @@ import controller.resources.Operaciones;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import model.ReceivableAccount;
+import model.Quotation;
 
-public class ReceivableAccountTableModel extends AbstractTableModel {
+/**
+ *
+ * @author Eyetive
+ */
+public class QuotationTableModel extends AbstractTableModel {
 
-    private List<ReceivableAccount> list = new ArrayList<>();
+    private List<Quotation> list = new ArrayList<>();
     private final double accuracyVal = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
 
     /**
      * @return the list
      */
-    public List<ReceivableAccount> getList() {
+    public List<Quotation> getList() {
         return list;
     }
 
     /**
      * @param list the list to set
      */
-    public void setList(List<ReceivableAccount> list) {
+    public void setList(List<Quotation> list) {
         this.list = list;
     }
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 4;
     }
 
     @Override
@@ -39,16 +48,16 @@ public class ReceivableAccountTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex)//son los datos que se saca de la base de datos
     {
-        ReceivableAccount receivableAccount = this.list.get(rowIndex);
+        Quotation quotation = this.list.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return String.valueOf(rowIndex + 1);
+                return quotation.getQuotationNumber();
             case 1:
-                return Operaciones.formatDate(receivableAccount.getReceivableAccountDate());
+                return quotation.getPerson().toString();
             case 2:
-                return Operaciones.formatDate(receivableAccount.getReceivableAccountUpdateDate());
+                return Operaciones.formatDate(quotation.getQuotationDate());
             case 3:
-                return Operaciones.parteDecimal(Math.rint(receivableAccount.getReceivableAccountTotal() * accuracyVal) / accuracyVal, GeneralParameter.ACCURACY_VALUE);
+                return quotation.getQuotationTotal();
             default:
                 return null;
         }
@@ -62,13 +71,14 @@ public class ReceivableAccountTableModel extends AbstractTableModel {
             case 0:
                 return "N°.";
             case 1:
-                return "FECHA";
+                return "CLIENTE";
             case 2:
-                return "FECHA ACTUALIZACIÓN";
+                return "FECHA";
             case 3:
                 return "TOTAL";
             default:
                 return null;
         }
     }
+
 }

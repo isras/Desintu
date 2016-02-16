@@ -40,4 +40,8 @@ public class QuotationService {
         return this.quotationDao.getQuotationListByNumber(criteria);
     }
     
+    public List<Quotation> getQuotationListByCustomerCriteria(String criteria){
+        return this.quotationDao.getQuotationListByCustomer(criteria);
+    }
+    
 }

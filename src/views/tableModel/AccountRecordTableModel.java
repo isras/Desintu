@@ -44,7 +44,7 @@ public class AccountRecordTableModel extends AbstractTableModel {
             case 0:
                 return String.valueOf(rowIndex + 1);
             case 1:
-                return Operaciones.formFechaToLarge(accountRecord.getAccountRecordDate());
+                return Operaciones.formatDate(accountRecord.getAccountRecordDate());
             case 2:
                 return accountRecord.getAccountRecordDescription();
             case 3:

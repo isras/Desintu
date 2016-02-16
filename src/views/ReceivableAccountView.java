@@ -6,6 +6,7 @@
 package views;
 
 import controller.service.AccountRecordService;
+import controller.service.AccountingEntryService;
 import controller.service.PersonService;
 import controller.service.ReceivableAccountService;
 import java.awt.event.KeyAdapter;
@@ -27,6 +28,7 @@ public class ReceivableAccountView extends javax.swing.JDialog {
     private final ReceivableAccountService receivableAccountService;
     private final AccountRecordService accountRecordService;
     private final AccountRecordTableModel accountRecordTableModel;
+    private final AccountingEntryService accountingEntryService;
 
     public ReceivableAccountView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -34,6 +36,7 @@ public class ReceivableAccountView extends javax.swing.JDialog {
         this.receivableAccountService = new ReceivableAccountService();
         this.accountRecordService = new AccountRecordService();
         this.accountRecordTableModel = new AccountRecordTableModel();
+        this.accountingEntryService = new AccountingEntryService();
         initComponents();
         paymentPanel.setVisible(false);
         chargePersonCombo();
@@ -284,6 +287,8 @@ public class ReceivableAccountView extends javax.swing.JDialog {
                 //Actualizamos la vista de la tabla
                 this.accountRecordTable.updateUI();
                 
+                
+                
                  //this.receivableAccountService.setInstance(this.receivableAccountService.getReceivableAccountByPerson(this.personService.getPerson()));
                 
                 Double newValue = this.receivableAccountService.getReceivableAccount().getReceivableAccountTotal() - Double.valueOf(this.paymentValueTextField.getText());
@@ -296,6 +301,11 @@ public class ReceivableAccountView extends javax.swing.JDialog {
                 if(this.receivableAccountService.updateReceivableAccount()){
                     System.out.println("Actualizado correctamente");
                     this.totalUpdate();
+                    //Para agregar un asiento contable
+                    this.chargeAccountingEntry("Abono a la cuenta de : " + this.personService.getPerson().toString(), Double.valueOf(this.paymentValueTextField.getText()));
+                    if(this.accountingEntryService.saveAccountingEntry()){
+                        System.out.println("Asiento guardado correctamente");
+                    }
                 }
             }
         }
@@ -349,6 +359,13 @@ public class ReceivableAccountView extends javax.swing.JDialog {
         
         this.totalUpdate();
         
+    }
+    
+    private void chargeAccountingEntry(String description, Double value){
+        accountingEntryService.getAccountingEntry().setAeType(0);
+        accountingEntryService.getAccountingEntry().setAeCreatedDate(new Date());
+        accountingEntryService.getAccountingEntry().setAeDescription(description);
+        accountingEntryService.getAccountingEntry().setAeValue(value);
     }
     
     private void totalUpdate(){

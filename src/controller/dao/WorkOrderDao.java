@@ -49,7 +49,16 @@ public class WorkOrderDao extends AdapterDao {
     }
 
     public boolean delete() {
-        return true;
+        boolean flag = false;
+        try {
+            this.getEntityManager().getTransaction().begin();
+            this.eliminar(this.workOrder);
+            this.getEntityManager().getTransaction().commit();//commmit enviado a la datos  
+            flag = true;
+        } catch (Exception e) {
+            System.out.println("Error en: " + e);
+        }
+        return flag;
     }
 
     public void newInstance() {
@@ -93,6 +102,18 @@ public class WorkOrderDao extends AdapterDao {
             Query q = this.getEntityManager().createQuery(query);
             workOrderList = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
         } catch (Exception e) {
+            System.out.println(e);
+        }
+        return workOrderList;
+    }
+    
+    public List<WorkOrder> getWorkOrderListByNumber(String criteria){
+        List<WorkOrder> workOrderList = new ArrayList<>();
+        try{
+            String query ="select c from WorkOrder c where c.workOrderNumber like '" + criteria + "%'";
+            Query q = this.getEntityManager().createQuery(query);
+            workOrderList = q.getResultList();
+        }catch(Exception e){
             System.out.println(e);
         }
         return workOrderList;

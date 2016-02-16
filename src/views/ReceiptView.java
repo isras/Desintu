@@ -510,12 +510,12 @@ public class ReceiptView extends javax.swing.JDialog {
 
         searchCustomerTextField.setEditable(true);
         searchCustomerTextField.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 searchCustomerTextFieldPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         searchCustomerTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -606,12 +606,12 @@ public class ReceiptView extends javax.swing.JDialog {
         employeeComboBox.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         employeeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciones un empleado...", "Julio Galán ", "Israel Sotomayor" }));
         employeeComboBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 employeeComboBoxPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
 
@@ -788,7 +788,7 @@ public class ReceiptView extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 857, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -801,16 +801,18 @@ public class ReceiptView extends javax.swing.JDialog {
 
     private void setworkOrderAndAddDetail() {
         this.detailService.getDetail().setWorkOrder(this.workOrderService.getWorkOrder());
+        this.detailService.getDetail().setDetType("WorkOrderDetail");
         this.detailService.addDetailList(this.detailService.getDetail());
     }
 
     //Relación de la factura con el detalle
     private void setInvoiceAndAddDetail() {
         this.detailService.getDetail().setInvoice(this.invoiceService.getInvoice());
+        this.detailService.getDetail().setDetType("InvoiceDetail");
         this.detailService.addDetailList(this.detailService.getDetail());
     }
-    
-    private void setQuotationAndAddDetail(){
+
+    private void setQuotationAndAddDetail() {
         this.detailService.getDetail().setQuotation(this.quotationService.getQuotation());
         this.detailService.getDetail().setDetType("QuotationDetail");
         this.detailService.addDetailList(this.detailService.getDetail());
@@ -1206,15 +1208,12 @@ public class ReceiptView extends javax.swing.JDialog {
                             if (this.workOrderService.getWorkOrder().getWorkOrderChange() != null) {
                                 this.saveWorkOrder();
                             }
-
                         } else {
                             //Guardamos la orden de trabajo cuando no se paga el valor completo de la misma
                             this.saveWorkOrder();
                             //Si no existe la cuenta por cobrar la creamos
                             this.receivableAccountBlock();
-
                         }
-
                     } else {
                         JOptionPane.showMessageDialog(this, "No se ha seleccionado ningún empleado");
                     }
@@ -1249,7 +1248,7 @@ public class ReceiptView extends javax.swing.JDialog {
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "La orden de trabajo no tiene items");
+                    JOptionPane.showMessageDialog(this, "La proforma no tiene items");
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "No ha seleccionado ningún cliente");
@@ -1258,55 +1257,58 @@ public class ReceiptView extends javax.swing.JDialog {
 
             if (this.personService.getPerson().getPersonId() != null) {
                 if (!this.detailService.getDetailList().isEmpty()) {
-                    if (this.invoiceService.getInvoice().getInvoiceId() == null) {
-                        this.chargeQuotationData();
-                        if (this.quotationService.saveQuotation()) {
-                            JOptionPane.showMessageDialog(this, "La proforma ha sido guardada correctamente");
-                            //Actualizamos el número de proforma automáticamente
-                            this.updateDocumentNumber();
-                            //Imprimimos el reporte
-                            Report print = new Report();
-                            print.printQuotation(quotationService, detailTableModel);
-                            this.dispose();
-                        } else {
-                            JOptionPane.showMessageDialog(this, "No se guardo la proforma");
-                        }
-                    } else if (this.quotationService.getQuotation().getQuotationId() != null) {
-                        this.chargeQuotationData();
-                        if (this.quotationService.updateQuotation()) {
-                            JOptionPane.showMessageDialog(this, "Proforma modificada correctamente");
-                            //En esta parte iria si desea convertir la orden de trabajo en factura o no
+
+                    new CambioV(null, true, Double.valueOf(this.receiptTotalTextField.getText()), invoiceService).setVisible(true);
+
+                    if (this.invoiceService.getInvoice().getInChange() != null) {
+                        if (this.invoiceService.getInvoice().getInvoiceId() == null) {
+                            this.chargeInvoiceData();
+                            if (this.invoiceService.saveInvoice()) {
+                                JOptionPane.showMessageDialog(this, "La factura ha sido guardada correctamente");
+                                //Actualizamos el número de proforma automáticamente
+                                this.updateDocumentNumber();
+                                //Imprimimos el reporte
+                                Report print = new Report();
+                                print.printInvoice(invoiceService, detailTableModel);
+                                this.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(this, "No se guardo la factura");
+                            }
+                        } else if (this.invoiceService.getInvoice().getInvoiceId() != null) {
+                            this.chargeInvoiceData();
+                            if (this.invoiceService.updateInvoice()) {
+                                JOptionPane.showMessageDialog(this, "Factura modificada correctamente");
+                                //En esta parte iria si desea convertir la orden de trabajo en factura o no
+                            }
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "La orden de trabajo no tiene items");
+                    JOptionPane.showMessageDialog(this, "La factura no tiene items");
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "No ha seleccionado ningún cliente");
             }
-
-            JOptionPane.showMessageDialog(this, "Ha guardado la factura correctamente");
         }
     }//GEN-LAST:event_receiptSaveBtActionPerformed
 
     private void chargeInvoiceData() {
 
-        this.invoiceService.getInvoice().setInSubtotal(this.workOrderService.getWorkOrder().getWorkOrderTotal());
+        this.invoiceService.getInvoice().setInSubtotal(Double.parseDouble(this.receiptSubtotalTextField.getText()));
         this.invoiceService.getInvoice().setInSubtotalIvazero(0.00);
-        this.invoiceService.getInvoice().setInSubtotalIva(this.workOrderService.getWorkOrder().getWorkOrderSubtotal());
-        this.invoiceService.getInvoice().setInIva(this.workOrderService.getWorkOrder().getWorkOrderIva());
-        this.invoiceService.getInvoice().setInTotal(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal());
-        this.invoiceService.getInvoice().setInCash(this.workOrderService.getWorkOrder().getWorkOrderCash());
-        this.invoiceService.getInvoice().setInChange(this.workOrderService.getWorkOrder().getWorkOrderChange());
+        this.invoiceService.getInvoice().setInSubtotalIva(Double.parseDouble(this.receiptSubtotalTextField.getText()));
+        this.invoiceService.getInvoice().setInIva(Double.valueOf(this.receiptIvaTextField.getText()));
+        this.invoiceService.getInvoice().setInTotal(Double.valueOf(this.receiptTotalTextField.getText()));
+        //this.invoiceService.getInvoice().setInCash(this.workOrderService.getWorkOrder().getWorkOrderCash());
+        //this.invoiceService.getInvoice().setInChange(this.workOrderService.getWorkOrder().getWorkOrderChange());
 
         this.invoiceService.getInvoice().setInIssueDate(new Date());
         this.invoiceService.getInvoice().setInIssueTime(new Date());
-        this.invoiceService.getInvoice().setInNumber("" + (Integer.valueOf(GeneralParameter.THIRD_INVOICE_NUMBRE) + 1));
+        this.invoiceService.getInvoice().setInNumber(receiptNumberTextField.getText());//"" + (Integer.valueOf(GeneralParameter.THIRD_INVOICE_NUMBRE) + 1));
         this.invoiceService.getInvoice().setInState("Realizada");
-        this.invoiceService.getInvoice().setPerson(this.workOrderService.getWorkOrder().getPerson());
 
-        this.invoiceService.getInvoice().setDetailList(this.workOrderService.getWorkOrder().getDetailList());
+        this.invoiceService.getInvoice().setDetailList(this.invoiceService.getInvoice().getDetailList());
 
+        this.invoiceService.getInvoice().setPerson(this.personService.getPerson());
     }
 
     //Actualizar el numero de comprobante al momento de guardar
@@ -1334,10 +1336,10 @@ public class ReceiptView extends javax.swing.JDialog {
         this.quotationService.getQuotation().setQuotationIva(Double.valueOf(receiptIvaTextField.getText()));
         this.quotationService.getQuotation().setQuotationTotal(Double.valueOf(receiptTotalTextField.getText()));
         this.quotationService.getQuotation().setQuotationDate(receiptIssueDateChooser.getDate());
-        
+
         //this.workOrderService.getWorkOrder().setDetailList(this.detailService.getDetailList());
         this.quotationService.getQuotation().setDetailList(this.detailService.getDetailList());
-        
+
         this.quotationService.getQuotation().setPerson(this.personService.getPerson());
     }
 

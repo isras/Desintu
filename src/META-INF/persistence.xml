@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="ArmoirePU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>model.AccountingEntry</class>
-    <class>model.Activity</class>
-    <class>model.Detail</class>
-    <class>model.Enterprise</class>
-    <class>model.History</class>
-    <class>model.Invoice</class>
-    <class>model.Person</class>
-    <class>model.Petition</class>
-    <class>model.Product</class>
-    <class>model.Rol</class>
-    <class>model.Sellnote</class>
-    <class>model.User</class>
-    <class>model.UserAccount</class>
-    <class>model.Setting</class>
-    <class>model.ClosingCash</class>
-    <class>model.WorkOrder</class>
-    <class>model.Employee</class>
-    <class>model.Salary</class>
-    <class>model.SalaryPayment</class>
-    <class>model.Quotation</class>
-    <class>model.AccountRecord</class>
-    <class>model.ReceivableAccount</class>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/desintu?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="Eyetive@2015"/>
-    </properties>
-  </persistence-unit>
+    <persistence-unit name="ArmoirePU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>model.AccountingEntry</class>
+        <class>model.Activity</class>
+        <class>model.Detail</class>
+        <class>model.Enterprise</class>
+        <class>model.History</class>
+        <class>model.Invoice</class>
+        <class>model.Person</class>
+        <class>model.Petition</class>
+        <class>model.Product</class>
+        <class>model.Rol</class>
+        <class>model.Sellnote</class>
+        <class>model.User</class>
+        <class>model.UserAccount</class>
+        <class>model.Setting</class>
+        <class>model.ClosingCash</class>
+        <class>model.WorkOrder</class>
+        <class>model.Employee</class>
+        <class>model.Salary</class>
+        <class>model.SalaryPayment</class>
+        <class>model.Quotation</class>
+        <class>model.AccountRecord</class>
+        <class>model.ReceivableAccount</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/desintu?zeroDateTimeBehavior=convertToNull"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.password" value="Eyetive@2015"/>
+        </properties>
+    </persistence-unit>
 </persistence>

@@ -20,6 +20,10 @@ public class WorkOrderService {
         return this.wdao.update();
     }
     
+    public boolean removeWorkOrder(){
+        return this.wdao.delete();
+    }
+    
     public void newInstace(){
         this.wdao.newInstance();
     }
@@ -34,6 +38,10 @@ public class WorkOrderService {
     
     public List<WorkOrder> getWorkOrderList(){
         return this.wdao.getWorkOrderList();
+    }
+    
+    public List<WorkOrder> getWorkOrderListByNumber(String criteria){
+        return this.wdao.getWorkOrderListByNumber(criteria);
     }
     
     public List<WorkOrder> getWorkOrderListByState(){

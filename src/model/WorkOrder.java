@@ -73,7 +73,7 @@ public class WorkOrder implements Serializable {
     @Column (name = "wo_type")
     private String workOrderType;
     @Column (name = "wo_invoice_state")
-    private String workOrderInvoiceState;
+    private Integer workOrderInvoiceState;
     @Column (name = "wo_subtotal")
     private Double workOrderSubtotal;
     @Column (name = "wo_iva")
@@ -86,8 +86,7 @@ public class WorkOrder implements Serializable {
     @Column (name = "wo_change")
     private Double workOrderChange;
     
-    
-    @OneToMany(mappedBy = "workOrder", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "workOrder", cascade = CascadeType.ALL)
     private List<Detail> detailList;
     @JoinColumn(name = "person_person_id", referencedColumnName = "person_id")
     @ManyToOne(optional = false)
@@ -256,14 +255,14 @@ public class WorkOrder implements Serializable {
     /**
      * @return the workOrderInvoiceState
      */
-    public String getWorkOrderInvoiceState() {
+    public Integer getWorkOrderInvoiceState() {
         return workOrderInvoiceState;
     }
 
     /**
      * @param workOrderInvoiceState the workOrderInvoiceState to set
      */
-    public void setWorkOrderInvoiceState(String workOrderInvoiceState) {
+    public void setWorkOrderInvoiceState(Integer workOrderInvoiceState) {
         this.workOrderInvoiceState = workOrderInvoiceState;
     }
 

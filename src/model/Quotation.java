@@ -7,6 +7,8 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,6 +50,10 @@ public class Quotation implements Serializable {
     private Double quotationIva;
     @Column(name = "qo_total")
     private Double quotationTotal;
+    
+    @OneToMany(mappedBy = "quotation", cascade = CascadeType.PERSIST)
+    private List<Detail> detailList;
+    
     @JoinColumn(name = "qo_person_id", referencedColumnName = "person_id")
     @ManyToOne(optional = false)
     private Person person;
@@ -137,6 +144,20 @@ public class Quotation implements Serializable {
     @Override
     public String toString() {
         return "model.Quotation[ quotationId=" + quotationId + " ]";
+    }
+
+    /**
+     * @return the detailList
+     */
+    public List<Detail> getDetailList() {
+        return detailList;
+    }
+
+    /**
+     * @param detailList the detailList to set
+     */
+    public void setDetailList(List<Detail> detailList) {
+        this.detailList = detailList;
     }
     
 }

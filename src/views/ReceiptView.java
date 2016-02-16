@@ -6,6 +6,7 @@ import controller.resources.Report;
 import controller.service.AccountRecordService;
 import controller.service.DetailService;
 import controller.service.EmployeeService;
+import controller.service.InvoiceService;
 import controller.service.PersonService;
 import controller.service.QuotationService;
 import controller.service.ReceivableAccountService;
@@ -33,10 +34,10 @@ public class ReceiptView extends javax.swing.JDialog {
     private final SettingService settingService;
     private final ReceivableAccountService receivableAccountService;
     private final AccountRecordService accountRecordService;
+    private final InvoiceService invoiceService;
     private JTextField searchNameText;
     private final Double auxTot;
     private Double receiptValue;
-    private Double receiptIvaValue;
 
     public ReceiptView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -49,6 +50,7 @@ public class ReceiptView extends javax.swing.JDialog {
         this.settingService = new SettingService();
         this.accountRecordService = new AccountRecordService();
         this.receivableAccountService = new ReceivableAccountService();
+        this.invoiceService = new InvoiceService();
         initComponents();
         this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         this.chargePersonCombo();
@@ -68,6 +70,7 @@ public class ReceiptView extends javax.swing.JDialog {
         this.settingService = new SettingService();
         this.receivableAccountService = new ReceivableAccountService();
         this.accountRecordService = new AccountRecordService();
+        this.invoiceService = new InvoiceService();
         initComponents();
         this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         this.workOrderService = wos;
@@ -472,10 +475,10 @@ public class ReceiptView extends javax.swing.JDialog {
                     .addComponent(jLabel5)
                     .addComponent(jLabel7)
                     .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(receiptStateComboBox, 0, 1, Short.MAX_VALUE)
-                    .addComponent(receiptDeliveryDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                    .addComponent(receiptStateComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(receiptDeliveryDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(receiptNumberTextField)
                     .addComponent(receiptIssueDateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -507,12 +510,12 @@ public class ReceiptView extends javax.swing.JDialog {
 
         searchCustomerTextField.setEditable(true);
         searchCustomerTextField.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 searchCustomerTextFieldPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
         searchCustomerTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -603,12 +606,12 @@ public class ReceiptView extends javax.swing.JDialog {
         employeeComboBox.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         employeeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciones un empleado...", "Julio Galán ", "Israel Sotomayor" }));
         employeeComboBox.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
             public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 employeeComboBoxPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
         });
 
@@ -731,8 +734,7 @@ public class ReceiptView extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ivaOptionCb)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(ivaOptionCb))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel17)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -786,9 +788,7 @@ public class ReceiptView extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 836, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 857, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -801,6 +801,18 @@ public class ReceiptView extends javax.swing.JDialog {
 
     private void setworkOrderAndAddDetail() {
         this.detailService.getDetail().setWorkOrder(this.workOrderService.getWorkOrder());
+        this.detailService.addDetailList(this.detailService.getDetail());
+    }
+
+    //Relación de la factura con el detalle
+    private void setInvoiceAndAddDetail() {
+        this.detailService.getDetail().setInvoice(this.invoiceService.getInvoice());
+        this.detailService.addDetailList(this.detailService.getDetail());
+    }
+    
+    private void setQuotationAndAddDetail(){
+        this.detailService.getDetail().setQuotation(this.quotationService.getQuotation());
+        this.detailService.getDetail().setDetType("QuotationDetail");
         this.detailService.addDetailList(this.detailService.getDetail());
     }
 
@@ -837,7 +849,7 @@ public class ReceiptView extends javax.swing.JDialog {
 
                     ivaOptionCb.setSelected(true);
 
-                    this.setworkOrderAndAddDetail();
+                    this.setQuotationAndAddDetail();
                     this.updateWorkOrderDetailTable();
                     this.totalCalculate();
 
@@ -849,7 +861,7 @@ public class ReceiptView extends javax.swing.JDialog {
 
                     ivaOptionCb.setSelected(true);
 
-                    this.setworkOrderAndAddDetail();
+                    this.setInvoiceAndAddDetail();
                     this.updateWorkOrderDetailTable();
                     this.totalCalculate();
                 }
@@ -982,7 +994,9 @@ public class ReceiptView extends javax.swing.JDialog {
         this.workOrderService.getWorkOrder().setWorkOrderNumber(receiptNumberTextField.getText());
         this.workOrderService.getWorkOrder().setWorkOrderIssueDate(receiptIssueDateChooser.getDate());
         this.workOrderService.getWorkOrder().setWorkOrderDeliveryDate(receiptDeliveryDateChooser.getDate());
-        //--------------------------------this.workOrderService.getWorkOrder().setWorkOrderTotal(Double.valueOf(receiptValueTextField.getText()));
+        //-------------------------------- esta parte ya no iria en la base de datos ni en el código
+        this.workOrderService.getWorkOrder().setWorkOrderTotal(0.00);
+        //--------------------------------
         this.workOrderService.getWorkOrder().setWorkOrderAdvance(Double.valueOf(receiptAdvanceTextField.getText()));
         this.workOrderService.getWorkOrder().setWorkOrderBalance(Double.valueOf(receiptBalanceTextField.getText()));
 
@@ -1065,6 +1079,8 @@ public class ReceiptView extends javax.swing.JDialog {
             }
         }
         this.receiptSubtotalTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderSubtotal()));
+        //Fijamos el valor a la variable a usar para el descuento
+        this.receiptValue = this.workOrderService.getWorkOrder().getWorkOrderSubtotal();
         this.receiptIvaTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderIva()));
         this.receiptTotalTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal()));
         this.receiptBalanceTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderBalance()));
@@ -1140,18 +1156,18 @@ public class ReceiptView extends javax.swing.JDialog {
         if (this.receivableAccountService.getReceivableAccount().getReceivableAccountId() != null) {
             System.out.println("Ya existe esta cuenta entonces hay que actualizar");
             Double accountReceivableNewValue = this.receivableAccountService.getReceivableAccount().getReceivableAccountTotal() + Double.valueOf(receiptBalanceTextField.getText());
-            
+
             System.out.println("El saldo anterior es: " + this.receivableAccountService.getReceivableAccount().getReceivableAccountTotal());
             System.out.println("El nuevo saldo es: " + accountReceivableNewValue);
             //Actualizamos el saldo anterior con el nuevo saldo
             this.chargeReceivableAccountData();
             this.receivableAccountService.getReceivableAccount().setReceivableAccountTotal(accountReceivableNewValue);
-            
+
             if (this.receivableAccountService.updateReceivableAccount()) {
                 System.out.println("SE ha actualizado la cuenta");
                 this.chargeAccountRecordData(0, "Abono a la cuenta el valor de: " + receiptAdvanceTextField.getText(), Double.parseDouble(receiptAdvanceTextField.getText()));
-                if(this.accountRecordService.saveAccountRecord()){
-                     System.out.println("Se ha agregado un nuevo registro a la cuenta");
+                if (this.accountRecordService.saveAccountRecord()) {
+                    System.out.println("Se ha agregado un nuevo registro a la cuenta");
                 }
             }
 
@@ -1239,9 +1255,59 @@ public class ReceiptView extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "No ha seleccionado ningún cliente");
             }
         } else if (receiptInvoiceRb.isSelected()) {
+
+            if (this.personService.getPerson().getPersonId() != null) {
+                if (!this.detailService.getDetailList().isEmpty()) {
+                    if (this.invoiceService.getInvoice().getInvoiceId() == null) {
+                        this.chargeQuotationData();
+                        if (this.quotationService.saveQuotation()) {
+                            JOptionPane.showMessageDialog(this, "La proforma ha sido guardada correctamente");
+                            //Actualizamos el número de proforma automáticamente
+                            this.updateDocumentNumber();
+                            //Imprimimos el reporte
+                            Report print = new Report();
+                            print.printQuotation(quotationService, detailTableModel);
+                            this.dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "No se guardo la proforma");
+                        }
+                    } else if (this.quotationService.getQuotation().getQuotationId() != null) {
+                        this.chargeQuotationData();
+                        if (this.quotationService.updateQuotation()) {
+                            JOptionPane.showMessageDialog(this, "Proforma modificada correctamente");
+                            //En esta parte iria si desea convertir la orden de trabajo en factura o no
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "La orden de trabajo no tiene items");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No ha seleccionado ningún cliente");
+            }
+
             JOptionPane.showMessageDialog(this, "Ha guardado la factura correctamente");
         }
     }//GEN-LAST:event_receiptSaveBtActionPerformed
+
+    private void chargeInvoiceData() {
+
+        this.invoiceService.getInvoice().setInSubtotal(this.workOrderService.getWorkOrder().getWorkOrderTotal());
+        this.invoiceService.getInvoice().setInSubtotalIvazero(0.00);
+        this.invoiceService.getInvoice().setInSubtotalIva(this.workOrderService.getWorkOrder().getWorkOrderSubtotal());
+        this.invoiceService.getInvoice().setInIva(this.workOrderService.getWorkOrder().getWorkOrderIva());
+        this.invoiceService.getInvoice().setInTotal(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal());
+        this.invoiceService.getInvoice().setInCash(this.workOrderService.getWorkOrder().getWorkOrderCash());
+        this.invoiceService.getInvoice().setInChange(this.workOrderService.getWorkOrder().getWorkOrderChange());
+
+        this.invoiceService.getInvoice().setInIssueDate(new Date());
+        this.invoiceService.getInvoice().setInIssueTime(new Date());
+        this.invoiceService.getInvoice().setInNumber("" + (Integer.valueOf(GeneralParameter.THIRD_INVOICE_NUMBRE) + 1));
+        this.invoiceService.getInvoice().setInState("Realizada");
+        this.invoiceService.getInvoice().setPerson(this.workOrderService.getWorkOrder().getPerson());
+
+        this.invoiceService.getInvoice().setDetailList(this.workOrderService.getWorkOrder().getDetailList());
+
+    }
 
     //Actualizar el numero de comprobante al momento de guardar
     private void updateDocumentNumber() {
@@ -1268,6 +1334,10 @@ public class ReceiptView extends javax.swing.JDialog {
         this.quotationService.getQuotation().setQuotationIva(Double.valueOf(receiptIvaTextField.getText()));
         this.quotationService.getQuotation().setQuotationTotal(Double.valueOf(receiptTotalTextField.getText()));
         this.quotationService.getQuotation().setQuotationDate(receiptIssueDateChooser.getDate());
+        
+        //this.workOrderService.getWorkOrder().setDetailList(this.detailService.getDetailList());
+        this.quotationService.getQuotation().setDetailList(this.detailService.getDetailList());
+        
         this.quotationService.getQuotation().setPerson(this.personService.getPerson());
     }
 

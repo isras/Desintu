@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -54,6 +55,7 @@ public class ReceivableAccount implements Serializable {
     private List<AccountRecord> accountRecordList;
 
     public ReceivableAccount() {
+        this.accountRecordList = new ArrayList<>();
     }
 
     public ReceivableAccount(Long receivableAccountId) {

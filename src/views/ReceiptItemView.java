@@ -512,7 +512,7 @@ public class ReceiptItemView extends javax.swing.JDialog {
         this.ds.getDetail().setDetQuantity(Double.valueOf(workOrderItemQuantitySp.getValue().toString()));
         this.ds.getDetail().setDetSalePrice(Double.valueOf(workOrderItemTotalValueTxt.getText()));
         this.ds.getDetail().setDetTotal(totalValue);
-        this.ds.getDetail().setDetType("WorkOrderDetail");
+        //this.ds.getDetail().setDetType("WorkOrderDetail");
     }
 
     private void workOrderItemPrintJCItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_workOrderItemPrintJCItemStateChanged

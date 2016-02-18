@@ -63,6 +63,8 @@ public class Report {
         parameters.put("subtotal", String.valueOf(wos.getWorkOrder().getWorkOrderAdvance()));
         parameters.put("subtotalIva", String.valueOf(wos.getWorkOrder().getWorkOrderBalance()));
         parameters.put("total", String.valueOf(wos.getWorkOrder().getWorkOrderTotal()));
+        parameters.put("efectivo",String.valueOf(wos.getWorkOrder().getWorkOrderCash()));
+        parameters.put("cambio", String.valueOf(wos.getWorkOrder().getWorkOrderChange()));
 
         JRTableModelDataSource dataSource = new JRTableModelDataSource(dtm);
         AbstractJasperReports.createReport(conn, path, parameters, dataSource);

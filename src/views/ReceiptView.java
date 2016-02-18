@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.Objects;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import org.eclipse.persistence.internal.cache.AdvancedProcessor;
 import views.tableModel.DetailTableModel;
 import views.tableModel.EmployeeComboBoxModel;
 import views.tableModel.PersonComboBoxModel;
@@ -1001,14 +1002,15 @@ public class ReceiptView extends javax.swing.JDialog {
         this.workOrderService.getWorkOrder().setWorkOrderIssueDate(receiptIssueDateChooser.getDate());
         this.workOrderService.getWorkOrder().setWorkOrderDeliveryDate(receiptDeliveryDateChooser.getDate());
         //-------------------------------- esta parte ya no iria en la base de datos ni en el código
-        this.workOrderService.getWorkOrder().setWorkOrderTotal(0.00);
+        
         //--------------------------------
         this.workOrderService.getWorkOrder().setWorkOrderAdvance(Double.valueOf(receiptAdvanceTextField.getText()));
         this.workOrderService.getWorkOrder().setWorkOrderBalance(Double.valueOf(receiptBalanceTextField.getText()));
 
         this.workOrderService.getWorkOrder().setWorkOrderSubtotal(Double.valueOf(this.receiptSubtotalTextField.getText()));
         this.workOrderService.getWorkOrder().setWorkOrderIva(Double.parseDouble(this.receiptIvaTextField.getText()));
-        this.workOrderService.getWorkOrder().setWorkOrderInvoiceTotal(Double.valueOf(this.receiptTotalTextField.getText()));
+        this.workOrderService.getWorkOrder().setWorkOrderTotal(Double.valueOf(this.receiptTotalTextField.getText()));
+        this.workOrderService.getWorkOrder().setWorkOrderInvoiceTotal(0.00);
 
         if (this.receiptLowPriorityJRb.isSelected()) {
             this.workOrderService.getWorkOrder().setWorkOrderPriority(0);
@@ -1127,6 +1129,8 @@ public class ReceiptView extends javax.swing.JDialog {
                 //Para imprimir el reporte
                 Report print = new Report();
                 print.printWorkOrder(workOrderService, detailTableModel);
+                //Creamos la cuenta por pagar
+                this.receivableAccountBlock();
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "No se guardo la orden de trabajo");
@@ -1217,10 +1221,11 @@ public class ReceiptView extends javax.swing.JDialog {
                                 }
                             }
                         } else {
+                            //Abrimos la ventana del vuelto con el valor del anticipo
+                            new CambioV(null, true,Double.valueOf(receiptAdvanceTextField.getText()), this.workOrderService).setVisible(true);
                             //Guardamos la orden de trabajo cuando no se paga el valor completo de la misma
                             this.saveWorkOrder();
                             //Si no existe la cuenta por cobrar la creamos
-                            this.receivableAccountBlock();
                         }
                     } else {
                         JOptionPane.showMessageDialog(this, "No se ha seleccionado ningún empleado");

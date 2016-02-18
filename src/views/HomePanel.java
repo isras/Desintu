@@ -1,8 +1,14 @@
 package views;
 
+import controller.resources.Report;
 import controller.service.WorkOrderService;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import views.tableModel.DetailTableModel;
 import views.tableModel.WorkDiaryTableModel;
 
 public class HomePanel extends javax.swing.JPanel {
@@ -10,12 +16,14 @@ public class HomePanel extends javax.swing.JPanel {
     private ImageIcon ic;
     private final WorkOrderService wos;
     private final WorkDiaryTableModel wdtm;
+    private final DetailTableModel dtm;
     private String imagePath;
 
     public HomePanel(String imagePath) {
         this.imagePath = imagePath;
         this.wos = new WorkOrderService();
         this.wdtm = new WorkDiaryTableModel();
+        this.dtm = new DetailTableModel();
         initComponents();
 
         this.updateWorkOrderDiaryTable();
@@ -40,8 +48,27 @@ public class HomePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        workOrderOptionsPopupMenu = new javax.swing.JPopupMenu();
+        workOrderViewMenuItem = new javax.swing.JMenuItem();
+        finishWorkOrderMenuItem = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         workDiaryTable = new javax.swing.JTable();
+
+        workOrderViewMenuItem.setText("Visualizar ");
+        workOrderViewMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                workOrderViewMenuItemActionPerformed(evt);
+            }
+        });
+        workOrderOptionsPopupMenu.add(workOrderViewMenuItem);
+
+        finishWorkOrderMenuItem.setText("Finalizar Orden de Trabajo");
+        finishWorkOrderMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                finishWorkOrderMenuItemActionPerformed(evt);
+            }
+        });
+        workOrderOptionsPopupMenu.add(finishWorkOrderMenuItem);
 
         setPreferredSize(new java.awt.Dimension(692, 528));
 
@@ -57,6 +84,9 @@ public class HomePanel extends javax.swing.JPanel {
             }
         ));
         workDiaryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                workDiaryTableMousePressed(evt);
+            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 workDiaryTableMouseClicked(evt);
             }
@@ -84,12 +114,34 @@ public class HomePanel extends javax.swing.JPanel {
     private void workDiaryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_workDiaryTableMouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
-            this.wos.setInstance(this.wdtm.getList().get(this.workDiaryTable.getSelectedRow()));
-            new ReceiptView(null, true, wos).setVisible(true);
+           // this.wos.setInstance(this.wdtm.getList().get(this.workDiaryTable.getSelectedRow()));
+          //  new ReceiptView(null, true, wos).setVisible(true);
             //Actualizamos la tabla quitando los trabajos terminados y volviendo a cargar los pendientes
-            this.updateWorkOrderDiaryTable();
+           // this.updateWorkOrderDiaryTable();
         }
     }//GEN-LAST:event_workDiaryTableMouseClicked
+
+    private void workDiaryTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_workDiaryTableMousePressed
+        // TODO add your handling code here:
+        tableOptionsPopup(evt);
+    }//GEN-LAST:event_workDiaryTableMousePressed
+
+    private void workOrderViewMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_workOrderViewMenuItemActionPerformed
+        // TODO add your handling code here:
+        Report report = new Report();
+        dtm.setList(this.wos.getWorkOrder().getDetailList());
+        report.printWorkOrder(wos,dtm);
+    }//GEN-LAST:event_workOrderViewMenuItemActionPerformed
+
+    private void finishWorkOrderMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishWorkOrderMenuItemActionPerformed
+        // TODO add your handling code here:
+        this.wos.getWorkOrder().setWorkOrderState(3);
+        if(this.wos.updateWorkOrder()){
+            JOptionPane.showMessageDialog(this, "La orden de trabajo a terminado");
+            this.updateWorkOrderDiaryTable();
+        }
+        
+    }//GEN-LAST:event_finishWorkOrderMenuItemActionPerformed
 
     @Override
     public void paintComponent(Graphics g) {
@@ -97,10 +149,32 @@ public class HomePanel extends javax.swing.JPanel {
         ic = new ImageIcon(getClass().getResource(getImagePath()));
         g.drawImage(ic.getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
     }
+    
+    private void tableOptionsPopup(java.awt.event.MouseEvent evt) {
+        if (evt.getButton() == MouseEvent.BUTTON3) {
+            Point p = evt.getPoint();
+            int rowNumber = workDiaryTable.rowAtPoint(p);
+            ListSelectionModel modelo = workDiaryTable.getSelectionModel();
+            modelo.setSelectionInterval(rowNumber, rowNumber);
+
+            System.out.println("fila presionada " + workDiaryTable.getSelectedRow());
+            //Cargamos una nueva instancia del una orden de trabajo
+            this.wos.setInstance(this.wdtm.getList().get(this.workDiaryTable.getSelectedRow()));
+
+            //removeTable.setEnabled(true);
+            //addTable.setEnabled(false);
+            //changeTableToAnother.setEnabled(true);
+            workOrderOptionsPopupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
+            workOrderOptionsPopupMenu.setVisible(true);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem finishWorkOrderMenuItem;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable workDiaryTable;
+    private javax.swing.JPopupMenu workOrderOptionsPopupMenu;
+    private javax.swing.JMenuItem workOrderViewMenuItem;
     // End of variables declaration//GEN-END:variables
 
     /**

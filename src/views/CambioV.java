@@ -9,12 +9,12 @@ import controller.service.WorkOrderService;
 
 public class CambioV extends javax.swing.JDialog {
 
-    private double totalVenta;
+    private final double totalVenta;
     private Person cliente;
     private final InvoiceService invs;
-    private Operaciones uccfactura;
+    private final Operaciones uccfactura;
     private final WorkOrderService workOrderService;
-    private int changeState;
+    private final int changeState;
 
     public CambioV(java.awt.Frame parent, boolean modal, double val, InvoiceService invs) {
         super(parent, modal);

@@ -5,6 +5,8 @@
  */
 package views.tableModel;
 
+import controller.resources.GeneralParameter;
+import controller.resources.Operaciones;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -17,6 +19,11 @@ import model.Salary;
 public class SalaryTableModel extends AbstractTableModel {
 
     private List<Salary> list = new ArrayList<>();
+    private final Double auxTot;
+    
+    public SalaryTableModel(){
+        this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
+    }
 
     @Override
     public int getRowCount() {
@@ -39,7 +46,7 @@ public class SalaryTableModel extends AbstractTableModel {
                 return salary.getSalaryValue();
             case 2:
                 if(salary.getSalaryBalance() != null){
-                    return salary.getSalaryBalance();
+                    return Operaciones.parteDecimal(Math.rint(salary.getSalaryBalance()*auxTot)/auxTot, GeneralParameter.ACCURACY_VALUE);
                 }else{
                     return "0.00";
                 }

@@ -5,6 +5,8 @@
  */
 package views;
 
+import controller.resources.GeneralParameter;
+import controller.resources.Operaciones;
 import controller.service.EmployeeService;
 import controller.service.PersonService;
 import controller.service.SalaryPaymentService;
@@ -28,6 +30,7 @@ public class EmployeeView extends javax.swing.JDialog {
     private final SalaryTableModel salaryTableModel;
     private final SalaryPaymentService salaryPaymentService;
     private final SalaryPaymentTableModel salaryPaymentTableModel;
+    private final Double auxTot;
 
     public EmployeeView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -39,6 +42,7 @@ public class EmployeeView extends javax.swing.JDialog {
         this.salaryPaymentService = new SalaryPaymentService();
         this.salaryPaymentTableModel = new SalaryPaymentTableModel();
         initComponents();
+        this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         employeeSaveBt.setVisible(false);
         employeeCancelBt.setVisible(false);
         employeeSalaryPaymentBt.setVisible(false);
@@ -959,7 +963,7 @@ public class EmployeeView extends javax.swing.JDialog {
         if (this.salaryService.getSalary().getSalaryBalance() == 0) {
             this.salaryService.getSalary().setSalaryState(1);
         }
-        this.salaryPaymentBalanceTxt.setText(String.valueOf(this.salaryService.getSalary().getSalaryBalance()));
+        this.salaryPaymentBalanceTxt.setText(Operaciones.parteDecimal(Math.rint(this.salaryService.getSalary().getSalaryBalance()*auxTot)/auxTot, GeneralParameter.ACCURACY_VALUE));
 
         this.salaryService.updateSalary();
     }

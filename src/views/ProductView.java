@@ -67,7 +67,7 @@ public class ProductView extends javax.swing.JDialog {
         this.productDescriptionTxt.setText("");
         this.productPvpTxt.setText("0.00");
         this.productStockSp.setValue(1);
-        this.productIVAChB.setSelected(false);
+        //this.productIVAChB.setSelected(false);
         this.productTypeCb.setSelectedItem("Seleccione...");
         this.ps.newInstance();
     }
@@ -81,7 +81,7 @@ public class ProductView extends javax.swing.JDialog {
         this.productDescriptionTxt.setEditable(false);
         this.productPvpTxt.setEditable(false);
         this.productStockSp.setEnabled(false);
-        this.productIVAChB.setEnabled(false);
+        //this.productIVAChB.setEnabled(false);
         this.productTypeCb.setEnabled(false);
     }
 
@@ -118,11 +118,11 @@ public class ProductView extends javax.swing.JDialog {
                 break;
         }
 
-        if (this.ps.getProduct().getPdIvaState() == 1) {
-            this.productIVAChB.setSelected(true);
-        } else {
-            this.productIVAChB.setSelected(false);
-        }
+//        if (this.ps.getProduct().getPdIvaState() == 1) {
+//            this.productIVAChB.setSelected(true);
+//        } else {
+//            this.productIVAChB.setSelected(false);
+//        }
     }
 
     //Método para crear un objeto producto
@@ -158,11 +158,11 @@ public class ProductView extends javax.swing.JDialog {
         }
         
         //Controlamos si la opción del iva esta seleccionada para guardar el producto con iva 12 o iva 0
-        if (this.productIVAChB.isSelected()) {
-            this.ps.getProduct().setPdIvaState(1);
-        } else {
+        //if (this.productIVAChB.isSelected()) {
+          //  this.ps.getProduct().setPdIvaState(1);
+        //} else {
             this.ps.getProduct().setPdIvaState(0);
-        }
+        //}
         this.ps.getProduct().setPdDescription(this.productDescriptionTxt.getText());
     }
     
@@ -197,8 +197,6 @@ public class ProductView extends javax.swing.JDialog {
         productPvpTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         productStockSp = new javax.swing.JSpinner();
-        jLabel6 = new javax.swing.JLabel();
-        productIVAChB = new javax.swing.JCheckBox();
         barCodeChekB = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -281,9 +279,6 @@ public class ProductView extends javax.swing.JDialog {
         productStockSp.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         productStockSp.setPreferredSize(new java.awt.Dimension(60, 22));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setText("IVA:");
-
         barCodeChekB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 barCodeChekBActionPerformed(evt);
@@ -354,11 +349,7 @@ public class ProductView extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(productStockSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(productIVAChB))
+                                        .addComponent(productStockSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(productTypeCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))))))
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -384,19 +375,14 @@ public class ProductView extends javax.swing.JDialog {
                     .addGroup(contentPanelLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jLabel5))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(barCodeChekB)))
+                    .addComponent(barCodeChekB, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(6, 6, 6)
-                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(productPvpTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7)
-                        .addComponent(productStockSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel4))
-                    .addComponent(productIVAChB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(productPvpTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(productStockSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(13, 13, 13)
                 .addGroup(contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(productTypeCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -511,14 +497,12 @@ public class ProductView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField productCodeTxt;
     private javax.swing.JTextArea productDescriptionTxt;
-    private javax.swing.JCheckBox productIVAChB;
     private javax.swing.JTextField productNameTxt;
     private javax.swing.JTextField productPvpTxt;
     private javax.swing.JButton productReaderBt;

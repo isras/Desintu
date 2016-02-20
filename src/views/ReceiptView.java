@@ -123,6 +123,7 @@ public class ReceiptView extends javax.swing.JDialog {
         receiptQuotationRb = new javax.swing.JRadioButton();
         receiptWorkOrderRb = new javax.swing.JRadioButton();
         receiptInvoiceRb = new javax.swing.JRadioButton();
+        deleteItemButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         receiptNumberTextField = new javax.swing.JTextField();
@@ -356,7 +357,7 @@ public class ReceiptView extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(receiptDetailTable);
 
-        receiptAddBt.setText("AÑADIR");
+        receiptAddBt.setText("AÑADIR ITEM");
         receiptAddBt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 receiptAddBtActionPerformed(evt);
@@ -397,6 +398,13 @@ public class ReceiptView extends javax.swing.JDialog {
             }
         });
 
+        deleteItemButton.setText("ELIMINAR ITEM");
+        deleteItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteItemButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -409,6 +417,8 @@ public class ReceiptView extends javax.swing.JDialog {
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(receiptAddBt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteItemButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(receiptQuotationRb)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -428,7 +438,8 @@ public class ReceiptView extends javax.swing.JDialog {
                     .addComponent(jLabel4)
                     .addComponent(receiptQuotationRb)
                     .addComponent(receiptWorkOrderRb)
-                    .addComponent(receiptInvoiceRb))
+                    .addComponent(receiptInvoiceRb)
+                    .addComponent(deleteItemButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1490,6 +1501,16 @@ public class ReceiptView extends javax.swing.JDialog {
         balanceTotalCalculate();
     }//GEN-LAST:event_receiptDiscountStateChanged
 
+    private void deleteItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteItemButtonActionPerformed
+        // TODO add your handling code here:
+        if(receiptDetailTable.getSelectedRow() == 1){
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Por favor seleccione un item para eliminar");
+        }
+        
+    }//GEN-LAST:event_deleteItemButtonActionPerformed
+
     //Método encargado de cerrar todos los procesos de un JDialog
     private void closeWindow() {
         this.processWindowEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -1500,6 +1521,7 @@ public class ReceiptView extends javax.swing.JDialog {
     private javax.swing.JButton add;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton deleteItemButton;
     private javax.swing.JComboBox employeeComboBox;
     private javax.swing.JCheckBox ivaOptionCb;
     private javax.swing.JDialog jDialog1;

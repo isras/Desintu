@@ -170,7 +170,7 @@ public class EmployeeView extends javax.swing.JDialog {
         salaryPaymentBalanceTxt = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         employeeTabView = new javax.swing.JTabbedPane();
-        jPanel6 = new javax.swing.JPanel();
+        employeeFirstPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         employeeTable = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
@@ -181,7 +181,6 @@ public class EmployeeView extends javax.swing.JDialog {
         employeeEditBt = new javax.swing.JButton();
         employeeCancelBt = new javax.swing.JButton();
         employeeSalaryBt = new javax.swing.JButton();
-        employeeWorkBt = new javax.swing.JButton();
         employeeSalaryAddBt = new javax.swing.JButton();
         employeeSalaryPaymentBt = new javax.swing.JButton();
 
@@ -724,7 +723,7 @@ public class EmployeeView extends javax.swing.JDialog {
             }
         });
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        employeeFirstPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         employeeTable.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         employeeTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -743,13 +742,13 @@ public class EmployeeView extends javax.swing.JDialog {
         jLabel12.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel12.setText("Buscar Empleado:");
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout employeeFirstPanelLayout = new javax.swing.GroupLayout(employeeFirstPanel);
+        employeeFirstPanel.setLayout(employeeFirstPanelLayout);
+        employeeFirstPanelLayout.setHorizontalGroup(
+            employeeFirstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(employeeFirstPanelLayout.createSequentialGroup()
+                .addGroup(employeeFirstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(employeeFirstPanelLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -757,20 +756,21 @@ public class EmployeeView extends javax.swing.JDialog {
                     .addComponent(jScrollPane1))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        employeeFirstPanelLayout.setVerticalGroup(
+            employeeFirstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(employeeFirstPanelLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(employeeFirstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))
         );
 
-        employeeTabView.addTab("Empleados", jPanel6);
+        employeeTabView.addTab("Empleados", employeeFirstPanel);
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
         employeeNewBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -807,7 +807,7 @@ public class EmployeeView extends javax.swing.JDialog {
         jToolBar1.add(employeeEditBt);
 
         employeeCancelBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        employeeCancelBt.setText("CANCELAR");
+        employeeCancelBt.setText("SALIR");
         employeeCancelBt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 employeeCancelBtActionPerformed(evt);
@@ -826,13 +826,6 @@ public class EmployeeView extends javax.swing.JDialog {
             }
         });
         jToolBar1.add(employeeSalaryBt);
-
-        employeeWorkBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        employeeWorkBt.setText("TRABAJOS");
-        employeeWorkBt.setFocusable(false);
-        employeeWorkBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        employeeWorkBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(employeeWorkBt);
 
         employeeSalaryAddBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         employeeSalaryAddBt.setText("AGREGAR SALARIO");
@@ -1028,7 +1021,6 @@ public class EmployeeView extends javax.swing.JDialog {
         employeeSaveBt.setVisible(true);
         employeeCancelBt.setVisible(true);
         employeeSalaryBt.setVisible(false);
-        employeeWorkBt.setVisible(false);
     }
 
     private void employeeCancelBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeCancelBtActionPerformed
@@ -1070,7 +1062,6 @@ public class EmployeeView extends javax.swing.JDialog {
         employeeSaveBt.setVisible(false);
         employeeNewBt.setVisible(true);
         employeeEditBt.setVisible(true);
-        employeeWorkBt.setVisible(true);
         employeeSalaryBt.setVisible(true);
         employeeSalaryAddBt.setVisible(true);
         employeeSalaryPaymentBt.setVisible(false);
@@ -1088,10 +1079,13 @@ public class EmployeeView extends javax.swing.JDialog {
         // TODO add your handling code here:
         employeeTabView.add(employeePanel);
         employeeTabView.setSelectedIndex(employeeTabView.getComponentCount() - 1);
+        
+        employeeTabView.setEnabledAt(employeeTabView.indexOfComponent(employeeFirstPanel),false);
+        
         employeeTabView.setTitleAt(employeeTabView.getSelectedIndex(), "Nuevo Empleado");
+        
 
         employeeSalaryAddBt.setVisible(false);
-        employeeWorkBt.setVisible(false);
         employeeSalaryBt.setVisible(false);
         employeeEditBt.setVisible(false);
         employeeSaveBt.setVisible(true);
@@ -1113,7 +1107,6 @@ public class EmployeeView extends javax.swing.JDialog {
             this.chargeEmployeeView();
 
             employeeSalaryAddBt.setVisible(false);
-            employeeWorkBt.setVisible(false);
             employeeSalaryBt.setVisible(false);
             employeeEditBt.setVisible(true);
             employeeSaveBt.setVisible(true);
@@ -1153,7 +1146,6 @@ public class EmployeeView extends javax.swing.JDialog {
             this.employeeSaveBt.setVisible(false);
             this.employeeEditBt.setVisible(false);
             this.employeeCancelBt.setVisible(true);
-            this.employeeWorkBt.setVisible(false);
             this.employeeSalaryBt.setEnabled(false);
 
         } else {
@@ -1167,6 +1159,8 @@ public class EmployeeView extends javax.swing.JDialog {
             this.employeeTabView.add(salaryPaymentPanel);
             this.employeeTabView.setSelectedIndex(employeeTabView.getComponentCount() - 1);
             this.employeeTabView.setTitleAt(employeeTabView.getSelectedIndex(), "Pago");
+            
+            employeeTabView.setEnabledAt(employeeTabView.indexOfComponent(salaryPanel),false);
 
             this.salaryService.setInstance(this.salaryService.getSalaryList().get(this.employeeSalaryTable.getSelectedRow()));
 
@@ -1267,6 +1261,7 @@ public class EmployeeView extends javax.swing.JDialog {
     private javax.swing.JButton employeeEditBt;
     private javax.swing.JTextField employeeEmailTxt;
     private javax.swing.JTextField employeeFirstNameTxt;
+    private javax.swing.JPanel employeeFirstPanel;
     private com.toedter.calendar.JDateChooser employeeHireDateDC;
     private javax.swing.JTextField employeeIdentificationTxt;
     private javax.swing.JTextField employeeJobTxt;
@@ -1282,7 +1277,6 @@ public class EmployeeView extends javax.swing.JDialog {
     private javax.swing.JButton employeeSaveBt;
     private javax.swing.JTabbedPane employeeTabView;
     private javax.swing.JTable employeeTable;
-    private javax.swing.JButton employeeWorkBt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1310,7 +1304,6 @@ public class EmployeeView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;

@@ -114,6 +114,12 @@ public class ProductView extends javax.swing.JDialog {
             case "t":
                 this.productTypeCb.setSelectedItem("Terminado");
                 break;
+            case "a":
+                this.productTypeCb.setSelectedItem("Articulo");
+                break;
+            case "cl":
+                this.productTypeCb.setSelectedItem("Corte Láser");
+                break;
             default:
                 break;
         }
@@ -153,6 +159,11 @@ public class ProductView extends javax.swing.JDialog {
             case "Terminado":
                 this.ps.getProduct().setPdType("t");
                 break;
+            case "Articulo":
+                this.ps.getProduct().setPdType("a");
+                break;
+            case "Corte Láser":
+                this.ps.getProduct().setPdType("cl");
             default:
                 break;
         }
@@ -291,7 +302,7 @@ public class ProductView extends javax.swing.JDialog {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("TIPO:");
 
-        productTypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Material Puro", "Material Impreso", "Servicio", "Terminado" }));
+        productTypeCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Material Puro", "Material Impreso", "Servicio", "Terminado", "Articulo", "Corte Láser" }));
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);

@@ -20,7 +20,6 @@ import java.util.Date;
 import java.util.Objects;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import org.eclipse.persistence.internal.cache.AdvancedProcessor;
 import views.tableModel.DetailTableModel;
 import views.tableModel.EmployeeComboBoxModel;
 import views.tableModel.PersonComboBoxModel;
@@ -859,6 +858,8 @@ public class ReceiptView extends javax.swing.JDialog {
                     this.setworkOrderAndAddDetail();
                     this.updateWorkOrderDetailTable();
                     this.totalCalculate();
+                    //Calculamos el saldo cuando la orden de trabajo esta pendiente
+                    this.balanceTotalCalculate();
                 } else if (this.receiptQuotationRb.isSelected()) {
                     receiptSubtotalTextField.setEnabled(true);
                     receiptIvaTextField.setEnabled(true);
@@ -870,6 +871,8 @@ public class ReceiptView extends javax.swing.JDialog {
                     this.setQuotationAndAddDetail();
                     this.updateWorkOrderDetailTable();
                     this.totalCalculate();
+                    //Calculamos el saldo cuando la orden de trabajo esta pendiente
+                    this.balanceTotalCalculate();
 
                 } else if (this.receiptInvoiceRb.isSelected()) {
                     receiptSubtotalTextField.setEnabled(true);
@@ -882,6 +885,8 @@ public class ReceiptView extends javax.swing.JDialog {
                     this.setInvoiceAndAddDetail();
                     this.updateWorkOrderDetailTable();
                     this.totalCalculate();
+                    //Calculamos el saldo cuando la orden de trabajo esta pendiente
+                    this.balanceTotalCalculate();
                 }
             }
         } else {
@@ -1013,12 +1018,13 @@ public class ReceiptView extends javax.swing.JDialog {
         this.workOrderService.getWorkOrder().setWorkOrderIssueDate(receiptIssueDateChooser.getDate());
         this.workOrderService.getWorkOrder().setWorkOrderDeliveryDate(receiptDeliveryDateChooser.getDate());
         //-------------------------------- esta parte ya no iria en la base de datos ni en el código
-        
+
         //--------------------------------
         this.workOrderService.getWorkOrder().setWorkOrderAdvance(Double.valueOf(receiptAdvanceTextField.getText()));
         this.workOrderService.getWorkOrder().setWorkOrderBalance(Double.valueOf(receiptBalanceTextField.getText()));
 
         this.workOrderService.getWorkOrder().setWorkOrderSubtotal(Double.valueOf(this.receiptSubtotalTextField.getText()));
+        this.workOrderService.getWorkOrder().setWorkOrderDiscount(Double.valueOf(this.receiptDiscount.getValue().toString()));
         this.workOrderService.getWorkOrder().setWorkOrderIva(Double.parseDouble(this.receiptIvaTextField.getText()));
         this.workOrderService.getWorkOrder().setWorkOrderTotal(Double.valueOf(this.receiptTotalTextField.getText()));
         this.workOrderService.getWorkOrder().setWorkOrderInvoiceTotal(0.00);
@@ -1100,6 +1106,7 @@ public class ReceiptView extends javax.swing.JDialog {
         this.receiptSubtotalTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderSubtotal()));
         //Fijamos el valor a la variable a usar para el descuento
         this.receiptValue = this.workOrderService.getWorkOrder().getWorkOrderSubtotal();
+        this.receiptDiscount.setValue(this.workOrderService.getWorkOrder().getWorkOrderDiscount());
         this.receiptIvaTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderIva()));
         this.receiptTotalTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal()));
         this.receiptBalanceTextField.setText(String.valueOf(this.workOrderService.getWorkOrder().getWorkOrderBalance()));
@@ -1184,11 +1191,18 @@ public class ReceiptView extends javax.swing.JDialog {
             this.chargeReceivableAccountData();
             this.receivableAccountService.getReceivableAccount().setReceivableAccountTotal(accountReceivableNewValue);
 
+            if (!this.receiptAdvanceTextField.getText().equals(0.00)) {
+
+            }
+
             if (this.receivableAccountService.updateReceivableAccount()) {
                 System.out.println("SE ha actualizado la cuenta");
-                this.chargeAccountRecordData(0, "Abono a la orden Nro.: " + receiptNumberTextField.getText(), Double.parseDouble(receiptAdvanceTextField.getText()));
-                if (this.accountRecordService.saveAccountRecord()) {
-                    System.out.println("Se ha agregado un nuevo registro a la cuenta");
+                //si el valor del adenlanto es 0 no agregamos un registro.
+                if (!this.receiptAdvanceTextField.getText().equals(0.00)) {
+                    this.chargeAccountRecordData(0, "Abono a la orden Nro.: " + receiptNumberTextField.getText(), Double.parseDouble(receiptAdvanceTextField.getText()));
+                    if (this.accountRecordService.saveAccountRecord()) {
+                        System.out.println("Se ha agregado un nuevo registro a la cuenta");
+                    }
                 }
             }
 
@@ -1197,9 +1211,12 @@ public class ReceiptView extends javax.swing.JDialog {
             this.chargeReceivableAccountData();
             if (this.receivableAccountService.saveReceivableAccount()) {
                 System.out.println("Cuenta por cobrar guardada correctamente");
-                this.chargeAccountRecordData(0, "Abono a la cuenta el valor de: " + receiptAdvanceTextField.getText(), Double.parseDouble(receiptAdvanceTextField.getText()));
-                if (this.accountRecordService.saveAccountRecord()) {
-                    System.out.println("Registro de cuenta guardada correctamente");
+                this.chargeAccountRecordData(0, "Abono a la orden Nro.: " + receiptNumberTextField.getText(), Double.parseDouble(receiptAdvanceTextField.getText()));
+                //si el valor del adenlanto es 0 no agregamos un registro.
+                if (!this.receiptAdvanceTextField.getText().equals("0.00")) {
+                    if (this.accountRecordService.saveAccountRecord()) {
+                        System.out.println("Registro de cuenta guardada correctamente");
+                    }
                 }
             }
         }
@@ -1227,13 +1244,13 @@ public class ReceiptView extends javax.swing.JDialog {
                             if (this.workOrderService.getWorkOrder().getWorkOrderChange() != null) {
                                 this.saveWorkOrder();
                                 this.chargeAccountingEntry("Pago de orden de trabajo Nro. " + this.receiptNumberTextField.getText(), Double.valueOf(this.receiptTotalTextField.getText()));
-                                if(this.accountingEntryService.saveAccountingEntry()){
+                                if (this.accountingEntryService.saveAccountingEntry()) {
                                     System.out.println("Se guardo el asiento contable");
                                 }
                             }
                         } else {
                             //Abrimos la ventana del vuelto con el valor del anticipo
-                            new CambioV(null, true,Double.valueOf(receiptAdvanceTextField.getText()), this.workOrderService).setVisible(true);
+                            new CambioV(null, true, Double.valueOf(receiptAdvanceTextField.getText()), this.workOrderService).setVisible(true);
                             //Guardamos la orden de trabajo cuando no se paga el valor completo de la misma
                             this.saveWorkOrder();
                             //Si no existe la cuenta por cobrar la creamos
@@ -1294,13 +1311,13 @@ public class ReceiptView extends javax.swing.JDialog {
                                 //Imprimimos el reporte
                                 Report print = new Report();
                                 print.printInvoice(invoiceService, detailTableModel);
-                                
+
                                 //Guardamos el asiento contable
                                 this.chargeAccountingEntry("Pago de la factura Nro. " + this.receiptNumberTextField.getText(), Double.valueOf(this.receiptTotalTextField.getText()));
-                                if(this.accountingEntryService.saveAccountingEntry()){
+                                if (this.accountingEntryService.saveAccountingEntry()) {
                                     System.out.println("Asiento contable guardado");
                                 }
-                                
+
                                 this.dispose();
                             } else {
                                 JOptionPane.showMessageDialog(this, "No se guardo la factura");
@@ -1456,13 +1473,13 @@ public class ReceiptView extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_receiptWorkOrderRbActionPerformed
 
-    private void chargeAccountingEntry(String description, Double value){
+    private void chargeAccountingEntry(String description, Double value) {
         accountingEntryService.getAccountingEntry().setAeType(0);
         accountingEntryService.getAccountingEntry().setAeCreatedDate(new Date());
         accountingEntryService.getAccountingEntry().setAeDescription(description);
         accountingEntryService.getAccountingEntry().setAeValue(value);
     }
-    
+
     private void ivaOptionCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ivaOptionCbActionPerformed
         // TODO add your handling code here:
         if (ivaOptionCb.isSelected()) {
@@ -1503,12 +1520,15 @@ public class ReceiptView extends javax.swing.JDialog {
 
     private void deleteItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteItemButtonActionPerformed
         // TODO add your handling code here:
-        if(receiptDetailTable.getSelectedRow() == 1){
-            
-        }else{
+        if (receiptDetailTable.getSelectedRowCount() == 1) {
+            this.detailTableModel.getList().remove(this.receiptDetailTable.getSelectedRow());
+            this.receiptDetailTable.updateUI();
+            this.totalCalculate();
+            this.balanceTotalCalculate();
+        } else {
             JOptionPane.showMessageDialog(this, "Por favor seleccione un item para eliminar");
         }
-        
+
     }//GEN-LAST:event_deleteItemButtonActionPerformed
 
     //Método encargado de cerrar todos los procesos de un JDialog

@@ -22,9 +22,13 @@ public class ReceiptItemView extends javax.swing.JDialog {
     private double finishedValue;
     private double serviceValue;
     private double totalValue;
+    private double productValue;
+    private double cutValue;
     private String miName;
     private String tName;
     private String sName;
+    private String pName;
+    private String cName;
     private String descriptionText;
     private ReceiptView wo;
     private final DetailService ds;
@@ -56,6 +60,7 @@ public class ReceiptItemView extends javax.swing.JDialog {
         this.ps.setProductListPrintMaterial(this.ps.getProductByType("mi"));
         this.ps.setProductListFinished(this.ps.getProductByType("t"));
         this.ps.setProductListService(this.ps.getProductByType("s"));
+        this.ps.setProductList(this.ps.getProductByType("a"));
 
         if (this.ps.getProductListPrintMaterial().isEmpty()) {
             DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
@@ -83,6 +88,15 @@ public class ReceiptItemView extends javax.swing.JDialog {
             this.workOrderItemServiceJC.setModel(new ProductComboBoxModel(this.ps.getProductListService()));
             this.workOrderItemServiceJC.setSelectedIndex(0);
         }
+        
+        if(this.ps.getProductList().isEmpty()){
+            DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+            dcbm.addElement("Sin productos");
+            this.receiptProductComboBox.setModel(dcbm);
+        }else{
+            this.receiptProductComboBox.setModel(new ProductComboBoxModel(this.ps.getProductList()));
+            this.receiptProductComboBox.setSelectedIndex(0);
+        }
 
     }
 
@@ -109,27 +123,31 @@ public class ReceiptItemView extends javax.swing.JDialog {
         workOrderItemYDimenTxt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         workOrderItemPrintJC = new javax.swing.JComboBox();
+        jLabel12 = new javax.swing.JLabel();
+        workOrderItemQuantitySp = new javax.swing.JSpinner();
         jPanel4 = new javax.swing.JPanel();
         woiPrintCheckBox = new javax.swing.JCheckBox();
         woiServiceCheckBox = new javax.swing.JCheckBox();
         woiFinishedCheckBox = new javax.swing.JCheckBox();
+        receiptProductCheckBox = new javax.swing.JCheckBox();
+        receiptCutCheckBox = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         workOrderItemServiceJC = new javax.swing.JComboBox();
         jPanel5 = new javax.swing.JPanel();
-        workOrderItemSimpleComplexityRB = new javax.swing.JRadioButton();
-        workOrderItemMediumComplexityRB = new javax.swing.JRadioButton();
-        workOrderItemComplexComplexityRB = new javax.swing.JRadioButton();
-        noneComplexityRB = new javax.swing.JRadioButton();
+        jLabel9 = new javax.swing.JLabel();
+        laserCutTexfField = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         workOrderItemCalculateBt = new javax.swing.JButton();
         workOrderItemAddBt = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        workOrderItemQuantitySp = new javax.swing.JSpinner();
         jLabel8 = new javax.swing.JLabel();
         workOrderItemTotalValueTxt = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         workOrderItemDetailTxt = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        receiptProductComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -162,7 +180,7 @@ public class ReceiptItemView extends javax.swing.JDialog {
         workOrderItemYDimenTxt.setText("0.00");
         workOrderItemYDimenTxt.setEnabled(false);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel6.setText("Producto:");
 
         workOrderItemPrintJC.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -174,29 +192,37 @@ public class ReceiptItemView extends javax.swing.JDialog {
             }
         });
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setText("Cantidad:");
+
+        workOrderItemQuantitySp.setValue(1);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                .addGap(2, 2, 2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(workOrderItemFinishedJC, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(workOrderItemPrintJC, 0, 537, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(workOrderItemQuantitySp, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(workOrderItemXDimenTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(workOrderItemYDimenTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(workOrderItemFinishedJC, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(workOrderItemPrintJC, 0, 477, Short.MAX_VALUE))
+                        .addComponent(workOrderItemYDimenTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -216,7 +242,9 @@ public class ReceiptItemView extends javax.swing.JDialog {
                     .addComponent(workOrderItemXDimenTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
-                    .addComponent(workOrderItemYDimenTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(workOrderItemYDimenTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(workOrderItemQuantitySp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -257,6 +285,20 @@ public class ReceiptItemView extends javax.swing.JDialog {
             }
         });
 
+        receiptProductCheckBox.setText("Artículo");
+        receiptProductCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                receiptProductCheckBoxActionPerformed(evt);
+            }
+        });
+
+        receiptCutCheckBox.setText("Corte Láser");
+        receiptCutCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                receiptCutCheckBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -268,7 +310,11 @@ public class ReceiptItemView extends javax.swing.JDialog {
                 .addComponent(woiFinishedCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(woiServiceCheckBox)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(receiptProductCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(receiptCutCheckBox)
+                .addContainerGap(125, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +323,9 @@ public class ReceiptItemView extends javax.swing.JDialog {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(woiPrintCheckBox)
                     .addComponent(woiServiceCheckBox)
-                    .addComponent(woiFinishedCheckBox))
+                    .addComponent(woiFinishedCheckBox)
+                    .addComponent(receiptProductCheckBox)
+                    .addComponent(receiptCutCheckBox))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -297,32 +345,16 @@ public class ReceiptItemView extends javax.swing.JDialog {
         });
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Complejidad", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11), new java.awt.Color(0, 153, 255))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Corte Láser", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11), new java.awt.Color(0, 153, 255))); // NOI18N
 
-        workOrderItemSimpleComplexityRB.setBackground(new java.awt.Color(255, 255, 255));
-        complexityBG.add(workOrderItemSimpleComplexityRB);
-        workOrderItemSimpleComplexityRB.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        workOrderItemSimpleComplexityRB.setText("Simple");
-        workOrderItemSimpleComplexityRB.setEnabled(false);
+        jLabel9.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel9.setText("Segundos:");
 
-        workOrderItemMediumComplexityRB.setBackground(new java.awt.Color(255, 255, 255));
-        complexityBG.add(workOrderItemMediumComplexityRB);
-        workOrderItemMediumComplexityRB.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        workOrderItemMediumComplexityRB.setSelected(true);
-        workOrderItemMediumComplexityRB.setText("Media");
-        workOrderItemMediumComplexityRB.setEnabled(false);
+        laserCutTexfField.setText("0");
+        laserCutTexfField.setEnabled(false);
 
-        workOrderItemComplexComplexityRB.setBackground(new java.awt.Color(255, 255, 255));
-        complexityBG.add(workOrderItemComplexComplexityRB);
-        workOrderItemComplexComplexityRB.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        workOrderItemComplexComplexityRB.setText("Compleja");
-        workOrderItemComplexComplexityRB.setEnabled(false);
-
-        noneComplexityRB.setBackground(new java.awt.Color(255, 255, 255));
-        complexityBG.add(noneComplexityRB);
-        noneComplexityRB.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        noneComplexityRB.setText("Ninguna");
-        noneComplexityRB.setEnabled(false);
+        jLabel10.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel10.setText("seg.");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -330,13 +362,11 @@ public class ReceiptItemView extends javax.swing.JDialog {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(noneComplexityRB)
+                .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(workOrderItemSimpleComplexityRB)
+                .addComponent(laserCutTexfField, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(workOrderItemMediumComplexityRB)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(workOrderItemComplexComplexityRB)
+                .addComponent(jLabel10)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -344,11 +374,10 @@ public class ReceiptItemView extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(workOrderItemSimpleComplexityRB)
-                    .addComponent(workOrderItemMediumComplexityRB)
-                    .addComponent(workOrderItemComplexComplexityRB)
-                    .addComponent(noneComplexityRB))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel9)
+                    .addComponent(laserCutTexfField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -395,10 +424,6 @@ public class ReceiptItemView extends javax.swing.JDialog {
             }
         });
 
-        jLabel12.setText("CANTIDAD");
-
-        workOrderItemQuantitySp.setValue(1);
-
         jLabel8.setText("VALOR:");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -418,11 +443,7 @@ public class ReceiptItemView extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(workOrderItemCalculateBt))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGap(0, 252, Short.MAX_VALUE)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(workOrderItemQuantitySp, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(workOrderItemTotalValueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -442,10 +463,39 @@ public class ReceiptItemView extends javax.swing.JDialog {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
-                        .addComponent(workOrderItemTotalValueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12)
-                        .addComponent(workOrderItemQuantitySp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(workOrderItemTotalValueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(workOrderItemAddBt))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Artículos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Roboto", 1, 12), new java.awt.Color(0, 153, 255))); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel1.setText("Artículo:");
+
+        receiptProductComboBox.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        receiptProductComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione..." }));
+        receiptProductComboBox.setEnabled(false);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(receiptProductComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(receiptProductComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -457,9 +507,10 @@ public class ReceiptItemView extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -470,10 +521,12 @@ public class ReceiptItemView extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -484,7 +537,7 @@ public class ReceiptItemView extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -559,6 +612,24 @@ public class ReceiptItemView extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_woiFinishedCheckBoxActionPerformed
 
+    private void receiptProductCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receiptProductCheckBoxActionPerformed
+        // TODO add your handling code here:
+        if(this.receiptProductCheckBox.isSelected()){
+            this.receiptProductComboBox.setEnabled(true);
+        }else{
+            this.receiptProductComboBox.setEnabled(false);
+        }
+    }//GEN-LAST:event_receiptProductCheckBoxActionPerformed
+
+    private void receiptCutCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_receiptCutCheckBoxActionPerformed
+        // TODO add your handling code here:
+        if(receiptCutCheckBox.isSelected()){
+            this.laserCutTexfField.setEnabled(true);
+        }else{
+            this.laserCutTexfField.setEnabled(false);
+        }
+    }//GEN-LAST:event_receiptCutCheckBoxActionPerformed
+
     //Para deshabilitar los campos de la sección de terminados
     private void finishedButtonDisable() {
         workOrderItemFinishedJC.setEnabled(false);
@@ -576,19 +647,19 @@ public class ReceiptItemView extends javax.swing.JDialog {
     //Para deshabilitar los campos de la sección de servicios
     private void serviceButtonsDisable() {
         workOrderItemServiceJC.setEnabled(false);
-        workOrderItemSimpleComplexityRB.setEnabled(false);
-        workOrderItemMediumComplexityRB.setEnabled(false);
-        workOrderItemComplexComplexityRB.setEnabled(false);
-        noneComplexityRB.setEnabled(false);
+        //workOrderItemSimpleComplexityRB.setEnabled(false);
+        //workOrderItemMediumComplexityRB.setEnabled(false);
+        //workOrderItemComplexComplexityRB.setEnabled(false);
+        //noneComplexityRB.setEnabled(false);
     }
 
     //Para habilitar los campos de la sección de servicios
     private void serviceButtonsEnable() {
         workOrderItemServiceJC.setEnabled(true);
-        workOrderItemSimpleComplexityRB.setEnabled(true);
-        workOrderItemMediumComplexityRB.setEnabled(true);
-        workOrderItemComplexComplexityRB.setEnabled(true);
-        noneComplexityRB.setEnabled(true);
+        //workOrderItemSimpleComplexityRB.setEnabled(true);
+        //workOrderItemMediumComplexityRB.setEnabled(true);
+        //workOrderItemComplexComplexityRB.setEnabled(true);
+        //noneComplexityRB.setEnabled(true);
     }
 
     //Para habilitar los campos de la sección impresión
@@ -663,16 +734,46 @@ public class ReceiptItemView extends javax.swing.JDialog {
                 descriptionText = sb.append(",").append(" ").append(sName).toString();
             }
 
-            if (workOrderItemSimpleComplexityRB.isSelected()) {
-                serviceValue += (serviceValue * GeneralParameter.SIMPLE_SERVICE_VALUE) / 100;
-            } else if (workOrderItemMediumComplexityRB.isSelected()) {
-                serviceValue += (serviceValue * GeneralParameter.MEDIUM_SERVICE_VALUE) / 100;
-            } else if (workOrderItemComplexComplexityRB.isSelected()) {
-                serviceValue += (serviceValue * GeneralParameter.COMPLEX_SERVICE_VALUE) / 100;
+            //if (workOrderItemSimpleComplexityRB.isSelected()) {
+              //  serviceValue += (serviceValue * GeneralParameter.SIMPLE_SERVICE_VALUE) / 100;
+            //} else if (workOrderItemMediumComplexityRB.isSelected()) {
+              //  serviceValue += (serviceValue * GeneralParameter.MEDIUM_SERVICE_VALUE) / 100;
+            //} else if (workOrderItemComplexComplexityRB.isSelected()) {
+              //  serviceValue += (serviceValue * GeneralParameter.COMPLEX_SERVICE_VALUE) / 100;
+           // }
+        }
+        
+        if(!this.receiptProductCheckBox.isSelected()){
+            productValue = 0.00;
+            pName = "";
+        }else{
+            ProductComboBoxModel productComboBoxModel = (ProductComboBoxModel) this.receiptProductComboBox.getModel();
+            productValue = productComboBoxModel.getSelectedItem().getPdSalePrice();
+            
+            pName = productComboBoxModel.getSelectedItem().getPdName();
+            if(descriptionText.isEmpty()){
+                descriptionText = sb.append(pName).toString();
+            }else{
+                descriptionText = sb.append(",").append(" ").append(pName).toString();
             }
         }
+        
+        if(!this.receiptCutCheckBox.isSelected()){
+            cutValue = 0.00;
+            cName = "";
+        }else{
+            cutValue = 0.01;
+            cName = "Corte Láser";
+            if(descriptionText.isEmpty()){
+                descriptionText = sb.append(cName).toString();
+            }else{
+                descriptionText = sb.append(",").append(" ").append(cName).toString();
+            }
+        }
+        
+        
 
-        totalValue = (((materialValue + finishedValue) * (Double.parseDouble(workOrderItemXDimenTxt.getText()) * Double.parseDouble(workOrderItemYDimenTxt.getText()))) + serviceValue) * Double.valueOf(workOrderItemQuantitySp.getValue().toString());
+        totalValue = (((materialValue + finishedValue) * (Double.parseDouble(workOrderItemXDimenTxt.getText()) * Double.parseDouble(workOrderItemYDimenTxt.getText()))) + serviceValue + productValue + (cutValue * Double.valueOf(laserCutTexfField.getText()))) * Double.valueOf(workOrderItemQuantitySp.getValue().toString());
         //workOrderItemDetailTxt.setText(sb.append(miName).append(" ").append(tName).append(" ").append(workOrderItemXDimenTxt.getText()).append("x").append(workOrderItemYDimenTxt.getText()).toString());
         workOrderItemDetailTxt.setText(descriptionText);
         workOrderItemTotalValueTxt.setText(String.valueOf(Operaciones.parteDecimal(Math.rint(totalValue * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
@@ -682,6 +783,8 @@ public class ReceiptItemView extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup complexityBG;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -691,27 +794,29 @@ public class ReceiptItemView extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JRadioButton noneComplexityRB;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JTextField laserCutTexfField;
+    private javax.swing.JCheckBox receiptCutCheckBox;
+    private javax.swing.JCheckBox receiptProductCheckBox;
+    private javax.swing.JComboBox<String> receiptProductComboBox;
     private javax.swing.ButtonGroup stateBG;
     private javax.swing.JCheckBox woiFinishedCheckBox;
     private javax.swing.JCheckBox woiPrintCheckBox;
     private javax.swing.JCheckBox woiServiceCheckBox;
     private javax.swing.JButton workOrderItemAddBt;
     private javax.swing.JButton workOrderItemCalculateBt;
-    private javax.swing.JRadioButton workOrderItemComplexComplexityRB;
     private javax.swing.JTextField workOrderItemDetailTxt;
     private javax.swing.JComboBox workOrderItemFinishedJC;
-    private javax.swing.JRadioButton workOrderItemMediumComplexityRB;
     private javax.swing.JComboBox workOrderItemPrintJC;
     private javax.swing.JSpinner workOrderItemQuantitySp;
     private javax.swing.JComboBox workOrderItemServiceJC;
-    private javax.swing.JRadioButton workOrderItemSimpleComplexityRB;
     private javax.swing.JTextField workOrderItemTotalValueTxt;
     private javax.swing.JTextField workOrderItemXDimenTxt;
     private javax.swing.JTextField workOrderItemYDimenTxt;

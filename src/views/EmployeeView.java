@@ -55,6 +55,8 @@ public class EmployeeView extends javax.swing.JDialog {
         this.employeeTableModel.setList(this.employeeService.getEmployeeList());
         this.employeeTable.setModel(this.employeeTableModel);
         this.employeeTable.updateUI();
+        
+        //this.salaryPaymentService.setSalaryPaymentList(salaryPaymentList);
 
     }
 
@@ -774,7 +776,7 @@ public class EmployeeView extends javax.swing.JDialog {
         jToolBar1.setRollover(true);
 
         employeeNewBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        employeeNewBt.setText("NUEVO");
+        employeeNewBt.setText("NUEVO EMPLEADO");
         employeeNewBt.setFocusable(false);
         employeeNewBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         employeeNewBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -840,7 +842,7 @@ public class EmployeeView extends javax.swing.JDialog {
         jToolBar1.add(employeeSalaryAddBt);
 
         employeeSalaryPaymentBt.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        employeeSalaryPaymentBt.setText("PAGO");
+        employeeSalaryPaymentBt.setText("REALIZAR PAGOS");
         employeeSalaryPaymentBt.setFocusable(false);
         employeeSalaryPaymentBt.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         employeeSalaryPaymentBt.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

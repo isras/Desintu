@@ -14,8 +14,8 @@ import model.SalaryPayment;
  *
  * @author eyetive
  */
-public class SalaryPaymentTableModel extends AbstractTableModel {
-
+public class SalaryPrincipalTableModel extends AbstractTableModel {
+    
     private List<SalaryPayment> list = new ArrayList<>();
 
     @Override
@@ -31,18 +31,23 @@ public class SalaryPaymentTableModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         SalaryPayment salaryPayment = this.list.get(rowIndex);
+        
+        Double salaryPaymentTotal = 0.00;
+        for (int i = 0; i < salaryPayment.getSalary().getSalaryPaymentList().size(); i++) {
+            salaryPaymentTotal += salaryPayment.getSalary().getSalaryPaymentList().get(i).getSalaryPaymentValue();
+        }
 
         switch (columnIndex) {
             case 0:
-                return rowIndex + 1;
+                return salaryPayment.getSalary().getEmployee().getPerson().toString();
             case 1:
-                return salaryPayment.getSalaryPaymentValue();
+                return salaryPayment.getSalary().getSalaryDate();
             case 2:
-                return salaryPayment.getSalaryPaymentDate();
+                return salaryPayment.getSalary().getSalaryValue();
             case 3:
-                return salaryPayment.getSalaryPaymentDescription();
+                return salaryPaymentTotal;
             case 4:
-                return salaryPayment.getSalary().getEmployee().getPerson().getPrFirstName();
+                return salaryPayment.getSalary().getSalaryBalance();
             default:
                 return null;
         }
@@ -53,15 +58,15 @@ public class SalaryPaymentTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "Nro";
-            case 1:
-                return "Valor";
-            case 2:
-                return "Fecha";
-            case 3:
-                return "Descripción";
-            case 4:
                 return "Nombre";
+            case 1:
+                return "Fecha";
+            case 2:
+                return "Sueldo";
+            case 3:
+                return "Adelantos";
+            case 4:
+                return "Saldo";
             default:
                 return null;
         }

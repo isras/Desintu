@@ -35,7 +35,14 @@ public class EmployeeTableModel extends AbstractTableModel {
             case 0:
                 return employee.toString();
             case 1:
+                if(employee.getSalaryList().isEmpty()){
+                  System.out.println("0.00");
+                //}else{
+                 //   return employee.getSalaryList().get(0).getSalaryValue();
+                    
+                }
                 return employee.getPerson().getPrIdentification();
+                
             case 2:
                 return employee.getPerson().getPrPhone();
             case 3:
@@ -50,13 +57,13 @@ public class EmployeeTableModel extends AbstractTableModel {
     {
         switch (column) {
             case 0:
-                return "Nombres";
+                return "NOMBRE";
             case 1:
-                return "Identificación";
+                return "IDENTIFICACIÓN";
             case 2:
-                return "Teléfono";             
+                return "TELÉFONO";             
             case 3:
-                return "Dirección";
+                return "DIRECCIÓN";
             default:
                 return null;
         }

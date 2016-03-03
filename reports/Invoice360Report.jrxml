@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2016-01-06T19:13:03 -->
+<!-- 2016-03-02T23:13:40 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InvoiceReport" pageWidth="430" pageHeight="595" columnWidth="402" leftMargin="14" rightMargin="14" topMargin="99" bottomMargin="85" whenResourceMissingType="Empty" uuid="0202ae2f-86b2-45a0-84b6-7d4da6a997e6">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="17"/>
@@ -16,6 +16,8 @@
 	<parameter name="iva" class="java.lang.String"/>
 	<parameter name="subtotalIvaZero" class="java.lang.String"/>
 	<parameter name="subtotalIva" class="java.lang.String"/>
+	<parameter name="orderNumber" class="java.lang.String"/>
+	<parameter name="orderDiscount" class="java.lang.String"/>
 	<field name="Cantidad" class="java.lang.String"/>
 	<field name="Descripcion" class="java.lang.String"/>
 	<field name="Precio" class="java.lang.String"/>
@@ -78,6 +80,17 @@
 					<pen lineStyle="Solid"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement x="275" y="3" width="70" height="18" uuid="8fa9c8ad-5d39-4e59-b942-d50d0041a568"/>
+				<text><![CDATA[ORDEN Nro. ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="345" y="3" width="56" height="18" uuid="51c44a04-7884-48b0-a992-a3e550d87642"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{orderNumber}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -157,9 +170,9 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="78" splitType="Stretch">
+		<band height="80" splitType="Stretch">
 			<staticText>
-				<reportElement x="294" y="62" width="38" height="11" uuid="db29a88f-79b0-49e1-86be-62bafc32464c"/>
+				<reportElement x="294" y="17" width="38" height="11" uuid="db29a88f-79b0-49e1-86be-62bafc32464c"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
@@ -180,7 +193,7 @@
 				<text><![CDATA[CAMBIO: $]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="342" y="62" width="50" height="11" uuid="9b973981-a60a-4da9-9485-45204f9aa490"/>
+				<reportElement x="342" y="17" width="50" height="11" uuid="9b973981-a60a-4da9-9485-45204f9aa490"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
@@ -201,28 +214,28 @@
 				<textFieldExpression><![CDATA[$P{cambio}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="278" y="17" width="54" height="11" uuid="6649bef6-c8d4-4bf2-bf8f-a6079955262a"/>
+				<reportElement x="277" y="45" width="54" height="11" uuid="6649bef6-c8d4-4bf2-bf8f-a6079955262a"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[ANTICIPO: $]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="342" y="17" width="50" height="11" uuid="9c552571-204f-498a-ace7-7f76d0942e4f"/>
+				<reportElement x="342" y="45" width="50" height="11" uuid="9c552571-204f-498a-ace7-7f76d0942e4f"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{subtotal}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="260" y="39" width="72" height="11" uuid="52890115-5864-4de7-9363-2983d46a07c7"/>
+				<reportElement x="259" y="60" width="72" height="11" uuid="52890115-5864-4de7-9363-2983d46a07c7"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[SALDO: $]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="342" y="39" width="50" height="11" uuid="123aaa5c-288e-498f-be89-211f0ca55694"/>
+				<reportElement x="342" y="60" width="50" height="11" uuid="123aaa5c-288e-498f-be89-211f0ca55694"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
@@ -234,6 +247,27 @@
 					<pen lineWidth="0.5" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement x="272" y="31" width="60" height="10" uuid="f6b90918-b087-490e-85b5-34705ba9f60f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DESCUENTO: $]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="342" y="31" width="38" height="10" uuid="554556a2-e4ab-46c9-bc5e-cce7d50636d5"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{orderDiscount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="384" y="31" width="8" height="10" uuid="b5ed2ccb-9ed9-4f75-a004-3f872b79b1eb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[%]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>
@@ -274,7 +308,7 @@
 				<text><![CDATA[10 de Agosto y Rocafuerte]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="316" y="30" width="50" height="13" uuid="389277ab-e2e3-4d85-9658-973fcf254ae0"/>
+				<reportElement x="305" y="30" width="50" height="13" uuid="389277ab-e2e3-4d85-9658-973fcf254ae0"/>
 				<textElement>
 					<font size="8" isBold="false" isItalic="true"/>
 				</textElement>
@@ -288,7 +322,7 @@
 				<text><![CDATA[loja360@yahoo.es]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="260" y="30" width="52" height="13" uuid="389277ab-e2e3-4d85-9658-973fcf254ae0"/>
+				<reportElement x="249" y="30" width="52" height="13" uuid="389277ab-e2e3-4d85-9658-973fcf254ae0"/>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="false" isItalic="true"/>
 				</textElement>
@@ -314,7 +348,7 @@
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="248" y="4" width="80" height="13" uuid="389277ab-e2e3-4d85-9658-973fcf254ae0"/>
+				<reportElement x="248" y="4" width="94" height="13" uuid="389277ab-e2e3-4d85-9658-973fcf254ae0"/>
 				<textElement>
 					<font size="8" isBold="false" isItalic="true"/>
 				</textElement>

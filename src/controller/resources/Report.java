@@ -56,6 +56,7 @@ public class Report {
         String path = System.getProperty("user.dir") + "/reports/Invoice360Report.jasper";
 
         Map parameters = new HashMap();
+        parameters.put("orderNumber",wos.getWorkOrder().getWorkOrderNumber());
         parameters.put("nombreCliente", wos.getWorkOrder().getPerson().toString());
         parameters.put("rucCliente", wos.getWorkOrder().getPerson().getPrIdentification());
         parameters.put("dirCliente", wos.getWorkOrder().getPerson().getPrAddress());
@@ -63,6 +64,7 @@ public class Report {
         parameters.put("subtotal", String.valueOf(wos.getWorkOrder().getWorkOrderAdvance()));
         parameters.put("subtotalIva", String.valueOf(wos.getWorkOrder().getWorkOrderBalance()));
         parameters.put("total", String.valueOf(wos.getWorkOrder().getWorkOrderTotal()));
+        parameters.put("orderDiscount",String.valueOf(wos.getWorkOrder().getWorkOrderDiscount()));
         parameters.put("efectivo",String.valueOf(wos.getWorkOrder().getWorkOrderCash()));
         parameters.put("cambio", String.valueOf(wos.getWorkOrder().getWorkOrderChange()));
 

@@ -67,4 +67,12 @@ public class ProductService {
         this.pDao.setProductListService(list);
     }
     
+    public List<Product> getProductList(){
+        return this.pDao.getProductList();
+    }
+    
+    public void setProductList(List<Product> list){
+        this.pDao.setProductList(list);
+    }
+    
 }

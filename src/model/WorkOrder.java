@@ -76,6 +76,8 @@ public class WorkOrder implements Serializable {
     private Integer workOrderInvoiceState;
     @Column (name = "wo_subtotal")
     private Double workOrderSubtotal;
+    @Column (name = "wo_discount")
+    private Double workOrderDiscount;
     @Column (name = "wo_iva")
     private Double workOrderIva;
     @Column (name = "wo_invoice_total")
@@ -334,6 +336,20 @@ public class WorkOrder implements Serializable {
      */
     public void setWorkOrderChange(Double workOrderChange) {
         this.workOrderChange = workOrderChange;
+    }
+
+    /**
+     * @return the workOrderDiscount
+     */
+    public Double getWorkOrderDiscount() {
+        return workOrderDiscount;
+    }
+
+    /**
+     * @param workOrderDiscount the workOrderDiscount to set
+     */
+    public void setWorkOrderDiscount(Double workOrderDiscount) {
+        this.workOrderDiscount = workOrderDiscount;
     }
     
 }

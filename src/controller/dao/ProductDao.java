@@ -11,6 +11,7 @@ public class ProductDao extends AdapterDao {
     private List<Product> productListPrintMaterial;
     private List<Product> productListFinished;
     private List<Product> productListService;
+    private List<Product> productList;
 
     public ProductDao() {
         super(Product.class, new Conexion().getEm());
@@ -64,40 +65,40 @@ public class ProductDao extends AdapterDao {
     }
 
     public List<Product> list() {
-        List<Product> productList = new ArrayList<>();
+        List<Product> list = new ArrayList<>();
         try {
             String query = "select c from Product c";
             Query q = this.getEntityManager().createQuery(query);
-            productList = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
+            list = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
         } catch (Exception e) {
             System.out.println(e);
         }
-        return productList;
+        return list;
     }
 
     public List<Product> getProductsByCriteria(String criteria) {
-        List<Product> productList = new ArrayList<>();
+        List<Product> list = new ArrayList<>();
         try {
             String query = "select c from Product c where c.pdName like '" + criteria + "%' or c.pdCode like '" + criteria + "%' or c.pdBarcode like '" + criteria + "%'";
             Query q = this.getEntityManager().createQuery(query);
-            productList = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
+            list = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
         } catch (Exception e) {
             System.out.println(e);
         }
-        return productList;
+        return list;
     }
 
     public List<Product> getProductsByType(String criteria) {
-        List<Product> productList = new ArrayList<>();
+        List<Product> list = new ArrayList<>();
         try {
             String query = "select p from Product p where p.pdType ='" + criteria + "'";
             Query q = this.getEntityManager().createQuery(query);
-            productList = q.getResultList();
-            System.out.println(productList);
+            list = q.getResultList();
+            System.out.println(list);
         } catch (Exception e) {
             System.out.println(e);
         }
-        return productList;
+        return list;
     }
 
     /**
@@ -150,6 +151,23 @@ public class ProductDao extends AdapterDao {
      */
     public void setProductListService(List<Product> productListService) {
         this.productListService = productListService;
+    }
+
+    /**
+     * @return the productList
+     */
+    public List<Product> getProductList() {
+        if(this.productList == null){
+            this.productList = new ArrayList<>();
+        }
+        return productList;
+    }
+
+    /**
+     * @param productList the productList to set
+     */
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
 }

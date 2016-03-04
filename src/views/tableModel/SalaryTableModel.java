@@ -32,7 +32,7 @@ public class SalaryTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -43,16 +43,27 @@ public class SalaryTableModel extends AbstractTableModel {
             case 0:
                 return rowIndex + 1;
             case 1:
-                return salary.getSalaryValue();
+                return salary.getSalaryDate();
+                
             case 2:
+                return salary.getSalaryValue();
+                
+            case 3:
+                Double salaryPaymentTotal = 0.00;
+                
+                for (int i = 0; i < salary.getSalaryPaymentList().size(); i++) {
+                    salaryPaymentTotal += salary.getSalaryPaymentList().get(i).getSalaryPaymentValue();
+                }
+                return salaryPaymentTotal;
+                
+                
+            case 4:
                 if(salary.getSalaryBalance() != null){
                     return Operaciones.parteDecimal(Math.rint(salary.getSalaryBalance()*auxTot)/auxTot, GeneralParameter.ACCURACY_VALUE);
                 }else{
                     return "0.00";
                 }
-            case 3:
-                return salary.getSalaryDate();
-            case 4:
+            case 5:
                 if(salary.getSalaryState() == 0){
                     return "Pendiente";
                 }else{
@@ -70,12 +81,17 @@ public class SalaryTableModel extends AbstractTableModel {
             case 0:
                 return "Nro";
             case 1:
-                return "Valor";
-            case 2:
-                return "Saldo";
-            case 3:
                 return "Fecha";
+                
+            case 2:
+                return "Sueldo";
+            case 3:
+                return "Adelantos";
+                
             case 4:
+                return "Saldo";
+                
+            case 5:
                 return "Estado";
             default:
                 return null;

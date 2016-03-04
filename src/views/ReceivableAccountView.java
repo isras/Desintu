@@ -51,6 +51,7 @@ public class ReceivableAccountView extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        receivableAccountButtonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         accountRecordTable = new javax.swing.JTable();
@@ -66,7 +67,11 @@ public class ReceivableAccountView extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         paymentValueTextField = new javax.swing.JTextField();
         savePaymentButton = new javax.swing.JButton();
+        advanceCheckBox = new javax.swing.JRadioButton();
+        loanCheckBox = new javax.swing.JRadioButton();
+        newReceivableAccountButton = new javax.swing.JButton();
         searchCustomerComboBox = new javax.swing.JComboBox<>();
+        newCustomer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -146,29 +151,52 @@ public class ReceivableAccountView extends javax.swing.JDialog {
             }
         });
 
+        advanceCheckBox.setText("Abono");
+
+        loanCheckBox.setText("Préstamo");
+
         javax.swing.GroupLayout paymentPanelLayout = new javax.swing.GroupLayout(paymentPanel);
         paymentPanel.setLayout(paymentPanelLayout);
         paymentPanelLayout.setHorizontalGroup(
             paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paymentPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(paymentValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(savePaymentButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paymentPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(paymentValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(savePaymentButton)
+                        .addContainerGap())
+                    .addGroup(paymentPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(advanceCheckBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(loanCheckBox)
+                        .addGap(20, 20, 20))))
         );
         paymentPanelLayout.setVerticalGroup(
             paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(paymentPanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paymentPanelLayout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(advanceCheckBox)
+                    .addComponent(loanCheckBox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(paymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(paymentValueTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(savePaymentButton))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        newReceivableAccountButton.setText("CUENTA INICIAL");
+        newReceivableAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newReceivableAccountButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -176,7 +204,9 @@ public class ReceivableAccountView extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addPaymentButton)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(addPaymentButton)
+                    .addComponent(newReceivableAccountButton))
                 .addGap(18, 18, 18)
                 .addComponent(paymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -185,10 +215,13 @@ public class ReceivableAccountView extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(addPaymentButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(paymentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(newReceivableAccountButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addPaymentButton))
+                    .addComponent(paymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         searchCustomerComboBox.setEditable(true);
@@ -202,38 +235,48 @@ public class ReceivableAccountView extends javax.swing.JDialog {
             }
         });
 
+        newCustomer.setText("NUEVO CLIENTE");
+        newCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCustomerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(searchCustomerComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchCustomerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(newCustomer))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(searchCustomerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(searchCustomerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newCustomer))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(137, 137, 137))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -244,7 +287,7 @@ public class ReceivableAccountView extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -257,7 +300,13 @@ public class ReceivableAccountView extends javax.swing.JDialog {
             PersonComboBoxModel pcbm = (PersonComboBoxModel) searchCustomerComboBox.getModel();
             this.personService.setInstance(pcbm.getSelectedItem());
             if (this.personService.getPerson() != null) {
-                this.chargeAccountRecordsInTable();
+                if(this.receivableAccountService.getReceivableAccountByPerson(this.personService.getPerson()).getReceivableAccountId() == null){
+                    this.addPaymentButton.setEnabled(false);
+                }else{
+                    this.chargeAccountRecordsInTable();
+                    this.addPaymentButton.setEnabled(true);
+                }
+                
             }
         }
     }//GEN-LAST:event_searchCustomerComboBoxPopupMenuWillBecomeInvisible
@@ -269,9 +318,15 @@ public class ReceivableAccountView extends javax.swing.JDialog {
     }//GEN-LAST:event_addPaymentButtonActionPerformed
 
     private void chargeAccountRecordData(){
-        this.accountRecordService.getAccountRecord().setAccountRecordType(0);
+        if(advanceCheckBox.isSelected()){
+            this.accountRecordService.getAccountRecord().setAccountRecordType(0);
+            this.accountRecordService.getAccountRecord().setAccountRecordDescription("Pago a la cuenta");
+        }else{
+            this.accountRecordService.getAccountRecord().setAccountRecordType(1);
+            this.accountRecordService.getAccountRecord().setAccountRecordDescription("Préstamo al cliente");
+        }
         this.accountRecordService.getAccountRecord().setAccountRecordDate(new Date());
-        this.accountRecordService.getAccountRecord().setAccountRecordDescription("Pago a la cuenta");
+        
         this.accountRecordService.getAccountRecord().setAccountRecordValue(Double.parseDouble(this.paymentValueTextField.getText()));
         this.accountRecordService.getAccountRecord().setReceivableAccount(this.receivableAccountService.getReceivableAccount());
     }
@@ -290,8 +345,14 @@ public class ReceivableAccountView extends javax.swing.JDialog {
                 
                 
                  //this.receivableAccountService.setInstance(this.receivableAccountService.getReceivableAccountByPerson(this.personService.getPerson()));
+                 Double newValue;
+                 if(this.advanceCheckBox.isSelected()){
+                     newValue = this.receivableAccountService.getReceivableAccount().getReceivableAccountTotal() - Double.valueOf(this.paymentValueTextField.getText());
+                 }else{
+                     newValue = this.receivableAccountService.getReceivableAccount().getReceivableAccountTotal() + Double.valueOf(this.paymentValueTextField.getText());
+                 }
                 
-                Double newValue = this.receivableAccountService.getReceivableAccount().getReceivableAccountTotal() - Double.valueOf(this.paymentValueTextField.getText());
+                
                 
                 System.out.println("Actualizado correctamente: " + newValue);
                 
@@ -312,6 +373,39 @@ public class ReceivableAccountView extends javax.swing.JDialog {
         this.paymentPanel.setVisible(false);
         
     }//GEN-LAST:event_savePaymentButtonActionPerformed
+
+    private void newReceivableAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newReceivableAccountButtonActionPerformed
+        // TODO add your handling code here:
+        if(this.personService.getPerson().getPersonId() == null){
+            JOptionPane.showMessageDialog(this, "El cliente no existe");
+        }else{
+            if(this.receivableAccountService.getReceivableAccountByPerson(this.personService.getPerson()).getReceivableAccountId() == null){
+                this.chargeReceivableAccountData();
+                if(this.receivableAccountService.saveReceivableAccount()){
+                    System.out.println("Se guardo la cuenta");
+                    this.addPaymentButton.setEnabled(true);
+                }
+                
+            }else{
+                this.addPaymentButton.setEnabled(true);
+                JOptionPane.showMessageDialog(this, "El empleado ya tiene una cuenta");
+                System.out.println("" + this.receivableAccountService.getReceivableAccountByPerson(this.personService.getPerson()));
+            }
+        }
+    }//GEN-LAST:event_newReceivableAccountButtonActionPerformed
+
+    private void chargeReceivableAccountData(){
+        this.receivableAccountService.getReceivableAccount().setReceivableAccountDate(new Date());
+        this.receivableAccountService.getReceivableAccount().setReceivableAccountUpdateDate(null);
+        this.receivableAccountService.getReceivableAccount().setReceivableAccountTotal(0.00);
+        
+        this.receivableAccountService.getReceivableAccount().setPerson(this.personService.getPerson());
+    }
+    
+    private void newCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerActionPerformed
+        // TODO add your handling code here:
+        new PersonView(null, true, 1).setVisible(true);
+    }//GEN-LAST:event_newCustomerActionPerformed
 
     //Para cargar los clientes en el combobox
     private void chargePersonCombo() {
@@ -372,7 +466,9 @@ public class ReceivableAccountView extends javax.swing.JDialog {
         Double total = 0.00;
         
         for (int i = 0; i < this.accountRecordService.getAccountRecordList().size(); i++) {
-            total += this.accountRecordService.getAccountRecordList().get(i).getAccountRecordValue();
+            if(this.accountRecordService.getAccountRecordList().get(i).getAccountRecordType() == 0){
+                total += this.accountRecordService.getAccountRecordList().get(i).getAccountRecordValue();
+            } 
         }
         
         this.paymentsLabel.setText(String.valueOf(total));
@@ -382,6 +478,7 @@ public class ReceivableAccountView extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable accountRecordTable;
     private javax.swing.JButton addPaymentButton;
+    private javax.swing.JRadioButton advanceCheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -390,10 +487,14 @@ public class ReceivableAccountView extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton loanCheckBox;
+    private javax.swing.JButton newCustomer;
+    private javax.swing.JButton newReceivableAccountButton;
     private javax.swing.JPanel paymentPanel;
     private javax.swing.JTextField paymentValueTextField;
     private javax.swing.JLabel paymentsLabel;
     private javax.swing.JLabel receivableAccountBalanceLabel;
+    private javax.swing.ButtonGroup receivableAccountButtonGroup;
     private javax.swing.JButton savePaymentButton;
     private javax.swing.JComboBox<String> searchCustomerComboBox;
     // End of variables declaration//GEN-END:variables

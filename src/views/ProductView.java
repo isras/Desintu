@@ -460,7 +460,13 @@ public class ProductView extends javax.swing.JDialog {
                 }   this.closeWindow();
                 break;
             case 3:
-                break; 
+                this.chargeProduct();
+                if(this.ps.deleteProduct()){
+                JOptionPane.showMessageDialog(this, "El producto se ha eliminado");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Hubo un error al modificar el producto");
+                }   this.closeWindow();
+                break;
             default:
                 break;
         }

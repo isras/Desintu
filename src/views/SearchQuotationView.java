@@ -305,9 +305,6 @@ public class SearchQuotationView extends javax.swing.JDialog {
     private void chargeWorkOrderData(){
         
         this.workOrderService.getWorkOrder().setWorkOrderState(1);
-        this.workOrderService.getWorkOrder().setWorkOrderType("WorkOrder");
-        this.workOrderService.getWorkOrder().setWorkOrderPriority(0);
-        this.workOrderService.getWorkOrder().setWorkOrderDescription("Trabajo de impresión");
         this.workOrderService.getWorkOrder().setWorkOrderNumber(String.valueOf(GeneralParameter.WORK_ORDER_NUMBER + 1));
         this.workOrderService.getWorkOrder().setWorkOrderDeliveryDate(new Date());
         this.workOrderService.getWorkOrder().setWorkOrderTotal(0.00);
@@ -330,8 +327,10 @@ public class SearchQuotationView extends javax.swing.JDialog {
         
     }
     
+    //Cargamos los datos para genera una factura a partir de la proforma 
     private void chargeInvoiceData() {
         
+        //Controlamos que cuando exista una proforma con total cero o nulo recalculamos el valor del iva y su total
         if(this.quotationService.getQuotation().getQuotationTotal() == 0.00 || this.quotationService.getQuotation().getQuotationTotal() == null){
             this.invoiceIvaCalculate();
         }else{
@@ -417,7 +416,7 @@ public class SearchQuotationView extends javax.swing.JDialog {
         // TODO add your handling code here:
         
         chargeWorkOrderData();
-        new ReceiptView(null, true, this.workOrderService).setVisible(true);
+        new ReceiptView(null, true, this.workOrderService, "WorkOrder",0).setVisible(true);
         
     }//GEN-LAST:event_workOrderGenerateMenuItemActionPerformed
 
@@ -432,7 +431,7 @@ public class SearchQuotationView extends javax.swing.JDialog {
         this.invoiceService.getInvoice().setInSubtotalIvazero(0.00);
         
 
-        iva = this.workOrderService.getWorkOrder().getWorkOrderTotal() * 0.12;
+        iva = this.workOrderService.getWorkOrder().getWorkOrderTotal() * GeneralParameter.IVA_VALUE;
         this.invoiceService.getInvoice().setInIva(Double.valueOf(Operaciones.parteDecimal(Math.rint(iva * auxTot) / auxTot, GeneralParameter.ACCURACY_VALUE)));
 
         total = this.workOrderService.getWorkOrder().getWorkOrderTotal() + iva;

@@ -46,8 +46,12 @@ public class SalaryService {
         return this.salaryDao.listAll();
     }
     
-    public List<Salary> getSalaryByEmployee(Employee employee){
+    public Salary getSalaryByEmployee(Employee employee){
         return this.salaryDao.getSalaryByEmployee(employee);
+    }
+    
+    public List<Salary> getSalaryListByEmployee(Employee employee){
+        return this.salaryDao.getSalaryListByEmployee(employee);
     }
     
     public List<Salary> getSalaryList(){

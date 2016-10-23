@@ -39,6 +39,8 @@ public class ReceivableAccount implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "receivable_account_id")
     private Long receivableAccountId;
+    @Column (name = "ra_count")
+    private Integer receivableAccountCount;
     @Column(name = "ra_date")
     @Temporal(TemporalType.DATE)
     private Date receivableAccountDate;
@@ -133,6 +135,20 @@ public class ReceivableAccount implements Serializable {
     @Override
     public String toString() {
         return "model.ReceivableAccount[ receivableAccountId=" + receivableAccountId + " ]";
+    }
+
+    /**
+     * @return the receivableAccountCount
+     */
+    public Integer getReceivableAccountCount() {
+        return receivableAccountCount;
+    }
+
+    /**
+     * @param receivableAccountCount the receivableAccountCount to set
+     */
+    public void setReceivableAccountCount(Integer receivableAccountCount) {
+        this.receivableAccountCount = receivableAccountCount;
     }
     
 }

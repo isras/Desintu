@@ -12,7 +12,7 @@ import javax.swing.table.AbstractTableModel;
 public class ProductTableModel extends AbstractTableModel {
 
     private List<Product> list = new ArrayList<>();
-    
+
     /**
      * @return the list
      */
@@ -29,7 +29,7 @@ public class ProductTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -45,10 +45,23 @@ public class ProductTableModel extends AbstractTableModel {
             case 0:
                 return product.getPdName();
             case 1:
-                return product.getPdCode();
+                switch (product.getPdType()) {
+                    case "mi":
+                        return "Material Impreso";
+                    case "mp":
+                        return "Material Puro";
+                    case "s":
+                        return "Servicio";
+                    case "t":
+                        return "Terminado";
+                    case "a":
+                        return "Articulo";
+                    case "cl":
+                        return "Corte Làser";
+                    default:
+                        break;
+                }
             case 2:
-                return product.getPdDescription();
-            case 3:
                 return String.valueOf(product.getPdSalePrice());
             default:
                 return null;
@@ -62,10 +75,8 @@ public class ProductTableModel extends AbstractTableModel {
             case 0:
                 return "Nombre";
             case 1:
-                return "Código";
+                return "Tipo";
             case 2:
-                return "Descripción";             
-            case 3:
                 return "PVP";
             default:
                 return null;

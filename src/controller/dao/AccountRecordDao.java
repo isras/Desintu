@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import model.AccountRecord;
+import model.ReceivableAccount;
 
 /**
  *
@@ -108,4 +104,17 @@ public class AccountRecordDao extends AdapterDao {
         }
         return list;
     }
+    
+     public List<AccountRecord> getAccountRecordListByReceivableAccountIdAndCount(ReceivableAccount receivableAccount) {
+        List<AccountRecord> list = new ArrayList<>();
+        try {
+            String query = "select c from AccountRecord c where c.accountRecordCount = " + receivableAccount.getReceivableAccountCount() + " and c.receivableAccount.receivableAccountId = " + receivableAccount.getReceivableAccountId();
+            Query q = this.getEntityManager().createQuery(query);
+            list = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
 }

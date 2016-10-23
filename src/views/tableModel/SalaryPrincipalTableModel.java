@@ -39,7 +39,7 @@ public class SalaryPrincipalTableModel extends AbstractTableModel {
 
         switch (columnIndex) {
             case 0:
-                return salaryPayment.getSalary().getEmployee().getPerson().toString();
+                return salaryPayment.getSalary().getEmployee().toString();
             case 1:
                 return salaryPayment.getSalary().getSalaryDate();
             case 2:

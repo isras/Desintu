@@ -7,6 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,6 +37,8 @@ public class AccountRecord implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "account_record_id")
     private Long accountRecordId;
+    @Column (name = "ar_count")
+    private Integer accountRecordCount;
     @Column(name = "ar_type")
     private Integer accountRecordType;
     @Column(name = "ar_date")
@@ -45,9 +49,9 @@ public class AccountRecord implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "ar_value")
     private Double accountRecordValue;
-    @JoinColumn(name = "ra_receivable_account_id", referencedColumnName = "receivable_account_id")
+    @JoinColumn(name = "ar_receivable_account_id", referencedColumnName = "receivable_account_id")
     @ManyToOne(optional = false)
-    private ReceivableAccount receivableAccount;
+    private ReceivableAccount receivableAccount;    
 
     public AccountRecord() {
     }
@@ -128,5 +132,18 @@ public class AccountRecord implements Serializable {
     public String toString() {
         return "model.AccountRecord[ accountRecordId=" + accountRecordId + " ]";
     }
-    
+
+    /**
+     * @return the accountRecordCount
+     */
+    public Integer getAccountRecordCount() {
+        return accountRecordCount;
+    }
+
+    /**
+     * @param accountRecordCount the accountRecordCount to set
+     */
+    public void setAccountRecordCount(Integer accountRecordCount) {
+        this.accountRecordCount = accountRecordCount;
+    }
 }

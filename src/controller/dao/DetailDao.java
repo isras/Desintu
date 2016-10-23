@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Detail;
 
-/**
- *
- * @author Usuario
- */
 public class DetailDao extends AdapterDao {
 
     private Detail detail;
@@ -55,7 +51,7 @@ public class DetailDao extends AdapterDao {
         }
         return flag;
     }
-    
+
     public boolean update(Detail detail) {
         boolean flag = false;
         try {
@@ -68,8 +64,8 @@ public class DetailDao extends AdapterDao {
         }
         return flag;
     }
-    
-        public boolean remove(){
+
+    public boolean remove() {
         boolean flag = false;
         try {
             this.getEntityManager().getTransaction().begin();
@@ -112,7 +108,7 @@ public class DetailDao extends AdapterDao {
     }
 
     public void addDetailList(Detail detail) {
-        if(this.detailList == null){
+        if (this.detailList == null) {
             this.detailList = new ArrayList<>();
         }
         this.detailList.add(detail);

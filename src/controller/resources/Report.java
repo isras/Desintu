@@ -4,6 +4,7 @@ import controller.Sessions;
 import controller.service.CashClosingService;
 import controller.service.InvoiceService;
 import controller.service.QuotationService;
+import controller.service.SalaryService;
 import controller.service.WorkOrderService;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,6 +14,7 @@ import java.util.Map;
 import views.tableModel.InventoryTableModel;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import views.tableModel.DetailTableModel;
+import views.tableModel.SalaryPaymentTableModel;
 
 public class Report {
 
@@ -71,6 +73,23 @@ public class Report {
         JRTableModelDataSource dataSource = new JRTableModelDataSource(dtm);
         AbstractJasperReports.createReport(conn, path, parameters, dataSource);
         AbstractJasperReports.showViewer("ORDEN DE TRABAJO - PREVIEW");
+    }
+    
+    public void printEmployeeSalary(SalaryService salaryService, SalaryPaymentTableModel salaryPaymentTableModel) {
+
+        String path = System.getProperty("user.dir") + "/reports/EmployeePaymentRol.jasper";
+
+        Map parameters = new HashMap();
+        parameters.put("employee_name",salaryService.getSalary().getEmployee().toString());
+        parameters.put("employee_address", salaryService.getSalary().getEmployee().getEmployeeAddress());
+        parameters.put("employee_phone", salaryService.getSalary().getEmployee().getEmployeePhone());
+        parameters.put("employee_salary", salaryService.getSalary().toString());
+        parameters.put("employee_salary_balance", salaryService.getSalary().getSalaryBalance().toString());
+        parameters.put("employee_payment_month", salaryService.getSalary().getSalaryDate().toString());
+
+        JRTableModelDataSource dataSource = new JRTableModelDataSource(salaryPaymentTableModel);
+        AbstractJasperReports.createReport(conn, path, parameters, dataSource);
+        AbstractJasperReports.showViewer("ROL DE PAGOS - PREVIEW");
     }
 
     public void printQuotation(QuotationService quotationService, DetailTableModel dtm) {

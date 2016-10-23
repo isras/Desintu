@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.1.final using JasperReports Library version 6.2.1  -->
+<!-- 2016-10-01T19:56:53 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EmployeePaymentRole" pageWidth="595" pageHeight="425" columnWidth="567" leftMargin="14" rightMargin="14" topMargin="99" bottomMargin="14" whenResourceMissingType="Empty" uuid="24fbe294-e689-4195-84df-9f0542130d4b">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<parameter name="employee_name" class="java.lang.String"/>
+	<parameter name="employee_salary" class="java.lang.String"/>
+	<parameter name="employee_salary_balance" class="java.lang.String"/>
+	<parameter name="employee_payment_month" class="java.lang.String"/>
+	<parameter name="employee_address" class="java.lang.String"/>
+	<parameter name="employee_phone" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="Nro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Fecha" class="java.lang.String"/>
+	<field name="Descripción" class="java.lang.String"/>
+	<field name="Valor" class="java.lang.String"/>
+	<field name="Observación" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="110" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="40" width="290" height="26" uuid="a377bc66-21b7-4e1a-bcca-2d5dac5a66b5"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{employee_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="460" y="39" width="56" height="21" uuid="5712297b-3426-45c0-b0d1-efc1eb108cc3"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Sueldo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="520" y="39" width="40" height="21" uuid="56b8e1bc-16e1-4ede-a8f4-05f69e1f1c85"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{employee_salary}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="476" y="65" width="40" height="20" uuid="36a2968e-d41c-463a-b203-02d236c97503"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Saldo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="520" y="65" width="40" height="20" uuid="da8ce484-e18e-416f-bb28-7c1af1811305"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{employee_salary_balance}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="4" width="100" height="16" uuid="f39aaa72-44bf-453d-b946-f23c60b3aad5"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="30" width="570" height="1" uuid="b8d6f68e-fbb9-4f3e-87d5-82d1058dea99"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="0" width="570" height="1" uuid="4f4ef170-c547-4985-8a72-49eeb4ff1684"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<textField pattern="MMMM">
+				<reportElement x="450" y="4" width="110" height="26" uuid="640141a2-ebb2-4e7a-87a1-8f53f6a7fc12"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="69" width="290" height="16" uuid="73ef839f-772b-4054-83a4-9db6ac71bc40"/>
+				<textFieldExpression><![CDATA[$P{employee_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="87" width="110" height="14" uuid="c0465392-7213-400b-ac8e-7498cd5d5838"/>
+				<textFieldExpression><![CDATA[$P{employee_phone}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="22" height="19" uuid="dc12db1c-50d0-4eba-b2aa-d14edf622dd0"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="0" width="90" height="19" uuid="c906b74b-1824-45c8-9ba1-7017e350d781"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="0" width="180" height="19" uuid="bb236723-9098-4c65-9799-2e326d85bc5a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[DESCRIPCIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="0" width="86" height="19" uuid="71a8b757-50fd-4458-88e4-60af0bce90aa"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[VALOR]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="570" height="1" uuid="8742bae3-db0d-442b-888f-9b7261572eeb"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="405" y="1" width="165" height="18" uuid="28c54868-0bae-420f-9312-72ef236ec1dc"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[OBSERVACIÓN]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="570" height="1" uuid="e4597309-00e7-4007-958d-e33ca67e5be2"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="12" width="570" height="1" uuid="57bb063f-852d-417f-af8b-051993299e96"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="0" width="22" height="13" uuid="6bf8f329-d898-4372-9110-6b252f699fef"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="0" width="90" height="13" uuid="85b23cc1-0f14-4493-8989-4e3c476be322"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="0" width="180" height="13" uuid="fa15b6b1-d65f-47dd-8318-56f7ae36f760"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Descripción}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="0" width="86" height="13" uuid="0ea59063-d1ab-4071-b3b2-0c37c9c842b5"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="405" y="1" width="164" height="12" uuid="17e64364-f9cc-4959-a679-18f535108c80"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Observación}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="75" splitType="Stretch">
+			<line>
+				<reportElement x="108" y="30" width="160" height="1" uuid="4b7bc79a-0c67-4dfb-bdfb-166321683b53"/>
+			</line>
+			<line>
+				<reportElement x="316" y="30" width="160" height="1" uuid="74b2f422-44d7-4173-b944-02dd76211314"/>
+			</line>
+			<textField>
+				<reportElement x="108" y="33" width="160" height="18" uuid="f2ce3f40-7118-4644-bf96-14daff75ce3d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{employee_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="316" y="33" width="160" height="18" uuid="b0df5c49-f8d2-4fd0-a6bd-f66b869a0996"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Byron Lavanda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="50" width="160" height="18" uuid="0e01fb5f-0460-48bf-a50d-a5c2d37712c0"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[REPRESENTANTE LEGAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="50" width="160" height="18" uuid="49a72681-4194-471d-8e9c-6076c033c928"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[TRABAJADOR]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

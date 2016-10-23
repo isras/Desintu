@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.io.Serializable;
@@ -22,10 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author Eyetive
- */
 @Entity
 @Table(name = "work_order")
 //@XmlRootElement
@@ -49,10 +40,8 @@ public class WorkOrder implements Serializable {
     private Long workOrderId;
     @Column(name = "wo_state")
     private Integer workOrderState;
-    @Column(name = "wo_priority")
-    private Integer workOrderPriority;
-    @Column(name = "wo_description")
-    private String workOrderDescription;
+    @Column(name = "wo_count")
+    private Integer workOrderCount;
     @Column(name = "wo_number")
     private String workOrderNumber;
     @Column(name = "wo_issue_date")
@@ -67,26 +56,23 @@ public class WorkOrder implements Serializable {
     @Column(name = "wo_balance")
     private Double workOrderBalance;
     @Column(name = "wo_advance")
-    private Double workOrderAdvance;
-    
-    //Esta parte es temporal
-    @Column (name = "wo_type")
-    private String workOrderType;
+    private Double workOrderAdvance;    
     @Column (name = "wo_invoice_state")
     private Integer workOrderInvoiceState;
+    @Column (name = "wo_quotation_state")
+    private Integer workOrderQuotationState;
     @Column (name = "wo_subtotal")
     private Double workOrderSubtotal;
     @Column (name = "wo_discount")
     private Double workOrderDiscount;
     @Column (name = "wo_iva")
-    private Double workOrderIva;
-    @Column (name = "wo_invoice_total")
-    private Double workOrderInvoiceTotal;
-    
+    private Double workOrderIva;    
     @Column (name = "wo_cash")
     private Double workOrderCash;
     @Column (name = "wo_change")
     private Double workOrderChange;
+    @Column (name = "wo_payment_state")
+    private Integer workOrderPaymentState;
     
     @OneToMany(mappedBy = "workOrder", cascade = CascadeType.ALL)
     private List<Detail> detailList;
@@ -119,14 +105,6 @@ public class WorkOrder implements Serializable {
 
     public void setWorkOrderState(Integer workOrderState) {
         this.workOrderState = workOrderState;
-    }
-
-    public String getWorkOrderDescription() {
-        return workOrderDescription;
-    }
-
-    public void setWorkOrderDescription(String workOrderDescription) {
-        this.workOrderDescription = workOrderDescription;
     }
 
     public String getWorkOrderNumber() {
@@ -227,34 +205,6 @@ public class WorkOrder implements Serializable {
     }
 
     /**
-     * @return the workOrderPriority
-     */
-    public Integer getWorkOrderPriority() {
-        return workOrderPriority;
-    }
-
-    /**
-     * @param workOrderPriority the workOrderPriority to set
-     */
-    public void setWorkOrderPriority(Integer workOrderPriority) {
-        this.workOrderPriority = workOrderPriority;
-    }
-
-    /**
-     * @return the workOrderType
-     */
-    public String getWorkOrderType() {
-        return workOrderType;
-    }
-
-    /**
-     * @param workOrderType the workOrderType to set
-     */
-    public void setWorkOrderType(String workOrderType) {
-        this.workOrderType = workOrderType;
-    }
-
-    /**
      * @return the workOrderInvoiceState
      */
     public Integer getWorkOrderInvoiceState() {
@@ -297,20 +247,6 @@ public class WorkOrder implements Serializable {
     }
 
     /**
-     * @return the workOrderInvoiceTotal
-     */
-    public Double getWorkOrderInvoiceTotal() {
-        return workOrderInvoiceTotal;
-    }
-
-    /**
-     * @param workOrderInvoiceTotal the workOrderInvoiceTotal to set
-     */
-    public void setWorkOrderInvoiceTotal(Double workOrderInvoiceTotal) {
-        this.workOrderInvoiceTotal = workOrderInvoiceTotal;
-    }
-
-    /**
      * @return the workOrderCash
      */
     public Double getWorkOrderCash() {
@@ -350,6 +286,47 @@ public class WorkOrder implements Serializable {
      */
     public void setWorkOrderDiscount(Double workOrderDiscount) {
         this.workOrderDiscount = workOrderDiscount;
+    }   
+
+    /**
+     * @return the workOrderQuotationState
+     */
+    public Integer getWorkOrderQuotationState() {
+        return workOrderQuotationState;
     }
-    
+
+    /**
+     * @param workOrderQuotationState the workOrderQuotationState to set
+     */
+    public void setWorkOrderQuotationState(Integer workOrderQuotationState) {
+        this.workOrderQuotationState = workOrderQuotationState;
+    }
+
+    /**
+     * @return the workOrderPaymentState
+     */
+    public Integer getWorkOrderPaymentState() {
+        return workOrderPaymentState;
+    }
+
+    /**
+     * @param workOrderPaymentState the workOrderPaymentState to set
+     */
+    public void setWorkOrderPaymentState(Integer workOrderPaymentState) {
+        this.workOrderPaymentState = workOrderPaymentState;
+    }
+
+    /**
+     * @return the workOrderCount
+     */
+    public Integer getWorkOrderCount() {
+        return workOrderCount;
+    }
+
+    /**
+     * @param workOrderCount the workOrderCount to set
+     */
+    public void setWorkOrderCount(Integer workOrderCount) {
+        this.workOrderCount = workOrderCount;
+    }
 }

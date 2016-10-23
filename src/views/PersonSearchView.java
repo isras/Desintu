@@ -129,10 +129,11 @@ public class PersonSearchView extends javax.swing.JDialog {
 
     private void clientSearchTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_clientSearchTxtKeyReleased
         // TODO add your handling code here:
-        this.ptm.setList(this.psr.list());        
+        this.ptm.setList(this.psr.getPersonsByCriteriaType(clientSearchTxt.getText()));        
         clientSearchTable.setModel(this.ptm);
-        clientSearchTable.getColumnModel().getColumn(1).setPreferredWidth(190);
-        clientSearchTable.getColumnModel().getColumn(2).setCellRenderer(Operaciones.getRenderCellToRigth());
+        clientSearchTable.getColumnModel().getColumn(0).setPreferredWidth(200);
+        clientSearchTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+        clientSearchTable.getColumnModel().getColumn(2).setPreferredWidth(50);
         clientSearchTable.updateUI();
     }//GEN-LAST:event_clientSearchTxtKeyReleased
 

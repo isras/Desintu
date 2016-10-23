@@ -42,6 +42,19 @@ public class ProductDao extends AdapterDao {
         }
         return flag;
     }
+    
+    public boolean delete(){
+        boolean flag = false;
+        try{
+            this.getEntityManager().getTransaction().begin();
+            this.eliminar(this.product);
+            this.getEntityManager().getTransaction().commit();
+            flag = true;
+        }catch (Exception e){
+            System.out.println("Error en: " + e);
+        }
+        return flag;
+    }
 
     /**
      * @return the product

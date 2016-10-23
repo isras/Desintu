@@ -319,17 +319,18 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
     
     private void chargeInvoiceData() {
 
-        if (this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal() == 0.00 || this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal() == null) {
-            this.invoiceIvaCalculate();
-        } else {
-            this.invoiceService.getInvoice().setInSubtotal(this.workOrderService.getWorkOrder().getWorkOrderTotal());
-            this.invoiceService.getInvoice().setInSubtotalIvazero(0.00);
-            this.invoiceService.getInvoice().setInSubtotalIva(this.workOrderService.getWorkOrder().getWorkOrderSubtotal());
-            this.invoiceService.getInvoice().setInIva(this.workOrderService.getWorkOrder().getWorkOrderIva());
-            this.invoiceService.getInvoice().setInTotal(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal());
-            this.invoiceService.getInvoice().setInCash(this.workOrderService.getWorkOrder().getWorkOrderCash());
-            this.invoiceService.getInvoice().setInChange(this.workOrderService.getWorkOrder().getWorkOrderChange());
-        }
+//        if (this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal() == 0.00 || this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal() == null) {
+        //Calculamos el iva de la orden de trabajo para poder generar la factura    
+        this.invoiceIvaCalculate();
+//        } else {
+//            this.invoiceService.getInvoice().setInSubtotal(this.workOrderService.getWorkOrder().getWorkOrderTotal());
+//            this.invoiceService.getInvoice().setInSubtotalIvazero(0.00);
+//            this.invoiceService.getInvoice().setInSubtotalIva(this.workOrderService.getWorkOrder().getWorkOrderSubtotal());
+//            this.invoiceService.getInvoice().setInIva(this.workOrderService.getWorkOrder().getWorkOrderIva());
+//            this.invoiceService.getInvoice().setInTotal(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal());
+//            this.invoiceService.getInvoice().setInCash(this.workOrderService.getWorkOrder().getWorkOrderCash());
+//            this.invoiceService.getInvoice().setInChange(this.workOrderService.getWorkOrder().getWorkOrderChange());
+//        }
 
         this.invoiceService.getInvoice().setInIssueDate(new Date());
         this.invoiceService.getInvoice().setInIssueTime(new Date());
@@ -343,13 +344,15 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
     }
     
     private void chargeQuotationData(){
-        if (this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal() == 0.00 || this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal() == null) {
-            this.quotationIvaCalculate();
-        } else {
-            this.quotationService.getQuotation().setQuotationSubtotal(this.workOrderService.getWorkOrder().getWorkOrderTotal());
-            this.quotationService.getQuotation().setQuotationIva(this.workOrderService.getWorkOrder().getWorkOrderIva());
-            this.quotationService.getQuotation().setQuotationTotal(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal());
-        }
+        //if (this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal() == 0.00 || this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal() == null) {
+        //Calculamos el iva de la orden de trabajo para genera una proforma
+        //Chekear si se puede optimizar el codigo para solo usar un metodo para calcular el iva
+        this.quotationIvaCalculate();
+        //} else {
+            //this.quotationService.getQuotation().setQuotationSubtotal(this.workOrderService.getWorkOrder().getWorkOrderTotal());
+            //this.quotationService.getQuotation().setQuotationIva(this.workOrderService.getWorkOrder().getWorkOrderIva());
+            //this.quotationService.getQuotation().setQuotationTotal(this.workOrderService.getWorkOrder().getWorkOrderInvoiceTotal());
+        //}
 
         this.quotationService.getQuotation().setQuotationDate(new Date());
         this.quotationService.getQuotation().setQuotationNumber(String.valueOf(GeneralParameter.QUOTATION_NUMBER + 1));
@@ -370,7 +373,7 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
             this.invoiceService.getInvoice().getDetailList().get(i).setInvoice(this.invoiceService.getInvoice());
         }
     }
-    
+    //Actualizamos el tipo de detalle de oreden de trabajo a proforma
     private void workOrderDetailToQuotationDetail(){
         this.quotationService.getQuotation().setDetailList(this.workOrderService.getWorkOrder().getDetailList());
         
@@ -385,8 +388,12 @@ public class SearchWorkOrderView extends javax.swing.JDialog {
 
     private void showWorkOrderViewMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showWorkOrderViewMenuItemActionPerformed
         // TODO add your handling code here:
+        Report report = new Report();
         this.workOrderService.setInstance(this.workDiaryTableModel.getList().get(searchWorkOrderTable.getSelectedRow()));
-        new ReceiptView(null, true, workOrderService).setVisible(true);
+        this.detailTableModel.setList(this.workOrderService.getWorkOrder().getDetailList());
+        report.printWorkOrder(workOrderService, this.detailTableModel);
+        
+        //new ReceiptView(null, true, workOrderService).setVisible(true);
     }//GEN-LAST:event_showWorkOrderViewMenuItemActionPerformed
 
     private void invoiceGenerateMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceGenerateMenuItemActionPerformed

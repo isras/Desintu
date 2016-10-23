@@ -85,7 +85,7 @@ public class SalaryDao extends AdapterDao {
         return list;
     }
 
-    public List<Salary> getSalaryByEmployee(Employee emp) {
+    public List<Salary> getSalaryListByEmployee(Employee emp) {
         List<Salary> list = new ArrayList<>();
         try {
             String query = "select c from Salary c where c.employee.employeeId = " + emp.getEmployeeId();
@@ -95,6 +95,18 @@ public class SalaryDao extends AdapterDao {
             System.out.println(e);
         }
         return list;
+    }
+    
+    public Salary getSalaryByEmployee(Employee employee){
+        Salary salaryEmployee = null;
+        try {
+            String query = "Select c from Salary c where c.employee.employeeId =" + employee.getEmployeeId();
+            Query q = this.getEntityManager().createQuery(query);
+            salaryEmployee = (Salary) q.getSingleResult();
+        } catch (Exception e) {
+            System.out.println("Error" + e);
+        }
+        return salaryEmployee;
     }
 
     /**

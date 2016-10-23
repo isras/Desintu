@@ -25,6 +25,7 @@ public class GeneralParameter {
     public static int PUBLICIST_PRINT_DISCOUNT_VALUE;
     public static int  PUBLICIST_FINISHED_DISCOUNT_VALUE;
     public static int PUBLICIST_SERVICE_DISCOUNT_VALUE;
+    public static double PERSONAL_INSURANCE_CONTRIBUTION;
 
     public static void chargeSetting() {
         SettingService ss = new SettingService();

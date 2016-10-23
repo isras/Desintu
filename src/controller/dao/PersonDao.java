@@ -95,6 +95,19 @@ public class PersonDao extends AdapterDao {
         }
         return personList;
     }
+    
+    //Para obtener todas las personas de tipo Proveedor
+    public List<Person> getSuppliersByCriteriaType(String criteria) {
+        List<Person> personList = new ArrayList<>();
+        try {
+            String query = "select c from Person c where (c.prType = 'Proveedor') and (c.prFirstName like '%" + criteria + "%' or c.prLastName like '%" + criteria + "%' or c.prIdentification like '%" + criteria + "%')";
+            Query q = this.getEntityManager().createQuery(query);
+            personList = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return personList;
+    }
 
     public boolean personExists(String identification) {
         boolean flag = false;

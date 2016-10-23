@@ -50,6 +50,7 @@ public class HomePanel extends javax.swing.JPanel {
 
         workOrderOptionsPopupMenu = new javax.swing.JPopupMenu();
         workOrderViewMenuItem = new javax.swing.JMenuItem();
+        editWorkOrderMenuItem = new javax.swing.JMenuItem();
         finishWorkOrderMenuItem = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         workDiaryTable = new javax.swing.JTable();
@@ -62,7 +63,15 @@ public class HomePanel extends javax.swing.JPanel {
         });
         workOrderOptionsPopupMenu.add(workOrderViewMenuItem);
 
-        finishWorkOrderMenuItem.setText("Finalizar Orden de Trabajo");
+        editWorkOrderMenuItem.setText("Editar");
+        editWorkOrderMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editWorkOrderMenuItemActionPerformed(evt);
+            }
+        });
+        workOrderOptionsPopupMenu.add(editWorkOrderMenuItem);
+
+        finishWorkOrderMenuItem.setText("Finalizar");
         finishWorkOrderMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 finishWorkOrderMenuItemActionPerformed(evt);
@@ -84,11 +93,11 @@ public class HomePanel extends javax.swing.JPanel {
             }
         ));
         workDiaryTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                workDiaryTableMousePressed(evt);
-            }
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 workDiaryTableMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                workDiaryTableMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(workDiaryTable);
@@ -143,6 +152,16 @@ public class HomePanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_finishWorkOrderMenuItemActionPerformed
 
+    private void editWorkOrderMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editWorkOrderMenuItemActionPerformed
+        // TODO add your handling code here:
+        //Cargamos la instancia de una orden de trabajo 
+        this.wos.setInstance(this.wdtm.getList().get(this.workDiaryTable.getSelectedRow()));
+        //Cargamos la ventana de documento 
+        new ReceiptView(null, true, wos, "WorkOrder", 1).setVisible(true);
+        //Actualizamos la tabla quitando los trabajos terminados y volviendo a cargar los pendientes
+        this.updateWorkOrderDiaryTable();
+    }//GEN-LAST:event_editWorkOrderMenuItemActionPerformed
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -161,15 +180,13 @@ public class HomePanel extends javax.swing.JPanel {
             //Cargamos una nueva instancia del una orden de trabajo
             this.wos.setInstance(this.wdtm.getList().get(this.workDiaryTable.getSelectedRow()));
 
-            //removeTable.setEnabled(true);
-            //addTable.setEnabled(false);
-            //changeTableToAnother.setEnabled(true);
             workOrderOptionsPopupMenu.show(evt.getComponent(), evt.getX(), evt.getY());
             workOrderOptionsPopupMenu.setVisible(true);
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem editWorkOrderMenuItem;
     private javax.swing.JMenuItem finishWorkOrderMenuItem;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable workDiaryTable;

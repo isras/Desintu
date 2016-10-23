@@ -36,17 +36,14 @@ public class EmployeeTableModel extends AbstractTableModel {
                 return employee.toString();
             case 1:
                 if(employee.getSalaryList().isEmpty()){
-                  System.out.println("0.00");
-                //}else{
-                 //   return employee.getSalaryList().get(0).getSalaryValue();
-                    
+                  System.out.println("0.00");                    
                 }
-                return employee.getPerson().getPrIdentification();
+                return employee.getEmployeeIdentification();
                 
             case 2:
-                return employee.getPerson().getPrPhone();
+                return employee.getEmployeePhone();
             case 3:
-                return employee.getPerson().getPrAddress();
+                return employee.getEmployeeAddress();
             default:
                 return null;
         }

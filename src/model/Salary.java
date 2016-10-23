@@ -119,7 +119,7 @@ public class Salary implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Salary[ salaryId=" + salaryId + " ]";
+        return "" + salaryValue;
     }
 
     public Employee getEmployee() {

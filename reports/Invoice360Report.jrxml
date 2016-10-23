@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2016-03-02T23:13:40 -->
+<!-- Created with Jaspersoft Studio version 6.2.1.final using JasperReports Library version 6.2.1  -->
+<!-- 2016-04-20T14:44:09 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InvoiceReport" pageWidth="430" pageHeight="595" columnWidth="402" leftMargin="14" rightMargin="14" topMargin="99" bottomMargin="85" whenResourceMissingType="Empty" uuid="0202ae2f-86b2-45a0-84b6-7d4da6a997e6">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="17"/>
 	<property name="ireport.y" value="695"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<parameter name="nombreCliente" class="java.lang.String"/>
 	<parameter name="rucCliente" class="java.lang.String"/>
 	<parameter name="dirCliente" class="java.lang.String"/>
@@ -133,28 +134,28 @@
 	</columnHeader>
 	<detail>
 		<band height="13" splitType="Stretch">
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="5" y="1" width="49" height="11" uuid="a6b4aa8f-6117-419b-9bc2-a2cb0bcd7d54"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="54" y="1" width="218" height="11" uuid="4feb60c6-d530-464d-831a-b3785bc44d1d"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Descripcion}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="285" y="1" width="27" height="11" uuid="4f1ad808-3244-4f5f-847b-5b0576dc29a7"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Precio}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement x="352" y="1" width="29" height="11" uuid="297496fb-8ad0-4440-aa9e-7dec31275429"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
@@ -172,7 +173,7 @@
 	<columnFooter>
 		<band height="80" splitType="Stretch">
 			<staticText>
-				<reportElement x="294" y="17" width="38" height="11" uuid="db29a88f-79b0-49e1-86be-62bafc32464c"/>
+				<reportElement x="316" y="17" width="38" height="11" uuid="db29a88f-79b0-49e1-86be-62bafc32464c"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
@@ -193,8 +194,8 @@
 				<text><![CDATA[CAMBIO: $]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="342" y="17" width="50" height="11" uuid="9b973981-a60a-4da9-9485-45204f9aa490"/>
-				<textElement textAlignment="Center">
+				<reportElement x="358" y="17" width="42" height="11" uuid="9b973981-a60a-4da9-9485-45204f9aa490"/>
+				<textElement textAlignment="Left">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
@@ -214,29 +215,29 @@
 				<textFieldExpression><![CDATA[$P{cambio}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="277" y="45" width="54" height="11" uuid="6649bef6-c8d4-4bf2-bf8f-a6079955262a"/>
+				<reportElement x="300" y="45" width="54" height="11" uuid="6649bef6-c8d4-4bf2-bf8f-a6079955262a"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[ANTICIPO: $]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="342" y="45" width="50" height="11" uuid="9c552571-204f-498a-ace7-7f76d0942e4f"/>
-				<textElement textAlignment="Center">
+				<reportElement x="358" y="45" width="42" height="11" uuid="9c552571-204f-498a-ace7-7f76d0942e4f"/>
+				<textElement textAlignment="Left">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{subtotal}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="259" y="60" width="72" height="11" uuid="52890115-5864-4de7-9363-2983d46a07c7"/>
+				<reportElement x="282" y="60" width="72" height="11" uuid="52890115-5864-4de7-9363-2983d46a07c7"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[SALDO: $]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="342" y="60" width="50" height="11" uuid="123aaa5c-288e-498f-be89-211f0ca55694"/>
-				<textElement textAlignment="Center">
+				<reportElement x="358" y="60" width="42" height="11" uuid="123aaa5c-288e-498f-be89-211f0ca55694"/>
+				<textElement textAlignment="Left">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{subtotalIva}]]></textFieldExpression>
@@ -248,21 +249,27 @@
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="272" y="31" width="60" height="10" uuid="f6b90918-b087-490e-85b5-34705ba9f60f"/>
+				<reportElement x="294" y="31" width="60" height="11" uuid="f6b90918-b087-490e-85b5-34705ba9f60f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[DESCUENTO: $]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="342" y="31" width="38" height="10" uuid="554556a2-e4ab-46c9-bc5e-cce7d50636d5"/>
-				<textElement textAlignment="Center">
+				<reportElement x="358" y="31" width="20" height="11" uuid="554556a2-e4ab-46c9-bc5e-cce7d50636d5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{orderDiscount}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="384" y="31" width="8" height="10" uuid="b5ed2ccb-9ed9-4f75-a004-3f872b79b1eb"/>
+				<reportElement x="379" y="31" width="8" height="11" uuid="b5ed2ccb-9ed9-4f75-a004-3f872b79b1eb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
 				<textElement>
 					<font size="8"/>
 				</textElement>

@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.service;
 
 import controller.dao.AccountRecordDao;
 import java.util.List;
 import model.AccountRecord;
+import model.ReceivableAccount;
 
-/**
- *
- * @author eyetive
- */
 public class AccountRecordService {
     
     private final AccountRecordDao accountRecordDao;
@@ -59,5 +51,9 @@ public class AccountRecordService {
     
     public List<AccountRecord> list(){
         return this.accountRecordDao.list();
+    }
+    
+    public List<AccountRecord> getAccountRecordListByReceivableAccountIdAndCount(ReceivableAccount receivableAccount){
+        return this.accountRecordDao.getAccountRecordListByReceivableAccountIdAndCount(receivableAccount);
     }
 }

@@ -47,7 +47,7 @@ public class PersonView extends javax.swing.JDialog {
             personSaveBt.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/images/buttons/editButtonHover.png")));
         }
         if (this.personOption == 3) {//Indicador tres para desactivar un cliente
-            this.setTitle("ELIMINAR PACIENTE");
+            this.setTitle("ELIMINAR CLIENTE");
             personFirstNameTxtf.setEnabled(false);
             personLastNameTxtf.setEnabled(false);
             personIdentificationFtxtf.setEnabled(false);

@@ -68,13 +68,6 @@ public class SettingPanel extends javax.swing.JPanel {
         optionsPanel = new javax.swing.JPanel();
         settingSaveBt = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        settingIvaValueTxt = new javax.swing.JTextField();
-        settingAccuracyValueSp = new javax.swing.JSpinner();
-        jLabel8 = new javax.swing.JLabel();
-        settingPrintPreview = new javax.swing.JCheckBox();
-        jLabel9 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         settingThirdNumberTxt = new javax.swing.JTextField();
@@ -108,6 +101,16 @@ public class SettingPanel extends javax.swing.JPanel {
         finishedDiscountSp = new javax.swing.JSpinner();
         jLabel18 = new javax.swing.JLabel();
         serviceDiscountSp = new javax.swing.JSpinner();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        settingIvaValueTxt = new javax.swing.JTextField();
+        settingAccuracyValueSp = new javax.swing.JSpinner();
+        jLabel8 = new javax.swing.JLabel();
+        settingPrintPreview = new javax.swing.JCheckBox();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        settingPersonalInsuranceTxt = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
         adminPrefJB = new javax.swing.JButton();
         preferencesContenPanel = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -311,55 +314,6 @@ public class SettingPanel extends javax.swing.JPanel {
                 settingSaveBtActionPerformed(evt);
             }
         });
-
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("General"));
-
-        jLabel7.setText("Valor del Iva:");
-
-        jLabel8.setText("Precición de redondeo:");
-
-        settingPrintPreview.setBackground(new java.awt.Color(255, 255, 255));
-        settingPrintPreview.setText("Impresión Directa");
-
-        jLabel9.setText("%");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(settingAccuracyValueSp, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
-                    .addComponent(settingIvaValueTxt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addGap(22, 22, 22)
-                .addComponent(settingPrintPreview)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(settingIvaValueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(settingPrintPreview)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(settingAccuracyValueSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("General", jPanel6);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -664,6 +618,76 @@ public class SettingPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Descuentos", jPanel9);
 
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("General"));
+
+        jLabel7.setText("Valor del Iva:");
+
+        jLabel8.setText("Precición de redondeo:");
+
+        settingPrintPreview.setBackground(new java.awt.Color(255, 255, 255));
+        settingPrintPreview.setText("Impresión Directa");
+
+        jLabel9.setText("%");
+
+        jLabel10.setText("Aporte personal al seguro:");
+
+        settingPersonalInsuranceTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingPersonalInsuranceTxtActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("%");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(settingPersonalInsuranceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(settingAccuracyValueSp)
+                    .addComponent(settingIvaValueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(22, 22, 22)
+                        .addComponent(settingPrintPreview))
+                    .addComponent(jLabel11))
+                .addContainerGap(142, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(settingIvaValueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(settingPrintPreview)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(settingAccuracyValueSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(settingPersonalInsuranceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11)))
+                .addContainerGap(150, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("General", jPanel6);
+
         javax.swing.GroupLayout optionsPanelLayout = new javax.swing.GroupLayout(optionsPanel);
         optionsPanel.setLayout(optionsPanelLayout);
         optionsPanelLayout.setHorizontalGroup(
@@ -775,6 +799,10 @@ public class SettingPanel extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_settingSaveBtActionPerformed
+
+    private void settingPersonalInsuranceTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingPersonalInsuranceTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_settingPersonalInsuranceTxtActionPerformed
     
     private void chargeSetting(){
         this.ss.getSetting().setIVA_VALUE(Double.valueOf(settingIvaValueTxt.getText()));
@@ -796,6 +824,7 @@ public class SettingPanel extends javax.swing.JPanel {
         this.ss.getSetting().setPUBLICIST_PRINT_DISCOUNT_VALUE(Integer.parseInt(String.valueOf(printDiscountSp.getValue())));
         this.ss.getSetting().setPUBLICIST_FINISHED_DISCOUNT_VALUE(Integer.parseInt(String.valueOf(finishedDiscountSp.getValue())));
         this.ss.getSetting().setPUBLICIST_SERVICE_DISCOUNT_VALUE(Integer.parseInt(String.valueOf(serviceDiscountSp.getValue())));
+        this.ss.getSetting().setPERSONAL_INSURANCE_CONTRIBUTION(Double.valueOf(settingPersonalInsuranceTxt.getText()));
     }
     
     private void chargeViewSetting(){
@@ -816,6 +845,7 @@ public class SettingPanel extends javax.swing.JPanel {
         printDiscountSp.setValue(this.ss.getSetting().getPUBLICIST_PRINT_DISCOUNT_VALUE());
         finishedDiscountSp.setValue(this.ss.getSetting().getPUBLICIST_FINISHED_DISCOUNT_VALUE());
         serviceDiscountSp.setValue(this.ss.getSetting().getPUBLICIST_SERVICE_DISCOUNT_VALUE());
+        settingPersonalInsuranceTxt.setText(String.valueOf(this.ss.getSetting().getPERSONAL_INSURANCE_CONTRIBUTION()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -841,6 +871,8 @@ public class SettingPanel extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -884,6 +916,7 @@ public class SettingPanel extends javax.swing.JPanel {
     private javax.swing.JTextField settingAuthorizationNumberTxt;
     private javax.swing.JTextField settingFirstNumberTxt;
     private javax.swing.JTextField settingIvaValueTxt;
+    private javax.swing.JTextField settingPersonalInsuranceTxt;
     private javax.swing.JCheckBox settingPrintPreview;
     private javax.swing.JButton settingSaveBt;
     private javax.swing.JTextField settingSecondNumberTxt;

@@ -19,7 +19,7 @@ public class PersonTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -38,8 +38,6 @@ public class PersonTableModel extends AbstractTableModel {
                 return person.getPrIdentification();
             case 2:
                 return person.getPrPhone();
-            case 3:
-                return person.getPrAddress();
             default:
                 return null;
         }
@@ -54,9 +52,7 @@ public class PersonTableModel extends AbstractTableModel {
             case 1:
                 return "Identificación";
             case 2:
-                return "Teléfono";             
-            case 3:
-                return "Dirección";
+                return "Teléfono";
             default:
                 return null;
         }

@@ -107,7 +107,7 @@ public class Operaciones {
         for (int i = 0; i < numDecimal; i++) {
             val = val + 1;
         }
-        System.out.println("El valor es:" + val);
+        //System.out.println("El valor es:" + val);
         int num = Integer.parseInt(val);
         for (int i = 0; i < este.length(); i++) {
             if (este.charAt(i) == '.') {
@@ -132,8 +132,9 @@ public class Operaciones {
     /**
      * Da formato a una fecha recibida, en el siguiente orden 'Dddddd dd de
      * Mmmmm de yyyy'
+     *
      * @param fecha
-     * @return 
+     * @return
      */
     public static String formFechaToLarge(Date fecha) {
         int dia = fecha.getDate();
@@ -147,52 +148,54 @@ public class Operaciones {
     }
 
     public static String getDia(int dia) {
-        if (dia == 1) {
-            return "Lunes";
-        } else if (dia == 2) {
-            return "Martes";
-        } else if (dia == 3) {
-            return "Miércoles";
-        } else if (dia == 4) {
-            return "Jueves";
-        } else if (dia == 5) {
-            return "Viernes";
-        } else if (dia == 6) {
-            return "Sábado";
-        } else if (dia == 0) {
-            return "Domingo";
-        } else {
-            return "Error";
+        switch (dia) {
+            case 1:
+                return "Lunes";
+            case 2:
+                return "Martes";
+            case 3:
+                return "Miércoles";
+            case 4:
+                return "Jueves";
+            case 5:
+                return "Viernes";
+            case 6:
+                return "Sábado";
+            case 0:
+                return "Domingo";
+            default:
+                return "Error";
         }
     }
 
     public static String getMes(int mes) {
-        if (mes == 0) {
-            return "Enero";
-        } else if (mes == 1) {
-            return "Febrero";
-        } else if (mes == 2) {
-            return "Marzo";
-        } else if (mes == 3) {
-            return "Abril";
-        } else if (mes == 4) {
-            return "Mayo";
-        } else if (mes == 5) {
-            return "Junio";
-        } else if (mes == 6) {
-            return "Julio";
-        } else if (mes == 7) {
-            return "Agosto";
-        } else if (mes == 8) {
-            return "Septiembre";
-        } else if (mes == 9) {
-            return "Octubre";
-        } else if (mes == 10) {
-            return "Noviembre";
-        } else if (mes == 11) {
-            return "Diciembre";
-        } else {
-            return "Error";
+        switch (mes) {
+            case 0:
+                return "Enero";
+            case 1:
+                return "Febrero";
+            case 2:
+                return "Marzo";
+            case 3:
+                return "Abril";
+            case 4:
+                return "Mayo";
+            case 5:
+                return "Junio";
+            case 6:
+                return "Julio";
+            case 7:
+                return "Agosto";
+            case 8:
+                return "Septiembre";
+            case 9:
+                return "Octubre";
+            case 10:
+                return "Noviembre";
+            case 11:
+                return "Diciembre";
+            default:
+                return "Error";
         }
     }
 
@@ -212,10 +215,10 @@ public class Operaciones {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
                     boolean isSelected, boolean hasFocus, int row, int column) {
-//aqui obtengo el render de la calse superior
+                //aqui obtengo el render de la calse superior
                 JLabel l = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-//Alineo, puedes alinear cambiar fondo etc, solo seria cuention de validar fia, columna
-//si esta seleccionana, depende de tu necesidad
+                //Alineo, puedes alinear cambiar fondo etc, solo seria cuention de validar fia, columna
+                //si esta seleccionana, depende de tu necesidad
                 l.setHorizontalAlignment(SwingConstants.RIGHT);
                 if (hasFocus) {
                     l.setForeground(Color.RED);
@@ -227,16 +230,16 @@ public class Operaciones {
         };
         return render;
     }
-    
+
     public static TableCellRenderer getRenderCellCenter() {
         TableCellRenderer render = new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
                     boolean isSelected, boolean hasFocus, int row, int column) {
-//aqui obtengo el render de la calse superior
+                //aqui obtengo el render de la calse superior
                 JLabel l = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-//Alineo, puedes alinear cambiar fondo etc, solo seria cuention de validar fia, columna
-//si esta seleccionana, depende de tu necesidad
+                //Alineo, puedes alinear cambiar fondo etc, solo seria cuention de validar fia, columna
+                //si esta seleccionana, depende de tu necesidad
                 l.setHorizontalAlignment(SwingConstants.CENTER);
                 if (hasFocus) {
                     l.setForeground(Color.RED);
@@ -248,16 +251,16 @@ public class Operaciones {
         };
         return render;
     }
-    
+
     public static TableCellRenderer getRenderCellToLeft() {
         TableCellRenderer render = new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
                     boolean isSelected, boolean hasFocus, int row, int column) {
-//aqui obtengo el render de la calse superior
+                //aqui obtengo el render de la calse superior
                 JLabel l = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-//Alineo, puedes alinear cambiar fondo etc, solo seria cuention de validar fia, columna
-//si esta seleccionana, depende de tu necesidad
+                //Alineo, puedes alinear cambiar fondo etc, solo seria cuention de validar fia, columna
+                //si esta seleccionana, depende de tu necesidad
                 l.setHorizontalAlignment(SwingConstants.LEFT);
                 if (hasFocus) {
                     l.setForeground(Color.RED);
@@ -272,13 +275,14 @@ public class Operaciones {
 
     public static TableCellRenderer getRenderCellToColor(final Color color) {
         TableCellRenderer render = new DefaultTableCellRenderer() {
+            @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
                     boolean isSelected, boolean hasFocus, int row, int column) {
-//aqui obtengo el render de la calse superior
+                //aqui obtengo el render de la calse superior
                 JLabel l = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-//Alineo, puedes alinear cambiar fondo etc, solo seria cuention de validar fia, columna
-//si esta seleccionana, depende de tu necesidad
-//                l.setHorizontalAlignment(SwingConstants.RIGHT);
+                //Alineo, puedes alinear cambiar fondo etc, solo seria cuention de validar fia, columna
+                //si esta seleccionana, depende de tu necesidad
+                //l.setHorizontalAlignment(SwingConstants.RIGHT);
                 if (hasFocus) {
                     l.setBackground(new Color(255, 60, 255));
                 } else {
@@ -290,5 +294,14 @@ public class Operaciones {
             }
         };
         return render;
+    }
+
+    //Para obtener el ultimo día del mes
+    public int lastDayOfTheMonth(int year, int month) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month - 1, 1);
+        return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
     }
 }

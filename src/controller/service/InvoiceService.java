@@ -4,6 +4,7 @@ import com.toedter.calendar.JDateChooser;
 import controller.dao.InvoiceDao;
 import model.Invoice;
 import java.util.List;
+import model.Person;
 
 public class InvoiceService {
 
@@ -45,8 +46,15 @@ public class InvoiceService {
         return this.idao.getInvoicePerPerson(id);
     }
     
+    public List<Invoice> listInvoiceByPersonStateCount(Person person, Integer count){
+        return this.idao.listInvoiceByPersonStateCount(person, count);
+    }
+    
     public String getLastInvoice(){
         return this.idao.getLastInvoice();
     }
     
+    public List<Invoice> listInvoiceByState(){
+        return this.idao.listInvoiceByState();
+    } 
 }

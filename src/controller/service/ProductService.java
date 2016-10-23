@@ -19,6 +19,10 @@ public class ProductService {
         return this.pDao.update();
     }
     
+    public boolean deleteProduct(){
+        return this.pDao.delete();
+    }
+    
     public void newInstance(){
         this.pDao.newInstance();
     }

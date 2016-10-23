@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.service;
 
 import controller.dao.SalaryPaymentDao;
@@ -30,6 +25,10 @@ public class SalaryPaymentService {
         return this.salaryPaymentDao.update();
     }
     
+    public boolean removeSalaryPayment(){
+        return this.salaryPaymentDao.remove();
+    }
+    
     public void newInstance(){
         this.salaryPaymentDao.newInstance();
     }
@@ -46,8 +45,8 @@ public class SalaryPaymentService {
         return this.salaryPaymentDao.listAll();
     }
     
-    public List<SalaryPayment> getSalaryPaymentListBySalary(Salary salary){
-        return this.salaryPaymentDao.getSalaryPaymentBySalary(salary);
+    public List<SalaryPayment> getSalaryPaymentListBySalaryMonth(Salary salary, int month){
+        return this.salaryPaymentDao.getSalaryPaymentListBySalaryMonth(salary, month);
     }
     
     public List<SalaryPayment> getSalaryPaymentList(){

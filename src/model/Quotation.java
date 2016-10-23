@@ -50,6 +50,10 @@ public class Quotation implements Serializable {
     private Double quotationIva;
     @Column(name = "qo_total")
     private Double quotationTotal;
+    @Column (name = "qo_work_order_state")
+    private Integer quotationWorkOrderState;
+    @Column (name = "qo_invoice_state")
+    private Integer quotationInvoiceState;
     
     @OneToMany(mappedBy = "quotation", cascade = CascadeType.PERSIST)
     private List<Detail> detailList;
@@ -158,6 +162,34 @@ public class Quotation implements Serializable {
      */
     public void setDetailList(List<Detail> detailList) {
         this.detailList = detailList;
+    }
+
+    /**
+     * @return the quotationWorkOrderState
+     */
+    public Integer getQuotationWorkOrderState() {
+        return quotationWorkOrderState;
+    }
+
+    /**
+     * @param quotationWorkOrderState the quotationWorkOrderState to set
+     */
+    public void setQuotationWorkOrderState(Integer quotationWorkOrderState) {
+        this.quotationWorkOrderState = quotationWorkOrderState;
+    }
+
+    /**
+     * @return the quotationInvoiceState
+     */
+    public Integer getQuotationInvoiceState() {
+        return quotationInvoiceState;
+    }
+
+    /**
+     * @param quotationInvoiceState the quotationInvoiceState to set
+     */
+    public void setQuotationInvoiceState(Integer quotationInvoiceState) {
+        this.quotationInvoiceState = quotationInvoiceState;
     }
     
 }

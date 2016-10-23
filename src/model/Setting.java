@@ -63,6 +63,8 @@ public class Setting implements Serializable {
     private Integer PUBLICIST_FINISHED_DISCOUNT_VALUE;
     @Column (name = "pr_publicist_service_discount_value")
     private Integer PUBLICIST_SERVICE_DISCOUNT_VALUE;
+    @Column (name = "pr_personal_insurance_contribution")
+    private Double PERSONAL_INSURANCE_CONTRIBUTION;
 
     public Setting() {
     }
@@ -277,4 +279,18 @@ public class Setting implements Serializable {
     public void setWORK_ORDER_NUMBER(Integer WORK_ORDER_NUMBER) {
         this.WORK_ORDER_NUMBER = WORK_ORDER_NUMBER;
     }   
+
+    /**
+     * @return the PERSONAL_INSURANCE_CONTRIBUTION
+     */
+    public Double getPERSONAL_INSURANCE_CONTRIBUTION() {
+        return PERSONAL_INSURANCE_CONTRIBUTION;
+    }
+
+    /**
+     * @param PERSONAL_INSURANCE_CONTRIBUTION the PERSONAL_INSURANCE_CONTRIBUTION to set
+     */
+    public void setPERSONAL_INSURANCE_CONTRIBUTION(Double PERSONAL_INSURANCE_CONTRIBUTION) {
+        this.PERSONAL_INSURANCE_CONTRIBUTION = PERSONAL_INSURANCE_CONTRIBUTION;
+    }
 }

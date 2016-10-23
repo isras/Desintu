@@ -32,6 +32,7 @@ public class InvoicePanel extends javax.swing.JPanel {
         logoLabel = new javax.swing.JLabel();
         searchWorkOrderBt = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        buyInvoiceButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(50, 153, 187));
         setPreferredSize(new java.awt.Dimension(691, 528));
@@ -140,6 +141,13 @@ public class InvoicePanel extends javax.swing.JPanel {
             }
         });
 
+        buyInvoiceButton.setText("FACTURA DE COMPRA");
+        buyInvoiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buyInvoiceButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,6 +160,7 @@ public class InvoicePanel extends javax.swing.JPanel {
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buyInvoiceButton)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(editInvoiceBT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -184,7 +193,9 @@ public class InvoicePanel extends javax.swing.JPanel {
                                 .addComponent(invoiceCancellationBT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchWorkOrderBt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(87, 87, 87))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(buyInvoiceButton)
+                .addGap(58, 58, 58))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -266,8 +277,14 @@ public class InvoicePanel extends javax.swing.JPanel {
         new SearchQuotationView(null, true).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void buyInvoiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buyInvoiceButtonActionPerformed
+        // TODO add your handling code here:
+        new BuyInvoiceView(null, true).setVisible(true);
+    }//GEN-LAST:event_buyInvoiceButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buyInvoiceButton;
     private javax.swing.JButton editInvoiceBT;
     private javax.swing.JButton invoiceCancellationBT;
     private javax.swing.JButton jButton1;

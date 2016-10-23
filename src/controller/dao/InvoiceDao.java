@@ -6,6 +6,7 @@ import model.Invoice;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
+import model.Person;
 
 public class InvoiceDao extends AdapterDao {
 
@@ -90,6 +91,35 @@ public class InvoiceDao extends AdapterDao {
         }
         return invoices;
     }
+    
+    public List<Invoice> listInvoiceByPersonStateCount(Person person, Integer count){
+        List<Invoice> invoiceList = new ArrayList<>();
+        String invoiceState = "PENDIENTE";
+        try {
+            String query = "select c from Invoice c where c.inState='" + invoiceState + "' and c.person.personId=" + person.getPersonId() + " and c.invoiceCount=" + count;
+            Query q = this.getEntityManager().createQuery(query);
+            invoiceList = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return invoiceList;
+    }
+    
+    public List<Invoice> listInvoiceByState() {
+        List<Invoice> invoiceList = new ArrayList<>();
+        //String ini = Operaciones.formatDate(initialDate.getDate());
+        //String fin = Operaciones.formatDate(finalDate.getDate());
+        String invoiceState = "PENDIENTE";
+        try {
+            //String query = "select c from Invoice c where c.inIssueDate >= '" + ini + "' and c.inIssueDate <= '" + fin + "'";
+            String query = "select c from Invoice c where c.inState='" + invoiceState + "'";
+            Query q = this.getEntityManager().createQuery(query);
+            invoiceList = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return invoiceList;
+    }
 
     public List<Invoice> listInvoicePerDateRange(JDateChooser initialDate, JDateChooser finalDate) {
         List<Invoice> invoiceList = new ArrayList<>();
@@ -122,5 +152,4 @@ public class InvoiceDao extends AdapterDao {
 //        System.out.println(""+inv.getClass().getSimpleName().toLowerCase()+"."+prueba[1]);
 //        System.out.println(""+prueba[1]);
     }
-
 }

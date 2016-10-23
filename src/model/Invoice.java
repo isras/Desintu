@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package model;
 
 import java.io.Serializable;
@@ -25,10 +19,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author Jhoe
- */
 @Entity
 @Table(name = "invoice")
 @NamedQueries({
@@ -69,6 +59,8 @@ public class Invoice implements Serializable {
     private Date inIssueDate;
     @Column(name = "in_state")
     private String inState;
+    @Column (name = "invoice_count")
+    private Integer invoiceCount;
     @Column(name = "in_petition_name")
     private String inPetitionName;
     @OneToMany(mappedBy = "invoice", cascade = CascadeType.PERSIST)
@@ -256,6 +248,20 @@ public class Invoice implements Serializable {
      */
     public void setInSubtotalIvazero(Double inSubtotalIvazero) {
         this.inSubtotalIvazero = inSubtotalIvazero;
+    }
+
+    /**
+     * @return the invoiceCount
+     */
+    public Integer getInvoiceCount() {
+        return invoiceCount;
+    }
+
+    /**
+     * @param invoiceCount the invoiceCount to set
+     */
+    public void setInvoiceCount(Integer invoiceCount) {
+        this.invoiceCount = invoiceCount;
     }
     
 }

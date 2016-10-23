@@ -43,6 +43,8 @@ public class SalaryPayment implements Serializable {
     private Date salaryPaymentDate;
     @Column(name = "spa_description")
     private String salaryPaymentDescription;
+    @Column (name = "spa_observation")
+    private String salaryPaymentObservation;  
     @JoinColumn(name = "spa_salary_id", referencedColumnName = "salary_id")
     @ManyToOne(optional = false)
     private Salary salary;
@@ -116,7 +118,21 @@ public class SalaryPayment implements Serializable {
 
     @Override
     public String toString() {
-        return "model.SalaryItem[ salaryAdvanceId=" + salaryPaymentId + " ]";
+        return "" + salaryPaymentValue;
+    }
+
+    /**
+     * @return the salaryPaymentObservation
+     */
+    public String getSalaryPaymentObservation() {
+        return salaryPaymentObservation;
+    }
+
+    /**
+     * @param salaryPaymentObservation the salaryPaymentObservation to set
+     */
+    public void setSalaryPaymentObservation(String salaryPaymentObservation) {
+        this.salaryPaymentObservation = salaryPaymentObservation;
     }
     
 }

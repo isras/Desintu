@@ -5,6 +5,7 @@
  */
 package views.tableModel;
 
+import controller.resources.Operaciones;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -34,15 +35,15 @@ public class SalaryPaymentTableModel extends AbstractTableModel {
 
         switch (columnIndex) {
             case 0:
-                return rowIndex + 1;
+                return "" + (rowIndex + 1);
             case 1:
-                return salaryPayment.getSalaryPaymentValue();
+                return "" + Operaciones.formatDate(salaryPayment.getSalaryPaymentDate());
             case 2:
-                return salaryPayment.getSalaryPaymentDate();
-            case 3:
                 return salaryPayment.getSalaryPaymentDescription();
+            case 3:
+                return "" + salaryPayment.getSalaryPaymentValue();
             case 4:
-                return salaryPayment.getSalary().getEmployee().getPerson().getPrFirstName();
+                return salaryPayment.getSalaryPaymentObservation();
             default:
                 return null;
         }
@@ -55,13 +56,13 @@ public class SalaryPaymentTableModel extends AbstractTableModel {
             case 0:
                 return "Nro";
             case 1:
-                return "Valor";
-            case 2:
                 return "Fecha";
-            case 3:
+            case 2:
                 return "Descripción";
+            case 3:
+                return "Valor";
             case 4:
-                return "Nombre";
+                return "Observación";
             default:
                 return null;
         }
@@ -80,5 +81,4 @@ public class SalaryPaymentTableModel extends AbstractTableModel {
     public void setList(List<SalaryPayment> list) {
         this.list = list;
     }
-
 }

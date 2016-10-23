@@ -8,6 +8,7 @@ package controller.dao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
+import model.Person;
 import model.WorkOrder;
 
 /**
@@ -141,5 +142,30 @@ public class WorkOrderDao extends AdapterDao {
             System.out.println(e);
         }
         return workOrderList;
+    }
+    
+    public List<WorkOrder> getWorkOrderByCustomerAndInvoiceState(Person person){
+        List<WorkOrder> workOrderList = new ArrayList<>();
+        try{
+            String query = "select c from WorkOrder c where c.person.personId = " + person.getPersonId() + " and c.workOrderInvoiceState =" + 0;
+            Query q = this.getEntityManager().createQuery(query);
+            workOrderList = q.getResultList();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return workOrderList;
+    }
+    
+    //Para obtener las ordenes de trabajo que se encuentran dentro del conteo de la cuenta por pagar
+    public List <WorkOrder> getWorkOrderByCustomerCountState(Person person, Integer count){
+       List<WorkOrder> workOrderList = new ArrayList<>();
+        try{
+            String query = "select c from WorkOrder c where c.person.personId = " + person.getPersonId() + " and c.workOrderInvoiceState =" + 0 + " and c.workOrderCount =" + count;
+            Query q = this.getEntityManager().createQuery(query);
+            workOrderList = q.getResultList();
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return workOrderList; 
     }
 }

@@ -77,6 +77,8 @@ public class ProductSearchV extends javax.swing.JDialog {
 
             }
         ));
+        productSearchTable.getTableHeader().setResizingAllowed(false);
+        productSearchTable.getTableHeader().setReorderingAllowed(false);
         productSearchTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 productSearchTableMouseClicked(evt);
@@ -129,10 +131,12 @@ public class ProductSearchV extends javax.swing.JDialog {
 
     private void productSearchtTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productSearchtTxtKeyReleased
         // TODO add your handling code here:
-        this.ptm.setList(this.ps.list());
+        this.ptm.setList(this.ps.getProductsByCriteria(productSearchtTxt.getText()));
         this.productSearchTable.setModel(this.ptm);
-        this.productSearchTable.getColumnModel().getColumn(1).setPreferredWidth(190);
-        this.productSearchTable.getColumnModel().getColumn(2).setCellRenderer(Operaciones.getRenderCellToRigth());
+        this.productSearchTable.getColumnModel().getColumn(0).setPreferredWidth(200);
+        this.productSearchTable.getColumnModel().getColumn(1).setPreferredWidth(100);
+        this.productSearchTable.getColumnModel().getColumn(2).setCellRenderer(Operaciones.getRenderCellCenter());
+        this.productSearchTable.getColumnModel().getColumn(2).setHeaderRenderer(Operaciones.getRenderCellCenter());
         this.productSearchTable.updateUI();
     }//GEN-LAST:event_productSearchtTxtKeyReleased
 

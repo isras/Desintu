@@ -2,6 +2,7 @@ package controller.service;
 
 import controller.dao.WorkOrderDao;
 import java.util.List;
+import model.Person;
 import model.WorkOrder;
 
 public class WorkOrderService {
@@ -54,6 +55,14 @@ public class WorkOrderService {
     
      public List<WorkOrder> getWorkOrderListByEmployeeCriteria(String criteria){
         return this.wdao.getWorkOrderListByEmployeeCriteria(criteria);
+    }
+     
+    public List<WorkOrder> getWorkOrderByCustomerAndInvoiceState(Person person){
+        return this.wdao.getWorkOrderByCustomerAndInvoiceState(person);
+    }
+    
+    public List<WorkOrder> getWorkOrderByCustomerCountState(Person person, Integer count){
+        return this.wdao.getWorkOrderByCustomerCountState(person, count);
     }
     
 }

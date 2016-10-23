@@ -513,9 +513,9 @@ public class userAdministrationPanel extends javax.swing.JPanel {
         rolComboBox.setSelectedItem(this.uaService.getUserAccount().getRol());
 
         personNameTxt.setText(this.uaService.getUserAccount().getEmployee().toString());
-        personAddressTxt.setText(this.uaService.getUserAccount().getEmployee().getPerson().getPrAddress());
-        personIdentificarionTxt.setText(this.uaService.getUserAccount().getEmployee().getPerson().getPrIdentification());
-        personPhoneTxt.setText(this.uaService.getUserAccount().getEmployee().getPerson().getPrPhone());
+        personAddressTxt.setText(this.uaService.getUserAccount().getEmployee().getEmployeeAddress());
+        personIdentificarionTxt.setText(this.uaService.getUserAccount().getEmployee().getEmployeeIdentification());
+        personPhoneTxt.setText(this.uaService.getUserAccount().getEmployee().getEmployeePhone());
     }
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -609,9 +609,9 @@ public class userAdministrationPanel extends javax.swing.JPanel {
 
     private void chargeEmployeePersonalData() {
         personNameTxt.setText(this.employeeService.getEmployee().toString());
-        personAddressTxt.setText(this.employeeService.getEmployee().getPerson().getPrAddress());
-        personIdentificarionTxt.setText(this.employeeService.getEmployee().getPerson().getPrIdentification());
-        personPhoneTxt.setText(this.employeeService.getEmployee().getPerson().getPrPhone());
+        personAddressTxt.setText(this.employeeService.getEmployee().getEmployeeAddress());
+        personIdentificarionTxt.setText(this.employeeService.getEmployee().getEmployeeIdentification());
+        personPhoneTxt.setText(this.employeeService.getEmployee().getEmployeePhone());
     }
 
     private void clientTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientTableMouseClicked

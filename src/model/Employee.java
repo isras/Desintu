@@ -15,19 +15,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author eyetive
- */
 @Entity
 @Table(name = "employee")
 @NamedQueries({
@@ -48,13 +42,24 @@ public class Employee implements Serializable {
     @Column(name = "emp_departure_date")
     @Temporal(TemporalType.DATE)
     private Date employeeDepartureDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
+    @Column(name = "emp_first_name")
+    private String employeeFirstName;
+    @Column(name = "emp_last_name")
+    private String employeeLastName;
+    @Column(name = "emp_address")
+    private String employeeAddress;
+    @Column(name = "emp_email")
+    private String employeeEmail;
+    @Column(name = "emp_phone")
+    private String employeePhone;
+    @Column(name = "emp_identification")
+    private String employeeIdentification;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "Employee")
     private List<Salary> salaryList;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "employee")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "Employee")
     private List<WorkOrder> workOrderList;
-    @JoinColumn(name = "emp_person_id", referencedColumnName = "person_id")
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private Person person;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "Employee")
+    private List<Payroll> payrollList;
 
     public Employee() {
         this.salaryList = new ArrayList<>();
@@ -81,14 +86,6 @@ public class Employee implements Serializable {
         this.employeeJob = employeeJob;
     }
 
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -112,7 +109,7 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        return sb.append(person.getPrFirstName()).append(" ").append(person.getPrLastName()).toString();
+        return sb.append(getEmployeeFirstName()).append(" ").append(getEmployeeLastName()).toString();
     }
 
     /**
@@ -157,5 +154,97 @@ public class Employee implements Serializable {
 
     public void setWorkOrderList(List<WorkOrder> workOrderList) {
         this.workOrderList = workOrderList;
+    }
+
+    /**
+     * @return the employeeFirstName
+     */
+    public String getEmployeeFirstName() {
+        return employeeFirstName;
+    }
+
+    /**
+     * @param employeeFirstName the employeeFirstName to set
+     */
+    public void setEmployeeFirstName(String employeeFirstName) {
+        this.employeeFirstName = employeeFirstName;
+    }
+
+    /**
+     * @return the employeeLastName
+     */
+    public String getEmployeeLastName() {
+        return employeeLastName;
+    }
+
+    /**
+     * @param employeeLastName the employeeLastName to set
+     */
+    public void setEmployeeLastName(String employeeLastName) {
+        this.employeeLastName = employeeLastName;
+    }
+
+    /**
+     * @return the employeeAddress
+     */
+    public String getEmployeeAddress() {
+        return employeeAddress;
+    }
+
+    /**
+     * @param employeeAddress the employeeAddress to set
+     */
+    public void setEmployeeAddress(String employeeAddress) {
+        this.employeeAddress = employeeAddress;
+    }
+
+    /**
+     * @return the employeeEmail
+     */
+    public String getEmployeeEmail() {
+        return employeeEmail;
+    }
+
+    /**
+     * @param employeeEmail the employeeEmail to set
+     */
+    public void setEmployeeEmail(String employeeEmail) {
+        this.employeeEmail = employeeEmail;
+    }
+
+    /**
+     * @return the employeePhone
+     */
+    public String getEmployeePhone() {
+        return employeePhone;
+    }
+
+    /**
+     * @param employeePhone the employeePhone to set
+     */
+    public void setEmployeePhone(String employeePhone) {
+        this.employeePhone = employeePhone;
+    }
+
+    /**
+     * @return the employeeIdentification
+     */
+    public String getEmployeeIdentification() {
+        return employeeIdentification;
+    }
+
+    /**
+     * @param employeeIdentification the employeeIdentification to set
+     */
+    public void setEmployeeIdentification(String employeeIdentification) {
+        this.employeeIdentification = employeeIdentification;
+    }
+
+    public List<Payroll> getPayrollList() {
+        return payrollList;
+    }
+
+    public void setPayrollList(List<Payroll> payrollList) {
+        this.payrollList = payrollList;
     }
 }

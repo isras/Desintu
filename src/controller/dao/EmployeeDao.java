@@ -41,10 +41,8 @@ public class EmployeeDao extends AdapterDao {
         boolean flag = false;
         try {
             this.getEntityManager().getTransaction().begin();
-            this.guarda(this.employee);
-            this.getEntityManager().getTransaction().commit();//commmit enviado a la datos
-            this.detach(this.employee);
             this.modificar(this.employee);
+            this.getEntityManager().getTransaction().commit();//commmit enviado a la datos
             flag = true;
         } catch (Exception e) {
             System.out.println("Error en: " + e);
@@ -88,7 +86,7 @@ public class EmployeeDao extends AdapterDao {
     public List<Employee> getEmployeesByCriteria(String criteria) {
         List<Employee> list = new ArrayList<>();
         try {
-            String query = "select c from Employee c where c.person.prFirstName like '" + criteria + "%' or c.person.prLastName like '" + criteria + "%' or c.person.prIdentification like '" + criteria + "%'";
+            String query = "select c from Employee c where c.employeeFirstName like '" + criteria + "%' or c.employeeLastName like '" + criteria + "%' or c.employeeIdentification like '" + criteria + "%'";
             Query q = this.getEntityManager().createQuery(query);
             list = q.getResultList();//una obtener todos los objetos que estan guardados en la tabla de la base de datos 
         } catch (Exception e) {
@@ -101,7 +99,7 @@ public class EmployeeDao extends AdapterDao {
     public boolean employeeExists(String identification) {
         boolean flag = false;
         try {
-            String query = "select c from Employee c where c.prIdentification='" + identification + "'";
+            String query = "select c from Employee c where c.employeeIdentification='" + identification + "'";
             Query q = this.getEntityManager().createQuery(query);
             //p = (Person) q.getSingleResult()
             flag = !q.getResultList().isEmpty(); //una obtener todos los objetos que estan guardados en la tabla de la base de datos

@@ -37,7 +37,7 @@ public class WorkDiaryTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 5;
+        return 4;
     }
 
     @Override
@@ -55,10 +55,8 @@ public class WorkDiaryTableModel extends AbstractTableModel {
             case 1:
                 return wOrder.getPerson().toString();
             case 2:
-                return wOrder.getWorkOrderDescription(); //Operaciones.formFechaToLarge(aEntry.getAeCreatedDate());
-            case 3:
                 return Operaciones.formatDate(wOrder.getWorkOrderIssueDate());
-            case 4:
+            case 3:
                 return Operaciones.formatDate(wOrder.getWorkOrderDeliveryDate());
 //                if (aEntry.getAeType() == 0) {//Cuando es un ingreso
 //                    return Operaciones.parteDecimal(Math.rint(aEntry.getAeValue() * accuracyVal) / accuracyVal, GeneralParameter.ACCURACY_VALUE);

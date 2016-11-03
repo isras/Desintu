@@ -123,7 +123,7 @@ public class Operaciones {
         return este;
     }
 
-    public double formatToDecimales(double valor, int numberDecimal) {
+    public static double formatToDecimales(double valor, int numberDecimal) {
         BigDecimal big = new BigDecimal(valor);
         big = big.setScale(numberDecimal, RoundingMode.HALF_UP);
         return big.doubleValue();
@@ -297,11 +297,50 @@ public class Operaciones {
     }
 
     //Para obtener el ultimo día del mes
-    public int lastDayOfTheMonth(int year, int month) {
+    public static int lastDayOfTheMonth(int year, int month) {
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month - 1, 1);
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
+    }
+
+    public static int workedDays() {
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        return day;
+    }
+
+    public static Double iessContribution(Double basicSalary, Double extraHours) {
+        return formatToDecimales(((basicSalary + extraHours) * GeneralParameter.PERSONAL_INSURANCE_CONTRIBUTION) / 100, GeneralParameter.ACCURACY_VALUE);
+    }
+    
+    public static Double thirtheenSalary(Double salary, Double extraHours){
+        return formatToDecimales((salary + extraHours) / 12, GeneralParameter.ACCURACY_VALUE);
+    }
+
+    public static Double fourteenthSalary() {
+        Double fourteenthSalaryValue = GeneralParameter.BASIC_SALARY / 12;
+        //Controlamos si los dias trabajados son mayores a 30 y si el valor es
+        //31 fijamos el valor en 30
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
+        //Verificamos si el mes es Febrero y si es el ultimo día del mes y
+        //igualamos el valor del dia a 30
+        if (month == 2 && day == 28) {
+            day = 30;
+        }
+        //Verficamos si el dia es mayor a 30, si lo es fijamos el valor a 30
+        if (day > 30) {
+            day = 30;
+        }
+        Double fourteenthSalaryDayValue = (fourteenthSalaryValue / 30) * day;
+        return fourteenthSalaryDayValue;
+    }
+    
+    public static Double totalSalaryIncome(Double salary, Double extraHours, Double otherIncomes){
+        return formatToDecimales((salary + extraHours + thirtheenSalary(salary, extraHours) + fourteenthSalary() + otherIncomes), GeneralParameter.ACCURACY_VALUE);
     }
 }

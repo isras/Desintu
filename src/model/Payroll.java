@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.io.Serializable;
@@ -68,12 +63,12 @@ public class Payroll implements Serializable {
         this.payrollId = payrollId;
     }
 
-    public Integer getPrWorkedDays() {
+    public Integer getPayrollWorkedDays() {
         return payrollWorkedDays;
     }
 
-    public void setPrWorkedDays(Integer prWorkedDays) {
-        this.payrollWorkedDays = prWorkedDays;
+    public void setPayRollWorkedDays(Integer payrollWorkedDays) {
+        this.payrollWorkedDays = payrollWorkedDays;
     }
 
     public Double getPayrollBasicSalary() {
@@ -179,6 +174,5 @@ public class Payroll implements Serializable {
     @Override
     public String toString() {
         return "model.Payroll[ payrollId=" + payrollId + " ]";
-    }
-    
+    }   
 }

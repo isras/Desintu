@@ -65,6 +65,8 @@ public class Setting implements Serializable {
     private Integer PUBLICIST_SERVICE_DISCOUNT_VALUE;
     @Column (name = "pr_personal_insurance_contribution")
     private Double PERSONAL_INSURANCE_CONTRIBUTION;
+    @Column (name = "pr_basic_salary")
+    private Double BASIC_SALARY;
 
     public Setting() {
     }
@@ -292,5 +294,19 @@ public class Setting implements Serializable {
      */
     public void setPERSONAL_INSURANCE_CONTRIBUTION(Double PERSONAL_INSURANCE_CONTRIBUTION) {
         this.PERSONAL_INSURANCE_CONTRIBUTION = PERSONAL_INSURANCE_CONTRIBUTION;
+    }
+
+    /**
+     * @return the BASIC_SALARY
+     */
+    public Double getBASIC_SALARY() {
+        return BASIC_SALARY;
+    }
+
+    /**
+     * @param BASIC_SALARY the BASIC_SALARY to set
+     */
+    public void setBASIC_SALARY(Double BASIC_SALARY) {
+        this.BASIC_SALARY = BASIC_SALARY;
     }
 }

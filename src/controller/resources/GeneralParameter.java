@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller.resources;
 
 import controller.service.SettingService;
@@ -26,7 +21,8 @@ public class GeneralParameter {
     public static int  PUBLICIST_FINISHED_DISCOUNT_VALUE;
     public static int PUBLICIST_SERVICE_DISCOUNT_VALUE;
     public static double PERSONAL_INSURANCE_CONTRIBUTION;
-
+    public static double BASIC_SALARY;
+    
     public static void chargeSetting() {
         SettingService ss = new SettingService();
         if (ss.getUniqueSetting().getSettingId() != null) {
@@ -47,7 +43,9 @@ public class GeneralParameter {
             COMPLEX_SERVICE_VALUE = ss.getSetting().getCOMPLEX_SERVICE_VALUE();
             PUBLICIST_PRINT_DISCOUNT_VALUE = ss.getSetting().getPUBLICIST_PRINT_DISCOUNT_VALUE();
             PUBLICIST_FINISHED_DISCOUNT_VALUE = ss.getSetting().getPUBLICIST_FINISHED_DISCOUNT_VALUE();
-            PUBLICIST_SERVICE_DISCOUNT_VALUE = ss.getSetting().getPUBLICIST_SERVICE_DISCOUNT_VALUE();
+            PUBLICIST_SERVICE_DISCOUNT_VALUE = ss.getSetting().getPUBLICIST_SERVICE_DISCOUNT_VALUE();            
+            PERSONAL_INSURANCE_CONTRIBUTION = ss.getSetting().getPERSONAL_INSURANCE_CONTRIBUTION();
+            BASIC_SALARY = ss.getSetting().getBASIC_SALARY();
             
         } else {       
             JOptionPane.showMessageDialog(null, "Deberá configurar los parámetros del software\npara su correcto funcionamiento","SIN CONFIGURACIÓN",JOptionPane.INFORMATION_MESSAGE);

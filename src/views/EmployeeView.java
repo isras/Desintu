@@ -11,6 +11,7 @@ import controller.service.SalaryPaymentService;
 import controller.service.SalaryService;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,6 +36,8 @@ public class EmployeeView extends javax.swing.JDialog {
     private final SalaryPaymentTableModel salaryPaymentTableModel;
     private final PayrollService payrollService;
     private final Double auxTot;
+    private final Integer actualMonth;
+    private final Integer actualYear;
 
     public EmployeeView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -50,6 +53,12 @@ public class EmployeeView extends javax.swing.JDialog {
         initComponents();
         this.auxTot = Math.pow(10, GeneralParameter.ACCURACY_VALUE);
         this.getEmployeeList();
+        //Para calcular el ultimo día del mes
+        Calendar calendar = Calendar.getInstance();
+        actualMonth = calendar.get(Calendar.MONTH) + 1;
+        actualYear = calendar.get(Calendar.YEAR);
+        //Controlamos que el boton de generar rol de pago se habilite el ultimo día del mes
+        
 
     }
 
@@ -1205,7 +1214,6 @@ public class EmployeeView extends javax.swing.JDialog {
             this.updateSalaryPaymentTable();
 
             if (this.salaryService.getSalary().getSalaryBalance() != null) {
-                //this.salaryPaymentBalanceTxt.setText(String.valueOf(this.salaryService.getSalary().getSalaryBalance()));
                 this.salaryBalanceCalculate();
             } else {
                 this.salaryService.getSalary().setSalaryBalance(this.salaryService.getSalary().getSalaryValue());
@@ -1372,6 +1380,8 @@ public class EmployeeView extends javax.swing.JDialog {
         Double totalIncome = Operaciones.totalSalaryIncome(Double.valueOf(salaryPaymentValueTxt.getText()), Double.valueOf(salaryPaymentExtraHoursTxt.getText()), Double.valueOf(salaryPaymentOtherIncomesTxt.getText()));
 
         this.payrollService.getPayroll().setEmployee(this.employeeService.getEmployee());
+        this.payrollService.getPayroll().setPayrollDate(new Date());
+        this.payrollService.getPayroll().setPayrollMonth(salaryPaymentMonthChooser.getMonth() + 1);
         //Obtenemos los días trabajados y lo fijamos al Rol de Pagos
         this.payrollService.getPayroll().setPayRollWorkedDays(Operaciones.workedDays());
         this.payrollService.getPayroll().setPayrollBasicSalary(Double.parseDouble(salaryPaymentValueTxt.getText()));
@@ -1384,7 +1394,7 @@ public class EmployeeView extends javax.swing.JDialog {
         this.payrollService.getPayroll().setPayrollSalaryAdvance(salaryBalanceValue);
         this.payrollService.getPayroll().setPayrollTotalSalary(totalIncome - iessContributionValue - salaryBalanceValue);
 
-        System.out.println("EL TOTAL A RECIBIR ES: " + this.payrollService.getPayroll().getPayrollTotalSalary() + "EL VALOR DE LOS ANTICIPOS SON: " + this.payrollService.getPayroll().getPayrollSalaryAdvance());
+        System.out.println("EL TOTAL A RECIBIR ES: " + this.payrollService.getPayroll().getPayrollTotalSalary() + " EL VALOR DE LOS ANTICIPOS SON: " + this.payrollService.getPayroll().getPayrollSalaryAdvance() + " MES: " + salaryPaymentMonthChooser.getMonth());
 
     }
 

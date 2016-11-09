@@ -337,7 +337,7 @@ public class Operaciones {
             day = 30;
         }
         Double fourteenthSalaryDayValue = (fourteenthSalaryValue / 30) * day;
-        return fourteenthSalaryDayValue;
+        return formatToDecimales(fourteenthSalaryDayValue, GeneralParameter.ACCURACY_VALUE);
     }
     
     public static Double totalSalaryIncome(Double salary, Double extraHours, Double otherIncomes){

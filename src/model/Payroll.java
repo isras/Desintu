@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,10 @@ public class Payroll implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "payroll_id")
     private Long payrollId;
+    @Column(name = "pr_date")
+    private Date payrollDate;
+    @Column(name = "pr_month")
+    private Integer payrollMonth;
     @Column(name = "pr_worked_days")
     private Integer payrollWorkedDays;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -175,4 +180,32 @@ public class Payroll implements Serializable {
     public String toString() {
         return "model.Payroll[ payrollId=" + payrollId + " ]";
     }   
+
+    /**
+     * @return the payrollDate
+     */
+    public Date getPayrollDate() {
+        return payrollDate;
+    }
+
+    /**
+     * @param payrollDate the payrollDate to set
+     */
+    public void setPayrollDate(Date payrollDate) {
+        this.payrollDate = payrollDate;
+    }
+
+    /**
+     * @return the payrollMonth
+     */
+    public Integer getPayrollMonth() {
+        return payrollMonth;
+    }
+
+    /**
+     * @param payrollMonth the payrollMonth to set
+     */
+    public void setPayrollMonth(Integer payrollMonth) {
+        this.payrollMonth = payrollMonth;
+    }
 }

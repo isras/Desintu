@@ -1,5 +1,4 @@
 *.class
-*.jar
 *.mf
 nbproject/
 build/

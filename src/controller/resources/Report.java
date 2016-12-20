@@ -3,14 +3,17 @@ package controller.resources;
 import controller.Sessions;
 import controller.service.CashClosingService;
 import controller.service.InvoiceService;
+import controller.service.PayrollService;
 import controller.service.QuotationService;
 import controller.service.SalaryService;
 import controller.service.WorkOrderService;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.table.DefaultTableModel;
 import views.tableModel.InventoryTableModel;
 import net.sf.jasperreports.engine.data.JRTableModelDataSource;
 import views.tableModel.DetailTableModel;
@@ -135,6 +138,45 @@ public class Report {
         JRTableModelDataSource dataSource = new JRTableModelDataSource(null);
         AbstractJasperReports.createReport(conn, path, parameters, dataSource);
         AbstractJasperReports.showViewer("CIERRE DE CAJA - PREVIEW");
+    }
+    
+    public void printPayrollReport(PayrollService payrollService) {
+
+        String path = System.getProperty("user.dir") + "/reports/PayrollReport.jasper";
+        
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int firstDay = calendar.getActualMinimum(Calendar.DAY_OF_MONTH);
+        int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        Map parameters = new HashMap();
+        parameters.put("identification", payrollService.getPayroll().getEmployee().getEmployeeIdentification());
+        StringBuilder name = new StringBuilder();
+        name.append(payrollService.getPayroll().getEmployee().getEmployeeFirstName()).append(" ").append(payrollService.getPayroll().getEmployee().getEmployeeLastName());
+        parameters.put("name", name.toString());
+        parameters.put("occupation", payrollService.getPayroll().getEmployee().getEmployeeJob());
+        parameters.put("address", payrollService.getPayroll().getEmployee().getEmployeeAddress());
+        parameters.put("date", Operaciones.formatDate(payrollService.getPayroll().getPayrollDate()));
+        parameters.put("month", String.valueOf(payrollService.getPayroll().getPayrollMonth()));
+        parameters.put("firstDateMonth", firstDay + "/" + month + "/" + year);
+        parameters.put("lastDateMonth", lastDay + "/" + month + "/" + year);
+        
+        parameters.put("salary",String.valueOf(payrollService.getPayroll().getPayrollBasicSalary()));
+        parameters.put("extraHours", String.valueOf(payrollService.getPayroll().getPayrollExtraHours()));
+        parameters.put("xiiiSalary", String.valueOf(payrollService.getPayroll().getPayrollThirtheenSalary()));
+        parameters.put("xivSalary", String.valueOf(payrollService.getPayroll().getPayrollFourtteenthSalary()));
+        parameters.put("otherIncomes", String.valueOf(payrollService.getPayroll().getPayrollOtherIncome()));
+        parameters.put("iessContribution", String.valueOf(payrollService.getPayroll().getPayrollIessContribution()));
+        parameters.put("salaryAdvance", String.valueOf(payrollService.getPayroll().getPayrollSalaryAdvance()));
+        
+        parameters.put("totalIncome", String.valueOf(payrollService.getPayroll().getPayrollTotalIncome()));
+        //parameters.put("expenditure", String.valueOf(payrollService.getPayroll().getPa))
+        parameters.put("total", String.valueOf(payrollService.getPayroll().getPayrollTotalSalary()));
+        
+        JRTableModelDataSource dataSource = new JRTableModelDataSource(null);
+        AbstractJasperReports.createReport(conn, path, parameters, dataSource);
+        AbstractJasperReports.showViewer("ROL DE PAGOS - PREVIEW");
     }
 
     public void printInventory(InventoryTableModel itm) {

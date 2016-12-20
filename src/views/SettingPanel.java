@@ -111,6 +111,8 @@ public class SettingPanel extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         settingPersonalInsuranceTxt = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        basicSalaryTxt = new javax.swing.JTextField();
         adminPrefJB = new javax.swing.JButton();
         preferencesContenPanel = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
@@ -640,29 +642,37 @@ public class SettingPanel extends javax.swing.JPanel {
 
         jLabel11.setText("%");
 
+        jLabel21.setText("Salario Básico:");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(settingPersonalInsuranceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(settingAccuracyValueSp)
-                    .addComponent(settingIvaValueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(22, 22, 22)
-                        .addComponent(settingPrintPreview))
-                    .addComponent(jLabel11))
-                .addContainerGap(142, Short.MAX_VALUE))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(settingPersonalInsuranceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(settingAccuracyValueSp)
+                            .addComponent(settingIvaValueTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(22, 22, 22)
+                                .addComponent(settingPrintPreview))
+                            .addComponent(jLabel11))
+                        .addContainerGap(142, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(basicSalaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -678,12 +688,15 @@ public class SettingPanel extends javax.swing.JPanel {
                     .addComponent(settingAccuracyValueSp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(settingPersonalInsuranceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel11)))
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(settingPersonalInsuranceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel21)
+                    .addComponent(basicSalaryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("General", jPanel6);
@@ -825,6 +838,7 @@ public class SettingPanel extends javax.swing.JPanel {
         this.ss.getSetting().setPUBLICIST_FINISHED_DISCOUNT_VALUE(Integer.parseInt(String.valueOf(finishedDiscountSp.getValue())));
         this.ss.getSetting().setPUBLICIST_SERVICE_DISCOUNT_VALUE(Integer.parseInt(String.valueOf(serviceDiscountSp.getValue())));
         this.ss.getSetting().setPERSONAL_INSURANCE_CONTRIBUTION(Double.valueOf(settingPersonalInsuranceTxt.getText()));
+        this.ss.getSetting().setBASIC_SALARY(Double.valueOf(basicSalaryTxt.getText()));
     }
     
     private void chargeViewSetting(){
@@ -846,11 +860,13 @@ public class SettingPanel extends javax.swing.JPanel {
         finishedDiscountSp.setValue(this.ss.getSetting().getPUBLICIST_FINISHED_DISCOUNT_VALUE());
         serviceDiscountSp.setValue(this.ss.getSetting().getPUBLICIST_SERVICE_DISCOUNT_VALUE());
         settingPersonalInsuranceTxt.setText(String.valueOf(this.ss.getSetting().getPERSONAL_INSURANCE_CONTRIBUTION()));
+        basicSalaryTxt.setText(String.valueOf(this.ss.getSetting().getBASIC_SALARY()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adminPrefJB;
     private javax.swing.JPanel adminPreferencesPanel;
+    private javax.swing.JTextField basicSalaryTxt;
     private javax.swing.JCheckBox commercialOptionCB;
     private javax.swing.JSpinner complexServiceValueSp;
     private javax.swing.ButtonGroup enterpriseOptionButtonGroup;
@@ -883,6 +899,7 @@ public class SettingPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

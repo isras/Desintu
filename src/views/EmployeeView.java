@@ -13,6 +13,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
@@ -38,6 +39,8 @@ public class EmployeeView extends javax.swing.JDialog {
     private final Double auxTot;
     private final Integer actualMonth;
     private final Integer actualYear;
+    private final Integer lastDayMonth;
+    private final Integer actualDay;
 
     public EmployeeView(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -55,9 +58,21 @@ public class EmployeeView extends javax.swing.JDialog {
         this.getEmployeeList();
         //Para calcular el ultimo día del mes
         Calendar calendar = Calendar.getInstance();
+        actualDay = calendar.get(Calendar.DAY_OF_MONTH);
         actualMonth = calendar.get(Calendar.MONTH) + 1;
         actualYear = calendar.get(Calendar.YEAR);
+        lastDayMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         //Controlamos que el boton de generar rol de pago se habilite el ultimo día del mes
+        
+        if(Objects.equals(actualDay, lastDayMonth)){
+            JOptionPane.showMessageDialog(null, "Hoy se debe generar el rol de pagos");
+            //Cuando es el ultimo día del mes activamos el botón para generar el rol
+            payrollGenerateButton.setEnabled(true);
+            salaryPaymentExtraHoursTxt.setEditable(true);
+            salaryPaymentOtherIncomesTxt.setEditable(true);
+        }else{            
+            System.out.println("El ultimo dia del mes es: " + lastDayMonth + " El dia de hoy es: " + actualDay);
+        }
         
 
     }
@@ -189,6 +204,7 @@ public class EmployeeView extends javax.swing.JDialog {
         closeSalaryPaymentButton = new javax.swing.JButton();
         printSalaryPaymentButton = new javax.swing.JButton();
         payrollGenerateButton = new javax.swing.JButton();
+        demoCheck = new javax.swing.JCheckBox();
         jLabel24 = new javax.swing.JLabel();
         salaryPaymentBalanceTxt = new javax.swing.JTextField();
         removeSalaryPaymentButton = new javax.swing.JButton();
@@ -690,11 +706,13 @@ public class EmployeeView extends javax.swing.JDialog {
         jLabel28.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel28.setText("Horas Extras:");
 
+        salaryPaymentExtraHoursTxt.setEditable(false);
         salaryPaymentExtraHoursTxt.setText("0.00");
 
         jLabel22.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jLabel22.setText("Otros Ingresos:");
 
+        salaryPaymentOtherIncomesTxt.setEditable(false);
         salaryPaymentOtherIncomesTxt.setText("0.00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -787,9 +805,17 @@ public class EmployeeView extends javax.swing.JDialog {
         });
 
         payrollGenerateButton.setText("GENERAR ROL");
+        payrollGenerateButton.setEnabled(false);
         payrollGenerateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 payrollGenerateButtonActionPerformed(evt);
+            }
+        });
+
+        demoCheck.setText("Demo");
+        demoCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                demoCheckActionPerformed(evt);
             }
         });
 
@@ -800,6 +826,8 @@ public class EmployeeView extends javax.swing.JDialog {
             .addComponent(jSeparator2)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, salaryPaymentTablePanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(demoCheck)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(payrollGenerateButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(printSalaryPaymentButton)
@@ -816,6 +844,7 @@ public class EmployeeView extends javax.swing.JDialog {
                 .addGroup(salaryPaymentTablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(closeSalaryPaymentButton, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                     .addComponent(printSalaryPaymentButton, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(demoCheck)
                     .addComponent(payrollGenerateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -1365,14 +1394,34 @@ public class EmployeeView extends javax.swing.JDialog {
     }//GEN-LAST:event_payrollReportButtonActionPerformed
 
     private void payrollGenerateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payrollGenerateButtonActionPerformed
-        System.out.println("" + Operaciones.iessContribution(Double.parseDouble(salaryPaymentValueTxt.getText()), Double.parseDouble("0.00")));
-        System.out.println("EL CUARTO SUELDO ES: " + Operaciones.fourteenthSalary());
-        System.out.println("EL DECIMO TERCER SUELDO ES: " + Operaciones.thirtheenSalary(Double.parseDouble(salaryPaymentValueTxt.getText()), Double.parseDouble("0.00")));
-        System.out.println("TOTAL DE INGRESOS ES: " + Operaciones.totalSalaryIncome(Double.parseDouble(salaryPaymentValueTxt.getText()), Double.parseDouble("0.00"), Double.valueOf("0.00")));
+        
+        if(demoCheck.isSelected()){
+        JOptionPane.showMessageDialog( null, "EL CUARTO SUELDO ES: "+Operaciones.fourteenthSalary()+"\n"
+                + "EL DECIMO TERCER SUELDO ES: "+Operaciones.thirtheenSalary(Double.parseDouble(salaryPaymentValueTxt.getText()), Double.parseDouble("0.00"))+"\n"
+                + "LA CONTRIBUCIÓN AL IESS ES: " +Operaciones.iessContribution(Double.parseDouble(salaryPaymentValueTxt.getText()), Double.parseDouble(salaryPaymentExtraHoursTxt.getText()))+"\n"
+                + "TOTAL DE INGRESOS ES: " + Operaciones.totalSalaryIncome(Double.parseDouble(salaryPaymentValueTxt.getText()), Double.parseDouble("0.00"), Double.valueOf("0.00")));
+        
+        }else{
+            if(this.payrollService.getPayroll().getPayrollId() == null){
+                //Cargamos los datos del rol de pagos
+                payrollChargeData();
+                if(this.payrollService.savePayroll()){
+                    JOptionPane.showMessageDialog(null, "El rol de pagos se ha generado correctamente");
+                    Report report = new Report();
+                    report.printPayrollReport(payrollService);
+                }
+            }
+        }
 
-        payrollChargeData();
 
     }//GEN-LAST:event_payrollGenerateButtonActionPerformed
+
+    private void demoCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demoCheckActionPerformed
+        // TODO add your handling code here:
+        if(demoCheck.isSelected()){
+            payrollGenerateButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_demoCheckActionPerformed
 
     private void payrollChargeData() {
         Double salaryBalanceValue = salaryBalanceCalculate();
@@ -1381,7 +1430,7 @@ public class EmployeeView extends javax.swing.JDialog {
 
         this.payrollService.getPayroll().setEmployee(this.employeeService.getEmployee());
         this.payrollService.getPayroll().setPayrollDate(new Date());
-        this.payrollService.getPayroll().setPayrollMonth(salaryPaymentMonthChooser.getMonth() + 1);
+        this.payrollService.getPayroll().setPayrollMonth(actualMonth);
         //Obtenemos los días trabajados y lo fijamos al Rol de Pagos
         this.payrollService.getPayroll().setPayRollWorkedDays(Operaciones.workedDays());
         this.payrollService.getPayroll().setPayrollBasicSalary(Double.parseDouble(salaryPaymentValueTxt.getText()));
@@ -1394,7 +1443,7 @@ public class EmployeeView extends javax.swing.JDialog {
         this.payrollService.getPayroll().setPayrollSalaryAdvance(salaryBalanceValue);
         this.payrollService.getPayroll().setPayrollTotalSalary(totalIncome - iessContributionValue - salaryBalanceValue);
 
-        System.out.println("EL TOTAL A RECIBIR ES: " + this.payrollService.getPayroll().getPayrollTotalSalary() + " EL VALOR DE LOS ANTICIPOS SON: " + this.payrollService.getPayroll().getPayrollSalaryAdvance() + " MES: " + salaryPaymentMonthChooser.getMonth());
+        System.out.println("EL TOTAL A RECIBIR ES: " + this.payrollService.getPayroll().getPayrollTotalSalary() + " EL VALOR DE LOS ANTICIPOS SON: " + this.payrollService.getPayroll().getPayrollSalaryAdvance() + " MES: " + actualMonth);
 
     }
 
@@ -1469,6 +1518,7 @@ public class EmployeeView extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addSalaryPanel;
     private javax.swing.JButton closeSalaryPaymentButton;
+    private javax.swing.JCheckBox demoCheck;
     private javax.swing.JTextField employeeAddressTxt;
     private javax.swing.JButton employeeCloseButton;
     private com.toedter.calendar.JDateChooser employeeDepartureDateDc;

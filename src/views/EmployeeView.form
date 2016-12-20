@@ -1014,6 +1014,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="salaryPaymentExtraHoursTxt">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="text" type="java.lang.String" value="0.00"/>
               </Properties>
             </Component>
@@ -1027,6 +1028,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="salaryPaymentOtherIncomesTxt">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="text" type="java.lang.String" value="0.00"/>
               </Properties>
             </Component>
@@ -1073,6 +1075,8 @@
                   <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="demoCheck" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="payrollGenerateButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="printSalaryPaymentButton" min="-2" max="-2" attributes="0"/>
@@ -1091,7 +1095,8 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="closeSalaryPaymentButton" pref="32" max="32767" attributes="0"/>
                           <Component id="printSalaryPaymentButton" alignment="0" pref="32" max="32767" attributes="0"/>
-                          <Component id="payrollGenerateButton" max="32767" attributes="0"/>
+                          <Component id="demoCheck" min="-2" max="-2" attributes="0"/>
+                          <Component id="payrollGenerateButton" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="19" max="32767" attributes="0"/>
                   </Group>
@@ -1120,9 +1125,18 @@
             <Component class="javax.swing.JButton" name="payrollGenerateButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="GENERAR ROL"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="payrollGenerateButtonActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="demoCheck">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Demo"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="demoCheckActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

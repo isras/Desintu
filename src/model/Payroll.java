@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "payroll")
@@ -25,6 +27,7 @@ public class Payroll implements Serializable {
     @Column(name = "payroll_id")
     private Long payrollId;
     @Column(name = "pr_date")
+    @Temporal(TemporalType.DATE)
     private Date payrollDate;
     @Column(name = "pr_month")
     private Integer payrollMonth;
@@ -37,7 +40,7 @@ public class Payroll implements Serializable {
     private Double payrollExtraHours;
     @Column(name = "pr_thirtheen_salary")
     private Double payrollThirtheenSalary;
-    @Column(name = "pr_fourtteenth_salary")
+    @Column(name = "pr_fourteenth_salary")
     private Double payrollFourtteenthSalary;
     @Column(name = "pr_other_income")
     private Double payrollOtherIncome;
